@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -19,6 +20,7 @@
             --gray: #64748b;
             --shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
             --shadow-lg: 0 10px 40px rgba(0, 0, 0, 0.12);
+            --bg-image: url("{% static 'phishield/images/bg.jpg' %}");
         }
 
         * {
@@ -29,7 +31,7 @@
 
         body {
             padding-top: 80px;
-            background: url("/static/phishield/images/bg.jpg") no-repeat center center fixed;
+            background: var(--bg-image) no-repeat center center fixed;
             background-size: cover;
             min-height: 100vh;
             font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
