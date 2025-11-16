@@ -8,11 +8,14 @@ from django.contrib.messages import constants as messages
 from dotenv import load_dotenv
 load_dotenv()
 import dj_database_url
+
+# Database configuration - automatically handles SSL based on DATABASE_URL
 DATABASES = {
     "default": dj_database_url.config(
         default="sqlite:///db.sqlite3",
-        conn_max_age=600,
-        ssl_require=True
+        conn_max_age=600
+        # Removed ssl_require - dj_database_url will handle SSL automatically
+        # For Railway/cloud platforms, SSL is typically handled by the connection string
     )
 }
 # ------------------------------
