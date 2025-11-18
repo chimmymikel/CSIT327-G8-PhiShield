@@ -3,26 +3,45 @@
 {% block title %}Settings - PhiShield{% endblock %}
 
 {% block content %}
-<div class="container-fluid py-4">
-    <div class="row">
-        <!-- Settings Navigation -->
-        <div class="col-lg-3 col-md-4 mb-4">
-            <div class="card shadow-sm">
-                <div class="card-header bg-transparent border-bottom-0">
-                    <h6 class="mb-0 text-dark fw-bold">Settings</h6>
+<div class="settings-container">
+    <div class="row g-4">
+        <!-- Settings Navigation Sidebar -->
+        <div class="col-lg-3 col-md-4">
+            <div class="settings-nav-card">
+                <div class="settings-nav-header">
+                    <div class="settings-nav-icon">
+                        <i class="fas fa-cog"></i>
+                    </div>
+                    <h5 class="settings-nav-title">Settings</h5>
                 </div>
-                <div class="list-group list-group-flush rounded">
-                    <a href="{% url 'phishield:profile' %}" class="list-group-item list-group-item-action border-0">
-                        <i class="fas fa-user me-2 text-primary"></i>Profile
+                <div class="settings-nav-list">
+                    <a href="{% url 'phishield:profile' %}" class="settings-nav-item">
+                        <div class="nav-item-icon">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <span>Profile</span>
+                        <i class="fas fa-chevron-right nav-item-arrow"></i>
                     </a>
-                    <a href="{% url 'phishield:edit_profile' %}" class="list-group-item list-group-item-action border-0">
-                        <i class="fas fa-edit me-2 text-primary"></i>Edit Profile
+                    <a href="{% url 'phishield:edit_profile' %}" class="settings-nav-item">
+                        <div class="nav-item-icon">
+                            <i class="fas fa-edit"></i>
+                        </div>
+                        <span>Edit Profile</span>
+                        <i class="fas fa-chevron-right nav-item-arrow"></i>
                     </a>
-                    <a href="{% url 'phishield:settings' %}" class="list-group-item list-group-item-action border-0 active">
-                        <i class="fas fa-cog me-2 text-white"></i>Preferences
+                    <a href="{% url 'phishield:settings' %}" class="settings-nav-item active">
+                        <div class="nav-item-icon">
+                            <i class="fas fa-sliders-h"></i>
+                        </div>
+                        <span>Preferences</span>
+                        <i class="fas fa-chevron-right nav-item-arrow"></i>
                     </a>
-                    <a href="{% url 'phishield:change_password' %}" class="list-group-item list-group-item-action border-0">
-                        <i class="fas fa-lock me-2 text-primary"></i>Change Password
+                    <a href="{% url 'phishield:change_password' %}" class="settings-nav-item">
+                        <div class="nav-item-icon">
+                            <i class="fas fa-lock"></i>
+                        </div>
+                        <span>Change Password</span>
+                        <i class="fas fa-chevron-right nav-item-arrow"></i>
                     </a>
                 </div>
             </div>
@@ -30,120 +49,268 @@
 
         <!-- Settings Content -->
         <div class="col-lg-9 col-md-8">
-            <div class="card shadow-sm">
-                <div class="card-header bg-transparent border-bottom-0">
-                    <h5 class="mb-0 text-dark fw-bold"><i class="fas fa-cog me-2"></i>Application Settings</h5>
-                    <p class="text-muted mb-0 small">Customize your PhiShield experience</p>
+            <!-- Main Settings Card -->
+            <div class="settings-content-card">
+                <div class="settings-content-header">
+                    <div class="settings-header-left">
+                        <div class="settings-header-icon">
+                            <i class="fas fa-cog"></i>
+                        </div>
+                        <div>
+                            <h4 class="settings-content-title">Application Settings</h4>
+                            <p class="settings-content-subtitle">Customize your PhiShield experience</p>
+                        </div>
+                    </div>
                 </div>
-                <div class="card-body">
+
+                <div class="settings-content-body">
                     <form method="POST">
                         {% csrf_token %}
                         
-                        <!-- Notification Settings -->
-                        <div class="mb-5">
-                            <h6 class="border-bottom pb-2 mb-4 text-dark fw-bold">
-                                <i class="fas fa-bell me-2 text-primary"></i>Notification Settings
-                            </h6>
-                            <div class="form-check form-switch mb-3 p-3 bg-light rounded">
-                                <input class="form-check-input" type="checkbox" name="receive_email_notifications" 
-                                       id="receive_email_notifications" {% if profile.receive_email_notifications %}checked{% endif %}>
-                                <label class="form-check-label fw-bold" for="receive_email_notifications">
-                                    Email Notifications
-                                </label>
-                                <small class="form-text text-muted d-block mt-1">Receive email updates about your security analyses and account activity</small>
+                        <!-- Notification Settings Section -->
+                        <div class="settings-section">
+                            <div class="section-header">
+                                <div class="section-icon section-icon-primary">
+                                    <i class="fas fa-bell"></i>
+                                </div>
+                                <div>
+                                    <h5 class="section-title">Notification Settings</h5>
+                                    <p class="section-subtitle">Manage how you receive updates and alerts</p>
+                                </div>
                             </div>
-                            <div class="form-check form-switch mb-3 p-3 bg-light rounded">
-                                <input class="form-check-input" type="checkbox" name="receive_security_alerts" 
-                                       id="receive_security_alerts" {% if profile.receive_security_alerts %}checked{% endif %}>
-                                <label class="form-check-label fw-bold" for="receive_security_alerts">
-                                    Security Alerts
-                                </label>
-                                <small class="form-text text-muted d-block mt-1">Get immediate alerts for high-risk threats and suspicious activities</small>
+
+                            <div class="settings-options">
+                                <div class="setting-item">
+                                    <div class="setting-info">
+                                        <div class="setting-icon-wrapper">
+                                            <i class="fas fa-envelope"></i>
+                                        </div>
+                                        <div class="setting-text">
+                                            <label class="setting-label" for="receive_email_notifications">
+                                                Email Notifications
+                                            </label>
+                                            <p class="setting-description">
+                                                Receive email updates about your security analyses and account activity
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="setting-control">
+                                        <label class="toggle-switch">
+                                            <input type="checkbox" name="receive_email_notifications" 
+                                                   id="receive_email_notifications" 
+                                                   {% if profile.receive_email_notifications %}checked{% endif %}>
+                                            <span class="toggle-slider"></span>
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <div class="setting-item">
+                                    <div class="setting-info">
+                                        <div class="setting-icon-wrapper">
+                                            <i class="fas fa-exclamation-triangle"></i>
+                                        </div>
+                                        <div class="setting-text">
+                                            <label class="setting-label" for="receive_security_alerts">
+                                                Security Alerts
+                                            </label>
+                                            <p class="setting-description">
+                                                Get immediate alerts for high-risk threats and suspicious activities
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="setting-control">
+                                        <label class="toggle-switch">
+                                            <input type="checkbox" name="receive_security_alerts" 
+                                                   id="receive_security_alerts" 
+                                                   {% if profile.receive_security_alerts %}checked{% endif %}>
+                                            <span class="toggle-slider"></span>
+                                        </label>
+                                    </div>
+                                </div>
                             </div>
                         </div>
 
-                        <!-- Security Settings -->
-                        <div class="mb-5">
-                            <h6 class="border-bottom pb-2 mb-4 text-dark fw-bold">
-                                <i class="fas fa-shield-alt me-2 text-primary"></i>Security Settings
-                            </h6>
-                            <div class="form-check form-switch mb-3 p-3 bg-light rounded">
-                                <input class="form-check-input" type="checkbox" name="auto_scan_links" 
-                                       id="auto_scan_links" {% if profile.auto_scan_links %}checked{% endif %}>
-                                <label class="form-check-label fw-bold" for="auto_scan_links">
-                                    Auto-scan Links
-                                </label>
-                                <small class="form-text text-muted d-block mt-1">Automatically scan URLs found in analyzed messages for additional security</small>
+                        <!-- Security Settings Section -->
+                        <div class="settings-section">
+                            <div class="section-header">
+                                <div class="section-icon section-icon-success">
+                                    <i class="fas fa-shield-alt"></i>
+                                </div>
+                                <div>
+                                    <h5 class="section-title">Security Settings</h5>
+                                    <p class="section-subtitle">Configure advanced security features</p>
+                                </div>
+                            </div>
+
+                            <div class="settings-options">
+                                <div class="setting-item">
+                                    <div class="setting-info">
+                                        <div class="setting-icon-wrapper">
+                                            <i class="fas fa-search"></i>
+                                        </div>
+                                        <div class="setting-text">
+                                            <label class="setting-label" for="auto_scan_links">
+                                                Auto-scan Links
+                                            </label>
+                                            <p class="setting-description">
+                                                Automatically scan URLs found in analyzed messages for additional security
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="setting-control">
+                                        <label class="toggle-switch">
+                                            <input type="checkbox" name="auto_scan_links" 
+                                                   id="auto_scan_links" 
+                                                   {% if profile.auto_scan_links %}checked{% endif %}>
+                                            <span class="toggle-slider"></span>
+                                        </label>
+                                    </div>
+                                </div>
                             </div>
                         </div>
 
-                        <!-- Appearance Settings -->
-                        <div class="mb-5">
-                            <h6 class="border-bottom pb-2 mb-4 text-dark fw-bold">
-                                <i class="fas fa-palette me-2 text-primary"></i>Appearance
-                            </h6>
-                            <div class="form-check form-switch mb-3 p-3 bg-light rounded">
-                                <input class="form-check-input" type="checkbox" name="dark_mode_enabled" 
-                                       id="dark_mode_enabled" {% if profile.dark_mode_enabled %}checked{% endif %}>
-                                <label class="form-check-label fw-bold" for="dark_mode_enabled">
-                                    Dark Mode
-                                </label>
-                                <small class="form-text text-muted d-block mt-1">Enable dark theme for better visibility in low-light conditions</small>
+                        <!-- Appearance Settings Section -->
+                        <div class="settings-section">
+                            <div class="section-header">
+                                <div class="section-icon section-icon-warning">
+                                    <i class="fas fa-palette"></i>
+                                </div>
+                                <div>
+                                    <h5 class="section-title">Appearance</h5>
+                                    <p class="section-subtitle">Personalize your interface preferences</p>
+                                </div>
                             </div>
-                            <div class="form-check form-switch mb-3 p-3 bg-light rounded">
-                                <input class="form-check-input" type="checkbox" name="show_tips" 
-                                       id="show_tips" {% if profile.show_tips %}checked{% endif %}>
-                                <label class="form-check-label fw-bold" for="show_tips">
-                                    Show Security Tips
-                                </label>
-                                <small class="form-text text-muted d-block mt-1">Display helpful security tips and best practices throughout the application</small>
+
+                            <div class="settings-options">
+                                <div class="setting-item">
+                                    <div class="setting-info">
+                                        <div class="setting-icon-wrapper">
+                                            <i class="fas fa-moon"></i>
+                                        </div>
+                                        <div class="setting-text">
+                                            <label class="setting-label" for="dark_mode_enabled">
+                                                Dark Mode
+                                            </label>
+                                            <p class="setting-description">
+                                                Enable dark theme for better visibility in low-light conditions
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="setting-control">
+                                        <label class="toggle-switch">
+                                            <input type="checkbox" name="dark_mode_enabled" 
+                                                   id="dark_mode_enabled" 
+                                                   {% if profile.dark_mode_enabled %}checked{% endif %}>
+                                            <span class="toggle-slider"></span>
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <div class="setting-item">
+                                    <div class="setting-info">
+                                        <div class="setting-icon-wrapper">
+                                            <i class="fas fa-lightbulb"></i>
+                                        </div>
+                                        <div class="setting-text">
+                                            <label class="setting-label" for="show_tips">
+                                                Show Security Tips
+                                            </label>
+                                            <p class="setting-description">
+                                                Display helpful security tips and best practices throughout the application
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="setting-control">
+                                        <label class="toggle-switch">
+                                            <input type="checkbox" name="show_tips" 
+                                                   id="show_tips" 
+                                                   {% if profile.show_tips %}checked{% endif %}>
+                                            <span class="toggle-slider"></span>
+                                        </label>
+                                    </div>
+                                </div>
                             </div>
                         </div>
 
-                        <!-- Language Settings -->
-                        <div class="mb-4">
-                            <h6 class="border-bottom pb-2 mb-4 text-dark fw-bold">
-                                <i class="fas fa-language me-2 text-primary"></i>Language & Region
-                            </h6>
-                            <div class="p-3 bg-light rounded">
-                                <label for="language" class="form-label fw-bold">Interface Language</label>
-                                <select class="form-select" name="language" id="language">
-                                    <option value="en" {% if profile.language == 'en' %}selected{% endif %}>English</option>
-                                    <option value="es" {% if profile.language == 'es' %}selected{% endif %}>Español (Spanish)</option>
-                                </select>
-                                <small class="form-text text-muted">Choose your preferred language for the interface</small>
+                        <!-- Language Settings Section -->
+                        <div class="settings-section">
+                            <div class="section-header">
+                                <div class="section-icon section-icon-info">
+                                    <i class="fas fa-language"></i>
+                                </div>
+                                <div>
+                                    <h5 class="section-title">Language & Region</h5>
+                                    <p class="section-subtitle">Set your preferred language</p>
+                                </div>
+                            </div>
+
+                            <div class="settings-options">
+                                <div class="setting-item-select">
+                                    <label for="language" class="select-label">
+                                        <i class="fas fa-globe me-2"></i>
+                                        Interface Language
+                                    </label>
+                                    <select class="form-select-custom" name="language" id="language">
+                                        <option value="en" {% if profile.language == 'en' %}selected{% endif %}>
+                                            🇺🇸 English
+                                        </option>
+                                        <option value="es" {% if profile.language == 'es' %}selected{% endif %}>
+                                            🇪🇸 Español (Spanish)
+                                        </option>
+                                    </select>
+                                    <small class="select-hint">Choose your preferred language for the interface</small>
+                                </div>
                             </div>
                         </div>
 
-                        <div class="d-flex justify-content-between align-items-center pt-4 border-top">
-                            <a href="{% url 'phishield:profile' %}" class="btn btn-outline-secondary">
-                                <i class="fas fa-arrow-left me-1"></i>Back to Profile
+                        <!-- Action Buttons -->
+                        <div class="settings-actions">
+                            <a href="{% url 'phishield:profile' %}" class="btn-secondary-custom">
+                                <i class="fas fa-arrow-left"></i>
+                                <span>Back to Profile</span>
                             </a>
-                            <button type="submit" class="btn btn-primary">
-                                <i class="fas fa-save me-1"></i>Save Settings
+                            <button type="submit" class="btn-primary-custom">
+                                <i class="fas fa-save"></i>
+                                <span>Save Settings</span>
                             </button>
                         </div>
                     </form>
                 </div>
             </div>
 
-            <!-- Account Actions -->
-            <div class="card shadow-sm mt-4 border-warning">
-                <div class="card-header bg-warning bg-opacity-10 border-warning">
-                    <h6 class="mb-0 text-dark fw-bold"><i class="fas fa-exclamation-triangle me-2 text-warning"></i>Account Actions</h6>
+            <!-- Account Actions Card -->
+            <div class="account-actions-card">
+                <div class="account-actions-header">
+                    <div class="account-actions-icon">
+                        <i class="fas fa-exclamation-triangle"></i>
+                    </div>
+                    <div>
+                        <h5 class="account-actions-title">Account Actions</h5>
+                        <p class="account-actions-subtitle">Manage your account security</p>
+                    </div>
                 </div>
-                <div class="card-body">
-                    <div class="row g-3">
-                        <div class="col-md-6">
-                            <a href="{% url 'phishield:change_password' %}" class="btn btn-warning w-100">
-                                <i class="fas fa-lock me-2"></i>Change Password
-                            </a>
-                        </div>
-                        <div class="col-md-6">
-                            <button type="button" class="btn btn-outline-danger w-100" disabled>
-                                <i class="fas fa-trash me-2"></i>Delete Account
-                            </button>
-                            <small class="text-muted d-block mt-1 text-center">Feature coming soon</small>
+                <div class="account-actions-body">
+                    <div class="action-buttons-grid">
+                        <a href="{% url 'phishield:change_password' %}" class="action-button action-button-warning">
+                            <div class="action-button-icon">
+                                <i class="fas fa-lock"></i>
+                            </div>
+                            <div class="action-button-content">
+                                <h6 class="action-button-title">Change Password</h6>
+                                <p class="action-button-text">Update your account password</p>
+                            </div>
+                            <i class="fas fa-arrow-right action-button-arrow"></i>
+                        </a>
+                        
+                        <div class="action-button action-button-danger disabled">
+                            <div class="action-button-icon">
+                                <i class="fas fa-trash"></i>
+                            </div>
+                            <div class="action-button-content">
+                                <h6 class="action-button-title">Delete Account</h6>
+                                <p class="action-button-text">Feature coming soon</p>
+                            </div>
+                            <i class="fas fa-lock action-button-arrow"></i>
                         </div>
                     </div>
                 </div>
@@ -151,4 +318,912 @@
         </div>
     </div>
 </div>
+
+<style>
+/* Variables */
+:root {
+    --lighttodark: var(--light);
+    --whitetodark: #ffffff;
+    --mtitle:var(--dark);
+    --mtext:var(--gray);
+    --mcard: var(--light); 
+    --bg-gradient: linear-gradient(135deg, #007BFF 0%, #00BCD4 50%, #00E0D1 100%);
+    --primary: #6366f1;
+    --primary-dark: #4f46e5;
+    --primary-light: #e0e7ff;
+    --primary-glow: rgba(99, 102, 241, 0.4);
+    --success: #10b981;
+    --success-light: #d1fae5;
+    --success-glow: rgba(16, 185, 129, 0.4);
+    --warning: #f59e0b;
+    --warning-light: #fef3c7;
+    --warning-glow: rgba(245, 158, 11, 0.4);
+    --danger: #ef4444;
+    --danger-light: #fee2e2;
+    --info: #3b82f6;
+    --info-light: #dbeafe;
+    --dark: #1e293b;
+    --light: #f8fafc;
+    --gray: #64748b;
+    --gray-light: #cbd5e1;
+    --shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
+    --shadow-hover: 0 12px 40px rgba(0, 0, 0, 0.12);
+    --shadow-xl: 0 20px 60px rgba(0, 0, 0, 0.15);
+}
+
+.dark {
+    --lighttodark: var(--dark);
+    --whitetodark: var(--bg-gradient);
+    --mtext:var(--light);
+    --mtitle:var(--light);
+    --mcard: var(--dark);
+    --bg-gradient: linear-gradient(135deg, #0b1220 0%, #0b1220 50%, #0b1220 100%);
+}
+
+/* Container */
+.settings-container {
+    max-width: 100%;
+    padding: 1.5rem;
+    margin: 0 auto;
+    min-height: calc(100vh - 200px);
+}
+
+/* Settings Navigation Card */
+.settings-nav-card {
+    background: var(--mcard);
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    animation: fadeInLeft 0.6s ease-out;
+    position: sticky;
+    top: 90px;
+}
+
+.settings-nav-header {
+    background: var(--bg-gradient);
+    padding: 28px;
+    text-align: center;
+}
+
+.settings-nav-icon {
+    width: 64px;
+    height: 64px;
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(12px);
+    border-radius: 16px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 28px;
+    margin-bottom: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    animation: pulse 2s ease-in-out infinite;
+}
+
+.settings-nav-title {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: white;
+    margin: 0;
+}
+
+.settings-nav-list {
+    padding: 12px;
+}
+
+.settings-nav-item {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 16px;
+    border-radius: 12px;
+    text-decoration: none;
+    color: var(--mtitle);
+    font-weight: 600;
+    transition: all 0.3s ease;
+    margin-bottom: 6px;
+    position: relative;
+}
+
+.settings-nav-item:hover {
+    background: var(--lighttodark);
+    color: var(--primary);
+    transform: translateX(6px);
+}
+
+.settings-nav-item.active {
+    background: linear-gradient(135deg, var(--primary-light) 0%, #ddd6fe 100%);
+    color: var(--primary);
+    box-shadow: 0 4px 12px rgba(99, 102, 241, 0.2);
+}
+
+.nav-item-icon {
+    width: 40px;
+    height: 40px;
+    background: linear-gradient(135deg, var(--primary-light) 0%, white 100%);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--primary);
+    font-size: 18px;
+    transition: all 0.3s;
+}
+
+.settings-nav-item:hover .nav-item-icon,
+.settings-nav-item.active .nav-item-icon {
+    transform: scale(1.1) rotate(-5deg);
+    background: var(--primary);
+    color: white;
+}
+
+.nav-item-arrow {
+    margin-left: auto;
+    font-size: 14px;
+    opacity: 0.5;
+    transition: all 0.3s;
+}
+
+.settings-nav-item:hover .nav-item-arrow,
+.settings-nav-item.active .nav-item-arrow {
+    opacity: 1;
+    transform: translateX(4px);
+}
+
+/* Settings Content Card */
+.settings-content-card {
+    background: var(--whitetodark);
+    border-radius: 24px;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    animation: fadeInUp 0.6s ease-out;
+    margin-bottom: 24px;
+}
+
+.settings-content-header {
+    background: var(--whitetodark);
+    padding: 32px;
+    border-bottom: 2px solid var(--light);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.settings-header-left {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.settings-header-icon {
+    width: 56px;
+    height: 56px;
+    background: linear-gradient(135deg, var(--primary) 0%, #4f46e5 100%);
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 24px;
+    box-shadow: 0 8px 24px var(--primary-glow);
+}
+
+.settings-content-title {
+    font-size: 1.75rem;
+    font-weight: 800;
+    color: var(--mtitle);
+    margin: 0;
+    letter-spacing: -0.5px;
+}
+
+.settings-content-subtitle {
+    color: var(--gray);
+    margin: 6px 0 0;
+    font-size: 1rem;
+}
+
+.settings-content-body {
+    padding: 36px;
+}
+
+/* Settings Section */
+.settings-section {
+    margin-bottom: 48px;
+}
+
+.settings-section:last-child {
+    margin-bottom: 0;
+}
+
+.section-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 24px;
+    padding-bottom: 16px;
+    border-bottom: 2px solid var(--light);
+}
+
+.section-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 20px;
+    box-shadow: var(--shadow);
+}
+
+.section-icon-primary {
+    background: linear-gradient(135deg, var(--primary) 0%, #4f46e5 100%);
+}
+
+.section-icon-success {
+    background: linear-gradient(135deg, var(--success) 0%, #059669 100%);
+}
+
+.section-icon-warning {
+    background: linear-gradient(135deg, var(--warning) 0%, #f97316 100%);
+}
+
+.section-icon-info {
+    background: linear-gradient(135deg, var(--info) 0%, #2563eb 100%);
+}
+
+.section-title {
+    font-size: 1.3rem;
+    font-weight: 800;
+    color: var(--mtitle);
+    margin: 0;
+}
+
+.section-subtitle {
+    color: var(--gray);
+    margin: 4px 0 0;
+    font-size: 0.9rem;
+}
+
+/* Settings Options */
+.settings-options {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.setting-item {
+    background: var(--mcard);
+    border-radius: 16px;
+    padding: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+}
+
+.setting-item:hover {
+    background: var(--whitetodark);
+    border-color: var(--primary-light);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+    transform: translateX(4px);
+}
+
+.setting-info {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    flex: 1;
+}
+
+.setting-icon-wrapper {
+    width: 44px;
+    height: 44px;
+    background: white;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--primary);
+    font-size: 18px;
+    flex-shrink: 0;
+    box-shadow: 0 2px 8px rgba(99, 102, 241, 0.15);
+}
+
+.setting-text {
+    flex: 1;
+}
+
+.setting-label {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--mtitle);
+    margin-bottom: 4px;
+    display: block;
+    cursor: pointer;
+}
+
+.setting-description {
+    font-size: 0.9rem;
+    color: var(--gray);
+    line-height: 1.5;
+    margin: 0;
+}
+
+.setting-control {
+    flex-shrink: 0;
+}
+
+/* Custom Toggle Switch */
+.toggle-switch {
+    position: relative;
+    display: inline-block;
+    width: 56px;
+    height: 30px;
+    cursor: pointer;
+}
+
+.toggle-switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.toggle-slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: var(--gray-light);
+    border-radius: 30px;
+    transition: all 0.3s;
+}
+
+.toggle-slider:before {
+    position: absolute;
+    content: "";
+    height: 22px;
+    width: 22px;
+    left: 4px;
+    bottom: 4px;
+    background: white;
+    border-radius: 50%;
+    transition: all 0.3s;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+.toggle-switch input:checked + .toggle-slider {
+    background: linear-gradient(135deg, var(--primary) 0%, #4f46e5 100%);
+    box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.2);
+}
+
+.toggle-switch input:checked + .toggle-slider:before {
+    transform: translateX(26px);
+}
+
+.toggle-switch:hover .toggle-slider {
+    box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.1);
+}
+
+/* Select Item */
+.setting-item-select {
+    background: var(--lighttodark);
+    border-radius: 16px;
+    padding: 24px;
+    transition: all 0.3s ease;
+}
+
+.setting-item-select:hover {
+    background: var(--lighttodark);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+}
+
+.select-label {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--mtitle);
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+}
+
+.form-select-custom {
+    width: 100%;
+    padding: 14px 18px;
+    border: 2px solid var(--gray-light);
+    border-radius: 12px;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--mtitle);
+    background: var(--whitetodark);
+    cursor: pointer;
+    transition: all 0.3s;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%236366f1' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 16px center;
+    padding-right: 48px;
+}
+
+.form-select-custom:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.1);
+}
+
+.select-hint {
+    display: block;
+    margin-top: 8px;
+    font-size: 0.85rem;
+    color: var(--gray);
+}
+
+/* Action Buttons */
+.settings-actions {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding-top: 32px;
+    border-top: 2px solid var(--light);
+    margin-top: 32px;
+}
+
+.btn-primary-custom,
+.btn-secondary-custom {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 28px;
+    border-radius: 12px;
+    font-weight: 700;
+    font-size: 1rem;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    border: none;
+    cursor: pointer;
+}
+
+.btn-primary-custom {
+    background: linear-gradient(135deg, var(--primary) 0%, #4f46e5 100%);
+    color: white;
+    box-shadow: 0 6px 20px var(--primary-glow);
+}
+
+.btn-primary-custom:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 30px var(--primary-glow);
+}
+
+.btn-secondary-custom {
+    background: white;
+    color: var(--gray);
+    border: 2px solid var(--gray-light);
+}
+
+.btn-secondary-custom:hover {
+    background: var(--light);
+    border-color: var(--gray);
+    color: var(--dark);
+    transform: translateY(-2px);
+}
+
+/* Account Actions Card */
+.account-actions-card {
+    background: var(--whitetodark);
+    border-radius: 24px;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    border: 2px solid var(--warning-light);
+    animation: fadeInUp 0.6s ease-out 0.2s backwards;
+}
+
+.account-actions-header {
+    background: linear-gradient(135deg, var(--warning-light) 0%, #fef3c7 100%);
+    padding: 28px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.account-actions-icon {
+    width: 52px;
+    height: 52px;
+    background: linear-gradient(135deg, var(--warning) 0%, #f97316 100%);
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 22px;
+    box-shadow: 0 6px 20px var(--warning-glow);
+}
+
+.account-actions-title {
+    font-size: 1.4rem;
+    font-weight: 800;
+    color: var(--dark);
+    margin: 0;
+}
+
+.account-actions-subtitle {
+    color: var(--gray);
+    margin: 4px 0 0;
+    font-size: 0.9rem;
+}
+
+.account-actions-body {
+    padding: 28px;
+}
+
+.action-buttons-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 16px;
+}
+
+.action-button {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 20px;
+    border-radius: 16px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+    background: var(--light);
+    position: relative;
+    overflow: hidden;
+}
+
+.action-button:not(.disabled):hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+}
+
+.action-button-warning {
+    background: linear-gradient(135deg, var(--warning-light) 0%, #fef3c7 100%);
+}
+
+.action-button-warning:hover {
+    border-color: var(--warning);
+    background: linear-gradient(135deg, var(--warning-light) 0%, #fde68a 100%);
+}
+
+.action-button-danger {
+    background: linear-gradient(135deg, var(--danger-light) 0%, #fee2e2 100%);
+}
+
+.action-button-danger:not(.disabled):hover {
+    border-color: var(--danger);
+    background: linear-gradient(135deg, var(--danger-light) 0%, #fecaca 100%);
+}
+
+.action-button.disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.action-button-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    flex-shrink: 0;
+    transition: all 0.3s;
+}
+
+.action-button-warning .action-button-icon {
+    background: linear-gradient(135deg, var(--warning) 0%, #f97316 100%);
+    color: white;
+    box-shadow: 0 4px 12px var(--warning-glow);
+}
+
+.action-button-danger .action-button-icon {
+    background: linear-gradient(135deg, var(--danger) 0%, #dc2626 100%);
+    color: white;
+    box-shadow: 0 4px 12px rgba(239, 68, 68, 0.4);
+}
+
+.action-button:not(.disabled):hover .action-button-icon {
+    transform: scale(1.1) rotate(-5deg);
+}
+
+.action-button-content {
+    flex: 1;
+}
+
+.action-button-title {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--dark);
+    margin: 0 0 4px;
+}
+
+.action-button-text {
+    font-size: 0.85rem;
+    color: var(--gray);
+    margin: 0;
+}
+
+.action-button-arrow {
+    font-size: 18px;
+    opacity: 0.5;
+    transition: all 0.3s;
+    flex-shrink: 0;
+}
+
+.action-button-warning .action-button-arrow {
+    color: var(--warning);
+}
+
+.action-button-danger .action-button-arrow {
+    color: var(--danger);
+}
+
+.action-button:not(.disabled):hover .action-button-arrow {
+    opacity: 1;
+    transform: translateX(4px);
+}
+
+/* Animations */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 991px) {
+    .settings-nav-card {
+        position: relative;
+        top: 0;
+    }
+}
+
+@media (max-width: 768px) {
+    .settings-container {
+        padding: 1rem;
+    }
+
+    .settings-nav-header {
+        padding: 20px;
+    }
+
+    .settings-nav-icon {
+        width: 56px;
+        height: 56px;
+        font-size: 24px;
+    }
+
+    .settings-nav-title {
+        font-size: 1.3rem;
+    }
+
+    .settings-content-header {
+        padding: 24px;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .settings-header-left {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .settings-header-icon {
+        width: 48px;
+        height: 48px;
+        font-size: 20px;
+    }
+
+    .settings-content-title {
+        font-size: 1.5rem;
+    }
+
+    .settings-content-body {
+        padding: 24px;
+    }
+
+    .settings-section {
+        margin-bottom: 36px;
+    }
+
+    .section-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .section-icon {
+        width: 44px;
+        height: 44px;
+        font-size: 18px;
+    }
+
+    .section-title {
+        font-size: 1.2rem;
+    }
+
+    .setting-item {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 20px;
+    }
+
+    .setting-info {
+        width: 100%;
+    }
+
+    .setting-control {
+        width: 100%;
+        display: flex;
+        justify-content: flex-end;
+    }
+
+    .settings-actions {
+        flex-direction: column-reverse;
+        gap: 12px;
+    }
+
+    .btn-primary-custom,
+    .btn-secondary-custom {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .account-actions-header {
+        padding: 20px;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .account-actions-icon {
+        width: 48px;
+        height: 48px;
+        font-size: 20px;
+    }
+
+    .account-actions-title {
+        font-size: 1.2rem;
+    }
+
+    .account-actions-body {
+        padding: 20px;
+    }
+
+    .action-buttons-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 576px) {
+    .settings-nav-item {
+        padding: 14px;
+    }
+
+    .nav-item-icon {
+        width: 36px;
+        height: 36px;
+        font-size: 16px;
+    }
+
+    .settings-nav-item span {
+        font-size: 0.95rem;
+    }
+
+    .setting-icon-wrapper {
+        width: 40px;
+        height: 40px;
+        font-size: 16px;
+    }
+
+    .setting-label {
+        font-size: 1rem;
+    }
+
+    .setting-description {
+        font-size: 0.85rem;
+    }
+
+    .toggle-switch {
+        width: 50px;
+        height: 26px;
+    }
+
+    .toggle-slider:before {
+        height: 20px;
+        width: 20px;
+        left: 3px;
+        bottom: 3px;
+    }
+
+    .toggle-switch input:checked + .toggle-slider:before {
+        transform: translateX(24px);
+    }
+}
+
+/* Smooth Scrolling */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--light);
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, var(--primary) 0%, #4f46e5 100%);
+    border-radius: 10px;
+    border: 2px solid var(--light);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(180deg, #4f46e5 0%, var(--primary-dark) 100%);
+}
+
+/* Focus Styles for Accessibility */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible {
+    outline: 3px solid var(--primary);
+    outline-offset: 3px;
+    border-radius: 8px;
+}
+
+/* Print Styles */
+@media print {
+    .settings-nav-card,
+    .account-actions-card {
+        box-shadow: none;
+        border: 1px solid var(--gray-light);
+    }
+
+    .settings-actions {
+        display: none;
+    }
+}
+</style>
 {% endblock %}

@@ -1,4 +1,3 @@
-{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,18 +8,30 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
+            --darktolight: #1e293b;
+            --dropdown-bg: white;
+            --bg-footer: linear-gradient(135deg, rgba(99, 102, 241, 0.9) 0%, rgba(118, 75, 162, 0.9) 100%);;
+            --bg-navbar:  rgba(255, 255, 255, 0.98);
+            --bg-main: url("/static/phishield/images/bg.jpg") no-repeat center center fixed;
             --primary-color: #6366f1;
             --primary-dark: #4f46e5;
             --primary-light: #e0e7ff;
             --danger-color: #ef4444;
             --warning-color: #f59e0b;
             --success-color: #10b981;
-            --dark: #1e293b;
+            --navlink: #1e293b;
             --light: #f8fafc;
             --gray: #64748b;
             --shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
             --shadow-lg: 0 10px 40px rgba(0, 0, 0, 0.12);
-            --bg-image: url("{% static 'phishield/images/bg.jpg' %}");
+        }
+        .dark {
+            --darktolight: var(--light);
+            --dropdown-bg: #1a1f29;
+            --bg-footer: #1a1f29;
+            --bg-navbar: #1a1f29;
+            --bg-main: #1a1f29;
+            --navlink: #f8fafc;
         }
 
         * {
@@ -31,7 +42,7 @@
 
         body {
             padding-top: 80px;
-            background: var(--bg-image) no-repeat center center fixed;
+            background: var(--bg-main);
             background-size: cover;
             min-height: 100vh;
             font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -48,7 +59,7 @@
 
         /* Enhanced Navbar */
         .navbar {
-            background: rgba(255, 255, 255, 0.98) !important;
+            background: var(--bg-navbar);
             backdrop-filter: blur(20px);
             box-shadow: 0 4px 30px rgba(0, 0, 0, 0.08);
             padding: 0.75rem 0;
@@ -59,7 +70,7 @@
         .navbar.scrolled {
             box-shadow: 0 8px 40px rgba(0, 0, 0, 0.12);
             padding: 0.5rem 0;
-        }
+        }   
 
         .navbar-brand {
             font-weight: 800;
@@ -105,7 +116,7 @@
         }
 
         .nav-link {
-            color: var(--dark) !important;
+            color: var(--navlink) !important;
             font-weight: 600;
             padding: 10px 16px !important;
             border-radius: 10px;
@@ -115,6 +126,7 @@
             gap: 8px;
             position: relative;
             overflow: hidden;
+            white-space: nowrap;
         }
 
         .nav-link::before {
@@ -194,7 +206,7 @@
             border-radius: 16px;
             padding: 12px;
             margin-top: 12px;
-            background: white;
+            background: var(--dropdown-bg);
             min-width: 240px;
             animation: dropdownSlide 0.3s ease;
         }
@@ -211,10 +223,11 @@
         }
 
         .dropdown-item {
+            color: var(--darktolight);
             border-radius: 10px;
             padding: 10px 16px;
             margin: 3px 0;
-            font-weight: 600;
+            font-weight: 700;
             transition: all 0.3s ease;
             display: flex;
             align-items: center;
@@ -325,7 +338,7 @@
             padding: 40px 20px;
             color: white;
             margin-top: 60px;
-            background: linear-gradient(135deg, rgba(99, 102, 241, 0.9) 0%, rgba(118, 75, 162, 0.9) 100%);
+            background: var(--bg-footer);
             border-radius: 20px 20px 0 0;
             box-shadow: 0 -4px 30px rgba(0, 0, 0, 0.1);
         }
@@ -630,7 +643,7 @@
                                 </li>
                             </ul>
                         </li>
-
+                        
                     {% else %}
                         <!-- Navigation for Unauthenticated Users -->
                         <li class="nav-item">
@@ -758,6 +771,32 @@
             });
         });
     </script>
+
+    <script>
+document.addEventListener('DOMContentLoaded', () => {
+    const checkbox = document.getElementById('dark_mode_enabled');
+    const body = document.body;
+
+    // Apply saved theme on page load
+    const savedTheme = localStorage.getItem('theme') || 'light';
+    if (savedTheme === 'dark') {
+        body.classList.add('dark');
+        checkbox.checked = true;
+    }
+
+    // When user toggles the checkbox
+    checkbox.addEventListener('change', () => {
+        if (checkbox.checked) {
+            body.classList.add('dark');
+            localStorage.setItem('theme', 'dark');
+        } else {
+            body.classList.remove('dark');
+            localStorage.setItem('theme', 'light');
+        }
+    });
+});
+</script>
+
     
     <style>
         @keyframes slideOutRight {
@@ -767,7 +806,9 @@
             }
         }
     </style>
+
+    
     
     {% block extra_scripts %}{% endblock %}
-</body>
+</body> 
 </html>
