@@ -277,9 +277,15 @@
     </div>
 </div>
 
+
 <style>
 /* Variables */
 :root {
+    --whitetodark: #ffffff;
+    --mtitle:var(--dark);
+    --mtext:var(--gray);
+    --mcard: var(--light); 
+    --bg-gradient: linear-gradient(135deg, #007BFF 0%, #00BCD4 50%, #00E0D1 100%);
     --primary: #6366f1;
     --primary-dark: #4f46e5;
     --primary-light: #e0e7ff;
@@ -303,6 +309,15 @@
     --shadow-xl: 0 20px 60px rgba(0, 0, 0, 0.15);
 }
 
+.dark {
+    --whitetodark: var(--bg-gradient);
+    --mtext:var(--light);
+    --mtitle:var(--light);
+    --mcard: var(--bg-gradient);
+    --bg-gradient: linear-gradient(135deg, #0b1220 0%, #0b1220 50%, #0b1220 100%);
+}
+
+
 /* Container */
 .about-container {
     max-width: 100%;
@@ -313,7 +328,7 @@
 
 /* Hero Section */
 .hero-section {
-    background: linear-gradient(135deg, #007BFF 0%, #00BCD4 50%, #00E0D1 100%);
+    background: var(--bg-gradient);
     border-radius: 28px;
     padding: 60px 40px;
     position: relative;
@@ -388,7 +403,7 @@
 
 /* Mission Card */
 .mission-card {
-    background: white;
+    background: var(--mcard);
     border-radius: 24px;
     padding: 40px;
     box-shadow: var(--shadow);
@@ -425,7 +440,7 @@
 .mission-title {
     font-size: 2rem;
     font-weight: 800;
-    color: var(--dark);
+    color: var(--mtitle);
     margin: 0;
     letter-spacing: -0.5px;
 }
@@ -433,7 +448,7 @@
 .mission-text {
     font-size: 1.15rem;
     line-height: 1.8;
-    color: var(--gray);
+    color: var(--mtext);
     margin-bottom: 32px;
 }
 
@@ -447,7 +462,7 @@
 .section-heading {
     font-size: 1.5rem;
     font-weight: 800;
-    color: var(--dark);
+    color: var(--mtitle);
     margin-bottom: 20px;
     letter-spacing: -0.3px;
 }
@@ -464,7 +479,7 @@
     gap: 16px;
     padding: 16px 0;
     font-size: 1.05rem;
-    color: var(--dark);
+    color: var(--gray);
     line-height: 1.6;
     transition: all 0.3s;
 }
@@ -485,7 +500,7 @@
 
 /* Stats Sidebar */
 .stats-sidebar {
-    background: white;
+    background: var(--whitetodark);
     border-radius: 24px;
     overflow: hidden;
     box-shadow: var(--shadow);
@@ -495,7 +510,7 @@
 }
 
 .stats-header {
-    background: linear-gradient(135deg, #007BFF 0%, #00BCD4 50%, #00E0D1 100%);
+    background: var(--bg-gradient);
     padding: 28px;
     text-align: center;
 }
@@ -537,7 +552,7 @@
 .info-heading {
     font-size: 1.1rem;
     font-weight: 700;
-    color: var(--dark);
+    color: var(--mtitle);
     margin-bottom: 12px;
     text-transform: uppercase;
     letter-spacing: 0.5px;
@@ -597,7 +612,7 @@
 .features-title {
     font-size: 2rem;
     font-weight: 800;
-    color: var(--dark);
+    color: var(--mtitle);
     margin: 0;
     letter-spacing: -0.5px;
 }
@@ -610,7 +625,7 @@
 
 /* Feature Cards */
 .feature-card {
-    background: white;
+    background: var(--whitetodark);
     border-radius: 20px;
     padding: 32px;
     text-align: center;
@@ -697,7 +712,7 @@
 .feature-card-primary .feature-card-icon {
     background: linear-gradient(135deg, var(--primary) 0%, #4f46e5 100%);
     color: white;
-    box-shadow: 0 10px 30px var(--primary-glow);
+    box-shadow: 0 10px 30px var(--primary-glow);    
 }
 
 .feature-card-warning .feature-card-icon {
@@ -764,7 +779,7 @@
 .team-title {
     font-size: 2rem;
     font-weight: 800;
-    color: var(--dark);
+    color: var(--mtitle);
     margin: 0;
     letter-spacing: -0.5px;
 }
@@ -785,7 +800,7 @@
     gap: 16px;
     font-size: 1.5rem;
     font-weight: 800;
-    color: var(--dark);
+    color: var(--mtitle);
     margin-bottom: 1.5rem;
 }
 
@@ -811,7 +826,7 @@
 
 /* Team Cards */
 .team-card {
-    background: white;
+    background: var(--whitetodark);
     border-radius: 20px;
     padding: 36px 28px;
     text-align: center;

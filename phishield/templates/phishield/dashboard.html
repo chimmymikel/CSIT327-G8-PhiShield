@@ -302,6 +302,16 @@
 <style>
 /* Enhanced Modern Color Palette */
 :root {
+    --graytodark: var(--gray);
+    --whitetodark: linear-gradient(135deg, var(--light) 0%, white 100%);
+    --statslink-border: var(--primary-light);
+    --statslink: var(--light);
+    --emptyicon: linear-gradient(135deg, var(--light) 0%, white 100%);
+    --sectiontitle: var(--dark);
+    --statlabel:var(--gray);
+    --statnumber:transparent;
+    --bg-statcard: var(--light);
+    --bg-gradient: linear-gradient(135deg, #007BFF 0%, #00BCD4 50%, #00E0D1 100%);
     --primary: #6366f1;
     --primary-dark: #4f46e5;
     --primary-light: #e0e7ff;
@@ -310,7 +320,7 @@
     --danger-light: #fee2e2;
     --danger-glow: rgba(239, 68, 68, 0.4);
     --success: #10b981;
-    --success-light: #d1fae5;
+    --success-light: #d1fae5; 
     --success-glow: rgba(16, 185, 129, 0.4);
     --warning: #f59e0b;
     --warning-light: #fef3c7;
@@ -326,6 +336,19 @@
     --shadow-xl: 0 20px 60px rgba(0, 0, 0, 0.15);
 }
 
+.dark {
+    --graytodark: var(--dark);
+    --whitetodark: var(--dark);
+    --statslink-border: var(--gray);
+    --statslink: var(--dark);
+    --emptyicon: var(--dark);
+    --sectiontitle: var(--light);
+    --statlabel:var(--light);
+    --statnumber:var(--light);
+    --bg-statcard: var(--bg-gradient);
+    --bg-gradient: linear-gradient(135deg, #0b1220 0%, #0b1220 50%, #0b1220 100%);
+}
+
 /* Container Fix */
 .dashboard-container {
     max-width: 100%;
@@ -336,7 +359,7 @@
 
 /* Welcome Card - Enhanced */
 .welcome-card {
-    background: linear-gradient(135deg, #007BFF 0%, #00BCD4 50%, #00E0D1 100%);
+    background: var(--bg-gradient);
     border-radius: 24px;
     padding: 36px;
     position: relative;
@@ -411,7 +434,7 @@
 
 /* Stat Cards - Enhanced */
 .stat-card {
-    background: white;
+    background: var(--bg-statcard);
     border-radius: 20px;
     padding: 28px;
     position: relative;
@@ -513,7 +536,7 @@
 
 .stat-icon-primary {
     background: linear-gradient(135deg, #e0e7ff 0%, #c7d2fe 100%);
-    color: var(--primary);
+    color: var(--primary); 
     box-shadow: 0 8px 24px var(--primary-glow);
 }
 
@@ -537,19 +560,18 @@
 .stat-number {
     font-size: 2.75rem;
     font-weight: 800;
-    color: var(--dark);
     line-height: 1;
     margin-bottom: 10px;
     letter-spacing: -1.5px;
     background: linear-gradient(135deg, var(--dark) 0%, var(--gray) 100%);
     -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    -webkit-text-fill-color: var(--statnumber);
     background-clip: text;
 }
 
 .stat-label {
     font-size: 1rem;
-    color: var(--gray);
+    color: var(--statlabel);
     font-weight: 600;
     margin-bottom: 14px;
     text-transform: uppercase;
@@ -634,7 +656,7 @@
 .section-title {
     font-size: 1.75rem;
     font-weight: 800;
-    color: var(--dark);
+    color: var(--sectiontitle);
     margin: 0;
     letter-spacing: -0.5px;
 }
@@ -648,7 +670,7 @@
 
 /* Action Cards - Enhanced */
 .action-card {
-    background: white;
+    background: var(--bg-statcard);
     border-radius: 24px;
     padding: 32px;
     position: relative;
@@ -782,7 +804,7 @@
 .action-title {
     font-size: 1.4rem;
     font-weight: 800;
-    color: var(--dark);
+    color: var(--sectiontitle);
     margin-bottom: 14px;
     position: relative;
     z-index: 1;
@@ -880,7 +902,7 @@
 
 /* Modern Card - Enhanced */
 .modern-card {
-    background: white;
+    background: var(--bg-statcard);
     border-radius: 24px;
     overflow: hidden;
     box-shadow: var(--shadow);
@@ -1003,7 +1025,7 @@
     display: flex;
     gap: 16px;
     padding: 20px;
-    background: linear-gradient(135deg, var(--light) 0%, white 100%);
+    background: var(--whitetodark);
     border-radius: 16px;
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     border: 2px solid transparent;
@@ -1028,7 +1050,7 @@
 }
 
 .activity-item:hover {
-    background: white;
+    background: var(--whitetodark);
     border-color: var(--primary-light);
     transform: translateX(6px);
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
@@ -1080,7 +1102,7 @@
 .activity-title {
     font-size: 1.05rem;
     font-weight: 700;
-    color: var(--dark);
+    color: var(--darktolight);
     margin: 0 0 8px;
 }
 
@@ -1156,7 +1178,7 @@
     width: 96px;
     height: 96px;
     margin: 0 auto 24px;
-    background: linear-gradient(135deg, var(--light) 0%, white 100%);
+    background: var(--emptyicon);
     border-radius: 24px;
     display: flex;
     align-items: center;
@@ -1386,8 +1408,8 @@
     justify-content: center;
     gap: 10px;
     padding: 14px;
-    background: white;
-    border: 2px solid var(--primary-light);
+    background: var(--statslink);
+    border: 2px solid var(--statslink-border);
     border-radius: 12px;
     color: var(--primary);
     text-decoration: none;

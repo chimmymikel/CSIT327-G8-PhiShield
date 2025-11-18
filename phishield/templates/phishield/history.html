@@ -131,6 +131,10 @@
 <style>
 /* Modern Color Palette */
 :root {
+    --lighttodark: var(--light);
+    --whitetogray: white;
+    --whitetodark: #ffffff;
+    --Hbackground: linear-gradient(135deg, #007BFF 0%, #00BCD4 50%, #00E0D1 100%);
     --primary: #667eea;
     --primary-dark: #5568d3;
     --primary-light: #e0e7ff;
@@ -148,6 +152,13 @@
     --shadow-hover: 0 20px 60px rgba(0, 0, 0, 0.12);
 }
 
+.dark {
+    --lighttodark: var(--dark);
+    --whitetogray: var(--gray);
+    --whitetodark: var(--Hbackground);
+    --Hbackground: linear-gradient(135deg, #0b1220 0%, #0b1220 50%, #0b1220 100%);
+}
+
 .history-container {
     max-width: 1400px;
     margin: 0 auto;
@@ -156,7 +167,7 @@
 
 /* Header Styles */
 .history-header {
-    background: linear-gradient(135deg, #007BFF 0%, #00BCD4 50%, #00E0D1 100%);
+    background: var(--Hbackground);
     border-radius: 20px;
     padding: 2rem;
     color: white;
@@ -210,7 +221,7 @@
 
 /* Filters Section */
 .history-filters {
-    background: white;
+    background: var(--whitetodark);
     border-radius: 16px;
     padding: 1.5rem;
     box-shadow: var(--shadow);
@@ -232,7 +243,7 @@
 .search-box input {
     width: 100%;
     padding: 0.75rem 1rem 0.75rem 3rem;
-    border: 2px solid var(--light);
+    border: 2px solid var(--gray);
     border-radius: 12px;
     font-size: 0.95rem;
     transition: all 0.3s;
@@ -247,10 +258,10 @@
 .filter-select {
     width: 100%;
     padding: 0.75rem 1rem;
-    border: 2px solid var(--light);
+    border: 2px solid var(--light); 
     border-radius: 12px;
     font-size: 0.95rem;
-    background: white;
+    background: var(--light);
     cursor: pointer;
     transition: all 0.3s;
 }
@@ -263,6 +274,7 @@
 
 /* History Grid */
 .history-grid {
+    background: var(--whitetodark);
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
     gap: 1.5rem;
@@ -270,7 +282,7 @@
 }
 
 .history-card {
-    background: white;
+    background: var(--whitetodark);
     border-radius: 16px;
     padding: 1.5rem;
     box-shadow: var(--shadow);

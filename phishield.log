@@ -567,3 +567,20 @@ INFO 2025-10-02 13:01:22,842 views Message analysis completed - Risk: suspicious
 [2025-10-10 14:28:46,820] INFO django.server - "GET /check-link/ HTTP/1.1" 200 23689
 [2025-10-10 14:28:48,700] INFO phishield - Dashboard accessed by: gave
 [2025-10-10 14:28:48,874] INFO django.server - "GET /dashboard/ HTTP/1.1" 200 62839
+[2025-11-18 19:27:48,848] INFO django.utils.autoreload - Watching for file changes with StatReloader
+[2025-11-18 19:27:56,810] INFO django.server - "GET /settings/ HTTP/1.1" 200 32021
+[2025-11-18 19:29:05,775] INFO django.server - "GET /settings/ HTTP/1.1" 200 32021
+[2025-11-18 19:29:07,689] INFO phishield - About Us page accessed
+[2025-11-18 19:29:07,961] INFO django.server - "GET /about/ HTTP/1.1" 200 53022
+[2025-11-18 19:30:33,998] INFO phishield - About Us page accessed
+[2025-11-18 19:30:34,274] INFO django.server - "GET /about/ HTTP/1.1" 200 54260
+[2025-11-18 19:30:38,404] INFO django.server - "GET /settings/ HTTP/1.1" 200 33259
+[2025-11-18 19:31:06,695] INFO django.server - "GET /settings/ HTTP/1.1" 200 59924
+[2025-11-18 19:31:43,968] INFO phishield - Dashboard accessed by: gave
+[2025-11-18 19:31:44,151] INFO django.server - "GET /dashboard/ HTTP/1.1" 200 65590
+[2025-11-18 19:31:46,132] INFO phishield - Dashboard accessed by: gave
+[2025-11-18 19:31:46,309] INFO django.server - "GET /dashboard/ HTTP/1.1" 200 65601
+[2025-11-18 19:32:07,399] INFO phishield - History accessed by: gave
+[2025-11-18 19:32:07,580] INFO django.server - "GET /history/ HTTP/1.1" 200 39754
+[2025-11-18 19:32:09,367] INFO phishield - History accessed by: gave
+[2025-11-18 19:32:09,541] INFO django.server - "GET /history/ HTTP/1.1" 200 39754
