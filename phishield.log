@@ -584,3 +584,30 @@ INFO 2025-10-02 13:01:22,842 views Message analysis completed - Risk: suspicious
 [2025-11-18 19:32:07,580] INFO django.server - "GET /history/ HTTP/1.1" 200 39754
 [2025-11-18 19:32:09,367] INFO phishield - History accessed by: gave
 [2025-11-18 19:32:09,541] INFO django.server - "GET /history/ HTTP/1.1" 200 39754
+[2025-11-18 20:01:37,904] INFO django.utils.autoreload - Watching for file changes with StatReloader
+[2025-11-18 20:01:47,800] INFO phishield - History accessed by: gave
+[2025-11-18 20:01:47,989] INFO django.server - "GET /history/ HTTP/1.1" 200 39767
+[2025-11-18 20:01:48,182] WARNING django.server - "GET /favicon.ico HTTP/1.1" 404 8348
+[2025-11-18 20:01:50,501] INFO django.server - "GET /settings/ HTTP/1.1" 200 59924
+[2025-11-18 20:01:57,150] INFO phishield - Dashboard accessed by: gave
+[2025-11-18 20:01:57,317] INFO django.server - "GET /dashboard/ HTTP/1.1" 200 65600
+[2025-11-18 20:01:59,878] INFO django.server - "GET /settings/ HTTP/1.1" 200 59924
+[2025-11-18 20:02:03,117] INFO phishield - Dashboard accessed by: gave
+[2025-11-18 20:02:03,282] INFO django.server - "GET /dashboard/ HTTP/1.1" 200 65585
+[2025-11-19 04:39:18,764] INFO django.utils.autoreload - Watching for file changes with StatReloader
+[2025-11-19 04:39:42,516] INFO django.utils.autoreload - Watching for file changes with StatReloader
+[2025-11-19 04:39:50,359] INFO phishield - Dashboard accessed by: gave
+[2025-11-19 04:39:50,561] INFO django.server - "GET /dashboard/ HTTP/1.1" 200 65593
+[2025-11-19 04:39:50,782] WARNING django.server - "GET /favicon.ico HTTP/1.1" 404 8348
+[2025-11-19 04:39:51,364] INFO phishield - Dashboard accessed by: gave
+[2025-11-19 04:39:51,533] INFO django.server - "GET /dashboard/ HTTP/1.1" 200 65573
+[2025-11-19 04:39:53,681] INFO django.server - "GET /settings/ HTTP/1.1" 200 59924
+[2025-11-19 04:39:56,387] INFO django.server - "GET /static/phishield/images/bg.jpg HTTP/1.1" 200 919056
+[2025-11-19 04:39:58,191] INFO phishield - About Us page accessed
+[2025-11-19 04:39:58,448] INFO django.server - "GET /about/ HTTP/1.1" 200 54260
+[2025-11-19 04:39:58,479] INFO django.server - "GET /static/phishield/images/habon.png HTTP/1.1" 200 163886
+[2025-11-19 04:39:58,481] INFO django.server - "GET /static/phishield/images/pfp.jpg HTTP/1.1" 200 188882
+[2025-11-19 04:39:58,484] INFO django.server - "GET /static/phishield/images/hontiveros.png HTTP/1.1" 200 356776
+[2025-11-19 04:39:58,485] INFO django.server - "GET /static/phishield/images/canete.png HTTP/1.1" 200 338010
+[2025-11-19 04:39:58,486] INFO django.server - "GET /static/phishield/images/campilanan.jpg HTTP/1.1" 200 542099
+[2025-11-19 04:39:58,494] INFO django.server - "GET /static/phishield/images/butihen.png HTTP/1.1" 200 1480994
