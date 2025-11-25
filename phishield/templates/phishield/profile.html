@@ -1,201 +1,393 @@
 {% extends "phishield/base.html" %}
 {% load static %}
 
-{% block title %}My Profile - PhiShield{% endblock %}
+{% block title %}My Profile | PhiShield{% endblock %}
 
 {% block content %}
-<div class="container-fluid py-4">
-    <div class="row">
-        <!-- Sidebar -->
-        <div class="col-lg-3 col-md-4 mb-4">
-            <div class="card shadow-sm">
-                <div class="card-body text-center p-4">
-                    <!-- Profile Picture -->
-                    <div class="position-relative d-inline-block">
-                        {% if profile.profile_picture %}
-                            <img src="{{ profile.profile_picture.url }}" alt="Profile Picture" 
-                                 class="rounded-circle mb-3" width="120" height="120" style="object-fit: cover;">
-                        {% else %}
-                            <div class="bg-primary rounded-circle d-inline-flex align-items-center justify-content-center mb-3" 
-                                 style="width: 120px; height: 120px;">
-                                <span class="text-white h3 fw-bold">{{ user.username|first|upper }}</span>
+<style>
+    /* --- THEME CONFIGURATION --- */
+    :root {
+        --brand-primary: #2563eb;
+        --brand-gradient: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%);
+        --glass-white: rgba(255, 255, 255, 0.95);
+        --soft-bg: #f0f4f8;
+        --text-dark: #1e293b;
+        --text-muted: #64748b;
+        --card-radius: 24px;
+        --btn-radius: 50px; /* Fully rounded buttons */
+        --shadow-sm: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+        --shadow-hover: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    }
+
+    body {
+        background-color: var(--soft-bg);
+        font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    }
+
+    /* --- CARDS --- */
+    .modern-card {
+        background: white;
+        border-radius: var(--card-radius);
+        border: 1px solid rgba(255, 255, 255, 0.5);
+        box-shadow: var(--shadow-sm);
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        overflow: hidden;
+        position: relative;
+    }
+
+    .modern-card:hover {
+        transform: translateY(-4px);
+        box-shadow: var(--shadow-hover);
+    }
+
+    /* --- BUTTONS (Rounder & Stylish) --- */
+    .btn-stylish {
+        border-radius: var(--btn-radius);
+        padding: 0.6rem 1.5rem;
+        font-weight: 600;
+        font-size: 0.9rem;
+        letter-spacing: 0.3px;
+        transition: all 0.3s ease;
+        border: none;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .btn-stylish-primary {
+        background: var(--brand-gradient);
+        color: white;
+        box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+    }
+
+    .btn-stylish-primary:hover {
+        box-shadow: 0 8px 16px rgba(37, 99, 235, 0.4);
+        transform: translateY(-1px);
+        color: white;
+    }
+
+    .btn-stylish-outline {
+        background: white;
+        color: var(--brand-primary);
+        border: 2px solid #e2e8f0;
+    }
+
+    .btn-stylish-outline:hover {
+        border-color: var(--brand-primary);
+        background: #f8fafc;
+        color: var(--brand-primary);
+    }
+
+    /* --- PROFILE SPECIFICS --- */
+    .profile-header-bg {
+        height: 160px;
+        background: var(--brand-gradient);
+        /* Abstract Pattern Overlay */
+        background-image: 
+            radial-gradient(circle at 10% 20%, rgba(255,255,255,0.1) 0%, transparent 20%),
+            radial-gradient(circle at 90% 80%, rgba(255,255,255,0.1) 0%, transparent 20%);
+    }
+
+    .profile-avatar-box {
+        margin-top: -80px;
+        padding: 6px;
+        background: white;
+        border-radius: 50%;
+        display: inline-block;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+
+    .profile-avatar-img {
+        width: 140px;
+        height: 140px;
+        border-radius: 50%;
+        object-fit: cover;
+    }
+
+    /* --- STATS WIDGETS --- */
+    .stat-box {
+        background: #f8fafc;
+        border-radius: 16px;
+        padding: 1.2rem;
+        text-align: center;
+        border: 1px solid #edf2f7;
+        transition: 0.2s;
+    }
+    .stat-box:hover {
+        background: #eff6ff; /* Light blue on hover */
+        border-color: #bfdbfe;
+    }
+    .stat-icon {
+        width: 40px;
+        height: 40px;
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 0.8rem;
+        font-size: 1.1rem;
+    }
+
+    /* --- TIMELINE --- */
+    .timeline-wrapper {
+        position: relative;
+        padding-left: 1.5rem;
+    }
+    .timeline-line {
+        position: absolute;
+        left: 7px;
+        top: 15px;
+        bottom: 0;
+        width: 2px;
+        background: #e2e8f0;
+    }
+    .timeline-card {
+        background: #f8fafc;
+        border-radius: 16px;
+        padding: 1rem;
+        margin-bottom: 1.5rem;
+        border: 1px solid #f1f5f9;
+    }
+    .timeline-dot {
+        position: absolute;
+        left: 0;
+        top: 15px;
+        width: 16px;
+        height: 16px;
+        border-radius: 50%;
+        border: 3px solid white;
+        box-shadow: 0 0 0 2px #cbd5e1;
+        background: white;
+        z-index: 2;
+    }
+    .timeline-dot.danger { background: #ef4444; box-shadow: 0 0 0 2px #fecaca; }
+    .timeline-dot.safe { background: #10b981; box-shadow: 0 0 0 2px #a7f3d0; }
+    .timeline-dot.warn { background: #f59e0b; box-shadow: 0 0 0 2px #fde68a; }
+
+    /* --- TYPOGRAPHY --- */
+    .label-fancy {
+        font-size: 0.75rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        color: #94a3b8;
+        margin-bottom: 0.4rem;
+    }
+</style>
+
+<div class="py-5">
+    <div class="container">
+        <div class="row g-4">
+            
+            <div class="col-lg-4">
+                
+                <div class="modern-card mb-4 text-center">
+                    <div class="profile-header-bg"></div>
+                    
+                    <div class="px-4 pb-4">
+                        <div class="profile-avatar-box position-relative">
+                            {% if profile.profile_picture %}
+                                <img src="{{ profile.profile_picture.url }}" class="profile-avatar-img" alt="Profile">
+                            {% else %}
+                                <div class="profile-avatar-img bg-primary d-flex align-items-center justify-content-center text-white display-4 fw-bold" style="width:140px; height:140px;">
+                                    {{ user.username|first|upper }}
+                                </div>
+                            {% endif %}
+                            
+                            {% if profile.email_verified %}
+                            <div class="position-absolute bottom-0 end-0 bg-success text-white rounded-circle d-flex align-items-center justify-content-center border border-4 border-white" 
+                                 style="width: 36px; height: 36px; transform: translate(0, -5px);" title="Verified">
+                                <i class="fas fa-check small"></i>
                             </div>
-                        {% endif %}
-                        <span class="position-absolute bottom-0 end-0 bg-success rounded-circle p-1 border border-3 border-white">
-                            <i class="fas fa-check text-white" style="font-size: 0.8rem;"></i>
-                        </span>
-                    </div>
-                    
-                    <h4 class="fw-bold text-dark mb-1">{{ user.get_full_name|default:user.username }}</h4>
-                    <p class="text-muted mb-2">@{{ user.username }}</p>
-                    <span class="badge bg-primary bg-gradient">{{ profile.get_role_display }}</span>
-                    
-                    <div class="mt-4">
-                        <a href="{% url 'phishield:edit_profile' %}" class="btn btn-primary btn-sm me-2">
-                            <i class="fas fa-edit me-1"></i>Edit Profile
-                        </a>
-                        <a href="{% url 'phishield:settings' %}" class="btn btn-outline-secondary btn-sm">
-                            <i class="fas fa-cog me-1"></i>Settings
-                        </a>
-                    </div>
-                </div>
-            </div>
+                            {% endif %}
+                        </div>
 
-            <!-- Statistics Card -->
-            <div class="card shadow-sm mt-4">
-                <div class="card-header bg-transparent border-bottom-0">
-                    <h6 class="mb-0 text-dark fw-bold"><i class="fas fa-chart-bar me-2"></i>Security Analytics</h6>
-                </div>
-                <div class="card-body">
-                    <div class="d-flex justify-content-between align-items-center mb-3">
-                        <span class="text-muted small">Total Checks</span>
-                        <span class="h5 mb-0 fw-bold text-dark">{{ profile.total_checks }}</span>
-                    </div>
-                    <div class="d-flex justify-content-between align-items-center mb-3">
-                        <span class="text-muted small">URL Checks</span>
-                        <span class="h6 mb-0 text-info">{{ total_url_checks }}</span>
-                    </div>
-                    <div class="d-flex justify-content-between align-items-center mb-3">
-                        <span class="text-muted small">Message Checks</span>
-                        <span class="h6 mb-0 text-info">{{ total_message_checks }}</span>
-                    </div>
-                    <div class="d-flex justify-content-between align-items-center mb-3">
-                        <span class="text-muted small">Threats Detected</span>
-                        <span class="h5 mb-0 text-danger fw-bold">{{ profile.threats_detected }}</span>
-                    </div>
-                    <div class="d-flex justify-content-between align-items-center mb-3">
-                        <span class="text-muted small">Safe Checks</span>
-                        <span class="h5 mb-0 text-success fw-bold">{{ profile.safe_checks }}</span>
-                    </div>
-                    <div class="d-flex justify-content-between align-items-center">
-                        <span class="text-muted small">Success Rate</span>
-                        <span class="h5 mb-0 text-primary fw-bold">{{ profile.success_rate }}%</span>
-                    </div>
-                </div>
-            </div>
-        </div>
+                        <div class="mt-3">
+                            <h4 class="fw-bold text-dark mb-1">{{ user.get_full_name|default:user.username }}</h4>
+                            <p class="text-muted mb-3">@{{ user.username }}</p>
+                            
+                            <span class="badge rounded-pill px-3 py-2 mb-4" style="background-color: #e0f2fe; color: #0369a1; font-weight: 600;">
+                                {{ profile.get_role_display }}
+                            </span>
 
-        <!-- Main Content -->
-        <div class="col-lg-9 col-md-8">
-            <!-- Profile Information -->
-            <div class="card shadow-sm mb-4">
-                <div class="card-header bg-transparent border-bottom-0 d-flex justify-content-between align-items-center py-3">
-                    <h5 class="mb-0 text-dark fw-bold"><i class="fas fa-user-circle me-2"></i>Profile Information</h5>
-                    <a href="{% url 'phishield:edit_profile' %}" class="btn btn-primary btn-sm">
-                        <i class="fas fa-edit me-1"></i>Edit
-                    </a>
+                            <div class="d-flex gap-2 justify-content-center">
+                                <a href="{% url 'phishield:edit_profile' %}" class="btn btn-stylish btn-stylish-primary flex-grow-1">
+                                    Edit Profile
+                                </a>
+                                <a href="{% url 'phishield:settings' %}" class="btn btn-stylish btn-stylish-outline">
+                                    <i class="fas fa-cog"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="card-body">
+
+                <div class="modern-card p-4">
+                    <div class="d-flex justify-content-between align-items-center mb-4">
+                        <h6 class="fw-bold mb-0 text-dark"><i class="fas fa-shield-alt text-primary me-2"></i>Security Stats</h6>
+                        <span class="badge bg-success rounded-pill px-3">{{ profile.success_rate }}% Score</span>
+                    </div>
+
                     <div class="row g-3">
+                        <div class="col-12">
+                            <div class="stat-box d-flex align-items-center justify-content-between text-start">
+                                <div>
+                                    <div class="label-fancy">Total Scans</div>
+                                    <div class="h3 fw-bold text-dark mb-0">{{ profile.total_checks }}</div>
+                                </div>
+                                <div class="stat-icon bg-primary text-white mb-0" style="width: 50px; height: 50px;">
+                                    <i class="fas fa-chart-line"></i>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-6">
+                            <div class="stat-box">
+                                <div class="stat-icon" style="background: #e0f2fe; color: #0284c7;">
+                                    <i class="fas fa-link"></i>
+                                </div>
+                                <div class="h5 fw-bold mb-0">{{ total_url_checks }}</div>
+                                <div class="small text-muted">URLs</div>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="stat-box">
+                                <div class="stat-icon" style="background: #f3e8ff; color: #9333ea;">
+                                    <i class="fas fa-comment-dots"></i>
+                                </div>
+                                <div class="h5 fw-bold mb-0">{{ total_message_checks }}</div>
+                                <div class="small text-muted">Messages</div>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="stat-box" style="background: #fef2f2; border-color: #fee2e2;">
+                                <div class="stat-icon" style="background: #fee2e2; color: #dc2626;">
+                                    <i class="fas fa-bug"></i>
+                                </div>
+                                <div class="h5 fw-bold text-danger mb-0">{{ profile.threats_detected }}</div>
+                                <div class="small text-danger">Threats</div>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="stat-box" style="background: #ecfdf5; border-color: #d1fae5;">
+                                <div class="stat-icon" style="background: #d1fae5; color: #059669;">
+                                    <i class="fas fa-check-circle"></i>
+                                </div>
+                                <div class="h5 fw-bold text-success mb-0">{{ profile.safe_checks }}</div>
+                                <div class="small text-success">Safe</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="col-lg-8">
+                
+                <div class="modern-card p-4 p-lg-5 mb-4">
+                    <div class="d-flex justify-content-between align-items-center mb-4 border-bottom pb-3">
+                        <h5 class="fw-bold text-dark mb-0">Personal Details</h5>
+                        <div class="text-muted small">ID: #{{ user.id }}</div>
+                    </div>
+                    
+                    <div class="row g-4">
                         <div class="col-md-6">
-                            <label class="form-label text-muted small fw-bold">Full Name</label>
-                            <p class="mb-0">{{ user.get_full_name|default:"Not set" }}</p>
+                            <div class="label-fancy">Email Address</div>
+                            <div class="fw-medium text-dark">{{ user.email }}</div>
                         </div>
                         <div class="col-md-6">
-                            <label class="form-label text-muted small fw-bold">Username</label>
-                            <p class="mb-0">@{{ user.username }}</p>
+                            <div class="label-fancy">Phone Number</div>
+                            <div class="fw-medium text-dark">{{ profile.phone|default:"--" }}</div>
                         </div>
                         <div class="col-md-6">
-                            <label class="form-label text-muted small fw-bold">Email Address</label>
-                            <div class="d-flex align-items-center">
-                                <span class="me-2">{{ user.email }}</span>
-                                {% if profile.email_verified %}
-                                    <span class="badge bg-success bg-gradient">Verified</span>
+                            <div class="label-fancy">Company</div>
+                            <div class="fw-medium text-dark">{{ profile.company|default:"--" }}</div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="label-fancy">Location</div>
+                            <div class="fw-medium text-dark">{{ profile.location|default:"--" }}</div>
+                        </div>
+                        <div class="col-12">
+                            <div class="label-fancy">About Me</div>
+                            <div class="p-4 rounded-4" style="background: #f8fafc; border: 1px dashed #cbd5e1;">
+                                {% if profile.bio %}
+                                    <p class="mb-0 text-secondary" style="line-height: 1.6;">{{ profile.bio|linebreaksbr }}</p>
                                 {% else %}
-                                    <span class="badge bg-warning bg-gradient">Not Verified</span>
+                                    <p class="mb-0 text-muted fst-italic">No bio added. Tell us about yourself!</p>
                                 {% endif %}
                             </div>
                         </div>
-                        <div class="col-md-6">
-                            <label class="form-label text-muted small fw-bold">Phone Number</label>
-                            <p class="mb-0">{{ profile.phone|default:"Not set" }}</p>
-                        </div>
-                        <div class="col-md-6">
-                            <label class="form-label text-muted small fw-bold">Location</label>
-                            <p class="mb-0">{{ profile.location|default:"Not set" }}</p>
-                        </div>
-                        <div class="col-md-6">
-                            <label class="form-label text-muted small fw-bold">Company</label>
-                            <p class="mb-0">{{ profile.company|default:"Not set" }}</p>
-                        </div>
-                        <div class="col-md-6">
-                            <label class="form-label text-muted small fw-bold">Role</label>
-                            <p class="mb-0">{{ profile.get_role_display }}</p>
-                        </div>
-                        <div class="col-md-6">
-                            <label class="form-label text-muted small fw-bold">Member Since</label>
-                            <p class="mb-0">{{ profile.date_joined|date:"F j, Y" }} <small class="text-muted">({{ profile.account_age_days }} days)</small></p>
-                        </div>
-                        <div class="col-12">
-                            <label class="form-label text-muted small fw-bold">Bio</label>
-                            <p class="mb-0">{{ profile.bio|default:"No bio yet. Tell us about yourself!"|linebreaks }}</p>
-                        </div>
                     </div>
                 </div>
-            </div>
 
-            <!-- Recent Activity -->
-            <div class="card shadow-sm">
-                <div class="card-header bg-transparent border-bottom-0">
-                    <h5 class="mb-0 text-dark fw-bold"><i class="fas fa-history me-2"></i>Recent Activity</h5>
-                </div>
-                <div class="card-body">
-                    {% if recent_links or recent_messages %}
-                        <div class="list-group list-group-flush">
-                            {% for link in recent_links %}
-                                <div class="list-group-item px-0 py-3 border-0">
-                                    <div class="d-flex align-items-center">
-                                        <div class="flex-shrink-0">
-                                            <div class="bg-primary bg-opacity-10 rounded-circle p-2">
-                                                <i class="fas fa-link text-primary"></i>
-                                            </div>
-                                        </div>
-                                        <div class="flex-grow-1 ms-3">
-                                            <div class="d-flex justify-content-between align-items-start">
-                                                <h6 class="mb-1 fw-bold">URL Analysis</h6>
-                                                <small class="text-muted">{{ link.date_checked|timesince }} ago</small>
-                                            </div>
-                                            <p class="mb-1 text-muted small">{{ link.url|truncatechars:60 }}</p>
-                                            <span class="badge {% if link.risk_level == 'high' %}bg-danger{% elif link.risk_level == 'medium' %}bg-warning{% else %}bg-success{% endif %}">
-                                                {{ link.risk_level|title }} Risk
-                                            </span>
-                                        </div>
-                                    </div>
-                                </div>
-                            {% endfor %}
-                            
-                            {% for message in recent_messages %}
-                                <div class="list-group-item px-0 py-3 border-0">
-                                    <div class="d-flex align-items-center">
-                                        <div class="flex-shrink-0">
-                                            <div class="bg-info bg-opacity-10 rounded-circle p-2">
-                                                <i class="fas fa-comment-alt text-info"></i>
-                                            </div>
-                                        </div>
-                                        <div class="flex-grow-1 ms-3">
-                                            <div class="d-flex justify-content-between align-items-start">
-                                                <h6 class="mb-1 fw-bold">Message Analysis</h6>
-                                                <small class="text-muted">{{ message.date_checked|timesince }} ago</small>
-                                            </div>
-                                            <p class="mb-1 text-muted small">{{ message.message|truncatechars:70 }}</p>
-                                            <span class="badge {% if message.risk_level == 'high' %}bg-danger{% elif message.risk_level == 'medium' %}bg-warning{% else %}bg-success{% endif %}">
-                                                {{ message.risk_level|title }} Risk
-                                            </span>
-                                        </div>
-                                    </div>
-                                </div>
-                            {% endfor %}
-                        </div>
-                    {% else %}
-                        <div class="text-center py-4">
-                            <i class="fas fa-inbox fa-3x text-muted mb-3"></i>
-                            <p class="text-muted">No recent activity yet.</p>
-                            <a href="{% url 'phishield:check_link' %}" class="btn btn-primary btn-sm">
-                                <i class="fas fa-shield-alt me-1"></i>Start Analyzing
+                <div class="modern-card p-4 p-lg-5">
+                    <div class="d-flex justify-content-between align-items-center mb-4">
+                        <h5 class="fw-bold text-dark mb-0">Analysis History</h5>
+                        {% if recent_links or recent_messages %}
+                            <a href="{% url 'phishield:check_link' %}" class="btn btn-sm btn-primary rounded-pill px-3">
+                                <i class="fas fa-plus small me-1"></i> New Scan
                             </a>
-                        </div>
-                    {% endif %}
+                        {% endif %}
+                    </div>
+
+                    <div class="timeline-wrapper">
+                        <div class="timeline-line"></div>
+
+                        {% if recent_links or recent_messages %}
+                            
+                            {% for link in recent_links %}
+                            <div class="position-relative ps-4 mb-4">
+                                <div class="timeline-dot {% if link.risk_level == 'high' %}danger{% elif link.risk_level == 'medium' %}warn{% else %}safe{% endif %}"></div>
+                                
+                                <div class="timeline-card">
+                                    <div class="d-flex justify-content-between mb-2">
+                                        <span class="fw-bold text-dark font-monospace small">URL Analysis</span>
+                                        <small class="text-muted">{{ link.date_checked|timesince }} ago</small>
+                                    </div>
+                                    <div class="text-truncate text-primary fw-medium mb-2">{{ link.url }}</div>
+                                    
+                                    {% if link.risk_level == 'high' %}
+                                        <span class="badge bg-danger rounded-pill">High Risk</span>
+                                    {% elif link.risk_level == 'medium' %}
+                                        <span class="badge bg-warning text-dark rounded-pill">Medium Risk</span>
+                                    {% else %}
+                                        <span class="badge bg-success rounded-pill">Safe</span>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            {% endfor %}
+
+                            {% for message in recent_messages %}
+                            <div class="position-relative ps-4 mb-4">
+                                <div class="timeline-dot {% if message.risk_level == 'high' %}danger{% elif message.risk_level == 'medium' %}warn{% else %}safe{% endif %}"></div>
+                                
+                                <div class="timeline-card">
+                                    <div class="d-flex justify-content-between mb-2">
+                                        <span class="fw-bold text-dark font-monospace small">Message Content</span>
+                                        <small class="text-muted">{{ message.date_checked|timesince }} ago</small>
+                                    </div>
+                                    <p class="text-muted small fst-italic mb-2 text-truncate">"{{ message.message }}"</p>
+                                    
+                                    {% if message.risk_level == 'high' %}
+                                        <span class="badge bg-danger rounded-pill">Phishing Detected</span>
+                                    {% elif message.risk_level == 'medium' %}
+                                        <span class="badge bg-warning text-dark rounded-pill">Suspicious</span>
+                                    {% else %}
+                                        <span class="badge bg-success rounded-pill">Clean</span>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            {% endfor %}
+
+                        {% else %}
+                            <div class="text-center py-5 text-muted">
+                                <i class="fas fa-shield-alt fa-3x mb-3 text-light"></i>
+                                <h6>No Recent Scans</h6>
+                                <p class="small">Start using the tool to populate your history.</p>
+                            </div>
+                        {% endif %}
+                    </div>
                 </div>
+
             </div>
         </div>
     </div>
