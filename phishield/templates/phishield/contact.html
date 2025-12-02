@@ -2,98 +2,478 @@
 {% block title %}Contact Us - PhiShield{% endblock %}
 
 {% block content %}
-<div class="content-card mt-4">
-    <h2><i class="fas fa-envelope"></i> Contact Us</h2>
-    <p class="text-muted">Have questions or suggestions? We'd love to hear from you!</p>
+<style>
+    :root {
+        /* Primary Colors */
+        --primary-purple: #667eea;
+        --primary-dark-purple: #764ba2;
+        
+        /* Text Colors */
+        --text-dark: #2d3748;
+        --text-medium: #4a5568;
+        --text-light: #718096;
+        
+        /* Border Colors */
+        --border-light: #e2e8f0;
+        --border-medium: #cbd5e0;
+        
+        /* Background Colors */
+        --whitetodark: var(--bg-white);
+        --gray: #64748b;
+        --bg-contact: linear-gradient(135deg, #007BFF 0%, #00BCD4 50%, #00E0D1 100%);
+        --bg-gradient: linear-gradient(135deg, #007BFF 0%, #00BCD4 50%, #00E0D1 100%);
+        --bg-white: #ffffff;
+        --bg-light: #f6f8fb;
+        --bg-very-light: #fafbfc;
+        --bg-off-white: #f0f0f0;
+        
+        /* Status Colors */
+        --success-light: #68d391;
+        --success-dark: #38a169;
+        --warning-light: #f6ad55;
+        --warning-dark: #ed8936;
+        --danger-light: #fc8181;
+        --danger-dark: #e53e3e;
+        --info-light: #4fd1c5;
+        --info-dark: #38b2ac;
+        
+        /* Shadow Colors */
+        --shadow-light: rgba(0, 0, 0, 0.08);
+        --shadow-medium: rgba(0, 0, 0, 0.12);
+        --shadow-primary: rgba(102, 126, 234, 0.3);
+        --shadow-primary-hover: rgba(102, 126, 234, 0.5);
+        --shadow-primary-focus: rgba(102, 126, 234, 0.1);
+        --shadow-dark: rgba(0, 0, 0, 0.2);
+        
+        /* Border Radius */
+        --radius-small: 10px;
+        --radius-medium: 12px;
+        --radius-large: 16px;
+        --radius-xlarge: 20px;
+    }
+    .dark {
+        --bg-contact: linear-gradient(135deg, #0b1220 0%, #0b1220 50%, #0b1220 100%);
+        --whitetodark: linear-gradient(135deg, #0b1220 0%, #0b1220 50%, #0b1220 100%);
+        --text-dark: white;
+        --text-medium: white;
+        --text-light: white;
+        --bg-gradient: #1e293b;
+    }
 
-    <div class="row mt-4">
-        <div class="col-md-8">
-            {% if messages %}
-                {% for message in messages %}
-                    <div class="alert alert-{{ message.tags }} alert-dismissible fade show">
-                        {{ message }}
-                        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-                    </div>
-                {% endfor %}
-            {% endif %}
+    .contact-hero {
+        background: var(--bg-contact);
+        border-radius: var(--radius-xlarge);
+        padding: 60px 40px;
+        margin-bottom: 40px;
+        color: var(--bg-white);
+        text-align: center;
+        box-shadow: 0 20px 60px var(--shadow-primary);
+    }
 
+    .contact-hero h1 {
+        font-size: 2.5rem;
+        font-weight: 700;
+        margin-bottom: 15px;
+        text-shadow: 0 2px 10px var(--shadow-dark);
+    }
+
+    .contact-hero p {
+        font-size: 1.2rem;
+        opacity: 0.95;
+        max-width: 600px;
+        margin: 0 auto;
+    }
+
+    .form-card {
+        background: var(--whitetodark);
+        border-radius: var(--radius-xlarge);
+        padding: 40px;
+        box-shadow: 0 10px 40px var(--whitetodark);
+        border: 1px solid var(--shadow-primary-focus);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .form-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 15px 50px var(--whitetodark);
+    }
+
+    .info-card {
+        background: var(--whitetodark);
+        border-radius: var(--radius-large);
+        padding: 30px;
+        box-shadow: 0 8px 30px var(--shadow-light);
+        border: 1px solid var(--shadow-primary-focus);
+        margin-bottom: 20px;
+        transition: transform 0.3s ease;
+    }
+
+    .info-card:hover {
+        transform: translateY(-3px);
+    }
+
+    .info-card .card-header {
+        background: var(--bg-gradient);
+        border-radius: var(--radius-medium);
+        padding: 20px;
+        margin: -30px -30px 25px -30px;
+    }
+
+    .info-card .card-header h5 {
+        font-weight: 600;
+        font-size: 1.1rem;
+    }
+
+    .info-item {
+        padding: 15px 0;
+        border-bottom: 1px solid var(--bg-off-white);
+    }
+
+    .info-item:last-child {
+        border-bottom: none;
+        padding-bottom: 0;
+    }
+
+    .info-item h6 {
+        font-weight: 600;
+        color: var(--text-dark);
+        margin-bottom: 8px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .info-item p {
+        color: var(--text-light);
+        margin-bottom: 0;
+        line-height: 1.6;
+    }
+
+    .form-label {
+        font-weight: 600;
+        color: var(--text-dark);
+        margin-bottom: 10px;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+    }
+
+    .form-control {
+        border: 2px solid var(--border-light);
+        border-radius: var(--radius-medium);
+        padding: 12px 18px;
+        transition: all 0.3s ease;
+        font-size: 0.95rem;
+    }
+
+    .form-control:focus {
+        border-color: var(--primary-purple);
+        box-shadow: 0 0 0 4px var(--shadow-primary-focus);
+        outline: none;
+    }
+
+    .form-control:hover {
+        border-color: var(--border-medium);
+    }
+
+    textarea.form-control {
+        resize: vertical;
+        min-height: 150px;
+    }
+
+    .btn-primary {
+        background: linear-gradient(135deg, var(--primary-purple) 0%, var(--primary-dark-purple) 100%);
+        border: none;
+        border-radius: var(--radius-medium);
+        padding: 14px 40px;
+        font-weight: 600;
+        font-size: 1.05rem;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 15px var(--shadow-primary);
+    }
+
+    .btn-primary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 25px var(--shadow-primary-hover);
+    }
+
+    .btn-primary:active {
+        transform: translateY(0);
+    }
+
+    .tips-card {
+        background: var(--whitetodark);
+        border-radius: var(--radius-large);
+        padding: 25px;
+        border: 2px solid var(--whitetodark);
+    }
+
+    .tips-card h6 {
+        color: var(--text-dark);
+        font-weight: 700;
+        margin-bottom: 15px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .tips-card ul {
+        padding-left: 20px;
+    }
+
+    .tips-card li {
+        color: var(--text-medium);
+        margin-bottom: 8px;
+        line-height: 1.6;
+    }
+
+    .faq-section {
+        background: var(--whitetodark);
+        border-radius: var(--radius-xlarge);
+        padding: 40px;
+        box-shadow: 0 10px 40px var(--shadow-light);
+        border: 1px solid var(--shadow-primary-focus);
+    }
+
+    .faq-section h4 {
+        color: var(--text-dark);
+        font-weight: 700;
+        margin-bottom: 30px;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+    }
+
+    .accordion-item {
+        border: 2px solid var(--whitetodark);
+        border-radius: var(--radius-medium) !important;
+        margin-bottom: 15px;
+        overflow: hidden;
+    }
+
+    .accordion-button {
+        background: var(--whitetodark);
+        color: var(--text-dark);
+        font-weight: 600;
+        padding: 18px 24px;
+        border: none;
+        font-size: 1rem;
+    }
+
+    .accordion-button:not(.collapsed) {
+        background: var(--bg-gradient);
+        color: var(--bg-white);
+        box-shadow: none;
+    }
+
+    .accordion-button:focus {
+        box-shadow: none;
+        border: none;
+    }
+
+    .accordion-button:hover {
+        background: var(--bg-gradient);
+        color: var(--whitetodark);
+    }
+
+    .accordion-body {
+        padding: 24px;
+        color: var(--text-medium);
+        line-height: 1.7;
+        background: var(--whitetodark);
+    }
+
+    .alert {
+        border-radius: var(--radius-medium);
+        border: none;
+        padding: 16px 20px;
+        box-shadow: 0 4px 15px var(--whitetodark);
+    }
+
+    .icon-badge {
+        width: 40px;
+        height: 40px;
+        border-radius: var(--radius-small);
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.2rem;
+    }
+
+    .icon-badge.primary {
+        background: linear-gradient(135deg, var(--primary-purple) 0%, var(--primary-dark-purple) 100%);
+        color: var(--bg-white);
+    }
+
+    .icon-badge.warning {
+        background: linear-gradient(135deg, var(--warning-light) 0%, var(--warning-dark) 100%);
+        color: var(--bg-white);
+    }
+
+    .icon-badge.danger {
+        background: linear-gradient(135deg, var(--danger-light) 0%, var(--danger-dark) 100%);
+        color: var(--bg-white);
+    }
+
+    .icon-badge.success {
+        background: linear-gradient(135deg, var(--success-light) 0%, var(--success-dark) 100%);
+        color: var(--bg-white);
+    }
+
+    .icon-badge.info {
+        background: linear-gradient(135deg, var(--info-light) 0%, var(--info-dark) 100%);
+        color: var(--bg-white);
+    }
+
+    @media (max-width: 768px) {
+        .contact-hero {
+            padding: 40px 25px;
+        }
+
+        .contact-hero h1 {
+            font-size: 2rem;
+        }
+
+        .form-card, .faq-section {
+            padding: 25px;
+        }
+    }
+</style>
+
+<div class="contact-hero">
+    <h1><i class="fas fa-envelope"></i> Contact Us</h1>
+    <p>Have questions or suggestions? We'd love to hear from you! Our team is here to help.</p>
+</div>
+
+<div class="row">
+    <div class="col-lg-8 mb-4">
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert alert-{{ message.tags }} alert-dismissible fade show">
+                    {{ message }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                </div>
+            {% endfor %}
+        {% endif %}
+
+        <div class="form-card">
+            <h3 class="mb-4" style="color: var(--text-dark); font-weight: 700;">
+                <i class="fas fa-paper-plane" style="color: var(--primary-purple);"></i> Send us a Message
+            </h3>
+            
             <form method="post">
                 {% csrf_token %}
                 
                 <div class="row">
                     <div class="col-md-6 mb-3">
-                        <label for="name" class="form-label">Your Name *</label>
-                        <input type="text" class="form-control" id="name" name="name" required>
+                        <label for="name" class="form-label">
+                            <i class="fas fa-user"></i> Your Name *
+                        </label>
+                        <input type="text" class="form-control" id="name" name="name" placeholder="John Doe" required>
                     </div>
                     <div class="col-md-6 mb-3">
-                        <label for="email" class="form-label">Email Address *</label>
-                        <input type="email" class="form-control" id="email" name="email" required>
+                        <label for="email" class="form-label">
+                            <i class="fas fa-envelope"></i> Email Address *
+                        </label>
+                        <input type="email" class="form-control" id="email" name="email" placeholder="john@example.com" required>
                     </div>
                 </div>
 
                 <div class="mb-3">
-                    <label for="subject" class="form-label">Subject *</label>
-                    <input type="text" class="form-control" id="subject" name="subject" required>
+                    <label for="subject" class="form-label">
+                        <i class="fas fa-tag"></i> Subject *
+                    </label>
+                    <input type="text" class="form-control" id="subject" name="subject" placeholder="How can we help you?" required>
                 </div>
 
-                <div class="mb-3">
-                    <label for="message" class="form-label">Message *</label>
-                    <textarea class="form-control" id="message" name="message" rows="6" required></textarea>
+                <div class="mb-4">
+                    <label for="message" class="form-label">
+                        <i class="fas fa-comment-alt"></i> Message *
+                    </label>
+                    <textarea class="form-control" id="message" name="message" rows="6" placeholder="Tell us more about your inquiry..." required></textarea>
                 </div>
 
-                <button type="submit" class="btn btn-primary btn-lg">
+                <button type="submit" class="btn btn-primary btn-lg w-100">
                     <i class="fas fa-paper-plane"></i> Send Message
                 </button>
             </form>
         </div>
+    </div>
 
-        <div class="col-md-4">
-            <div class="card">
-                <div class="card-header bg-primary text-white">
-                    <h5 class="mb-0"><i class="fas fa-info-circle"></i> Contact Information</h5>
+    <div class="col-lg-4 mb-4">
+        <div class="info-card">
+            <div class="card-header text-white">
+                <h5 class="mb-0"><i class="fas fa-info-circle"></i> Contact Information</h5>
+            </div>
+            <div class="card-body" style="padding: 0;">
+                <div class="info-item">
+                    <h6>
+                        <span class="icon-badge primary">
+                            <i class="fas fa-envelope"></i>
+                        </span>
+                        Email
+                    </h6>
+                    <p>support@phishield.com</p>
                 </div>
-                <div class="card-body">
-                    <h6><i class="fas fa-envelope text-primary"></i> Email</h6>
-                    <p class="small">support@phishield.com</p>
 
-                    <h6><i class="fas fa-clock text-warning"></i> Response Time</h6>
-                    <p class="small">Typically within 24-48 hours</p>
+                <div class="info-item">
+                    <h6>
+                        <span class="icon-badge warning">
+                            <i class="fas fa-clock"></i>
+                        </span>
+                        Response Time
+                    </h6>
+                    <p>Typically within 24-48 hours</p>
+                </div>
 
-                    <h6><i class="fas fa-exclamation-triangle text-danger"></i> Security Reports</h6>
-                    <p class="small">For security vulnerabilities, please mention "SECURITY" in subject</p>
+                <div class="info-item">
+                    <h6>
+                        <span class="icon-badge danger">
+                            <i class="fas fa-exclamation-triangle"></i>
+                        </span>
+                        Security Reports
+                    </h6>
+                    <p>For security vulnerabilities, please mention "SECURITY" in subject</p>
+                </div>
 
-                    <hr>
-
-                    <h6><i class="fas fa-shield-alt text-success"></i> Support Hours</h6>
-                    <p class="small mb-1">Monday - Friday: 9:00 AM - 6:00 PM</p>
-                    <p class="small">Weekends: Emergency support only</p>
+                <div class="info-item">
+                    <h6>
+                        <span class="icon-badge success">
+                            <i class="fas fa-shield-alt"></i>
+                        </span>
+                        Support Hours
+                    </h6>
+                    <p class="mb-1">Monday - Friday: 9:00 AM - 6:00 PM</p>
+                    <p>Weekends: Emergency support only</p>
                 </div>
             </div>
+        </div>
 
-            <div class="card mt-3">
-                <div class="card-body">
-                    <h6><i class="fas fa-lightbulb text-info"></i> Before Contacting</h6>
-                    <ul class="small mb-0">
-                        <li>Check our documentation</li>
-                        <li>Review the security tips</li>
-                        <li>Include relevant URLs if reporting phishing</li>
-                        <li>Provide detailed descriptions</li>
-                    </ul>
-                </div>
-            </div>
+        <div class="tips-card">
+            <h6>
+                <span class="icon-badge info">
+                    <i class="fas fa-lightbulb"></i>
+                </span>
+                Before Contacting
+            </h6>
+            <ul>
+                <li>Check our documentation</li>
+                <li>Review the security tips</li>
+                <li>Include relevant URLs if reporting phishing</li>
+                <li>Provide detailed descriptions</li>
+            </ul>
         </div>
     </div>
 </div>
 
-<!-- Additional Information Section -->
-<div class="content-card mt-4">
-    <h4><i class="fas fa-question-circle"></i> Frequently Asked Questions</h4>
+<div class="faq-section mt-4">
+    <h4><i class="fas fa-question-circle" style="color: var(--primary-purple);"></i> Frequently Asked Questions</h4>
     
-    <div class="accordion mt-3" id="faqAccordion">
+    <div class="accordion" id="faqAccordion">
         <div class="accordion-item">
             <h2 class="accordion-header">
                 <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faq1">
-                    How accurate is PhiShield's detection?
+                    <i class="fas fa-check-circle me-2"></i> How accurate is PhiShield's detection?
                 </button>
             </h2>
             <div id="faq1" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion">
@@ -108,7 +488,7 @@
         <div class="accordion-item">
             <h2 class="accordion-header">
                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq2">
-                    Can I report false positives/negatives?
+                    <i class="fas fa-flag me-2"></i> Can I report false positives/negatives?
                 </button>
             </h2>
             <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
@@ -122,7 +502,7 @@
         <div class="accordion-item">
             <h2 class="accordion-header">
                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq3">
-                    Is my data stored securely?
+                    <i class="fas fa-lock me-2"></i> Is my data stored securely?
                 </button>
             </h2>
             <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">

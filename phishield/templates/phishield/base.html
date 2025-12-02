@@ -620,19 +620,6 @@
                                 </li>
                                 <li><hr class="dropdown-divider"></li>
                                 <li>
-                                    <a class="dropdown-item" href="{% url 'phishield:view_logs' %}">
-                                        <i class="fas fa-scroll"></i>
-                                        <span>View Logs</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a class="dropdown-item" href="{% url 'phishield:view_analysis_logs' %}">
-                                        <i class="fas fa-chart-bar"></i>
-                                        <span>Analysis Logs</span>
-                                    </a>
-                                </li>
-                                <li><hr class="dropdown-divider"></li>
-                                <li>
                                     <form method="post" action="{% url 'phishield:logout' %}" class="d-inline w-100">
                                         {% csrf_token %}
                                         <button type="submit" class="dropdown-item text-danger">

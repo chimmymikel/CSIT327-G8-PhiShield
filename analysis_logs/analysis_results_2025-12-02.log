@@ -1,0 +1,44 @@
+[2025-12-02 09:55:49] | User: gave | Type: MESSAGE | Risk: safe
+Content: Buy now!
+Flags: No threats detected
+--------------------------------------------------------------------------------
+[2025-12-02 10:13:27] | User: gave | Type: MESSAGE | Risk: safe
+Content: Buy now!
+Flags: No threats detected
+--------------------------------------------------------------------------------
+[2025-12-02 10:13:47] | User: gave | Type: MESSAGE | Risk: safe
+Content: Buy now!
+Flags: No threats detected
+--------------------------------------------------------------------------------
+[2025-12-02 11:21:12] | User: gave | Type: MESSAGE | Risk: suspicious
+Content: Buy Now! Cheap fast click!
+Flags: Suspicious words: click
+--------------------------------------------------------------------------------
+[2025-12-02 11:21:45] | User: gave | Type: MESSAGE | Risk: suspicious
+Content: Buy Now! Click press
+Flags: Suspicious words: click
+--------------------------------------------------------------------------------
+[2025-12-02 11:30:01] | User: gave | Type: MESSAGE | Risk: safe
+Content: ASDAWD
+Flags: No threats detected
+--------------------------------------------------------------------------------
+[2025-12-02 11:30:13] | User: gave | Type: MESSAGE | Risk: safe
+Content: Asdwad
+Flags: No threats detected
+--------------------------------------------------------------------------------
+[2025-12-02 14:37:51] | User: gave | Type: MESSAGE | Risk: safe
+Content: asdaw
+Flags: No threats detected
+--------------------------------------------------------------------------------
+[2025-12-02 14:37:55] | User: gave | Type: MESSAGE | Risk: safe
+Content: press
+Flags: No threats detected
+--------------------------------------------------------------------------------
+[2025-12-02 14:38:02] | User: gave | Type: MESSAGE | Risk: suspicious
+Content: click
+Flags: Suspicious words: click
+--------------------------------------------------------------------------------
+[2025-12-02 14:40:33] | User: gave | Type: MESSAGE | Risk: suspicious
+Content: click
+Flags: Suspicious words: click
+--------------------------------------------------------------------------------
