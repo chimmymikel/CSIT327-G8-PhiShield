@@ -161,3 +161,62 @@
 [2025-11-18 19:31:46,132] INFO phishield - Dashboard accessed by: gave
 [2025-11-18 19:32:07,399] INFO phishield - History accessed by: gave
 [2025-11-18 19:32:09,367] INFO phishield - History accessed by: gave
+[2025-11-30 09:01:35,171] INFO phishield - Dashboard accessed by: gave
+[2025-11-30 09:01:39,096] INFO phishield - Dashboard accessed by: gave
+[2025-11-30 09:02:14,259] INFO phishield - Profile accessed by: gave
+[2025-11-30 09:02:22,476] INFO phishield - Profile accessed by: gave
+[2025-11-30 09:02:33,936] INFO phishield - Profile accessed by: gave
+[2025-11-30 09:55:06,015] INFO phishield - Profile accessed by: gave
+[2025-12-02 08:42:11,985] INFO phishield - Profile accessed by: gave
+[2025-12-02 08:42:27,546] INFO phishield - Profile accessed by: gave
+[2025-12-02 08:43:07,774] INFO phishield - About Us page accessed
+[2025-12-02 08:43:09,265] INFO phishield - History accessed by: gave
+[2025-12-02 08:43:13,496] INFO phishield - History accessed by: gave
+[2025-12-02 08:43:15,397] INFO phishield - History accessed by: gave
+[2025-12-02 08:48:48,766] INFO phishield - About Us page accessed
+[2025-12-02 08:48:54,184] INFO phishield - About Us page accessed
+[2025-12-02 08:48:59,136] INFO phishield - About Us page accessed
+[2025-12-02 08:49:02,770] INFO phishield - About Us page accessed
+[2025-12-02 08:49:04,929] INFO phishield - History accessed by: gave
+[2025-12-02 08:49:09,832] INFO phishield - About Us page accessed
+[2025-12-02 08:49:11,020] INFO phishield - History accessed by: gave
+[2025-12-02 08:49:11,713] INFO phishield - About Us page accessed
+[2025-12-02 08:49:15,524] INFO phishield - History accessed by: gave
+[2025-12-02 09:21:58,655] INFO phishield - About Us page accessed
+[2025-12-02 09:22:03,150] INFO phishield - History accessed by: gave
+[2025-12-02 09:22:15,263] INFO phishield - About Us page accessed
+[2025-12-02 09:22:16,142] INFO phishield - History accessed by: gave
+[2025-12-02 09:22:18,665] INFO phishield - Dashboard accessed by: gave
+[2025-12-02 09:22:47,521] INFO phishield - About Us page accessed
+[2025-12-02 09:22:48,980] INFO phishield - History accessed by: gave
+[2025-12-02 09:55:49,877] INFO phishield - Message analysis by gave
+[2025-12-02 09:55:50,041] INFO phishield - Message analysis completed - Risk: safe
+[2025-12-02 10:13:27,539] INFO phishield - Message analysis by gave
+[2025-12-02 10:13:27,691] INFO phishield - Message analysis completed - Risk: safe
+[2025-12-02 10:13:46,985] INFO phishield - Message analysis by gave
+[2025-12-02 10:13:47,127] INFO phishield - Message analysis completed - Risk: safe
+[2025-12-02 10:13:48,222] INFO phishield - About Us page accessed
+[2025-12-02 11:21:12,549] INFO phishield - Message analysis by gave
+[2025-12-02 11:21:12,701] INFO phishield - Message analysis completed - Risk: suspicious
+[2025-12-02 11:21:45,004] INFO phishield - Message analysis by gave
+[2025-12-02 11:21:45,146] INFO phishield - Message analysis completed - Risk: suspicious
+[2025-12-02 11:24:51,294] INFO phishield - About Us page accessed
+[2025-12-02 11:24:54,653] INFO phishield - History accessed by: gave
+[2025-12-02 11:25:03,560] INFO phishield - History accessed by: gave
+[2025-12-02 11:25:42,890] INFO phishield - About Us page accessed
+[2025-12-02 11:25:44,035] INFO phishield - History accessed by: gave
+[2025-12-02 11:25:44,917] INFO phishield - About Us page accessed
+[2025-12-02 11:25:45,694] INFO phishield - History accessed by: gave
+[2025-12-02 11:30:01,908] INFO phishield - Message analysis by gave
+[2025-12-02 11:30:02,053] INFO phishield - Message analysis completed - Risk: safe
+[2025-12-02 11:30:13,873] INFO phishield - Message analysis by gave
+[2025-12-02 11:30:14,006] INFO phishield - Message analysis completed - Risk: safe
+[2025-12-02 14:37:51,098] INFO phishield - Message analysis by gave
+[2025-12-02 14:37:51,268] INFO phishield - Message analysis completed - Risk: safe
+[2025-12-02 14:37:55,917] INFO phishield - Message analysis by gave
+[2025-12-02 14:37:56,050] INFO phishield - Message analysis completed - Risk: safe
+[2025-12-02 14:38:02,075] INFO phishield - Message analysis by gave
+[2025-12-02 14:38:02,209] INFO phishield - Message analysis completed - Risk: suspicious
+[2025-12-02 14:40:33,315] INFO phishield - Message analysis by gave
+[2025-12-02 14:40:33,447] INFO phishield - Message analysis completed - Risk: suspicious
+[2025-12-02 14:40:42,918] INFO phishield - Profile accessed by: gave
