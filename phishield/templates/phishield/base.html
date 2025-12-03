@@ -3,7 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}PhiShield - Phishing Detection{% endblock %}</title>
+    <title>{% block title %}PhiShield{% endblock %}</title>
+
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🛡️</text></svg>">
+
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -561,7 +564,6 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     {% if user.is_authenticated %}
-                        <!-- Core Navigation for Authenticated Users -->
                         <li class="nav-item">
                             <a class="nav-link" href="{% url 'phishield:dashboard' %}">
                                 <i class="fas fa-th-large"></i> Dashboard
@@ -593,7 +595,6 @@
                             </a>
                         </li>
 
-                        <!-- User Dropdown Menu -->
                         <li class="nav-item dropdown user-dropdown">
                             <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 {% if user.profile.profile_picture %}
@@ -632,7 +633,6 @@
                         </li>
                         
                     {% else %}
-                        <!-- Navigation for Unauthenticated Users -->
                         <li class="nav-item">
                             <a class="nav-link" href="{% url 'phishield:about_us' %}">
                                 <i class="fas fa-info-circle"></i> About
@@ -659,7 +659,6 @@
         </div>
     </nav>
 
-    <!-- Messages Display -->
     <div class="messages-container">
         {% if messages %}
             {% for message in messages %}
@@ -768,19 +767,21 @@ document.addEventListener('DOMContentLoaded', () => {
     const savedTheme = localStorage.getItem('theme') || 'light';
     if (savedTheme === 'dark') {
         body.classList.add('dark');
-        checkbox.checked = true;
+        if (checkbox) checkbox.checked = true; // Check if element exists before setting
     }
 
     // When user toggles the checkbox
-    checkbox.addEventListener('change', () => {
-        if (checkbox.checked) {
-            body.classList.add('dark');
-            localStorage.setItem('theme', 'dark');
-        } else {
-            body.classList.remove('dark');
-            localStorage.setItem('theme', 'light');
-        }
-    });
+    if (checkbox) {
+        checkbox.addEventListener('change', () => {
+            if (checkbox.checked) {
+                body.classList.add('dark');
+                localStorage.setItem('theme', 'dark');
+            } else {
+                body.classList.remove('dark');
+                localStorage.setItem('theme', 'light');
+            }
+        });
+    }
 });
 </script>
 

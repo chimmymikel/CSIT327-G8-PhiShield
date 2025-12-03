@@ -3,108 +3,286 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PhiShield - Phishing Detection System</title>
+    <title>PhiShield</title>
+    
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🛡️</text></svg>">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+    
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
     <style>
+        :root {
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --glass-bg: rgba(255, 255, 255, 0.1);
+            --glass-border: rgba(255, 255, 255, 0.2);
+            --text-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
+
         body {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: #0f0c29;  /* Fallback */
+            background: linear-gradient(-45deg, #24243e, #302b63, #0f0c29, #2b5876);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
             min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+            margin: 0;
         }
+
+        /* Animated Background Logic */
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
         .hero-container {
             text-align: center;
             color: white;
+            padding: 2rem;
+            position: relative;
+            z-index: 2;
+            max-width: 1200px;
         }
-        .hero-container h1 {
-            font-size: 4rem;
-            font-weight: 700;
+
+        /* Typography */
+        h1 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 5rem;
+            font-weight: 800;
+            margin-bottom: 10px;
+            text-shadow: var(--text-shadow);
+            letter-spacing: -2px;
+            /* Gradient Text */
+            background: linear-gradient(to right, #fff, #a5b4fc);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            
+            opacity: 0; /* Initial state for animation */
+            animation: fadeDown 0.8s ease-out forwards 0.3s;
+        }
+
+        .subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 50px;
+            opacity: 0;
+            color: rgba(255,255,255,0.9);
+            font-weight: 300;
+            animation: fadeInUp 0.8s ease-out forwards 0.5s;
+        }
+
+        /* Shield Icon Animation */
+        .shield-wrapper {
+            display: inline-block;
+            position: relative;
+            opacity: 0;
+            animation: zoomIn 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+        }
+
+        .shield-icon {
+            font-size: 7rem;
             margin-bottom: 20px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+            background: linear-gradient(45deg, #00d2ff, #3a7bd5);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            filter: drop-shadow(0 0 20px rgba(58, 123, 213, 0.5));
         }
-        .hero-container p {
-            font-size: 1.3rem;
-            margin-bottom: 40px;
-            opacity: 0.95;
+
+        /* Buttons */
+        .btn-group-custom {
+            opacity: 0;
+            animation: fadeInUp 0.8s ease-out forwards 0.7s;
+            margin-bottom: 30px;
         }
+
         .btn-hero {
-            padding: 15px 40px;
-            font-size: 1.2rem;
+            padding: 15px 45px;
+            font-size: 1.1rem;
             font-weight: 600;
             border-radius: 50px;
             margin: 10px;
-            transition: all 0.3s;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            font-family: 'Poppins', sans-serif;
         }
-        .btn-hero:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+
+        .btn-primary-custom {
+            background: white;
+            color: #302b63;
+            border: none;
+            box-shadow: 0 4px 15px rgba(255,255,255,0.2);
         }
-        .shield-icon {
-            font-size: 6rem;
-            margin-bottom: 30px;
-            animation: pulse 2s infinite;
+
+        .btn-primary-custom:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(255,255,255,0.4);
+            background: #fff;
+            color: #302b63;
         }
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.1); }
+
+        .btn-outline-custom {
+            background: transparent;
+            color: white;
+            border: 2px solid rgba(255,255,255,0.5);
         }
+
+        .btn-outline-custom:hover {
+            background: rgba(255,255,255,0.1);
+            border-color: white;
+            transform: translateY(-3px);
+        }
+
+        /* Glass Cards */
         .features {
             margin-top: 60px;
             display: flex;
             justify-content: center;
-            gap: 40px;
+            gap: 30px;
             flex-wrap: wrap;
         }
+
         .feature {
-            background: rgba(255,255,255,0.1);
-            backdrop-filter: blur(10px);
-            padding: 30px;
-            border-radius: 15px;
-            max-width: 250px;
+            background: var(--glass-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            padding: 40px 30px;
+            border-radius: 24px;
+            border: 1px solid var(--glass-border);
+            border-top: 1px solid rgba(255,255,255,0.4);
+            border-left: 1px solid rgba(255,255,255,0.4);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+            max-width: 300px;
+            width: 100%;
+            transition: all 0.4s ease;
+            opacity: 0; /* Hidden initially */
+            transform: translateY(30px);
         }
+
+        .feature:hover {
+            transform: translateY(-10px);
+            background: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 15px 45px rgba(0, 0, 0, 0.4);
+        }
+
         .feature i {
-            font-size: 3rem;
-            margin-bottom: 15px;
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            background: linear-gradient(to bottom right, #fff, #a5b4fc);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .feature h5 {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            font-size: 1.25rem;
+            margin-bottom: 10px;
+        }
+
+        .feature p {
+            font-size: 0.95rem;
+            color: rgba(255,255,255,0.7);
+            line-height: 1.6;
+            margin: 0;
+        }
+
+        /* Staggered Entrance Animations */
+        .feature:nth-child(1) { animation: cardEntrance 0.8s ease-out forwards 0.9s; }
+        .feature:nth-child(2) { animation: cardEntrance 0.8s ease-out forwards 1.1s; }
+        .feature:nth-child(3) { animation: cardEntrance 0.8s ease-out forwards 1.3s; }
+
+        @keyframes cardEntrance {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeDown {
+            from { opacity: 0; transform: translateY(-30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes zoomIn {
+            from { opacity: 0; transform: scale(0.5); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        /* Floating decoration circles (Background) */
+        .bg-circle {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            z-index: 1;
+            opacity: 0.6;
+            animation: float 10s infinite ease-in-out;
+        }
+        .c1 { width: 300px; height: 300px; background: #764ba2; top: -10%; left: -10%; }
+        .c2 { width: 400px; height: 400px; background: #667eea; bottom: -10%; right: -10%; animation-delay: -5s; }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) scale(1); }
+            50% { transform: translateY(20px) scale(1.1); }
         }
     </style>
 </head>
 <body>
+
+    <div class="bg-circle c1"></div>
+    <div class="bg-circle c2"></div>
+
     <div class="hero-container">
-        <i class="fas fa-shield-alt shield-icon"></i>
-        <h1>PhiShield</h1>
-        <p>Your Defense Against Phishing Attacks</p>
         
-        {% if user.is_authenticated %}
-            <a href="{% url 'phishield:dashboard' %}" class="btn btn-light btn-hero">
-                <i class="fas fa-th-large"></i> Go to Dashboard
-            </a>
-        {% else %}
-            <a href="{% url 'phishield:login' %}" class="btn btn-light btn-hero">
-                <i class="fas fa-sign-in-alt"></i> Login
-            </a>
-            <a href="{% url 'phishield:register' %}" class="btn btn-outline-light btn-hero">
-                <i class="fas fa-user-plus"></i> Register
-            </a>
-        {% endif %}
+        <div class="shield-wrapper">
+            <i class="fas fa-shield-alt shield-icon"></i>
+        </div>
+        
+        <h1>PhiShield</h1>
+        <p class="subtitle">Next-Generation Defense Against Phishing Attacks</p>
+        
+        <div class="btn-group-custom">
+            {% if user.is_authenticated %}
+                <a href="{% url 'phishield:dashboard' %}" class="btn btn-primary-custom btn-hero">
+                    <i class="fas fa-th-large me-2"></i> Go to Dashboard
+                </a>
+            {% else %}
+                <a href="{% url 'phishield:login' %}" class="btn btn-primary-custom btn-hero">
+                    <i class="fas fa-sign-in-alt me-2"></i> Login
+                </a>
+                <a href="{% url 'phishield:register' %}" class="btn btn-outline-custom btn-hero">
+                    <i class="fas fa-user-plus me-2"></i> Register
+                </a>
+            {% endif %}
+        </div>
 
         <div class="features">
             <div class="feature">
                 <i class="fas fa-link"></i>
                 <h5>URL Checker</h5>
-                <p>Analyze suspicious links before clicking</p>
+                <p>Analyze suspicious links instantly with our advanced AI algorithms before you click.</p>
             </div>
             <div class="feature">
-                <i class="fas fa-envelope"></i>
+                <i class="fas fa-envelope-open-text"></i>
                 <h5>Message Scanner</h5>
-                <p>Detect phishing in emails and texts</p>
+                <p>Detect hidden phishing attempts in your emails and SMS with deep-scan technology.</p>
             </div>
             <div class="feature">
                 <i class="fas fa-history"></i>
-                <h5>Check History</h5>
-                <p>Track all your security scans</p>
+                <h5>Audit Trail</h5>
+                <p>Keep a secure, detailed history of all your security scans for future reference.</p>
             </div>
         </div>
     </div>
