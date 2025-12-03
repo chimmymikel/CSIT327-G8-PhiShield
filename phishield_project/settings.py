@@ -149,6 +149,10 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 MEDIA_URL = "/media/"
 MEDIA_ROOT = BASE_DIR / "media"
 
+# WhiteNoise configuration for media files (works on Railway, but files are ephemeral)
+# For production, consider using cloud storage (AWS S3, Cloudinary) or Railway Volumes
+WHITENOISE_USE_FINDERS = True  # Allow WhiteNoise to find media files
+
 # File upload settings
 FILE_UPLOAD_MAX_MEMORY_SIZE = 5242880  # 5MB
 DATA_UPLOAD_MAX_MEMORY_SIZE = 5242880  # 5MB

@@ -508,9 +508,30 @@ def edit_profile(request):
         profile.company = request.POST.get('company', '')
         profile.role = request.POST.get('role', 'employee')
         
-        # Handle profile picture upload
+        # Handle profile picture upload with validation
         if 'profile_picture' in request.FILES:
-            profile.profile_picture = request.FILES['profile_picture']
+            uploaded_file = request.FILES['profile_picture']
+            
+            # Validate file size (5MB = 5242880 bytes)
+            if uploaded_file.size > 5242880:
+                messages.error(request, "Profile picture size exceeds 5MB limit. Please choose a smaller image.")
+            else:
+                # Validate file type by extension
+                allowed_extensions = ['.jpg', '.jpeg', '.png', '.gif', '.webp']
+                file_name = uploaded_file.name.lower()
+                if any(file_name.endswith(ext) for ext in allowed_extensions):
+                    # Delete old profile picture if it exists
+                    if profile.profile_picture:
+                        try:
+                            old_picture_path = profile.profile_picture.path
+                            if os.path.exists(old_picture_path):
+                                os.remove(old_picture_path)
+                        except Exception as e:
+                            logger.warning(f"Could not delete old profile picture: {e}")
+                    
+                    profile.profile_picture = uploaded_file
+                else:
+                    messages.error(request, "Invalid file type. Please upload a JPG, PNG, GIF, or WebP image.")
         
         profile.save()
         
