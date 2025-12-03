@@ -25,15 +25,17 @@
                         <!-- Profile Picture -->
                         <div class="text-center mb-4">
                             <div class="position-relative d-inline-block">
-                                {% if profile.profile_picture %}
-                                    <img src="{{ profile.profile_picture.url }}" alt="Current Profile Picture" 
-                                         class="rounded-circle mb-3" width="120" height="120" style="object-fit: cover;" id="profile-preview">
-                                {% else %}
-                                    <div class="bg-primary rounded-circle d-inline-flex align-items-center justify-content-center mb-3" 
-                                         style="width: 120px; height: 120px;" id="profile-preview">
-                                        <span class="text-white h3 fw-bold">{{ user.username|first|upper }}</span>
-                                    </div>
-                                {% endif %}
+                                <div id="profile-preview-container">
+                                    {% if profile.profile_picture %}
+                                        <img src="{{ profile.profile_picture.url }}" alt="Current Profile Picture" 
+                                             class="rounded-circle mb-3" width="120" height="120" style="object-fit: cover;" id="profile-preview">
+                                    {% else %}
+                                        <div class="bg-primary rounded-circle d-inline-flex align-items-center justify-content-center mb-3" 
+                                             style="width: 120px; height: 120px;" id="profile-preview">
+                                            <span class="text-white h3 fw-bold">{{ user.username|first|upper }}</span>
+                                        </div>
+                                    {% endif %}
+                                </div>
                             </div>
                             <div class="mt-2">
                                 <input type="file" class="form-control d-none" id="profile_picture" name="profile_picture" accept="image/*">
@@ -134,10 +136,29 @@
 document.getElementById('profile_picture').addEventListener('change', function(event) {
     const file = event.target.files[0];
     if (file) {
+        // Validate file size (5MB = 5242880 bytes)
+        if (file.size > 5242880) {
+            alert('File size exceeds 5MB limit. Please choose a smaller image.');
+            event.target.value = ''; // Clear the input
+            return;
+        }
+        
+        // Validate file type
+        const validTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/gif', 'image/webp'];
+        if (!validTypes.includes(file.type)) {
+            alert('Invalid file type. Please choose a JPG, PNG, GIF, or WebP image.');
+            event.target.value = ''; // Clear the input
+            return;
+        }
+        
         const reader = new FileReader();
         reader.onload = function(e) {
-            document.getElementById('profile-preview').innerHTML = 
-                `<img src="${e.target.result}" class="rounded-circle" width="120" height="120" style="object-fit: cover;">`;
+            const container = document.getElementById('profile-preview-container');
+            container.innerHTML = 
+                `<img src="${e.target.result}" alt="Profile Preview" class="rounded-circle mb-3" width="120" height="120" style="object-fit: cover;" id="profile-preview">`;
+        };
+        reader.onerror = function() {
+            alert('Error reading file. Please try again.');
         };
         reader.readAsDataURL(file);
     }
