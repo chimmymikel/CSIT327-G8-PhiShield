@@ -242,6 +242,20 @@ PHISHIELD_CONFIG = {
 }
 
 # ------------------------------
+# API Keys for Enhanced Phishing Detection
+# ------------------------------
+# Add these to your .env file:
+# PHISHTANK_API_KEY=your_phishtank_api_key_here (optional - works without key but with rate limits)
+# GOOGLE_SAFE_BROWSING_API_KEY=your_google_safe_browsing_api_key_here (optional)
+#
+# To get API keys:
+# - PhishTank: https://www.phishtank.com/api_register.php (free, optional)
+# - Google Safe Browsing: https://console.cloud.google.com/apis/credentials (free tier available)
+#
+# Note: The system will work without these API keys, but with reduced detection accuracy.
+# All other detection methods (typosquatting, domain reputation, etc.) work without API keys.
+
+# ------------------------------
 # Logging Configuration
 # ------------------------------
 LOGGING = {
