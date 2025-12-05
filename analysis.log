@@ -227,3 +227,24 @@
 [2025-12-04 11:41:26,692] INFO phishield - Dashboard accessed by: gave
 [2025-12-04 11:42:01,375] INFO phishield - Dashboard accessed by: gave
 [2025-12-04 11:42:09,684] INFO phishield - Dashboard accessed by: gave
+[2025-12-05 13:38:14,157] INFO phishield - Dashboard accessed by: gave
+[2025-12-05 13:38:29,687] INFO phishield - Message analysis by gave
+[2025-12-05 13:38:29,834] INFO phishield - Message analysis completed - Risk: suspicious
+[2025-12-05 14:01:51,827] INFO phishield - Message analysis by gave
+[2025-12-05 14:01:52,266] INFO phishield - Message analysis completed - Risk: suspicious
+[2025-12-05 14:02:16,504] INFO phishield - Message analysis by gave
+[2025-12-05 14:02:16,644] INFO phishield - Message analysis completed - Risk: suspicious
+[2025-12-05 14:02:29,259] INFO phishield - Message analysis by gave
+[2025-12-05 14:02:29,393] INFO phishield - Message analysis completed - Risk: suspicious
+[2025-12-05 14:06:41,505] INFO phishield - Message analysis by gave
+[2025-12-05 14:06:41,647] INFO phishield - Message analysis completed - Risk: suspicious
+[2025-12-05 14:11:41,060] INFO phishield - Message analysis by gave
+[2025-12-05 14:11:41,198] INFO phishield - Message analysis completed - Risk: suspicious
+[2025-12-05 14:12:01,062] INFO phishield - Message analysis by gave
+[2025-12-05 14:12:01,202] INFO phishield - Message analysis completed - Risk: safe
+[2025-12-05 14:14:44,956] INFO phishield - URL check by gave: https://github.com/chimmymikel/CSIT327-G8-PhiShield
+[2025-12-05 14:14:46,577] INFO phishield - URL analysis completed - Risk: safe
+[2025-12-05 14:56:09,307] INFO phishield - URL check by gave: http://127.0.0.1:8000/check-link/
+[2025-12-05 14:56:12,403] INFO phishield - URL analysis completed - Risk: dangerous
+[2025-12-05 14:57:01,864] INFO phishield - Message analysis by gave
+[2025-12-05 14:57:02,007] INFO phishield - Message analysis completed - Risk: safe

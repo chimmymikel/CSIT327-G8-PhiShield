@@ -62,25 +62,29 @@
         --border-light: #334155;
     }
 
+    .analyze-container {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 30px;
+        margin-top: 30px;
+        margin-bottom: 30px;
+    }
+
     .analyze-card {
         background: var(--whitetodark);
         border-radius: var(--radius-xlarge);
         padding: 0;
         box-shadow: 0 10px 40px var(--shadow-light);
         border: 1px solid var(--border-light);
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
         overflow: hidden;
-        margin-bottom: 40px;
-    }
-
-    .analyze-card:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 15px 50px var(--shadow-medium);
+        display: flex;
+        flex-direction: column;
+        max-height: calc(100vh - 180px);
     }
 
     .analyze-hero-header {
         background: var(--bg-gradient);
-        padding: 50px 40px;
+        padding: 30px 30px;
         color: var(--bg-white);
         text-align: center;
         position: relative;
@@ -99,16 +103,16 @@
     }
 
     .analyze-hero-header h3 {
-        font-size: 2.2rem;
+        font-size: 1.6rem;
         font-weight: 700;
-        margin-bottom: 15px;
+        margin-bottom: 8px;
         text-shadow: 0 2px 10px var(--shadow-dark);
         position: relative;
         z-index: 1;
     }
 
     .analyze-hero-header p {
-        font-size: 1.1rem;
+        font-size: 0.95rem;
         opacity: 0.95;
         position: relative;
         z-index: 1;
@@ -117,7 +121,11 @@
 
     .form-section {
         background: var(--whitetodark);
-        padding: 40px;
+        padding: 30px;
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        overflow-y: auto;
     }
 
     .form-label {
@@ -151,22 +159,25 @@
     }
 
     textarea {
-        min-height: 180px;
+        min-height: 200px;
         resize: vertical;
         font-family: 'Courier New', monospace;
         line-height: 1.6;
+        flex: 1;
     }
 
     .btn-warning {
         background: linear-gradient(135deg, #f6ad55 0%, #ed8936 100%);
         border: none;
         border-radius: var(--radius-medium);
-        padding: 16px 50px;
+        padding: 14px 40px;
         font-weight: 600;
-        font-size: 1.1rem;
+        font-size: 1rem;
         transition: all 0.3s ease;
         box-shadow: 0 4px 15px rgba(246, 173, 85, 0.4);
         color: white;
+        width: 100%;
+        margin-top: 20px;
     }
 
     .btn-warning:hover {
@@ -182,10 +193,36 @@
     .result-card {
         background: var(--whitetodark);
         border-radius: var(--radius-xlarge);
-        padding: 35px;
+        padding: 0;
         box-shadow: 0 10px 40px var(--shadow-light);
-        border: 2px solid var(--border-light);
-        animation: slideIn 0.5s ease-out;
+        border: 1px solid var(--border-light);
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        max-height: calc(100vh - 180px);
+    }
+
+    .result-header {
+        background: var(--bg-gradient);
+        padding: 30px 30px;
+        color: var(--bg-white);
+        text-align: center;
+    }
+
+    .result-header h3 {
+        font-size: 1.6rem;
+        font-weight: 700;
+        margin: 0;
+        text-shadow: 0 2px 10px var(--shadow-dark);
+    }
+
+    .result-content {
+        padding: 30px;
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        overflow-y: auto;
     }
 
     @keyframes pulse {
@@ -204,14 +241,14 @@
         }
     }
 
-    .result-card h4 {
+    .result-content h4 {
         color: var(--text-dark);
         font-weight: 700;
         margin-bottom: 25px;
         display: flex;
         align-items: center;
         gap: 12px;
-        font-size: 1.5rem;
+        font-size: 1.3rem;
     }
 
     .risk-badge {
@@ -253,16 +290,16 @@
     .details-section {
         background: var(--bg-light);
         border-radius: var(--radius-large);
-        padding: 25px;
-        margin-top: 25px;
+        padding: 20px;
+        margin-top: 20px;
         border-left: 4px solid #007BFF;
     }
 
     .details-section h6 {
         color: var(--text-dark);
         font-weight: 700;
-        margin-bottom: 15px;
-        font-size: 1.1rem;
+        margin-bottom: 12px;
+        font-size: 1rem;
         display: flex;
         align-items: center;
         gap: 10px;
@@ -272,22 +309,30 @@
         color: var(--text-medium);
         margin: 0;
         line-height: 1.7;
-        font-size: 1rem;
+        font-size: 0.95rem;
     }
 
     .alert {
         border-radius: var(--radius-large);
         border: none;
-        padding: 20px 25px;
+        padding: 18px 20px;
         box-shadow: 0 4px 15px var(--shadow-light);
         animation: slideIn 0.5s ease-out;
         background: linear-gradient(135deg, var(--info-light) 0%, var(--info-dark) 100%);
         color: white;
         border-left: 5px solid rgba(255, 255, 255, 0.5);
+        margin-top: 20px;
     }
 
     .alert strong {
         font-weight: 700;
+    }
+
+    .badge-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 20px 0;
     }
 
     .info-grid {
@@ -295,15 +340,17 @@
         grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
         gap: 20px;
         margin-top: 30px;
+        margin-bottom: 50px;
     }
 
     .info-box {
-        background: var(--bg-light);
+        background: var(--whitetodark);
         border-radius: var(--radius-large);
         padding: 25px;
         text-align: center;
         transition: all 0.3s ease;
         border: 2px solid var(--border-light);
+        box-shadow: 0 4px 15px var(--shadow-light);
     }
 
     .info-box:hover {
@@ -336,28 +383,45 @@
         line-height: 1.5;
     }
 
-    .badge-container {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        min-height: 100px;
+    .placeholder-content {
+        text-align: center;
+        color: var(--text-light);
+        padding: 40px 20px;
+    }
+
+    .placeholder-content i {
+        font-size: 4rem;
+        margin-bottom: 20px;
+        opacity: 0.3;
+    }
+
+    .placeholder-content p {
+        font-size: 1.1rem;
+        margin: 0;
+    }
+
+    @media (max-width: 1200px) {
+        .analyze-container {
+            grid-template-columns: 1fr;
+            max-height: none;
+        }
+
+        .analyze-card, .result-card {
+            max-height: 600px;
+        }
     }
 
     @media (max-width: 768px) {
-        .analyze-hero-header {
-            padding: 40px 25px;
+        .analyze-hero-header, .result-header {
+            padding: 25px 20px;
         }
 
-        .analyze-hero-header h3 {
-            font-size: 1.8rem;
+        .analyze-hero-header h3, .result-header h3 {
+            font-size: 1.4rem;
         }
 
-        .form-section {
-            padding: 25px;
-        }
-
-        .result-card {
-            padding: 25px;
+        .form-section, .result-content {
+            padding: 20px;
         }
 
         .risk-badge {
@@ -367,54 +431,65 @@
     }
 </style>
 
-<div class="analyze-card">
-    <div class="analyze-hero-header">
-        <h3><i class="fas fa-envelope-open-text"></i> Analyze Suspicious Message</h3>
-        <p>Paste a message or email content to check for phishing indicators and threats</p>
-    </div>
+<div class="analyze-container">
+    <!-- Left Side: Form -->
+    <div class="analyze-card">
+        <div class="analyze-hero-header">
+            <h3><i class="fas fa-envelope-open-text"></i> Analyze Suspicious Message</h3>
+            <p>Paste a message or email content to check for phishing indicators</p>
+        </div>
 
-    <div class="form-section">
-        <form method="post">
-            {% csrf_token %}
-            {{ form.as_p }}
-            <div class="text-center mt-4">
+        <div class="form-section">
+            <form method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
                 <button type="submit" class="btn btn-warning btn-lg">
                     <i class="fas fa-search"></i> Analyze Message
                 </button>
-            </div>
-        </form>
+            </form>
+        </div>
     </div>
 
-    {% if result %}
-    <div class="result-card mt-4">
-        <h4><i class="fas fa-chart-line"></i> Analysis Result</h4>
-        
-        <div class="badge-container">
-            <span class="risk-badge risk-{{ result }}">
-                {% if result == 'safe' %}
-                    <i class="fas fa-check-circle"></i> SAFE
-                {% elif result == 'suspicious' %}
-                    <i class="fas fa-exclamation-triangle"></i> SUSPICIOUS
-                {% elif result == 'dangerous' %}
-                    <i class="fas fa-times-circle"></i> DANGEROUS
+    <!-- Right Side: Results -->
+    <div class="result-card">
+        <div class="result-header">
+            <h3><i class="fas fa-chart-line"></i> Analysis Result</h3>
+        </div>
+
+        <div class="result-content">
+            {% if result %}
+                <div class="badge-container">
+                    <span class="risk-badge risk-{{ result }}">
+                        {% if result == 'safe' %}
+                            <i class="fas fa-check-circle"></i> SAFE
+                        {% elif result == 'suspicious' %}
+                            <i class="fas fa-exclamation-triangle"></i> SUSPICIOUS
+                        {% elif result == 'dangerous' %}
+                            <i class="fas fa-times-circle"></i> DANGEROUS
+                        {% endif %}
+                    </span>
+                </div>
+                
+                {% if flags %}
+                <div class="details-section">
+                    <h6><i class="fas fa-info-circle"></i> Detection Details</h6>
+                    <p>{{ flags }}</p>
+                </div>
                 {% endif %}
-            </span>
-        </div>
-        
-        {% if flags %}
-        <div class="details-section">
-            <h6><i class="fas fa-info-circle"></i> Detection Details</h6>
-            <p>{{ flags }}</p>
-        </div>
-        {% endif %}
-    </div>
-    {% endif %}
 
-    {% if tip %}
-    <div class="alert mt-4">
-        <i class="fas fa-lightbulb"></i> <strong>Security Tip:</strong> {{ tip }}
+                {% if tip %}
+                <div class="alert">
+                    <i class="fas fa-lightbulb"></i> <strong>Security Tip:</strong> {{ tip }}
+                </div>
+                {% endif %}
+            {% else %}
+                <div class="placeholder-content">
+                    <i class="fas fa-search"></i>
+                    <p>Submit a message to see the analysis results here</p>
+                </div>
+            {% endif %}
+        </div>
     </div>
-    {% endif %}
 </div>
 
 <div class="info-grid">

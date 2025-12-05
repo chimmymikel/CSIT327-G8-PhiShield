@@ -1,0 +1,40 @@
+[2025-12-05 13:38:29] | User: gave | Type: MESSAGE | Risk: suspicious
+Content: Click now
+Flags: Suspicious words: click
+--------------------------------------------------------------------------------
+[2025-12-05 14:01:51] | User: gave | Type: MESSAGE | Risk: suspicious
+Content: Click now
+Flags: Suspicious words: click
+--------------------------------------------------------------------------------
+[2025-12-05 14:02:16] | User: gave | Type: MESSAGE | Risk: suspicious
+Content: Click Now!
+Flags: Suspicious words: click
+--------------------------------------------------------------------------------
+[2025-12-05 14:02:29] | User: gave | Type: MESSAGE | Risk: suspicious
+Content: Click Now!
+Flags: Suspicious words: click
+--------------------------------------------------------------------------------
+[2025-12-05 14:06:41] | User: gave | Type: MESSAGE | Risk: suspicious
+Content: Click now?
+Flags: Suspicious words: click
+--------------------------------------------------------------------------------
+[2025-12-05 14:11:41] | User: gave | Type: MESSAGE | Risk: suspicious
+Content: Click now!
+Flags: Suspicious words: click
+--------------------------------------------------------------------------------
+[2025-12-05 14:12:01] | User: gave | Type: MESSAGE | Risk: safe
+Content: Hello I Love You
+Flags: No threats detected
+--------------------------------------------------------------------------------
+[2025-12-05 14:14:46] | User: gave | Type: URL | Risk: safe
+Content: https://github.com/chimmymikel/CSIT327-G8-PhiShield
+Flags: No threats detected
+--------------------------------------------------------------------------------
+[2025-12-05 14:56:12] | User: gave | Type: URL | Risk: dangerous
+Content: http://127.0.0.1:8000/check-link/
+Flags: Domain is an IP address (highly suspicious) | No valid SSL certificate detected | Numeric subdomain detected (suspicious) | Non-standard port detected (8000)
+--------------------------------------------------------------------------------
+[2025-12-05 14:57:01] | User: gave | Type: MESSAGE | Risk: safe
+Content: 12344354355346
+Flags: No threats detected
+--------------------------------------------------------------------------------
