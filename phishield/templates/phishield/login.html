@@ -46,7 +46,7 @@
           </label>
           <div class="input-group">
             {% render_field form.password class="form-control form-control-lg rounded-start-3 shadow-sm" placeholder="Enter your password" id="password-field" %}
-            <button type="button" class="btn btn-outline-secondary rounded-end-3" id="toggle-password" aria-label="Show/Hide Password">
+            <button type="button" class="btn btn-outline-secondary rounded-end-3 toggle-btn" id="toggle-password" aria-label="Show/Hide Password">
               <i class="fas fa-eye"></i>
             </button>
           </div>
@@ -64,7 +64,7 @@
         </div>
 
         <!-- Login Button -->
-        <button type="submit" class="btn btn-primary w-100 btn-lg rounded-3 shadow-sm">
+        <button type="submit" class="btn btn-primary w-100 btn-lg rounded-3 shadow-sm btn-hover">
           <i class="fas fa-sign-in-alt"></i> Login
         </button>
       </form>
@@ -78,8 +78,8 @@
 
       <!-- Register Link -->
       <div class="text-center">
-        <p class="text-muted mb-2">Don’t have an account?</p>
-        <a href="{% url 'phishield:register' %}" class="btn btn-outline-primary rounded-3 px-4 shadow-sm">
+        <p class="text-muted mb-2">Don't have an account?</p>
+        <a href="{% url 'phishield:register' %}" class="btn btn-outline-primary rounded-3 px-4 shadow-sm btn-hover-outline">
           <i class="fas fa-user-plus"></i> Register Now
         </a>
       </div>
@@ -112,6 +112,91 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    box-shadow: 0 4px 12px rgba(13, 110, 253, 0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .icon-circle:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 20px rgba(13, 110, 253, 0.3);
+  }
+
+  /* Content Card Enhancements */
+  .content-card {
+    background: linear-gradient(to bottom, #ffffff 0%, #f8f9fa 100%);
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    transition: box-shadow 0.3s ease;
+  }
+
+  .content-card:hover {
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12) !important;
+  }
+
+  /* Input Focus Effects */
+  .form-control:focus {
+    border-color: #0d6efd;
+    box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.15);
+    transform: translateY(-1px);
+    transition: all 0.2s ease;
+  }
+
+  /* Button Hover Effects */
+  .btn-hover {
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+  }
+
+  .btn-hover::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.2);
+    transform: translate(-50%, -50%);
+    transition: width 0.6s ease, height 0.6s ease;
+  }
+
+  .btn-hover:hover::before {
+    width: 300px;
+    height: 300px;
+  }
+
+  .btn-hover:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(13, 110, 253, 0.3);
+  }
+
+  .btn-hover:active {
+    transform: translateY(0);
+  }
+
+  /* Outline Button Hover */
+  .btn-hover-outline {
+    transition: all 0.3s ease;
+  }
+
+  .btn-hover-outline:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(13, 110, 253, 0.2);
+    background-color: rgba(13, 110, 253, 0.05);
+  }
+
+  /* Toggle Button Enhancement */
+  .toggle-btn {
+    transition: all 0.2s ease;
+  }
+
+  .toggle-btn:hover {
+    background-color: #e9ecef;
+    transform: scale(1.05);
+  }
+
+  .toggle-btn:active {
+    transform: scale(0.95);
   }
 
   /* Shake Animation */
@@ -140,8 +225,61 @@
   .fade-in-card { animation: fadeInCard 0.6s ease-out forwards; }
 
   /* Hover underline for forgot password */
+  .hover-underline {
+    position: relative;
+    transition: color 0.3s ease;
+  }
+
+  .hover-underline::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: -2px;
+    left: 0;
+    background-color: #0d6efd;
+    transition: width 0.3s ease;
+  }
+
+  .hover-underline:hover::after {
+    width: 100%;
+  }
+
   .hover-underline:hover {
-    text-decoration: underline;
+    text-decoration: none !important;
+    color: #0a58ca !important;
+  }
+
+  /* Alert Enhancement */
+  .alert {
+    border-left: 4px solid;
+    border-radius: 0.5rem;
+  }
+
+  .alert-danger {
+    border-left-color: #dc3545;
+    background-color: #f8d7da;
+  }
+
+  /* Label Icons Animation */
+  .form-label i {
+    transition: transform 0.2s ease;
+  }
+
+  .form-control:focus + .form-label i,
+  .form-label:hover i {
+    transform: scale(1.1);
+  }
+
+  /* Divider Enhancement */
+  hr {
+    opacity: 0.15;
+    border-color: #6c757d;
+  }
+
+  /* Smooth focus transitions for inputs */
+  .form-control, .input-group .btn {
+    transition: all 0.2s ease;
   }
 </style>
 {% endblock %}
