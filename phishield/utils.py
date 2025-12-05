@@ -189,6 +189,28 @@ def detect_typosquatting(domain):
     """
     domain_lower = domain.lower()
     
+    # First check: If the domain exactly matches a legitimate domain, it's not typosquatting
+    # Also check if it's a subdomain of a legitimate domain (e.g., gemini.google.com is legitimate)
+    # Normalize domain (remove www. prefix if present)
+    normalized_domain = domain_lower
+    if normalized_domain.startswith('www.'):
+        normalized_domain = normalized_domain[4:]
+    
+    # Check exact match and subdomain match against legitimate domains
+    for legit_domain in LEGITIMATE_DOMAINS:
+        legit_normalized = legit_domain.lower()
+        if legit_normalized.startswith('www.'):
+            legit_normalized = legit_normalized[4:]
+        
+        # Exact match means it's the legitimate domain itself, not typosquatting
+        if normalized_domain == legit_normalized:
+            return (False, None, 0)
+        
+        # Check if the domain is a subdomain of a legitimate domain
+        # e.g., gemini.google.com ends with .google.com, so it's legitimate
+        if normalized_domain.endswith('.' + legit_normalized):
+            return (False, None, 0)
+    
     # Remove TLD for comparison
     domain_parts = domain_lower.split('.')
     if len(domain_parts) < 2:
