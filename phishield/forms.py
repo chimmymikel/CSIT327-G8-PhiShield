@@ -5,15 +5,37 @@ from .email_verifier import validate_email_domain, SimpleEmailVerifier
 
 
 class LinkForm(forms.Form):
-    url = forms.URLField(
+    url = forms.CharField(
         label="Enter URL to Check",
         max_length=500,
-        widget=forms.URLInput(attrs={
+        widget=forms.TextInput(attrs={
             "class": "form-control form-control-lg",
-            "placeholder": "https://example.com",
+            "placeholder": "https://example.com or example.com",
             "autocomplete": "off"
         })
     )
+    
+    def clean_url(self):
+        """Validate and normalize URL - accepts URLs with or without protocol"""
+        url = self.cleaned_data.get('url', '').strip()
+        
+        if not url:
+            raise forms.ValidationError("Please enter a URL.")
+        
+        # Remove whitespace
+        url = url.strip()
+        
+        # Basic validation - check if it looks like a URL or domain
+        if not (url.startswith(('http://', 'https://')) or 
+                '.' in url or 
+                url.startswith('www.')):
+            raise forms.ValidationError("Please enter a valid URL or domain name.")
+        
+        # If no protocol, add https://
+        if not url.startswith(('http://', 'https://')):
+            url = 'https://' + url
+        
+        return url
 
 
 class MessageForm(forms.Form):
