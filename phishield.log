@@ -944,3 +944,65 @@ INFO 2025-10-02 13:01:22,842 views Message analysis completed - Risk: suspicious
 [2025-12-04 11:45:31,961] INFO django.utils.autoreload - Watching for file changes with StatReloader
 [2025-12-04 11:45:37,239] INFO django.server - "GET /password-reset/ HTTP/1.1" 200 22782
 [2025-12-04 11:45:50,422] INFO django.server - "GET /login/ HTTP/1.1" 200 27878
+[2025-12-05 13:37:21,009] INFO django.utils.autoreload - Watching for file changes with StatReloader
+[2025-12-05 13:38:06,173] INFO django.server - "GET /login/ HTTP/1.1" 200 27878
+[2025-12-05 13:38:06,493] INFO django.server - "GET /static/phishield/images/bg.jpg HTTP/1.1" 200 919056
+[2025-12-05 13:38:13,920] INFO django.server - "POST /login/ HTTP/1.1" 302 0
+[2025-12-05 13:38:14,157] INFO phishield - Dashboard accessed by: gave
+[2025-12-05 13:38:14,342] INFO django.server - "GET /dashboard/ HTTP/1.1" 200 70861
+[2025-12-05 13:38:16,722] INFO django.server - "GET /analyze-message/ HTTP/1.1" 200 34281
+[2025-12-05 13:38:29,687] INFO phishield - Message analysis by gave
+[2025-12-05 13:38:29,834] INFO phishield - Message analysis completed - Risk: suspicious
+[2025-12-05 13:38:30,011] INFO django.server - "POST /analyze-message/ HTTP/1.1" 200 35031
+[2025-12-05 13:38:30,027] INFO django.server - "GET /static/phishield/images/bg.jpg HTTP/1.1" 304 0
+[2025-12-05 14:01:51,827] INFO phishield - Message analysis by gave
+[2025-12-05 14:01:52,266] INFO phishield - Message analysis completed - Risk: suspicious
+[2025-12-05 14:01:52,454] INFO django.server - "POST /analyze-message/ HTTP/1.1" 200 36740
+[2025-12-05 14:01:52,493] INFO django.server - "GET /static/phishield/images/bg.jpg HTTP/1.1" 304 0
+[2025-12-05 14:01:53,921] INFO django.server - "GET /analyze-message/ HTTP/1.1" 200 36164
+[2025-12-05 14:02:16,504] INFO phishield - Message analysis by gave
+[2025-12-05 14:02:16,644] INFO phishield - Message analysis completed - Risk: suspicious
+[2025-12-05 14:02:16,826] INFO django.server - "POST /analyze-message/ HTTP/1.1" 200 36751
+[2025-12-05 14:02:29,259] INFO phishield - Message analysis by gave
+[2025-12-05 14:02:29,393] INFO phishield - Message analysis completed - Risk: suspicious
+[2025-12-05 14:02:29,569] INFO django.server - "POST /analyze-message/ HTTP/1.1" 200 36757
+[2025-12-05 14:02:54,511] INFO django.server - "GET /check-link/ HTTP/1.1" 200 34120
+[2025-12-05 14:02:58,373] INFO django.server - "GET /analyze-message/ HTTP/1.1" 200 36164
+[2025-12-05 14:05:54,538] INFO django.server - "GET /check-link/ HTTP/1.1" 200 34120
+[2025-12-05 14:05:54,558] INFO django.server - "GET /static/phishield/images/bg.jpg HTTP/1.1" 304 0
+[2025-12-05 14:05:59,405] INFO django.server - "GET /analyze-message/ HTTP/1.1" 200 36164
+[2025-12-05 14:06:26,396] INFO django.server - "GET /analyze-message/ HTTP/1.1" 200 36161
+[2025-12-05 14:06:41,505] INFO phishield - Message analysis by gave
+[2025-12-05 14:06:41,647] INFO phishield - Message analysis completed - Risk: suspicious
+[2025-12-05 14:06:41,833] INFO django.server - "POST /analyze-message/ HTTP/1.1" 200 36765
+[2025-12-05 14:07:15,321] INFO django.server - "GET /analyze-message/ HTTP/1.1" 200 36161
+[2025-12-05 14:07:16,951] INFO django.server - "GET /analyze-message/ HTTP/1.1" 200 36161
+[2025-12-05 14:07:17,545] INFO django.server - "GET /check-link/ HTTP/1.1" 200 34120
+[2025-12-05 14:07:18,304] INFO django.server - "GET /analyze-message/ HTTP/1.1" 200 36161
+[2025-12-05 14:11:30,449] INFO django.server - "GET /analyze-message/ HTTP/1.1" 200 36216
+[2025-12-05 14:11:30,480] INFO django.server - "GET /static/phishield/images/bg.jpg HTTP/1.1" 304 0
+[2025-12-05 14:11:41,060] INFO phishield - Message analysis by gave
+[2025-12-05 14:11:41,198] INFO phishield - Message analysis completed - Risk: suspicious
+[2025-12-05 14:11:41,384] INFO django.server - "POST /analyze-message/ HTTP/1.1" 200 36820
+[2025-12-05 14:12:01,062] INFO phishield - Message analysis by gave
+[2025-12-05 14:12:01,202] INFO phishield - Message analysis completed - Risk: safe
+[2025-12-05 14:12:01,388] INFO django.server - "POST /analyze-message/ HTTP/1.1" 200 36791
+[2025-12-05 14:14:24,849] INFO django.server - "GET /check-link/ HTTP/1.1" 200 36000
+[2025-12-05 14:14:26,526] INFO django.server - "GET /check-link/ HTTP/1.1" 200 36000
+[2025-12-05 14:14:44,956] INFO phishield - URL check by gave: https://github.com/chimmymikel/CSIT327-G8-PhiShield
+[2025-12-05 14:14:46,577] INFO phishield - URL analysis completed - Risk: safe
+[2025-12-05 14:14:46,755] INFO django.server - "POST /check-link/ HTTP/1.1" 200 36625
+[2025-12-05 14:15:34,105] INFO django.server - "POST /check-link/ HTTP/1.1" 200 36183
+[2025-12-05 14:15:34,140] INFO django.server - "GET /static/phishield/images/bg.jpg HTTP/1.1" 304 0
+[2025-12-05 14:55:55,892] INFO django.server - "POST /check-link/ HTTP/1.1" 200 37372
+[2025-12-05 14:55:55,918] INFO django.server - "GET /static/phishield/images/bg.jpg HTTP/1.1" 304 0
+[2025-12-05 14:56:09,307] INFO phishield - URL check by gave: http://127.0.0.1:8000/check-link/
+[2025-12-05 14:56:12,403] INFO phishield - URL analysis completed - Risk: dangerous
+[2025-12-05 14:56:12,578] INFO django.server - "POST /check-link/ HTTP/1.1" 200 37944
+[2025-12-05 14:56:35,710] INFO django.server - "POST /check-link/ HTTP/1.1" 200 37357
+[2025-12-05 14:56:54,957] INFO django.server - "GET /check-link/ HTTP/1.1" 200 37189
+[2025-12-05 14:56:55,558] INFO django.server - "GET /analyze-message/ HTTP/1.1" 200 36216
+[2025-12-05 14:57:01,864] INFO phishield - Message analysis by gave
+[2025-12-05 14:57:02,007] INFO phishield - Message analysis completed - Risk: safe
+[2025-12-05 14:57:02,191] INFO django.server - "POST /analyze-message/ HTTP/1.1" 200 36789
+[2025-12-05 14:57:09,843] INFO django.server - "GET /check-link/ HTTP/1.1" 200 37189
