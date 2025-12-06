@@ -5,165 +5,213 @@
 
 {% block content %}
 <style>
-    /* --- THEME CONFIGURATION --- */
+    /* --- MODERN THEME WITH VIBRANT GRADIENTS --- */
     :root {
-        --brand-primary: #2563eb;
-        --brand-gradient: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%);
-        --glass-white: rgba(255, 255, 255, 0.95);
-        --soft-bg: #f0f4f8;
+        --brand-primary: #3b82f6;
+        --brand-secondary: #8b5cf6;
+        --brand-gradient: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+        --accent-cyan: #06b6d4;
+        --accent-purple: #a855f7;
+        --accent-green: #10b981;
+        --accent-red: #ef4444;
+        --accent-orange: #f59e0b;
         --text-dark: #1e293b;
         --text-muted: #64748b;
-        --card-radius: 24px;
-        --btn-radius: 50px; /* Fully rounded buttons */
-        --shadow-sm: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
-        --shadow-hover: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        --card-radius: 20px;
+        --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
     }
 
-    body {
-        background-color: var(--soft-bg);
-        font-family: 'Inter', system-ui, -apple-system, sans-serif;
-    }
+    /* Keep original background */
 
-    /* --- CARDS --- */
+    /* --- MODERN CARDS --- */
     .modern-card {
         background: white;
         border-radius: var(--card-radius);
-        border: 1px solid rgba(255, 255, 255, 0.5);
-        box-shadow: var(--shadow-sm);
-        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        border: 1px solid rgba(59, 130, 246, 0.1);
+        box-shadow: var(--shadow-md);
+        transition: all 0.3s ease;
         overflow: hidden;
-        position: relative;
     }
 
     .modern-card:hover {
-        transform: translateY(-4px);
-        box-shadow: var(--shadow-hover);
+        transform: translateY(-2px);
+        box-shadow: var(--shadow-lg);
     }
 
-    /* --- BUTTONS (Rounder & Stylish) --- */
-    .btn-stylish {
-        border-radius: var(--btn-radius);
-        padding: 0.6rem 1.5rem;
-        font-weight: 600;
-        font-size: 0.9rem;
-        letter-spacing: 0.3px;
-        transition: all 0.3s ease;
-        border: none;
+    /* --- PROFILE HEADER --- */
+    .profile-header-bg {
+        height: 180px;
+        background: var(--brand-gradient);
+        background-image: 
+            radial-gradient(circle at 10% 20%, rgba(255,255,255,0.15) 0%, transparent 30%),
+            radial-gradient(circle at 90% 80%, rgba(255,255,255,0.15) 0%, transparent 30%);
         position: relative;
-        overflow: hidden;
     }
 
-    .btn-stylish-primary {
+    .profile-avatar-wrapper {
+        margin-top: -90px;
+        position: relative;
+        display: inline-block;
+    }
+
+    .profile-avatar-ring {
+        padding: 6px;
+        background: white;
+        border-radius: 50%;
+        box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+        display: inline-block;
+    }
+
+    .profile-avatar-img {
+        width: 160px;
+        height: 160px;
+        border-radius: 50%;
+        object-fit: cover;
+        display: block;
+    }
+
+    .verified-badge {
+        position: absolute;
+        bottom: 5px;
+        right: 5px;
+        width: 44px;
+        height: 44px;
+        background: var(--accent-green);
+        border: 4px solid white;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 4px 8px rgba(16, 185, 129, 0.3);
+    }
+
+    /* --- BUTTONS --- */
+    .btn-gradient {
         background: var(--brand-gradient);
         color: white;
-        box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+        border: none;
+        font-weight: 600;
+        padding: 0.7rem 1.8rem;
+        border-radius: 12px;
+        transition: all 0.2s ease;
+        box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
     }
 
-    .btn-stylish-primary:hover {
-        box-shadow: 0 8px 16px rgba(37, 99, 235, 0.4);
-        transform: translateY(-1px);
+    .btn-gradient:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 20px rgba(59, 130, 246, 0.4);
         color: white;
     }
 
-    .btn-stylish-outline {
-        background: white;
-        color: var(--brand-primary);
+    .btn-outline-custom {
         border: 2px solid #e2e8f0;
+        color: var(--text-dark);
+        background: white;
+        font-weight: 600;
+        padding: 0.7rem 1.2rem;
+        border-radius: 12px;
+        transition: all 0.2s ease;
     }
 
-    .btn-stylish-outline:hover {
+    .btn-outline-custom:hover {
         border-color: var(--brand-primary);
         background: #f8fafc;
         color: var(--brand-primary);
     }
 
-    /* --- PROFILE SPECIFICS --- */
-    .profile-header-bg {
-        height: 160px;
-        background: var(--brand-gradient);
-        /* Abstract Pattern Overlay */
-        background-image: 
-            radial-gradient(circle at 10% 20%, rgba(255,255,255,0.1) 0%, transparent 20%),
-            radial-gradient(circle at 90% 80%, rgba(255,255,255,0.1) 0%, transparent 20%);
-    }
-
-    .profile-avatar-box {
-        margin-top: -80px;
-        padding: 6px;
-        background: white;
-        border-radius: 50%;
-        display: inline-block;
-        box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-    }
-
-    .profile-avatar-img {
-        width: 140px;
-        height: 140px;
-        border-radius: 50%;
-        object-fit: cover;
-    }
-
-    /* --- STATS WIDGETS --- */
+    /* --- STAT BOXES --- */
     .stat-box {
-        background: #f8fafc;
+        background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
         border-radius: 16px;
-        padding: 1.2rem;
-        text-align: center;
-        border: 1px solid #edf2f7;
-        transition: 0.2s;
+        padding: 1.3rem;
+        border: 1px solid #e2e8f0;
+        transition: all 0.2s ease;
+        height: 100%;
     }
+
     .stat-box:hover {
-        background: #eff6ff; /* Light blue on hover */
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    }
+
+    .stat-box.featured {
+        background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
         border-color: #bfdbfe;
     }
+
     .stat-icon {
-        width: 40px;
-        height: 40px;
-        border-radius: 12px;
+        width: 50px;
+        height: 50px;
+        border-radius: 14px;
         display: flex;
         align-items: center;
         justify-content: center;
-        margin: 0 auto 0.8rem;
-        font-size: 1.1rem;
+        font-size: 1.2rem;
+        margin-bottom: 0.8rem;
+    }
+
+    /* --- ROLE BADGE --- */
+    .role-badge {
+        background: linear-gradient(135deg, #dbeafe 0%, #e0e7ff 100%);
+        color: #1e40af;
+        padding: 0.5rem 1.5rem;
+        border-radius: 20px;
+        font-weight: 600;
+        font-size: 0.9rem;
+        border: 1px solid #bfdbfe;
     }
 
     /* --- TIMELINE --- */
     .timeline-wrapper {
         position: relative;
-        padding-left: 1.5rem;
+        padding-left: 2rem;
     }
+
     .timeline-line {
         position: absolute;
-        left: 7px;
-        top: 15px;
+        left: 8px;
+        top: 20px;
         bottom: 0;
         width: 2px;
-        background: #e2e8f0;
+        background: linear-gradient(to bottom, #cbd5e1 0%, transparent 100%);
     }
-    .timeline-card {
-        background: #f8fafc;
-        border-radius: 16px;
-        padding: 1rem;
+
+    .timeline-item {
+        position: relative;
         margin-bottom: 1.5rem;
-        border: 1px solid #f1f5f9;
     }
+
     .timeline-dot {
         position: absolute;
-        left: 0;
-        top: 15px;
-        width: 16px;
-        height: 16px;
+        left: -24px;
+        top: 18px;
+        width: 18px;
+        height: 18px;
         border-radius: 50%;
         border: 3px solid white;
-        box-shadow: 0 0 0 2px #cbd5e1;
-        background: white;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.15);
         z-index: 2;
     }
-    .timeline-dot.danger { background: #ef4444; box-shadow: 0 0 0 2px #fecaca; }
-    .timeline-dot.safe { background: #10b981; box-shadow: 0 0 0 2px #a7f3d0; }
-    .timeline-dot.warn { background: #f59e0b; box-shadow: 0 0 0 2px #fde68a; }
 
-    /* --- TYPOGRAPHY --- */
+    .timeline-dot.danger { background: var(--accent-red); }
+    .timeline-dot.safe { background: var(--accent-green); }
+    .timeline-dot.warn { background: var(--accent-orange); }
+
+    .timeline-card {
+        background: #f8fafc;
+        border-radius: 14px;
+        padding: 1.2rem;
+        border: 1px solid #e2e8f0;
+        transition: all 0.2s ease;
+    }
+
+    .timeline-card:hover {
+        background: white;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    }
+
+    /* --- LABELS --- */
     .label-fancy {
         font-size: 0.75rem;
         font-weight: 700;
@@ -172,224 +220,364 @@
         color: #94a3b8;
         margin-bottom: 0.4rem;
     }
+
+    /* --- SECTION HEADERS --- */
+    .section-header {
+        font-size: 1.25rem;
+        font-weight: 700;
+        color: var(--text-dark);
+        margin-bottom: 1.5rem;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    .section-header i {
+        color: var(--brand-primary);
+    }
+
+    /* --- CONTAINER --- */
+    .profile-container {
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 2rem 1.5rem 3rem;
+    }
+
+    /* --- ICON COLORS --- */
+    .icon-primary { color: var(--brand-primary); }
+    .icon-cyan { color: var(--accent-cyan); }
+    .icon-purple { color: var(--accent-purple); }
+    .icon-green { color: var(--accent-green); }
+    .icon-red { color: var(--accent-red); }
+    .icon-orange { color: var(--accent-orange); }
 </style>
 
-<div class="py-5">
-    <div class="container">
-        <div class="row g-4">
-            
-            <div class="col-lg-4">
+<div class="profile-container">
+    <div class="row g-4">
+        
+        <!-- LEFT SIDEBAR: Profile Card -->
+        <div class="col-lg-4">
+            <div class="modern-card mb-4 text-center">
+                <!-- Gradient Header -->
+                <div class="profile-header-bg"></div>
                 
-                <div class="modern-card mb-4 text-center">
-                    <div class="profile-header-bg"></div>
-                    
-                    <div class="px-4 pb-4">
-                        <div class="profile-avatar-box position-relative">
+                <!-- Profile Content -->
+                <div class="px-4 pb-4">
+                    <!-- Avatar -->
+                    <div class="profile-avatar-wrapper">
+                        <div class="profile-avatar-ring">
                             {% if profile.profile_picture %}
-                                <img src="{{ profile.profile_picture.url }}" class="profile-avatar-img" alt="Profile">
+                                <img src="{{ profile.profile_picture.url }}" class="profile-avatar-img" alt="{{ user.username }}">
                             {% else %}
-                                <div class="profile-avatar-img bg-primary d-flex align-items-center justify-content-center text-white display-4 fw-bold" style="width:140px; height:140px;">
+                                <div class="profile-avatar-img d-flex align-items-center justify-content-center text-white display-3 fw-bold" style="background: var(--brand-gradient);">
                                     {{ user.username|first|upper }}
                                 </div>
                             {% endif %}
-                            
-                            {% if profile.email_verified %}
-                            <div class="position-absolute bottom-0 end-0 bg-success text-white rounded-circle d-flex align-items-center justify-content-center border border-4 border-white" 
-                                 style="width: 36px; height: 36px; transform: translate(0, -5px);" title="Verified">
-                                <i class="fas fa-check small"></i>
-                            </div>
-                            {% endif %}
+                        </div>
+                        
+                        {% if profile.email_verified %}
+                        <div class="verified-badge">
+                            <i class="fas fa-check text-white"></i>
+                        </div>
+                        {% endif %}
+                    </div>
+
+                    <!-- User Info -->
+                    <div class="mt-4">
+                        <h4 class="fw-bold text-dark mb-1">{{ user.get_full_name|default:user.username }}</h4>
+                        <p class="text-muted mb-3">@{{ user.username }}</p>
+                        
+                        <div class="role-badge d-inline-block mb-4">
+                            <i class="fas fa-user-shield me-2"></i>{{ profile.get_role_display }}
                         </div>
 
-                        <div class="mt-3">
-                            <h4 class="fw-bold text-dark mb-1">{{ user.get_full_name|default:user.username }}</h4>
-                            <p class="text-muted mb-3">@{{ user.username }}</p>
-                            
-                            <span class="badge rounded-pill px-3 py-2 mb-4" style="background-color: #e0f2fe; color: #0369a1; font-weight: 600;">
-                                {{ profile.get_role_display }}
-                            </span>
-
-                            <div class="d-flex gap-2 justify-content-center">
-                                <a href="{% url 'phishield:edit_profile' %}" class="btn btn-stylish btn-stylish-primary flex-grow-1">
-                                    Edit Profile
-                                </a>
-                                <a href="{% url 'phishield:settings' %}" class="btn btn-stylish btn-stylish-outline">
-                                    <i class="fas fa-cog"></i>
-                                </a>
-                            </div>
+                        <!-- Action Buttons -->
+                        <div class="d-flex gap-2 justify-content-center">
+                            <a href="{% url 'phishield:edit_profile' %}" class="btn btn-gradient flex-grow-1">
+                                <i class="fas fa-edit me-2"></i>Edit Profile
+                            </a>
+                            <a href="{% url 'phishield:settings' %}" class="btn btn-outline-custom">
+                                <i class="fas fa-cog"></i>
+                            </a>
                         </div>
                     </div>
                 </div>
+            </div>
 
-                <div class="modern-card p-4">
-                    <div class="d-flex justify-content-between align-items-center mb-4">
-                        <h6 class="fw-bold mb-0 text-dark"><i class="fas fa-shield-alt text-primary me-2"></i>Security Stats</h6>
-                        <span class="badge bg-success rounded-pill px-3">{{ profile.success_rate }}% Score</span>
-                    </div>
+            <!-- Security Stats Card -->
+            <div class="modern-card p-4">
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <h6 class="fw-bold mb-0 text-dark">
+                        <i class="fas fa-shield-alt icon-primary me-2"></i>Security Stats
+                    </h6>
+                    <span class="badge bg-success rounded-pill px-3 py-2">{{ profile.success_rate }}% Score</span>
+                </div>
 
-                    <div class="row g-3">
-                        <div class="col-12">
-                            <div class="stat-box d-flex align-items-center justify-content-between text-start">
-                                <div>
+                <div class="row g-3">
+                    <!-- Total Scans - Featured -->
+                    <div class="col-12">
+                        <div class="stat-box featured">
+                            <div class="d-flex align-items-center justify-content-between">
+                                <div class="text-start">
                                     <div class="label-fancy">Total Scans</div>
-                                    <div class="h3 fw-bold text-dark mb-0">{{ profile.total_checks }}</div>
+                                    <div class="h2 fw-bold text-dark mb-0">{{ profile.total_checks }}</div>
                                 </div>
-                                <div class="stat-icon bg-primary text-white mb-0" style="width: 50px; height: 50px;">
+                                <div class="stat-icon" style="background: var(--brand-gradient); color: white;">
                                     <i class="fas fa-chart-line"></i>
                                 </div>
                             </div>
                         </div>
+                    </div>
 
-                        <div class="col-6">
-                            <div class="stat-box">
-                                <div class="stat-icon" style="background: #e0f2fe; color: #0284c7;">
-                                    <i class="fas fa-link"></i>
-                                </div>
-                                <div class="h5 fw-bold mb-0">{{ total_url_checks }}</div>
-                                <div class="small text-muted">URLs</div>
+                    <!-- URL Checks -->
+                    <div class="col-6">
+                        <div class="stat-box text-center">
+                            <div class="stat-icon mx-auto" style="background: #dbeafe; color: #0284c7;">
+                                <i class="fas fa-link"></i>
                             </div>
+                            <div class="h4 fw-bold mb-0 text-dark">{{ total_url_checks }}</div>
+                            <div class="small text-muted">URLs</div>
                         </div>
-                        <div class="col-6">
-                            <div class="stat-box">
-                                <div class="stat-icon" style="background: #f3e8ff; color: #9333ea;">
-                                    <i class="fas fa-comment-dots"></i>
-                                </div>
-                                <div class="h5 fw-bold mb-0">{{ total_message_checks }}</div>
-                                <div class="small text-muted">Messages</div>
+                    </div>
+
+                    <!-- Message Checks -->
+                    <div class="col-6">
+                        <div class="stat-box text-center">
+                            <div class="stat-icon mx-auto" style="background: #f3e8ff; color: #9333ea;">
+                                <i class="fas fa-envelope"></i>
                             </div>
+                            <div class="h4 fw-bold mb-0 text-dark">{{ total_message_checks }}</div>
+                            <div class="small text-muted">Messages</div>
                         </div>
-                        <div class="col-6">
-                            <div class="stat-box" style="background: #fef2f2; border-color: #fee2e2;">
-                                <div class="stat-icon" style="background: #fee2e2; color: #dc2626;">
-                                    <i class="fas fa-bug"></i>
-                                </div>
-                                <div class="h5 fw-bold text-danger mb-0">{{ profile.threats_detected }}</div>
-                                <div class="small text-danger">Threats</div>
+                    </div>
+
+                    <!-- Threats Detected -->
+                    <div class="col-6">
+                        <div class="stat-box text-center" style="background: linear-gradient(135deg, #fef2f2 0%, #fee2e2 100%); border-color: #fecaca;">
+                            <div class="stat-icon mx-auto" style="background: #fee2e2; color: #dc2626;">
+                                <i class="fas fa-exclamation-triangle"></i>
                             </div>
+                            <div class="h4 fw-bold mb-0 text-danger">{{ profile.threats_detected }}</div>
+                            <div class="small text-danger fw-semibold">Threats</div>
                         </div>
-                        <div class="col-6">
-                            <div class="stat-box" style="background: #ecfdf5; border-color: #d1fae5;">
-                                <div class="stat-icon" style="background: #d1fae5; color: #059669;">
-                                    <i class="fas fa-check-circle"></i>
-                                </div>
-                                <div class="h5 fw-bold text-success mb-0">{{ profile.safe_checks }}</div>
-                                <div class="small text-success">Safe</div>
+                    </div>
+
+                    <!-- Safe Checks -->
+                    <div class="col-6">
+                        <div class="stat-box text-center" style="background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%); border-color: #a7f3d0;">
+                            <div class="stat-icon mx-auto" style="background: #a7f3d0; color: #059669;">
+                                <i class="fas fa-check-circle"></i>
                             </div>
+                            <div class="h4 fw-bold mb-0 text-success">{{ profile.safe_checks }}</div>
+                            <div class="small text-success fw-semibold">Safe</div>
                         </div>
                     </div>
                 </div>
+            </div>
+        </div>
 
+        <!-- RIGHT CONTENT: Details & History -->
+        <div class="col-lg-8">
+            
+            <!-- Personal Details Card -->
+            <div class="modern-card p-4 mb-4">
+                <div class="d-flex justify-content-between align-items-center mb-4 pb-3 border-bottom">
+                    <h5 class="section-header mb-0">
+                        <i class="fas fa-user-circle"></i>
+                        Personal Details
+                    </h5>
+                    <div class="text-muted small">ID: #{{ user.id }}</div>
+                </div>
+                
+                <div class="row g-4">
+                    <div class="col-md-6">
+                        <div class="label-fancy"><i class="fas fa-envelope icon-cyan me-1"></i>Email Address</div>
+                        <div class="fw-semibold text-dark">{{ user.email }}</div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="label-fancy"><i class="fas fa-phone icon-green me-1"></i>Phone Number</div>
+                        <div class="fw-semibold text-dark">{{ profile.phone|default:"Not provided" }}</div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="label-fancy"><i class="fas fa-map-marker-alt icon-red me-1"></i>Location</div>
+                        <div class="fw-semibold text-dark">{{ profile.location|default:"Not provided" }}</div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="label-fancy"><i class="fas fa-building icon-purple me-1"></i>Company</div>
+                        <div class="fw-semibold text-dark">{{ profile.company|default:"Not provided" }}</div>
+                    </div>
+                    <div class="col-12">
+                        <div class="label-fancy"><i class="fas fa-info-circle icon-primary me-1"></i>About Me</div>
+                        <div class="p-4 rounded-3" style="background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%); border: 2px dashed #cbd5e1;">
+                            {% if profile.bio %}
+                                <p class="mb-0 text-secondary" style="line-height: 1.7;">{{ profile.bio|linebreaksbr }}</p>
+                            {% else %}
+                                <p class="mb-0 text-muted fst-italic text-center py-2">
+                                    <i class="fas fa-pen me-2"></i>No bio added yet. Tell us about yourself!
+                                </p>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
             </div>
 
-            <div class="col-lg-8">
-                
-                <div class="modern-card p-4 p-lg-5 mb-4">
-                    <div class="d-flex justify-content-between align-items-center mb-4 border-bottom pb-3">
-                        <h5 class="fw-bold text-dark mb-0">Personal Details</h5>
-                        <div class="text-muted small">ID: #{{ user.id }}</div>
-                    </div>
-                    
-                    <div class="row g-4">
-                        <div class="col-md-6">
-                            <div class="label-fancy">Email Address</div>
-                            <div class="fw-medium text-dark">{{ user.email }}</div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="label-fancy">Phone Number</div>
-                            <div class="fw-medium text-dark">{{ profile.phone|default:"--" }}</div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="label-fancy">Company</div>
-                            <div class="fw-medium text-dark">{{ profile.company|default:"--" }}</div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="label-fancy">Location</div>
-                            <div class="fw-medium text-dark">{{ profile.location|default:"--" }}</div>
-                        </div>
-                        <div class="col-12">
-                            <div class="label-fancy">About Me</div>
-                            <div class="p-4 rounded-4" style="background: #f8fafc; border: 1px dashed #cbd5e1;">
-                                {% if profile.bio %}
-                                    <p class="mb-0 text-secondary" style="line-height: 1.6;">{{ profile.bio|linebreaksbr }}</p>
+            <!-- Analysis History Card -->
+            <div class="modern-card p-4">
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <h5 class="section-header mb-0">
+                        <i class="fas fa-history"></i>
+                        Analysis History
+                    </h5>
+                    {% if recent_links or recent_messages %}
+                        <a href="{% url 'phishield:check_link' %}" class="btn btn-sm btn-gradient">
+                            <i class="fas fa-plus me-1"></i> New Scan
+                        </a>
+                    {% endif %}
+                </div>
+
+                <div class="timeline-wrapper" id="timeline-container" style="max-height: 500px; overflow: hidden; position: relative;">
+                    <div class="timeline-line"></div>
+
+                    {% if recent_links or recent_messages %}
+                        
+                        <!-- URL Analysis Items -->
+                        {% for link in recent_links %}
+                        <div class="timeline-item">
+                            <div class="timeline-dot {% if link.risk_level == 'high' %}danger{% elif link.risk_level == 'medium' %}warn{% else %}safe{% endif %}"></div>
+                            
+                            <div class="timeline-card">
+                                <div class="d-flex justify-content-between align-items-start mb-2">
+                                    <span class="fw-bold text-dark">
+                                        <i class="fas fa-link icon-cyan me-2"></i>URL Analysis
+                                    </span>
+                                    <small class="text-muted">{{ link.date_checked|timesince }} ago</small>
+                                </div>
+                                <div class="text-truncate text-primary fw-medium mb-2" style="font-size: 0.9rem;">
+                                    {{ link.url }}
+                                </div>
+                                
+                                {% if link.risk_level == 'high' %}
+                                    <span class="badge bg-danger rounded-pill">
+                                        <i class="fas fa-exclamation-triangle me-1"></i>High Risk
+                                    </span>
+                                {% elif link.risk_level == 'medium' %}
+                                    <span class="badge bg-warning text-dark rounded-pill">
+                                        <i class="fas fa-exclamation-circle me-1"></i>Medium Risk
+                                    </span>
                                 {% else %}
-                                    <p class="mb-0 text-muted fst-italic">No bio added. Tell us about yourself!</p>
+                                    <span class="badge bg-success rounded-pill">
+                                        <i class="fas fa-check me-1"></i>Safe
+                                    </span>
                                 {% endif %}
                             </div>
                         </div>
-                    </div>
-                </div>
+                        {% endfor %}
 
-                <div class="modern-card p-4 p-lg-5">
-                    <div class="d-flex justify-content-between align-items-center mb-4">
-                        <h5 class="fw-bold text-dark mb-0">Analysis History</h5>
-                        {% if recent_links or recent_messages %}
-                            <a href="{% url 'phishield:check_link' %}" class="btn btn-sm btn-primary rounded-pill px-3">
-                                <i class="fas fa-plus small me-1"></i> New Scan
-                            </a>
-                        {% endif %}
-                    </div>
-
-                    <div class="timeline-wrapper">
-                        <div class="timeline-line"></div>
-
-                        {% if recent_links or recent_messages %}
+                        <!-- Message Analysis Items -->
+                        {% for message in recent_messages %}
+                        <div class="timeline-item">
+                            <div class="timeline-dot {% if message.risk_level == 'high' %}danger{% elif message.risk_level == 'medium' %}warn{% else %}safe{% endif %}"></div>
                             
-                            {% for link in recent_links %}
-                            <div class="position-relative ps-4 mb-4">
-                                <div class="timeline-dot {% if link.risk_level == 'high' %}danger{% elif link.risk_level == 'medium' %}warn{% else %}safe{% endif %}"></div>
-                                
-                                <div class="timeline-card">
-                                    <div class="d-flex justify-content-between mb-2">
-                                        <span class="fw-bold text-dark font-monospace small">URL Analysis</span>
-                                        <small class="text-muted">{{ link.date_checked|timesince }} ago</small>
-                                    </div>
-                                    <div class="text-truncate text-primary fw-medium mb-2">{{ link.url }}</div>
-                                    
-                                    {% if link.risk_level == 'high' %}
-                                        <span class="badge bg-danger rounded-pill">High Risk</span>
-                                    {% elif link.risk_level == 'medium' %}
-                                        <span class="badge bg-warning text-dark rounded-pill">Medium Risk</span>
-                                    {% else %}
-                                        <span class="badge bg-success rounded-pill">Safe</span>
-                                    {% endif %}
+                            <div class="timeline-card">
+                                <div class="d-flex justify-content-between align-items-start mb-2">
+                                    <span class="fw-bold text-dark">
+                                        <i class="fas fa-envelope icon-purple me-2"></i>Message Analysis
+                                    </span>
+                                    <small class="text-muted">{{ message.date_checked|timesince }} ago</small>
                                 </div>
-                            </div>
-                            {% endfor %}
-
-                            {% for message in recent_messages %}
-                            <div class="position-relative ps-4 mb-4">
-                                <div class="timeline-dot {% if message.risk_level == 'high' %}danger{% elif message.risk_level == 'medium' %}warn{% else %}safe{% endif %}"></div>
+                                <p class="text-muted small fst-italic mb-2 text-truncate">
+                                    "{{ message.message }}"
+                                </p>
                                 
-                                <div class="timeline-card">
-                                    <div class="d-flex justify-content-between mb-2">
-                                        <span class="fw-bold text-dark font-monospace small">Message Content</span>
-                                        <small class="text-muted">{{ message.date_checked|timesince }} ago</small>
-                                    </div>
-                                    <p class="text-muted small fst-italic mb-2 text-truncate">"{{ message.message }}"</p>
-                                    
-                                    {% if message.risk_level == 'high' %}
-                                        <span class="badge bg-danger rounded-pill">Phishing Detected</span>
-                                    {% elif message.risk_level == 'medium' %}
-                                        <span class="badge bg-warning text-dark rounded-pill">Suspicious</span>
-                                    {% else %}
-                                        <span class="badge bg-success rounded-pill">Clean</span>
-                                    {% endif %}
-                                </div>
+                                {% if message.risk_level == 'high' %}
+                                    <span class="badge bg-danger rounded-pill">
+                                        <i class="fas fa-bug me-1"></i>Phishing Detected
+                                    </span>
+                                {% elif message.risk_level == 'medium' %}
+                                    <span class="badge bg-warning text-dark rounded-pill">
+                                        <i class="fas fa-question-circle me-1"></i>Suspicious
+                                    </span>
+                                {% else %}
+                                    <span class="badge bg-success rounded-pill">
+                                        <i class="fas fa-shield-alt me-1"></i>Clean
+                                    </span>
+                                {% endif %}
                             </div>
-                            {% endfor %}
+                        </div>
+                        {% endfor %}
 
-                        {% else %}
-                            <div class="text-center py-5 text-muted">
-                                <i class="fas fa-shield-alt fa-3x mb-3 text-light"></i>
-                                <h6>No Recent Scans</h6>
-                                <p class="small">Start using the tool to populate your history.</p>
+                    {% else %}
+                        <!-- Empty State -->
+                        <div class="text-center py-5">
+                            <div class="mb-4">
+                                <i class="fas fa-shield-alt fa-4x text-muted" style="opacity: 0.3;"></i>
                             </div>
-                        {% endif %}
-                    </div>
+                            <h6 class="text-muted mb-2">No Analysis History Yet</h6>
+                            <p class="small text-muted mb-4">Start scanning URLs and messages to see your security history.</p>
+                            <a href="{% url 'phishield:check_link' %}" class="btn btn-gradient">
+                                <i class="fas fa-search me-2"></i>Start Your First Scan
+                            </a>
+                        </div>
+                    {% endif %}
+                    
+                    <!-- Fade gradient overlay when collapsed -->
+                    <div id="timeline-fade" class="position-absolute bottom-0 w-100" style="height: 80px; background: linear-gradient(to bottom, transparent 0%, white 100%); pointer-events: none; display: none;"></div>
                 </div>
-
+                
+                <!-- View More/Less Button -->
+                <div class="text-center mt-3" id="view-more-container" style="display: none;">
+                    <button class="btn btn-outline-custom btn-sm" id="view-more-btn" onclick="toggleTimeline()">
+                        <i class="fas fa-chevron-down me-2"></i>
+                        <span id="view-more-text">View More</span>
+                    </button>
+                </div>
             </div>
+
         </div>
     </div>
 </div>
+
+<script>
+// Timeline collapse/expand functionality
+document.addEventListener('DOMContentLoaded', function() {
+    const timelineContainer = document.getElementById('timeline-container');
+    const viewMoreContainer = document.getElementById('view-more-container');
+    const timelineFade = document.getElementById('timeline-fade');
+    
+    // Check if content exceeds max height
+    if (timelineContainer && timelineContainer.scrollHeight > 500) {
+        viewMoreContainer.style.display = 'block';
+        timelineFade.style.display = 'block';
+    }
+});
+
+function toggleTimeline() {
+    const timelineContainer = document.getElementById('timeline-container');
+    const viewMoreBtn = document.getElementById('view-more-btn');
+    const viewMoreText = document.getElementById('view-more-text');
+    const timelineFade = document.getElementById('timeline-fade');
+    const icon = viewMoreBtn.querySelector('i');
+    
+    if (timelineContainer.style.maxHeight === '500px') {
+        // Expand
+        timelineContainer.style.maxHeight = 'none';
+        timelineContainer.style.overflow = 'visible';
+        viewMoreText.textContent = 'View Less';
+        icon.classList.remove('fa-chevron-down');
+        icon.classList.add('fa-chevron-up');
+        timelineFade.style.display = 'none';
+    } else {
+        // Collapse
+        timelineContainer.style.maxHeight = '500px';
+        timelineContainer.style.overflow = 'hidden';
+        viewMoreText.textContent = 'View More';
+        icon.classList.remove('fa-chevron-up');
+        icon.classList.add('fa-chevron-down');
+        timelineFade.style.display = 'block';
+        
+        // Scroll to top of timeline smoothly
+        timelineContainer.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+}
+</script>
 {% endblock %}

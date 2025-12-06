@@ -1,167 +1,460 @@
 {% extends "phishield/base.html" %}
+{% load static %}
 
 {% block title %}Edit Profile - PhiShield{% endblock %}
 
 {% block content %}
-<div class="container-fluid py-4">
-    <div class="row justify-content-center">
-        <div class="col-lg-8 col-md-10">
-            <div class="card shadow-sm">
-                <div class="card-header bg-transparent border-bottom-0">
-                    <div class="d-flex justify-content-between align-items-center">
-                        <div>
-                            <h5 class="mb-0 text-dark fw-bold"><i class="fas fa-user-edit me-2"></i>Edit Profile</h5>
-                            <p class="text-muted mb-0 small">Update your personal information and preferences</p>
+<style>
+    /* --- MODERN THEME WITH VIBRANT ACCENTS --- */
+    :root {
+        --brand-primary: #3b82f6;
+        --brand-secondary: #8b5cf6;
+        --brand-gradient: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+        --accent-cyan: #06b6d4;
+        --accent-purple: #a855f7;
+        --text-dark: #1e293b;
+        --text-muted: #64748b;
+        --bg-light: #f8fafc;
+        --card-radius: 16px;
+        --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    }
+    
+    /* Keep original background - don't override */
+    
+    .modern-card {
+        background: white;
+        border-radius: var(--card-radius);
+        box-shadow: var(--shadow-lg);
+        overflow: hidden;
+        border: 1px solid rgba(59, 130, 246, 0.1);
+    }
+    
+    .form-control, .form-select {
+        border-radius: 10px;
+        border: 2px solid #e2e8f0;
+        padding: 0.7rem 1rem;
+        font-size: 0.95rem;
+        transition: all 0.2s ease;
+    }
+    
+    .form-control:focus {
+        border-color: var(--brand-primary);
+        box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+    }
+    
+    .btn-primary {
+        background: var(--brand-gradient);
+        color: white;
+        border: none;
+        font-weight: 600;
+        letter-spacing: 0.3px;
+        padding: 0.7rem 2rem;
+        border-radius: 10px;
+        transition: all 0.2s ease;
+    }
+    
+    .btn-primary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 16px rgba(59, 130, 246, 0.3);
+    }
+    
+    .btn-outline-secondary {
+        border-radius: 10px;
+        font-weight: 600;
+        padding: 0.7rem 2rem;
+        border: 2px solid #e2e8f0;
+        color: var(--text-dark);
+        transition: all 0.2s ease;
+    }
+    
+    .btn-outline-secondary:hover {
+        background: var(--bg-light);
+        border-color: #cbd5e1;
+    }
+    
+    .form-label {
+        font-size: 0.875rem;
+        font-weight: 600;
+        color: var(--text-dark);
+        margin-bottom: 0.5rem;
+    }
+    
+    .section-header {
+        font-size: 1.15rem;
+        font-weight: 700;
+        color: var(--text-dark);
+        margin-bottom: 1.5rem;
+        padding-bottom: 0.75rem;
+        border-bottom: 2px solid #e2e8f0;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+    
+    .section-header i {
+        color: var(--brand-primary);
+    }
+    
+    /* Container with proper spacing */
+    .profile-container {
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 2rem 1.5rem 3rem;
+    }
+    
+    /* Fixed two-column layout */
+    .profile-layout {
+        display: grid;
+        grid-template-columns: 320px 1fr;
+        gap: 2rem;
+        align-items: start;
+    }
+    
+    /* Make layout stack on smaller screens */
+    @media (max-width: 991px) {
+        .profile-layout {
+            grid-template-columns: 1fr;
+        }
+        
+        .profile-sidebar {
+            position: relative !important;
+            top: 0 !important;
+        }
+    }
+    
+    /* Profile sidebar with gradient */
+    .profile-sidebar {
+        background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+        border-radius: var(--card-radius);
+        padding: 2rem;
+        box-shadow: var(--shadow-md);
+        border: 1px solid rgba(59, 130, 246, 0.1);
+        position: sticky;
+        top: 2rem;
+    }
+    
+    /* Profile picture with colorful ring */
+    .profile-picture-wrapper {
+        position: relative;
+        width: 160px;
+        height: 160px;
+        margin: 0 auto;
+    }
+    
+    .profile-picture-ring {
+        position: absolute;
+        inset: -4px;
+        border-radius: 50%;
+        background: var(--brand-gradient);
+        padding: 4px;
+    }
+    
+    .profile-picture-container {
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        overflow: hidden;
+        background: white;
+        position: relative;
+        z-index: 1;
+    }
+    
+    .camera-btn {
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
+        background: var(--brand-gradient);
+        border: 3px solid white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        z-index: 2;
+    }
+    
+    .camera-btn:hover {
+        transform: scale(1.1);
+        box-shadow: 0 4px 12px rgba(59, 130, 246, 0.4);
+    }
+    
+    /* User info badges */
+    .info-badge {
+        background: linear-gradient(135deg, #f0f9ff 0%, #faf5ff 100%);
+        border-radius: 10px;
+        padding: 1rem;
+        margin-top: 1.5rem;
+        border: 1px solid rgba(59, 130, 246, 0.1);
+    }
+    
+    .info-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0.5rem 0;
+    }
+    
+    .info-row:not(:last-child) {
+        border-bottom: 1px solid #e2e8f0;
+    }
+    
+    /* Accent colors for icons */
+    .icon-accent-1 { color: var(--brand-primary); }
+    .icon-accent-2 { color: var(--accent-cyan); }
+    .icon-accent-3 { color: var(--accent-purple); }
+    
+    /* Page header integrated into main card */
+    .page-title-card {
+        background: white;
+        border-radius: var(--card-radius);
+        padding: 1.5rem 2rem;
+        margin-bottom: 2rem;
+        box-shadow: var(--shadow-md);
+        border: 1px solid rgba(59, 130, 246, 0.1);
+    }
+</style>
+
+<div class="profile-container">
+    <!-- Page Title Card -->
+    <div class="page-title-card">
+        <div class="d-flex justify-content-between align-items-center">
+            <div>
+                <h4 class="mb-0 text-dark fw-bold">
+                    <i class="fas fa-user-edit me-2 icon-accent-1"></i>
+                    Update Profile
+                </h4>
+                <p class="text-muted mb-0 small mt-1">Manage your personal information and settings</p>
+            </div>
+            <a href="{% url 'phishield:profile' %}" class="btn btn-outline-secondary btn-sm">
+                <i class="fas fa-times me-1"></i>Cancel
+            </a>
+        </div>
+    </div>
+
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        
+        <div class="profile-layout">
+            <!-- Left Sidebar: Profile Picture & Info -->
+            <div class="profile-sidebar">
+                <div class="text-center">
+                    <h6 class="fw-bold mb-3" style="color: var(--text-dark);">
+                        <i class="fas fa-image me-2 icon-accent-2"></i>Profile Picture
+                    </h6>
+                    
+                    <div class="profile-picture-wrapper mb-3">
+                        <div class="profile-picture-ring">
+                            <div id="profile-preview-container" class="profile-picture-container">
+                                {% if profile.profile_picture %}
+                                    <img src="{{ profile.profile_picture.url }}" alt="Profile Picture" 
+                                         class="w-100 h-100" style="object-fit: cover;" id="profile-preview">
+                                {% else %}
+                                    <div class="w-100 h-100 d-flex align-items-center justify-content-center" style="background: var(--brand-gradient);" id="profile-preview">
+                                        <span class="text-white display-4 fw-bold">{{ user.username|first|upper }}</span>
+                                    </div>
+                                {% endif %}
+                            </div>
                         </div>
-                        <a href="{% url 'phishield:profile' %}" class="btn btn-outline-secondary btn-sm">
-                            <i class="fas fa-times me-1"></i>Cancel
-                        </a>
+                        <label for="profile_picture" class="camera-btn">
+                            <i class="fas fa-camera text-white"></i>
+                        </label>
+                    </div>
+                    
+                    <input type="file" class="d-none" id="profile_picture" name="profile_picture" accept="image/jpeg,image/jpg,image/png,image/gif,image/webp">
+                    
+                    <div class="mt-3 text-start" style="background: #f8fafc; padding: 1rem; border-radius: 10px;">
+                        <small class="text-muted d-block mb-1">
+                            <i class="fas fa-check-circle icon-accent-1 me-1"></i>
+                            <strong>Formats:</strong> JPG, PNG, GIF, WebP
+                        </small>
+                        <small class="text-muted d-block">
+                            <i class="fas fa-file-alt icon-accent-3 me-1"></i>
+                            <strong>Max size:</strong> 5MB
+                        </small>
                     </div>
                 </div>
-                <div class="card-body">
-                    <form method="POST" enctype="multipart/form-data">
-                        {% csrf_token %}
-                        
-                        <!-- Profile Picture -->
-                        <div class="text-center mb-4">
-                            <div class="position-relative d-inline-block">
-                                <div id="profile-preview-container">
-                                    {% if profile.profile_picture %}
-                                        <img src="{{ profile.profile_picture.url }}" alt="Current Profile Picture" 
-                                             class="rounded-circle mb-3" width="120" height="120" style="object-fit: cover;" id="profile-preview">
-                                    {% else %}
-                                        <div class="bg-primary rounded-circle d-inline-flex align-items-center justify-content-center mb-3" 
-                                             style="width: 120px; height: 120px;" id="profile-preview">
-                                            <span class="text-white h3 fw-bold">{{ user.username|first|upper }}</span>
-                                        </div>
-                                    {% endif %}
-                                </div>
-                            </div>
-                            <div class="mt-2">
-                                <input type="file" class="form-control d-none" id="profile_picture" name="profile_picture" accept="image/*">
-                                <label for="profile_picture" class="btn btn-outline-primary btn-sm">
-                                    <i class="fas fa-camera me-1"></i>Change Photo
-                                </label>
-                                <small class="form-text text-muted d-block">JPG, PNG or GIF. Max 5MB.</small>
-                            </div>
+                
+                <!-- User Info -->
+                <div class="info-badge">
+                    <div class="info-row">
+                        <small class="text-muted">
+                            <i class="fas fa-user icon-accent-2 me-1"></i>Username
+                        </small>
+                        <small class="fw-bold text-dark">{{ user.username }}</small>
+                    </div>
+                    <div class="info-row">
+                        <small class="text-muted">
+                            <i class="fas fa-calendar icon-accent-3 me-1"></i>Member since
+                        </small>
+                        <small class="fw-bold text-dark">{{ user.date_joined|date:"M Y" }}</small>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Right Side: Form Fields -->
+            <div class="modern-card">
+                <div class="p-4">
+                    <!-- Basic Information Section -->
+                    <h5 class="section-header">
+                        <i class="fas fa-user-circle"></i>
+                        Basic Information
+                    </h5>
+                    
+                    <div class="row g-3 mb-4">
+                        <div class="col-md-6">
+                            <label for="first_name" class="form-label">
+                                <i class="fas fa-user icon-accent-1 me-1"></i>First Name
+                            </label>
+                            <input type="text" class="form-control" id="first_name" name="first_name" 
+                                   value="{{ user.first_name }}" placeholder="Enter first name">
                         </div>
-
-                        <div class="row g-3">
-                            <!-- Personal Information -->
-                            <div class="col-12">
-                                <h6 class="border-bottom pb-2 mb-3 text-dark fw-bold">Personal Information</h6>
-                            </div>
-                            
-                            <div class="col-md-6">
-                                <label for="first_name" class="form-label fw-bold">First Name</label>
-                                <input type="text" class="form-control" id="first_name" name="first_name" 
-                                       value="{{ user.first_name }}" placeholder="Enter your first name">
-                            </div>
-                            
-                            <div class="col-md-6">
-                                <label for="last_name" class="form-label fw-bold">Last Name</label>
-                                <input type="text" class="form-control" id="last_name" name="last_name" 
-                                       value="{{ user.last_name }}" placeholder="Enter your last name">
-                            </div>
-                            
-                            <div class="col-md-6">
-                                <label for="email" class="form-label fw-bold">Email Address</label>
-                                <input type="email" class="form-control" id="email" name="email" 
-                                       value="{{ user.email }}" placeholder="Enter your email address" required>
-                            </div>
-                            
-                            <div class="col-md-6">
-                                <label for="phone" class="form-label fw-bold">Phone Number</label>
-                                <input type="tel" class="form-control" id="phone" name="phone" 
-                                       value="{{ profile.phone|default:'' }}" placeholder="+1 (555) 123-4567">
-                            </div>
-
-                            <!-- Professional Information -->
-                            <div class="col-12 mt-4">
-                                <h6 class="border-bottom pb-2 mb-3 text-dark fw-bold">Professional Information</h6>
-                            </div>
-                            
-                            <div class="col-md-6">
-                                <label for="company" class="form-label fw-bold">Company</label>
-                                <input type="text" class="form-control" id="company" name="company" 
-                                       value="{{ profile.company|default:'' }}" placeholder="Enter your company name">
-                            </div>
-                            
-                            <div class="col-md-6">
-                                <label for="role" class="form-label fw-bold">Role</label>
-                                <select class="form-select" id="role" name="role">
-                                    <option value="employee" {% if profile.role == 'employee' %}selected{% endif %}>Employee</option>
-                                    <option value="manager" {% if profile.role == 'manager' %}selected{% endif %}>Manager</option>
-                                    <option value="security_analyst" {% if profile.role == 'security_analyst' %}selected{% endif %}>Security Analyst</option>
-                                    <option value="admin" {% if profile.role == 'admin' %}selected{% endif %}>Administrator</option>
-                                </select>
-                            </div>
-                            
-                            <div class="col-12">
-                                <label for="location" class="form-label fw-bold">Location</label>
-                                <input type="text" class="form-control" id="location" name="location" 
-                                       value="{{ profile.location|default:'' }}" placeholder="Enter your city and country">
-                            </div>
-
-                            <!-- Bio -->
-                            <div class="col-12 mt-4">
-                                <h6 class="border-bottom pb-2 mb-3 text-dark fw-bold">About Me</h6>
-                            </div>
-                            
-                            <div class="col-12">
-                                <label for="bio" class="form-label fw-bold">Bio</label>
-                                <textarea class="form-control" id="bio" name="bio" rows="4" 
-                                          placeholder="Tell us about yourself, your interests, or your experience with cybersecurity...">{{ profile.bio|default:'' }}</textarea>
-                                <small class="form-text text-muted">Share a brief description about yourself (max 500 characters)</small>
-                            </div>
+                        <div class="col-md-6">
+                            <label for="last_name" class="form-label">
+                                <i class="fas fa-user icon-accent-1 me-1"></i>Last Name
+                            </label>
+                            <input type="text" class="form-control" id="last_name" name="last_name" 
+                                   value="{{ user.last_name }}" placeholder="Enter last name">
                         </div>
-
-                        <div class="d-flex justify-content-between align-items-center pt-4 mt-4 border-top">
-                            <a href="{% url 'phishield:profile' %}" class="btn btn-outline-secondary">
-                                <i class="fas fa-arrow-left me-1"></i>Back to Profile
-                            </a>
-                            <button type="submit" class="btn btn-primary">
-                                <i class="fas fa-save me-1"></i>Save Changes
-                            </button>
+                        <div class="col-12">
+                            <label for="role" class="form-label">
+                                <i class="fas fa-user-shield icon-accent-2 me-1"></i>Role / Profession
+                            </label>
+                            <select class="form-control" id="role" name="role">
+                                <option value="user" {% if profile.role == 'user' %}selected{% endif %}>Regular User</option>
+                                <option value="employee" {% if profile.role == 'employee' %}selected{% endif %}>Employee</option>
+                                <option value="admin" {% if profile.role == 'admin' %}selected{% endif %}>Administrator</option>
+                                <option value="analyst" {% if profile.role == 'analyst' %}selected{% endif %}>Security Analyst</option>
+                            </select>
                         </div>
-                    </form>
+                    </div>
+
+                    <!-- Contact Information Section -->
+                    <h5 class="section-header mt-4">
+                        <i class="fas fa-address-card"></i>
+                        Contact Information
+                    </h5>
+                    
+                    <div class="row g-3 mb-4">
+                        <div class="col-md-6">
+                            <label for="email" class="form-label">
+                                <i class="fas fa-envelope icon-accent-2 me-1"></i>Email Address <span class="text-danger">*</span>
+                            </label>
+                            <input type="email" class="form-control" id="email" name="email" 
+                                   value="{{ user.email }}" placeholder="your.email@example.com" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="phone" class="form-label">
+                                <i class="fas fa-phone icon-accent-2 me-1"></i>Phone Number
+                            </label>
+                            <input type="tel" class="form-control" id="phone" name="phone" 
+                                   value="{{ profile.phone|default:'' }}" placeholder="+1 (555) 123-4567">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="location" class="form-label">
+                                <i class="fas fa-map-marker-alt icon-accent-3 me-1"></i>Location
+                            </label>
+                            <input type="text" class="form-control" id="location" name="location" 
+                                   value="{{ profile.location|default:'' }}" placeholder="City, Country">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="company" class="form-label">
+                                <i class="fas fa-building icon-accent-1 me-1"></i>Company
+                            </label>
+                            <input type="text" class="form-control" id="company" name="company" 
+                                   value="{{ profile.company|default:'' }}" placeholder="Company name">
+                        </div>
+                    </div>
+
+                    <!-- Bio Section -->
+                    <h5 class="section-header mt-4">
+                        <i class="fas fa-pen"></i>
+                        About Me
+                    </h5>
+                    
+                    <div class="row g-3 mb-4">
+                        <div class="col-12">
+                            <label for="bio" class="form-label">
+                                <i class="fas fa-align-left icon-accent-1 me-1"></i>Bio / Summary
+                            </label>
+                            <textarea class="form-control" id="bio" name="bio" rows="6" 
+                                      placeholder="Tell us about yourself, your interests, or your cybersecurity experience...">{{ profile.bio|default:'' }}</textarea>
+                            <small class="form-text text-muted">
+                                <i class="fas fa-info-circle me-1"></i>Maximum 500 characters
+                            </small>
+                        </div>
+                    </div>
+
+                    <!-- Action Buttons -->
+                    <div class="d-flex justify-content-between align-items-center pt-4 mt-3 border-top">
+                        <a href="{% url 'phishield:profile' %}" class="btn btn-outline-secondary">
+                            <i class="fas fa-arrow-left me-2"></i>Back to Profile
+                        </a>
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-save me-2"></i>Save Changes
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
+    </form>
 </div>
 
 <script>
-// Profile picture preview
-document.getElementById('profile_picture').addEventListener('change', function(event) {
-    const file = event.target.files[0];
-    if (file) {
-        // Validate file size (5MB = 5242880 bytes)
-        if (file.size > 5242880) {
-            alert('File size exceeds 5MB limit. Please choose a smaller image.');
-            event.target.value = ''; // Clear the input
-            return;
-        }
-        
-        // Validate file type
-        const validTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/gif', 'image/webp'];
-        if (!validTypes.includes(file.type)) {
-            alert('Invalid file type. Please choose a JPG, PNG, GIF, or WebP image.');
-            event.target.value = ''; // Clear the input
-            return;
-        }
-        
-        const reader = new FileReader();
-        reader.onload = function(e) {
-            const container = document.getElementById('profile-preview-container');
-            container.innerHTML = 
-                `<img src="${e.target.result}" alt="Profile Preview" class="rounded-circle mb-3" width="120" height="120" style="object-fit: cover;" id="profile-preview">`;
-        };
-        reader.onerror = function() {
-            alert('Error reading file. Please try again.');
-        };
-        reader.readAsDataURL(file);
+// Profile picture preview and validation
+document.addEventListener('DOMContentLoaded', function() {
+    const fileInput = document.getElementById('profile_picture');
+    const previewContainer = document.getElementById('profile-preview-container');
+    const username = "{{ user.username }}";
+    
+    function generateFallbackAvatar(initial) {
+        return `
+            <div class="w-100 h-100 d-flex align-items-center justify-content-center" style="background: var(--brand-gradient);" id="profile-preview">
+                <span class="text-white display-4 fw-bold">${initial}</span>
+            </div>
+        `;
     }
+
+    if (!previewContainer.querySelector('img')) {
+        const initial = username.charAt(0).toUpperCase();
+        previewContainer.innerHTML = generateFallbackAvatar(initial);
+    }
+
+    fileInput.addEventListener('change', function(event) {
+        const file = event.target.files[0];
+        const initial = username.charAt(0).toUpperCase();
+
+        if (file) {
+            const maxFileSize = 5242880; // 5MB
+            if (file.size > maxFileSize) {
+                alert('File size exceeds 5MB limit. Please choose a smaller image.');
+                event.target.value = '';
+                previewContainer.innerHTML = generateFallbackAvatar(initial);
+                return;
+            }
+            
+            const validTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/gif', 'image/webp'];
+            if (!validTypes.includes(file.type)) {
+                alert('Invalid file type. Please choose a JPG, PNG, GIF, or WebP image.');
+                event.target.value = '';
+                previewContainer.innerHTML = generateFallbackAvatar(initial);
+                return;
+            }
+            
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                previewContainer.innerHTML = 
+                    `<img src="${e.target.result}" alt="Profile Preview" class="w-100 h-100" style="object-fit: cover;" id="profile-preview">`;
+            };
+            reader.onerror = function() {
+                alert('Error reading file. Please try again.');
+            };
+            reader.readAsDataURL(file);
+        }
+    });
 });
 </script>
 {% endblock %}
