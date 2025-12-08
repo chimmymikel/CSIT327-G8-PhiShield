@@ -366,6 +366,12 @@ def contact(request):
         
         # 2. Validate that fields are not empty
         if name and email_from_user and subject_input and message:
+            # Check if email configuration is set
+            if not settings.EMAIL_HOST_USER or not settings.EMAIL_HOST_PASSWORD:
+                logger.error("Email configuration missing: EMAIL_HOST_USER or EMAIL_HOST_PASSWORD not set")
+                messages.error(request, "Email service is not configured. Please contact the administrator.")
+                return redirect('phishield:contact')
+            
             try:
                 # 3. Create the email content
                 full_message = f"""
@@ -396,8 +402,15 @@ def contact(request):
                 
             except Exception as e:
                 # Error Message if email fails
-                logger.error(f"Failed to send email: {e}")
-                messages.error(request, f"Error sending email: {e}")
+                logger.error(f"Failed to send email: {e}", exc_info=True)
+                # Provide more helpful error message
+                error_msg = str(e)
+                if "authentication failed" in error_msg.lower() or "535" in error_msg:
+                    messages.error(request, "Email authentication failed. Please check EMAIL_USER and EMAIL_PASSWORD in Railway variables. Make sure you're using a Gmail App Password, not your regular password.")
+                elif "EMAIL_HOST_USER" in error_msg or "EMAIL_HOST_PASSWORD" in error_msg or "None" in error_msg:
+                    messages.error(request, "Email configuration error. Please ensure EMAIL_USER and EMAIL_PASSWORD are set in Railway environment variables.")
+                else:
+                    messages.error(request, f"Error sending email: {error_msg}")
         else:
              messages.warning(request, 'Please fill in all fields.')
     
