@@ -407,13 +407,16 @@ def contact(request):
                 error_msg = str(e)
                 error_type = type(e).__name__
                 
+                # Handle network unreachable errors (common on Railway)
+                if "network is unreachable" in error_msg.lower() or "[errno 101]" in error_msg.lower():
+                    messages.error(request, "Cannot reach email server. This may be due to network restrictions on the hosting platform. Please contact the administrator or try again later.")
                 # Handle timeout errors
-                if "timeout" in error_msg.lower() or "timed out" in error_msg.lower() or "Timeout" in error_type:
+                elif "timeout" in error_msg.lower() or "timed out" in error_msg.lower() or "Timeout" in error_type:
                     messages.error(request, "Email service timed out. Please try again later or check your internet connection.")
                 elif "authentication failed" in error_msg.lower() or "535" in error_msg or "534" in error_msg:
-                    messages.error(request, "Email authentication failed. Please check EMAIL_USER and EMAIL_PASSWORD in .env file. Make sure you're using a Gmail App Password, not your regular password.")
+                    messages.error(request, "Email authentication failed. Please check EMAIL_USER and EMAIL_PASSWORD environment variables. Make sure you're using a Gmail App Password, not your regular password.")
                 elif "EMAIL_HOST_USER" in error_msg or "EMAIL_HOST_PASSWORD" in error_msg or "None" in error_msg:
-                    messages.error(request, "Email configuration error. Please ensure EMAIL_USER and EMAIL_PASSWORD are set in .env file.")
+                    messages.error(request, "Email configuration error. Please ensure EMAIL_USER and EMAIL_PASSWORD are set as environment variables.")
                 elif "connection" in error_msg.lower() or "refused" in error_msg.lower():
                     messages.error(request, "Could not connect to email server. Please check your internet connection and try again.")
                 else:

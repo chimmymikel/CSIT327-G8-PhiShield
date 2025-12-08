@@ -176,6 +176,8 @@ SESSION_SAVE_EVERY_REQUEST = True
 # EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 # NEW: Gmail SMTP Configuration using .env variables
+# Note: Railway may block outbound SMTP connections. If you get "Network is unreachable" errors,
+# consider using SendGrid, Mailgun, or Railway's email service instead.
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
@@ -183,6 +185,11 @@ EMAIL_USE_TLS = True
 EMAIL_HOST_USER = os.getenv('EMAIL_USER')
 EMAIL_HOST_PASSWORD = os.getenv('EMAIL_PASSWORD')
 EMAIL_TIMEOUT = 10  # Timeout in seconds to prevent hanging requests
+
+# Alternative: Use port 465 with SSL if port 587 is blocked
+# EMAIL_PORT = 465
+# EMAIL_USE_SSL = True
+# EMAIL_USE_TLS = False
 
 # Set the default sender to the authenticated email
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER or 'phishield001@gmail.com'
