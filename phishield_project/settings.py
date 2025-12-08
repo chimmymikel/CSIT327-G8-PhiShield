@@ -180,16 +180,17 @@ SESSION_SAVE_EVERY_REQUEST = True
 # consider using SendGrid, Mailgun, or Railway's email service instead.
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_PORT = 587
-EMAIL_USE_TLS = True
+
+# Try port 465 with SSL first (often works better on Railway)
+# If this doesn't work, switch back to port 587 with TLS
+email_port = int(os.getenv('EMAIL_PORT', '465'))  # Default to 465, can override with EMAIL_PORT env var
+EMAIL_PORT = email_port
+EMAIL_USE_SSL = (email_port == 465)
+EMAIL_USE_TLS = (email_port == 587)
+
 EMAIL_HOST_USER = os.getenv('EMAIL_USER')
 EMAIL_HOST_PASSWORD = os.getenv('EMAIL_PASSWORD')
 EMAIL_TIMEOUT = 10  # Timeout in seconds to prevent hanging requests
-
-# Alternative: Use port 465 with SSL if port 587 is blocked
-# EMAIL_PORT = 465
-# EMAIL_USE_SSL = True
-# EMAIL_USE_TLS = False
 
 # Set the default sender to the authenticated email
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER or 'phishield001@gmail.com'
