@@ -63,6 +63,7 @@ INSTALLED_APPS = [
 
     # Third-party
     'widget_tweaks',   # For form rendering
+    'anymail',         # For SendGrid email API (works on Railway)
 ]
 
 MIDDLEWARE = [
@@ -175,22 +176,35 @@ SESSION_SAVE_EVERY_REQUEST = True
 # REPLACED: Old Console Backend
 # EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
-# NEW: Gmail SMTP Configuration using .env variables
-# Note: Railway may block outbound SMTP connections. If you get "Network is unreachable" errors,
-# consider using SendGrid, Mailgun, or Railway's email service instead.
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'
+# Email Configuration - Using SendGrid API (works on Railway)
+# Railway blocks SMTP connections, so we use SendGrid's HTTP API instead
+# Get your API key from: https://app.sendgrid.com/settings/api_keys
 
-# Try port 465 with SSL first (often works better on Railway)
-# If this doesn't work, switch back to port 587 with TLS
-email_port = int(os.getenv('EMAIL_PORT', '465'))  # Default to 465, can override with EMAIL_PORT env var
-EMAIL_PORT = email_port
-EMAIL_USE_SSL = (email_port == 465)
-EMAIL_USE_TLS = (email_port == 587)
+# Check if SendGrid API key is set, otherwise fall back to SMTP (for local dev)
+SENDGRID_API_KEY = os.getenv('SENDGRID_API_KEY')
 
-EMAIL_HOST_USER = os.getenv('EMAIL_USER')
-EMAIL_HOST_PASSWORD = os.getenv('EMAIL_PASSWORD')
-EMAIL_TIMEOUT = 10  # Timeout in seconds to prevent hanging requests
+if SENDGRID_API_KEY:
+    # Use SendGrid API via Anymail (works on Railway - uses HTTP, not SMTP)
+    EMAIL_BACKEND = 'anymail.backends.sendgrid.EmailBackend'
+    ANYMAIL = {
+        "SENDGRID_API_KEY": SENDGRID_API_KEY,
+    }
+    DEFAULT_FROM_EMAIL = os.getenv('EMAIL_USER', 'phishield001@gmail.com')
+else:
+    # Fallback to SMTP for local development
+    EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+    EMAIL_HOST = 'smtp.gmail.com'
+    email_port = int(os.getenv('EMAIL_PORT', '465'))
+    EMAIL_PORT = email_port
+    EMAIL_USE_SSL = (email_port == 465)
+    EMAIL_USE_TLS = (email_port == 587)
+    EMAIL_HOST_USER = os.getenv('EMAIL_USER')
+    EMAIL_HOST_PASSWORD = os.getenv('EMAIL_PASSWORD')
+    EMAIL_TIMEOUT = 10
+    DEFAULT_FROM_EMAIL = os.getenv('EMAIL_USER', 'phishield001@gmail.com')
+
+# Set the contact email
+CONTACT_EMAIL = 'phishield001@gmail.com'
 
 # Set the default sender to the authenticated email
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER or 'phishield001@gmail.com'
