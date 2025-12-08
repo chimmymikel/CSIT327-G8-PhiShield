@@ -405,10 +405,17 @@ def contact(request):
                 logger.error(f"Failed to send email: {e}", exc_info=True)
                 # Provide more helpful error message
                 error_msg = str(e)
-                if "authentication failed" in error_msg.lower() or "535" in error_msg:
-                    messages.error(request, "Email authentication failed. Please check EMAIL_USER and EMAIL_PASSWORD in Railway variables. Make sure you're using a Gmail App Password, not your regular password.")
+                error_type = type(e).__name__
+                
+                # Handle timeout errors
+                if "timeout" in error_msg.lower() or "timed out" in error_msg.lower() or "Timeout" in error_type:
+                    messages.error(request, "Email service timed out. Please try again later or check your internet connection.")
+                elif "authentication failed" in error_msg.lower() or "535" in error_msg or "534" in error_msg:
+                    messages.error(request, "Email authentication failed. Please check EMAIL_USER and EMAIL_PASSWORD in .env file. Make sure you're using a Gmail App Password, not your regular password.")
                 elif "EMAIL_HOST_USER" in error_msg or "EMAIL_HOST_PASSWORD" in error_msg or "None" in error_msg:
-                    messages.error(request, "Email configuration error. Please ensure EMAIL_USER and EMAIL_PASSWORD are set in Railway environment variables.")
+                    messages.error(request, "Email configuration error. Please ensure EMAIL_USER and EMAIL_PASSWORD are set in .env file.")
+                elif "connection" in error_msg.lower() or "refused" in error_msg.lower():
+                    messages.error(request, "Could not connect to email server. Please check your internet connection and try again.")
                 else:
                     messages.error(request, f"Error sending email: {error_msg}")
         else:
