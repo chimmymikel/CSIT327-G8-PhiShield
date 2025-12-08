@@ -182,6 +182,7 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = os.getenv('EMAIL_USER')
 EMAIL_HOST_PASSWORD = os.getenv('EMAIL_PASSWORD')
+EMAIL_TIMEOUT = 10  # Timeout in seconds to prevent hanging requests
 
 # Set the default sender to the authenticated email
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER or 'phishield001@gmail.com'
