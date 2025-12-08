@@ -7,6 +7,8 @@ from .models import SuspiciousLink, SuspiciousMessage, UserProfile
 from .forms import LinkForm, MessageForm, RegisterForm
 from .utils import analyze_url, analyze_message
 from django.contrib import messages
+from django.core.mail import send_mail  # ✅ Added for email
+from django.conf import settings        # ✅ Added to access email settings
 import random
 import logging
 import os
@@ -351,18 +353,53 @@ def about_us(request):
 
 @login_required
 def contact(request):
-    """Contact page with form"""
+    """Contact page with functional email logic"""
     if request.method == "POST":
+        # 1. Get data from the HTML form
         name = request.POST.get('name')
-        email = request.POST.get('email')
-        subject = request.POST.get('subject')
+        email_from_user = request.POST.get('email')
+        subject_input = request.POST.get('subject')
         message = request.POST.get('message')
         
-        # ✅ Log contact form
+        # ✅ Log contact form submission
         logger.info(f"Contact form submitted by: {request.user.username}")
         
-        messages.success(request, "Your message has been received! We'll get back to you soon.")
-        return redirect('phishield:contact')
+        # 2. Validate that fields are not empty
+        if name and email_from_user and subject_input and message:
+            try:
+                # 3. Create the email content
+                full_message = f"""
+                You have received a new contact inquiry via PhiShield.
+                
+                --------------------------------------------------
+                Sender Name: {name}
+                Sender Email: {email_from_user}
+                Subject: {subject_input}
+                --------------------------------------------------
+                
+                Message:
+                {message}
+                """
+                
+                # 4. Send the email using Settings
+                send_mail(
+                    subject=f"PhiShield Contact: {subject_input}",
+                    message=full_message,
+                    from_email=settings.DEFAULT_FROM_EMAIL,
+                    recipient_list=[settings.CONTACT_EMAIL], # Defined in settings.py
+                    fail_silently=False,
+                )
+                
+                # 5. Success Message
+                messages.success(request, "Your message has been received! We'll get back to you soon.")
+                return redirect('phishield:contact')
+                
+            except Exception as e:
+                # Error Message if email fails
+                logger.error(f"Failed to send email: {e}")
+                messages.error(request, f"Error sending email: {e}")
+        else:
+             messages.warning(request, 'Please fill in all fields.')
     
     return render(request, "phishield/contact.html")
 
@@ -436,6 +473,7 @@ def view_analysis_logs(request):
     }
     
     return render(request, "phishield/view_analysis_logs.html", context)
+
 @login_required
 def profile(request):
     """User profile page"""

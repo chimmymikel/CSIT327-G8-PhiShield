@@ -103,8 +103,8 @@ WSGI_APPLICATION = 'phishield_project.wsgi.application'
 #DATABASES = {
     #'default': {
       #  'ENGINE': 'django.db.backends.sqlite3',
-     #   'NAME': BASE_DIR / 'db.sqlite3',
-   # }
+      #  'NAME': BASE_DIR / 'db.sqlite3',
+    # }
 #}
 
 # ------------------------------
@@ -170,11 +170,22 @@ SESSION_COOKIE_AGE = 1209600  # 2 weeks in seconds
 SESSION_SAVE_EVERY_REQUEST = True
 
 # ------------------------------
-# Email Configuration
+# Email Configuration (UPDATED)
 # ------------------------------
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-DEFAULT_FROM_EMAIL = 'noreply@phishield.com'
-CONTACT_EMAIL = 'contact@phishield.com'
+# REPLACED: Old Console Backend
+# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+# NEW: Gmail SMTP Configuration using .env variables
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = os.getenv('EMAIL_USER')
+EMAIL_HOST_PASSWORD = os.getenv('EMAIL_PASSWORD')
+
+# Set the default sender to the authenticated email
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+CONTACT_EMAIL = 'phishield001@gmail.com'
 
 # For production (commented out for development)
 """
