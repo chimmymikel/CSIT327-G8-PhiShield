@@ -184,7 +184,7 @@ EMAIL_HOST_USER = os.getenv('EMAIL_USER')
 EMAIL_HOST_PASSWORD = os.getenv('EMAIL_PASSWORD')
 
 # Set the default sender to the authenticated email
-DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER or 'phishield001@gmail.com'
 CONTACT_EMAIL = 'phishield001@gmail.com'
 
 # For production (commented out for development)
