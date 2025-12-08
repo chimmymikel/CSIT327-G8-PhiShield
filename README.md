@@ -63,6 +63,10 @@ SUPABASE_URL=your_supabase_project_url
 SUPABASE_KEY=your_supabase_anon_key
 SUPABASE_SECRET_KEY=your_supabase_secret_key
 
+# Email Configuration (Required for contact form)
+EMAIL_USER=phishield001@gmail.com
+EMAIL_PASSWORD=your_gmail_app_password
+
 # Optional: Enhanced phishing detection API keys
 # PhishTank API (free, optional - works without key but with rate limits)
 PHISHTANK_API_KEY=your_phishtank_api_key_here
@@ -70,6 +74,11 @@ PHISHTANK_API_KEY=your_phishtank_api_key_here
 # Google Safe Browsing API (free tier available)
 GOOGLE_SAFE_BROWSING_API_KEY=your_google_safe_browsing_api_key_here
 ```
+
+**Important for Railway Deployment:**
+- Set these environment variables in your Railway project dashboard (Variables tab)
+- The `.env` file is only for local development
+- Railway requires environment variables to be set in their platform settings
 
 **Note on API Keys:**
 - The system works without API keys, but with reduced detection accuracy
