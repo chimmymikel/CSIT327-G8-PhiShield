@@ -312,6 +312,50 @@
         font-size: 0.95rem;
     }
 
+    .flags-list {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .flag-item {
+        display: flex;
+        align-items: flex-start;
+        gap: 10px;
+        padding: 10px;
+        background: rgba(0, 123, 255, 0.05);
+        border-radius: var(--radius-small);
+        border-left: 3px solid #007BFF;
+        transition: all 0.2s ease;
+    }
+
+    .flag-item:hover {
+        background: rgba(0, 123, 255, 0.1);
+        transform: translateX(3px);
+    }
+
+    .flag-item i {
+        color: #007BFF;
+        margin-top: 3px;
+        font-size: 0.85rem;
+    }
+
+    .flag-item span {
+        color: var(--text-dark);
+        line-height: 1.6;
+        font-size: 0.95rem;
+        flex: 1;
+    }
+
+    .dark .flag-item {
+        background: rgba(0, 188, 212, 0.1);
+        border-left-color: #00BCD4;
+    }
+
+    .dark .flag-item i {
+        color: #00BCD4;
+    }
+
     .alert {
         border-radius: var(--radius-large);
         border: none;
@@ -473,7 +517,13 @@
                 {% if flags %}
                 <div class="details-section">
                     <h6><i class="fas fa-info-circle"></i> Detection Details</h6>
-                    <p>{{ flags }}</p>
+                    <div class="flags-list">
+                        {% for flag in flags %}
+                            <div class="flag-item">
+                                <i class="fas fa-chevron-right"></i> <span>{{ flag }}</span>
+                            </div>
+                        {% endfor %}
+                    </div>
                 </div>
                 {% endif %}
 
