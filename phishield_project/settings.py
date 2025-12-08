@@ -181,9 +181,9 @@ SESSION_SAVE_EVERY_REQUEST = True
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 
-# Try port 465 with SSL first (often works better on Railway)
-# If this doesn't work, switch back to port 587 with TLS
-email_port = int(os.getenv('EMAIL_PORT', '465'))  # Default to 465, can override with EMAIL_PORT env var
+# Port 587 with TLS is more reliable than 465 with SSL for Gmail
+# You can override this by setting EMAIL_PORT=465 in your .env file
+email_port = int(os.getenv('EMAIL_PORT', '587'))  # Default to 587 (TLS), can override with EMAIL_PORT env var
 EMAIL_PORT = email_port
 EMAIL_USE_SSL = (email_port == 465)
 EMAIL_USE_TLS = (email_port == 587)

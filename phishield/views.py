@@ -413,12 +413,21 @@ def contact(request):
                 # Handle timeout errors
                 elif "timeout" in error_msg.lower() or "timed out" in error_msg.lower() or "Timeout" in error_type:
                     messages.error(request, "Email service timed out. Please try again later or check your internet connection.")
-                elif "authentication failed" in error_msg.lower() or "535" in error_msg or "534" in error_msg:
-                    messages.error(request, "Email authentication failed. Please check EMAIL_USER and EMAIL_PASSWORD environment variables. Make sure you're using a Gmail App Password, not your regular password.")
-                elif "EMAIL_HOST_USER" in error_msg or "EMAIL_HOST_PASSWORD" in error_msg or "None" in error_msg:
-                    messages.error(request, "Email configuration error. Please ensure EMAIL_USER and EMAIL_PASSWORD are set as environment variables.")
-                elif "connection" in error_msg.lower() or "refused" in error_msg.lower():
-                    messages.error(request, "Could not connect to email server. Please check your internet connection and try again.")
+                # Handle SSL/TLS connection errors
+                elif "ssl" in error_msg.lower() or "tls" in error_msg.lower() or "[ssl:" in error_msg.lower():
+                    messages.error(request, "SSL/TLS connection error. Try setting EMAIL_PORT=587 in your .env file if you're using port 465, or vice versa.")
+                # Handle authentication errors
+                elif "authentication failed" in error_msg.lower() or "535" in error_msg or "534" in error_msg or "535-5.7.8" in error_msg:
+                    messages.error(request, "Email authentication failed. Please check EMAIL_USER and EMAIL_PASSWORD in your .env file. Make sure you're using a Gmail App Password (not your regular password). To create one: Google Account > Security > 2-Step Verification > App Passwords")
+                # Handle missing configuration
+                elif "EMAIL_HOST_USER" in error_msg or "EMAIL_HOST_PASSWORD" in error_msg or "None" in error_msg or "not set" in error_msg.lower():
+                    messages.error(request, "Email configuration error. Please ensure EMAIL_USER and EMAIL_PASSWORD are set in your .env file.")
+                # Handle connection refused/refused errors
+                elif "connection" in error_msg.lower() or "refused" in error_msg.lower() or "[errno 111]" in error_msg.lower() or "[errno 10061]" in error_msg.lower():
+                    messages.error(request, "Could not connect to email server. Please check your internet connection and firewall settings.")
+                # Handle SMTP errors
+                elif "smtp" in error_msg.lower() or "smtplib" in error_type.lower():
+                    messages.error(request, f"SMTP error: {error_msg}. Please check your email configuration in the .env file.")
                 else:
                     messages.error(request, f"Error sending email: {error_msg}")
         else:
