@@ -271,7 +271,11 @@ def analyze_message_view(request):
             profile.save()
             
             result = risk_level
-            flags = flag_list
+            # Split flags by | for better display
+            if flag_list and flag_list.strip():
+                flags = flag_list.split(' | ') if ' | ' in flag_list else [flag_list]
+            else:
+                flags = []
             tip = random.choice(TIPS)
             
             # ✅ Log result

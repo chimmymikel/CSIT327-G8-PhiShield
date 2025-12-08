@@ -460,46 +460,345 @@ def analyze_url(url):
 
 
 def analyze_message(text):
-    """Analyze text message for phishing indicators"""
+    """
+    Enhanced message analysis with comprehensive phishing detection
+    Analyzes text for multiple phishing indicators including URLs, patterns, and emotional manipulation
+    """
     try:
         flagged = []
+        risk_score = 0
+        text_lower = text.lower()
+        text_length = len(text)
         
-        found = [k for k in SUSPICIOUS_KEYWORDS if k in text.lower()]
-        if found:
-            flagged.append(f'Suspicious words: {", ".join(found[:3])}')
-
-        urls = re.findall(r'https?://\S+', text)
-        if len(urls) >= 2:
-            flagged.append(f'Contains {len(urls)} links (suspicious)')
-        elif len(urls) == 1:
-            flagged.append('Contains a link')
-
-        urgent_phrases = ['act now', 'urgent', 'verify your account', 'click here', 
-                         'immediate action', 'suspended', 'expire', 'limited time']
-        found_urgent = [p for p in urgent_phrases if p in text.lower()]
+        # ========== URL DETECTION AND ANALYSIS ==========
+        # Enhanced URL pattern matching (more precise to avoid false positives)
+        # Only match actual URLs, not domain names in regular text
+        url_patterns = [
+            r'https?://[^\s<>"\'\)]+',  # Standard URLs with protocol
+            r'www\.[^\s<>"\'\)]+',      # www URLs without protocol (must be at word boundary)
+        ]
+        
+        all_urls = []
+        for pattern in url_patterns:
+            found_urls = re.findall(pattern, text, re.IGNORECASE)
+            all_urls.extend(found_urls)
+        
+        # Remove duplicates and clean URLs
+        unique_urls = []
+        for url in all_urls:
+            # Clean up URLs (remove trailing punctuation)
+            url = url.rstrip('.,;:!?)')
+            # Only add if it looks like a real URL (has domain structure)
+            if '.' in url and len(url) > 4 and url not in unique_urls:
+                unique_urls.append(url)
+        
+        # Analyze each URL found in the message
+        url_risk_scores = []
+        dangerous_urls = []
+        suspicious_urls = []
+        
+        for url in unique_urls:
+            # Normalize URL for analysis
+            normalized_url = url
+            if not url.startswith(('http://', 'https://')):
+                normalized_url = 'https://' + url
+            
+            # Analyze the URL using the same function as link checker
+            url_risk, url_flags = analyze_url(normalized_url)
+            url_risk_scores.append(url_risk)
+            
+            if url_risk == 'dangerous':
+                dangerous_urls.append(url)
+                risk_score += 40
+            elif url_risk == 'suspicious':
+                suspicious_urls.append(url)
+                risk_score += 15
+            elif url_risk == 'safe':
+                risk_score -= 2  # Slight positive indicator
+        
+        # Report URL findings (only flag if URLs are actually suspicious)
+        if dangerous_urls:
+            flagged.append(f'⚠️ DANGEROUS URL(s) detected: {len(dangerous_urls)} malicious link(s) found')
+        if suspicious_urls:
+            flagged.append(f'⚠️ Suspicious URL(s) detected: {len(suspicious_urls)} questionable link(s) found')
+        # Only flag multiple URLs if they're suspicious - legitimate emails often have 2-3 links
+        if len(unique_urls) >= 4:  # Increased threshold from 3 to 4
+            flagged.append(f'Multiple URLs detected ({len(unique_urls)}) - verify all destinations')
+            risk_score += 8  # Reduced from 10
+        elif len(unique_urls) == 3 and (dangerous_urls or suspicious_urls):
+            flagged.append(f'Three URLs detected with suspicious links - verify destinations')
+            risk_score += 5
+        # Don't flag single safe URLs - too many false positives
+        # Only flag if URL is suspicious or combined with other red flags
+        
+        # ========== URGENCY AND PRESSURE TACTICS ==========
+        # More specific phrases - "action required" is too common in legitimate emails
+        # Check this FIRST as it's used in keyword detection logic
+        urgent_phrases = [
+            r'\bact\s+now\b', r'\burgent.*action\b', r'\bimmediate\s+action\s+required\b',
+            r'\bverify\s+your\s+account\s+immediately\b', r'\bclick\s+here\s+now\b',
+            r'\baccount\s+will\s+be\s+suspended\b', r'\bexpires\s+today\b',
+            r'\bwithin\s+24\s+hours\b', r'\bwithin\s+48\s+hours\b', r'\btoday\s+only\b',
+            r'\blast\s+chance\b', r'\byour\s+account\s+will\s+be\s+closed\b',
+            r'\byour\s+account\s+will\s+be\s+deleted\b', r'\bverify\s+now\s+or\s+lose\s+access\b',
+            r'\brespond\s+immediately\b', r'\bright\s+away\b', r'\bwithout\s+delay\b'
+        ]
+        
+        found_urgent = [p for p in urgent_phrases if re.search(p, text_lower)]
+        # Only flag urgency if combined with other suspicious elements or very strong phrases
+        urgency_flagged = False
         if found_urgent:
-            flagged.append(f'Urgent language detected: {", ".join(found_urgent[:2])}')
-
-        personal_info = ['social security', 'ssn', 'credit card', 'cvv', 
-                        'pin', 'date of birth', 'mother\'s maiden']
-        found_personal = [p for p in personal_info if p in text.lower()]
-        if found_personal:
-            flagged.append('Requests personal information (HIGH RISK)')
-
-        caps_ratio = sum(1 for c in text if c.isupper()) / max(len(text), 1)
-        if caps_ratio > 0.3 and len(text) > 20:
-            flagged.append('Excessive capitalization detected')
-
-        if not flagged:
-            result = 'safe'
-        elif found_personal or len(urls) > 1 or any(kw in text.lower() for kw in ['password', 'bank account', 'ssn']):
+            # Check for very strong urgency phrases
+            strong_urgency = any(re.search(p, text_lower) for p in [
+                r'\baccount\s+will\s+be\s+(closed|deleted|suspended)\b',
+                r'\bverify\s+now\s+or\s+lose\s+access\b',
+                r'\bexpires\s+today\b', r'\bwithin\s+24\s+hours\b'
+            ])
+            if strong_urgency or len(unique_urls) > 0:
+                flagged.append(f'⏰ Urgency tactics detected')
+                risk_score += 18  # Reduced from 20
+                urgency_flagged = True
+        
+        # ========== ENHANCED KEYWORD DETECTION ==========
+        # Use word boundaries to avoid false matches (e.g., "accounting" shouldn't match "account")
+        high_risk_keywords = [
+            r'\bpassword\b', r'\bssn\b', r'\bsocial\s+security\b', r'\bcredit\s+card\b', 
+            r'\bcvv\b', r'\bpin\s+number\b', r'\bbank\s+account\b', r'\brouting\s+number\b', 
+            r'\baccount\s+number\b', r'\bmother\'?s?\s+maiden\b', r'\bdate\s+of\s+birth\b',
+            r'\bdriver\s+license\b', r'\bpassport\s+number\b'
+        ]
+        
+        medium_risk_keywords = [
+            r'\bverify\s+your\s+account\b', r'\bconfirm\s+your\s+account\b', 
+            r'\bvalidate\s+your\s+account\b', r'\bauthenticate\s+your\s+account\b',
+            r'\baccount\s+suspended\b', r'\baccount\s+locked\b', r'\baccount\s+expired\b',
+            r'\bsecurity\s+alert\b', r'\bunauthorized\s+access\b', r'\baccount\s+closure\b',
+            r'\bimmediate\s+action\s+required\b'
+        ]
+        
+        low_risk_keywords = [
+            r'\bprize\b', r'\bwinner\b', r'\bcongratulations.*won\b', r'\bclaim\s+your\s+prize\b',
+            r'\blimited\s+time\s+offer\b', r'\bact\s+now\b'
+        ]
+        
+        found_high_risk = [kw for kw in high_risk_keywords if re.search(kw, text_lower)]
+        found_medium_risk = [kw for kw in medium_risk_keywords if re.search(kw, text_lower)]
+        found_low_risk = [kw for kw in low_risk_keywords if re.search(kw, text_lower)]
+        
+        # Only flag if keywords appear in suspicious context
+        if found_high_risk:
+            flagged.append(f'🚨 HIGH RISK: Requests sensitive information')
+            risk_score += 35
+        # Medium risk keywords are common in legitimate emails - only flag if combined with other red flags
+        if found_medium_risk and (len(unique_urls) > 0 or urgency_flagged or risk_score > 10):
+            flagged.append(f'⚠️ Account security keywords detected')
+            risk_score += 12  # Reduced from 15
+        # Low risk keywords only matter if combined with other suspicious elements
+        if found_low_risk and (found_high_risk or len(unique_urls) > 0 or urgency_flagged):
+            flagged.append(f'Suspicious promotional language detected')
+            risk_score += 5
+        
+        # ========== EMOTIONAL MANIPULATION ==========
+        fear_phrases = [
+            'your account has been compromised', 'unauthorized access detected',
+            'security breach', 'fraudulent activity', 'suspicious activity',
+            'your account will be closed', 'legal action', 'account termination',
+            'immediate suspension', 'violation detected'
+        ]
+        
+        greed_phrases = [
+            'you have won', 'congratulations', 'prize', 'reward', 'free money',
+            'claim your prize', 'you are selected', 'exclusive offer', 'limited offer',
+            'special promotion', 'claim now', 'free gift'
+        ]
+        
+        found_fear = [p for p in fear_phrases if p in text_lower]
+        found_greed = [p for p in greed_phrases if p in text_lower]
+        
+        if found_fear:
+            flagged.append(f'😨 Fear-based manipulation detected: {", ".join(found_fear[:2])}')
+            risk_score += 18
+        if found_greed:
+            flagged.append(f'💰 Greed-based manipulation detected: {", ".join(found_greed[:2])}')
+            risk_score += 12
+        
+        # ========== GRAMMAR AND SPELLING ANALYSIS ==========
+        # Common phishing email errors - only flag if multiple errors
+        common_errors = [
+            r'\b(youre|ur)\s+(account|email|password)\b',  # Your/you're errors (not "your" which is correct)
+            r'\bclick\s+hear\b',  # Common typo (not "click here" which is correct)
+            r'\b(recieve|recieved)\b',  # Receive misspellings
+            r'\b(seperate|seperated)\b',  # Separate misspellings
+            r'\b(acount|accont)\b',  # Account misspellings
+        ]
+        
+        error_count = 0
+        for pattern in common_errors:
+            if re.search(pattern, text_lower):
+                error_count += 1
+        
+        # Only flag if 3+ errors - one typo is normal, two might be coincidence
+        if error_count >= 3:
+            flagged.append(f'Multiple grammar/spelling errors detected ({error_count}) - common in phishing')
+            risk_score += 8
+        elif error_count >= 2 and (len(unique_urls) > 0 or found_high_risk):
+            # Only flag 2 errors if combined with other suspicious elements
+            flagged.append(f'Grammar/spelling errors detected ({error_count})')
+            risk_score += 5
+        
+        # ========== FORMATTING ANALYSIS ==========
+        # Excessive capitalization - be more lenient
+        caps_ratio = sum(1 for c in text if c.isupper()) / max(text_length, 1)
+        # Check if it's ALL CAPS (screaming) vs just headers
+        all_caps_words = sum(1 for word in text.split() if word.isupper() and len(word) > 2)
+        total_words = len(text.split())
+        all_caps_ratio = all_caps_words / max(total_words, 1) if total_words > 0 else 0
+        
+        if all_caps_ratio > 0.5 and text_length > 50:  # More than half words are all caps
+            flagged.append('Excessive ALL CAPS text - common phishing tactic')
+            risk_score += 10
+        elif caps_ratio > 0.5 and text_length > 30:  # More than 50% of characters are caps
+            flagged.append('High capitalization ratio detected')
+            risk_score += 5
+        
+        # Excessive exclamation marks - be more lenient (3 is normal in some contexts)
+        exclamation_count = text.count('!')
+        if exclamation_count >= 6:  # Increased threshold from 5
+            flagged.append(f'Excessive exclamation marks ({exclamation_count}) - urgency manipulation')
+            risk_score += 8
+        elif exclamation_count >= 4 and (found_urgent or len(unique_urls) > 0):
+            # Only flag 4-5 if combined with other suspicious elements
+            flagged.append(f'Multiple exclamation marks ({exclamation_count})')
+            risk_score += 4
+        
+        # ========== SENDER ANALYSIS ==========
+        # Check for email-like patterns in the message
+        email_pattern = r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b'
+        emails = re.findall(email_pattern, text)
+        
+        if emails:
+            # Check for suspicious sender patterns
+            suspicious_domains = ['gmail.com', 'yahoo.com', 'hotmail.com', 'outlook.com']
+            for email in emails:
+                domain = email.split('@')[1].lower() if '@' in email else ''
+                # If message claims to be from a company but sender is free email
+                if any(company_kw in text_lower for company_kw in ['bank', 'paypal', 'amazon', 'microsoft', 'apple']) and \
+                   any(susp_dom in domain for susp_dom in suspicious_domains):
+                    flagged.append(f'⚠️ Suspicious sender: Claims to be from company but uses free email ({email})')
+                    risk_score += 25
+        
+        # ========== PERSONAL INFORMATION REQUESTS ==========
+        # Focus on truly sensitive info - "full name" and "phone number" are often requested legitimately
+        sensitive_info_patterns = [
+            r'\bsocial\s+security\b', r'\bssn\b', r'\bcredit\s+card\b', r'\bcvv\b', r'\bcvc\b',
+            r'\bpin\s+number\b', r'\bdate\s+of\s+birth\b', r'\bmother\'?s?\s+maiden\b',
+            r'\bbank\s+account\s+number\b', r'\brouting\s+number\b', r'\baccount\s+number\b',
+            r'\bdriver\s+license\s+number\b', r'\bpassport\s+number\b'
+        ]
+        
+        # Less sensitive but still notable
+        moderate_info_patterns = [
+            r'\bfull\s+name\b', r'\bhome\s+address\b', r'\bphone\s+number\b'
+        ]
+        
+        sensitive_count = sum(1 for pattern in sensitive_info_patterns if re.search(pattern, text_lower))
+        moderate_count = sum(1 for pattern in moderate_info_patterns if re.search(pattern, text_lower))
+        
+        # Only flag if requesting truly sensitive info
+        if sensitive_count >= 2:
+            flagged.append(f'🚨 Requests multiple types of sensitive information ({sensitive_count} types)')
+            risk_score += 40
+        elif sensitive_count == 1:
+            flagged.append('⚠️ Requests sensitive personal information (HIGH RISK)')
+            risk_score += 25
+        elif sensitive_count == 1 and moderate_count >= 2:
+            # One sensitive + multiple moderate = suspicious
+            flagged.append('⚠️ Requests personal information')
+            risk_score += 20
+        
+        # ========== LINK DISGUISING TECHNIQUES ==========
+        # "Click here" is very common in legitimate emails - only flag if combined with other red flags
+        if re.search(r'\bclick\s+(here|this|link|button)\b', text_lower) and len(unique_urls) > 0:
+            # Only flag if URL is suspicious or combined with other red flags
+            if dangerous_urls or suspicious_urls or found_high_risk or found_urgent:
+                flagged.append('Uses generic link text with suspicious content - verify destination')
+                risk_score += 5
+        
+        # HTML links are normal in emails - only flag if suspicious
+        if re.search(r'<a\s+href', text_lower, re.IGNORECASE) and (dangerous_urls or suspicious_urls):
+            flagged.append('HTML link tags with suspicious URLs detected')
+            risk_score += 8
+        
+        # ========== MESSAGE LENGTH AND STRUCTURE ==========
+        # Very short messages are often suspicious, but legitimate notifications can be short
+        if text_length < 30 and len(unique_urls) > 0 and (dangerous_urls or suspicious_urls):
+            flagged.append('Very short message with suspicious link - common phishing pattern')
+            risk_score += 5
+        
+        # Very long messages with many links - only if truly excessive
+        if text_length > 3000 and len(unique_urls) >= 4:
+            flagged.append('Very long message with many links - potential obfuscation')
+            risk_score += 5
+        
+        # ========== POSITIVE INDICATORS (reduce false positives) ==========
+        # Check for professional formatting that suggests legitimate email
+        positive_indicators = 0
+        
+        # Professional greeting
+        if re.search(r'\b(dear|hello|hi|greetings)\s+', text_lower):
+            positive_indicators += 1
+        
+        # Professional closing
+        if re.search(r'\b(sincerely|regards|best|thank you|thanks)\b', text_lower):
+            positive_indicators += 1
+        
+        # Contact information provided
+        if re.search(r'\b(contact|phone|email|support|help)\b', text_lower) and len(text) > 100:
+            positive_indicators += 1
+        
+        # Well-structured message (has paragraphs, proper spacing)
+        if text.count('\n\n') >= 2 or (text.count('\n') >= 3 and text_length > 200):
+            positive_indicators += 1
+        
+        # Reduce risk score if message appears professional
+        if positive_indicators >= 3:
+            risk_score = max(0, risk_score - 10)  # Reduce score for professional messages
+        elif positive_indicators >= 2:
+            risk_score = max(0, risk_score - 5)
+        
+        # ========== FINAL RISK ASSESSMENT ==========
+        # Determine risk level based on comprehensive scoring
+        has_critical_url = any(url_risk == 'dangerous' for url_risk in url_risk_scores)
+        has_high_risk_keyword = len(found_high_risk) > 0
+        has_personal_info_request = sensitive_count > 0
+        has_multiple_red_flags = len(flagged) >= 5
+        
+        # Adjusted thresholds to reduce false positives
+        if has_critical_url or risk_score >= 70 or (has_high_risk_keyword and has_personal_info_request):
             result = 'dangerous'
-        elif flagged:
+        elif risk_score >= 35 or (has_personal_info_request and len(unique_urls) > 0) or len(dangerous_urls) > 0:
+            result = 'dangerous'
+        elif risk_score >= 18 or (len(flagged) >= 4 and len(unique_urls) > 0) or len(suspicious_urls) > 0:
+            result = 'suspicious'
+        elif risk_score >= 8 or (len(flagged) >= 2 and len(unique_urls) > 0):
+            result = 'suspicious'
+        elif risk_score > 0 or len(flagged) > 0:
             result = 'suspicious'
         else:
             result = 'safe'
-
-        return result, ' | '.join(flagged) if flagged else 'No threats detected'
-
+        
+        # Format flags for display with better organization
+        if flagged:
+            # Group flags by severity
+            critical_flags = [f for f in flagged if '🚨' in f or '⚠️' in f or 'DANGEROUS' in f.upper()]
+            warning_flags = [f for f in flagged if f not in critical_flags]
+            
+            flags_display = ' | '.join(critical_flags + warning_flags)
+        else:
+            flags_display = 'No threats detected - message appears safe'
+        
+        return result, flags_display
+        
     except Exception as e:
+        logger.error(f"Error analyzing message: {str(e)}")
         return 'error', f'Error analyzing message: {str(e)}'
