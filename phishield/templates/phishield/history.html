@@ -2,28 +2,752 @@
 {% block title %}History - PhiShield{% endblock %}
 
 {% block content %}
+<style>
+    /* --- 1. CSS VARIABLES --- */
+    :root {
+        --whitetodark: #ffffff;
+        --mtitle: #1e293b;
+        --mtext: #64748b;
+        --mcard: #f8fafc;
+        --bg-gradient: linear-gradient(135deg, #007BFF 0%, #00BCD4 50%, #00E0D1 100%);
+        --primary: #6366f1;
+        --primary-dark: #4f46e5;
+        --primary-light: #e0e7ff;
+        --primary-glow: rgba(99, 102, 241, 0.4);
+        --danger: #ef4444;
+        --danger-glow: rgba(239, 68, 68, 0.4);
+        --danger-dark: #dc2626;
+        --success: #10b981;
+        --success-light: #d1fae5;
+        --success-glow: rgba(16, 185, 129, 0.4);
+        --warning: #f59e0b;
+        --warning-light: #fef3c7;
+        --warning-glow: rgba(245, 158, 11, 0.4);
+        --info: #3b82f6;
+        --info-light: #dbeafe;
+        --info-glow: rgba(59, 130, 246, 0.4);
+        --dark: #1e293b;
+        --light: #f8fafc;
+        --gray: #64748b;
+        --gray-light: #cbd5e1;
+        --shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
+        --shadow-hover: 0 12px 40px rgba(0, 0, 0, 0.12);
+        --shadow-xl: 0 20px 60px rgba(0, 0, 0, 0.15);
+    }
+
+    .dark {
+        --whitetodark: #0b1220;
+        --mtext: #f8fafc;
+        --mtitle: #f8fafc;
+        --mcard: #0b1220;
+        --bg-gradient: linear-gradient(135deg, #0b1220 0%, #0b1220 50%, #0b1220 100%);
+        --light: #1e293b;
+    }
+
+    /* --- 2. CONTAINER --- */
+    .history-container {
+        max-width: 100%;
+        padding: 1.5rem;
+        margin: 0 auto;
+        min-height: calc(100vh - 200px);
+    }
+
+    /* --- 3. HERO SECTION --- */
+    .hero-section {
+        background: var(--bg-gradient);
+        border-radius: 28px;
+        padding: 60px 40px;
+        position: relative;
+        overflow: hidden;
+        margin-bottom: 3rem;
+        box-shadow: var(--shadow-xl);
+    }
+
+    .hero-content {
+        position: relative;
+        z-index: 2;
+        text-align: center;
+    }
+
+    .hero-icon-wrapper {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 100px;
+        height: 100px;
+        background: rgba(255, 255, 255, 0.15);
+        backdrop-filter: blur(16px);
+        border-radius: 24px;
+        margin-bottom: 24px;
+        box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        animation: float 4s ease-in-out infinite;
+    }
+
+    .hero-icon {
+        font-size: 52px;
+        color: white;
+        filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.3));
+    }
+
+    .hero-title {
+        font-size: 3rem;
+        font-weight: 800;
+        color: white;
+        margin-bottom: 16px;
+        letter-spacing: -1px;
+        text-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+    }
+
+    .hero-subtitle {
+        font-size: 1.3rem;
+        color: rgba(255, 255, 255, 0.95);
+        font-weight: 500;
+        margin-bottom: 24px;
+    }
+
+    .hero-stats {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.75rem;
+        background: rgba(255, 255, 255, 0.15);
+        backdrop-filter: blur(16px);
+        padding: 12px 24px;
+        border-radius: 16px;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        font-weight: 600;
+        color: white;
+        font-size: 1.05rem;
+    }
+
+    .hero-decoration {
+        position: absolute;
+        right: -80px;
+        top: -80px;
+        width: 320px;
+        height: 320px;
+        background: radial-gradient(circle, rgba(255, 255, 255, 0.12) 0%, transparent 70%);
+        border-radius: 50%;
+        animation: float 6s ease-in-out infinite;
+    }
+
+    .hero-decoration-2 {
+        position: absolute;
+        left: -60px;
+        bottom: -60px;
+        width: 240px;
+        height: 240px;
+        background: radial-gradient(circle, rgba(255, 255, 255, 0.08) 0%, transparent 70%);
+        border-radius: 50%;
+        animation: float 8s ease-in-out infinite reverse;
+    }
+
+    /* --- 4. FILTERS CARD --- */
+    .filters-card {
+        background: var(--whitetodark);
+        border-radius: 24px;
+        padding: 32px;
+        box-shadow: var(--shadow);
+        border: 1px solid rgba(0, 0, 0, 0.06);
+        margin-bottom: 2rem;
+        transition: all 0.4s;
+        animation: fadeInUp 0.7s ease-out;
+    }
+
+    .filters-card:hover {
+        box-shadow: var(--shadow-hover);
+        transform: translateY(-4px);
+    }
+
+    .filter-section-header {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        margin-bottom: 24px;
+    }
+
+    .filter-icon-badge {
+        width: 48px;
+        height: 48px;
+        border-radius: 12px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 20px;
+        flex-shrink: 0;
+        background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+        color: white;
+        box-shadow: 0 8px 20px var(--primary-glow);
+    }
+
+    .filter-title {
+        color: var(--mtitle);
+        font-weight: 700;
+        margin: 0;
+        font-size: 1.25rem;
+    }
+
+    .search-box {
+        position: relative;
+        width: 100%;
+    }
+
+    .search-box i {
+        position: absolute;
+        left: 1rem;
+        top: 50%;
+        transform: translateY(-50%);
+        color: var(--primary);
+        font-size: 1rem;
+    }
+
+    .search-box input {
+        width: 100%;
+        border: 2px solid var(--gray-light);
+        border-radius: 12px;
+        padding: 12px 16px 12px 3rem;
+        transition: all 0.3s ease;
+        font-size: 0.95rem;
+        background-color: var(--light);
+        color: var(--mtitle);
+    }
+
+    .search-box input:focus {
+        background-color: var(--whitetodark);
+        border-color: var(--primary);
+        box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.1);
+        outline: none;
+    }
+
+    .search-box input::placeholder {
+        color: var(--gray);
+    }
+
+    .filter-select {
+        width: 100%;
+        border: 2px solid var(--gray-light);
+        border-radius: 12px;
+        padding: 12px 16px;
+        transition: all 0.3s ease;
+        font-size: 0.95rem;
+        background-color: var(--light);
+        color: var(--mtitle);
+        cursor: pointer;
+    }
+
+    .filter-select:focus {
+        background-color: var(--whitetodark);
+        border-color: var(--primary);
+        box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.1);
+        outline: none;
+    }
+
+    /* --- 5. HISTORY GRID --- */
+    .history-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+        gap: 1.5rem;
+        margin-bottom: 2rem;
+    }
+
+    .history-card {
+        background: var(--whitetodark);
+        border-radius: 24px;
+        padding: 32px;
+        box-shadow: var(--shadow);
+        border: 1px solid rgba(0, 0, 0, 0.06);
+        transition: all 0.4s;
+        animation: fadeInUp 0.7s ease-out backwards;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .history-card:hover {
+        box-shadow: var(--shadow-hover);
+        transform: translateY(-4px);
+    }
+
+    .card-hover-effect {
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(99, 102, 241, 0.05), transparent);
+        transition: left 0.6s;
+    }
+
+    .history-card:hover .card-hover-effect {
+        left: 100%;
+    }
+
+    .card-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 1.25rem;
+        padding-bottom: 1rem;
+        border-bottom: 1px solid var(--gray-light);
+    }
+
+    .card-type {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+    }
+
+    .type-icon {
+        width: 44px;
+        height: 44px;
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 18px;
+        color: white;
+        flex-shrink: 0;
+    }
+
+    .type-url {
+        background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+        box-shadow: 0 8px 20px var(--primary-glow);
+    }
+
+    .type-message {
+        background: linear-gradient(135deg, var(--info) 0%, #2563eb 100%);
+        box-shadow: 0 8px 20px var(--info-glow);
+    }
+
+    .type-text {
+        font-weight: 700;
+        color: var(--mtitle);
+        font-size: 0.95rem;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+
+    .card-date {
+        font-size: 0.85rem;
+        color: var(--mtext);
+        display: flex;
+        align-items: center;
+        gap: 6px;
+    }
+
+    .card-date i {
+        color: var(--primary);
+    }
+
+    .card-content {
+        margin-bottom: 1.25rem;
+    }
+
+    .content-preview {
+        color: var(--mtext);
+        line-height: 1.6;
+        margin: 0;
+        font-size: 0.95rem;
+    }
+
+    .card-flags {
+        margin-bottom: 1.25rem;
+    }
+
+    .flags-container {
+        background: linear-gradient(135deg, var(--warning-light) 0%, #fef3c7 100%);
+        padding: 12px 16px;
+        border-radius: 12px;
+        display: flex;
+        align-items: flex-start;
+        gap: 12px;
+        font-size: 0.9rem;
+        border: 2px solid rgba(245, 158, 11, 0.15);
+    }
+
+    .flags-container i {
+        color: var(--warning);
+        margin-top: 2px;
+        flex-shrink: 0;
+        font-size: 1rem;
+    }
+
+    .flags-text {
+        color: var(--mtitle);
+        line-height: 1.5;
+        font-weight: 500;
+    }
+
+    .card-footer {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding-top: 1rem;
+        border-top: 1px solid var(--gray-light);
+    }
+
+    .risk-badge-modern {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 8px 16px;
+        border-radius: 12px;
+        font-weight: 700;
+        font-size: 0.8rem;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+
+    .risk-safe {
+        background: linear-gradient(135deg, var(--success-light) 0%, #9ae6b4 100%);
+        color: var(--success);
+        border: 2px solid rgba(16, 185, 129, 0.2);
+    }
+
+    .risk-suspicious {
+        background: linear-gradient(135deg, var(--warning-light) 0%, #fbd38d 100%);
+        color: var(--warning);
+        border: 2px solid rgba(245, 158, 11, 0.2);
+    }
+
+    .risk-dangerous {
+        background: linear-gradient(135deg, rgba(239, 68, 68, 0.15) 0%, rgba(220, 38, 38, 0.15) 100%);
+        color: var(--danger);
+        border: 2px solid rgba(239, 68, 68, 0.3);
+    }
+
+    .time-indicator {
+        font-size: 0.85rem;
+        color: var(--mtext);
+        display: flex;
+        align-items: center;
+        gap: 6px;
+    }
+
+    .time-indicator i {
+        color: var(--primary);
+    }
+
+    /* --- 6. LOAD MORE BUTTON --- */
+    .load-more-container {
+        text-align: center;
+        margin-top: 2rem;
+    }
+
+    .load-more-btn {
+        background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+        color: white;
+        border: none;
+        border-radius: 12px;
+        padding: 14px 40px;
+        font-weight: 600;
+        font-size: 1.05rem;
+        cursor: pointer;
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        box-shadow: 0 10px 30px var(--primary-glow);
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .load-more-btn:hover:not(:disabled) {
+        transform: translateY(-4px);
+        box-shadow: 0 15px 40px var(--primary-glow);
+    }
+
+    .load-more-btn:disabled {
+        cursor: not-allowed;
+        opacity: 0.7;
+    }
+
+    .end-message {
+        margin-top: 1rem;
+        padding: 16px 24px;
+        background: linear-gradient(135deg, var(--info-light) 0%, #dbeafe 100%);
+        border: 2px solid rgba(59, 130, 246, 0.2);
+        border-radius: 12px;
+        color: var(--mtitle);
+        text-align: center;
+        font-weight: 500;
+        animation: fadeInUp 0.5s ease-out;
+        display: inline-block;
+    }
+
+    .end-message i {
+        color: var(--info);
+        margin-right: 8px;
+    }
+
+    /* --- 7. EMPTY STATE --- */
+    .empty-history-state {
+        background: var(--whitetodark);
+        border-radius: 24px;
+        padding: 60px 40px;
+        box-shadow: var(--shadow);
+        border: 1px solid rgba(0, 0, 0, 0.06);
+        text-align: center;
+        animation: fadeInUp 0.7s ease-out;
+    }
+
+    .empty-icon-wrapper {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 120px;
+        height: 120px;
+        background: linear-gradient(135deg, var(--primary-light) 0%, #dbeafe 100%);
+        border-radius: 30px;
+        margin: 0 auto 32px;
+        border: 3px solid rgba(99, 102, 241, 0.2);
+    }
+
+    .empty-icon {
+        font-size: 60px;
+        color: var(--primary);
+    }
+
+    .empty-title {
+        font-size: 2rem;
+        font-weight: 800;
+        color: var(--mtitle);
+        margin-bottom: 16px;
+        letter-spacing: -0.5px;
+    }
+
+    .empty-text {
+        color: var(--mtext);
+        font-size: 1.1rem;
+        margin-bottom: 32px;
+        max-width: 500px;
+        margin-left: auto;
+        margin-right: auto;
+        line-height: 1.6;
+    }
+
+    .empty-actions {
+        display: flex;
+        gap: 16px;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+
+    .empty-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        border-radius: 12px;
+        padding: 14px 32px;
+        font-weight: 600;
+        font-size: 1rem;
+        text-decoration: none;
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .empty-btn.primary {
+        background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+        color: white;
+        box-shadow: 0 10px 30px var(--primary-glow);
+    }
+
+    .empty-btn.primary:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 15px 40px var(--primary-glow);
+        text-decoration: none;
+    }
+
+    .empty-btn.secondary {
+        background: var(--light);
+        color: var(--primary);
+        border: 2px solid var(--gray-light);
+        box-shadow: var(--shadow);
+    }
+
+    .empty-btn.secondary:hover {
+        transform: translateY(-4px);
+        box-shadow: var(--shadow-hover);
+        border-color: var(--primary);
+        background: var(--primary-light);
+        text-decoration: none;
+    }
+
+    /* --- 8. ANIMATIONS --- */
+    @keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    @keyframes float {
+        0%, 100% {
+            transform: translateY(0) rotate(0deg);
+        }
+        50% {
+            transform: translateY(-20px) rotate(5deg);
+        }
+    }
+
+    /* Staggered animation for cards */
+    .history-card:nth-child(1) { animation-delay: 0.1s; }
+    .history-card:nth-child(2) { animation-delay: 0.2s; }
+    .history-card:nth-child(3) { animation-delay: 0.3s; }
+    .history-card:nth-child(4) { animation-delay: 0.4s; }
+    .history-card:nth-child(5) { animation-delay: 0.5s; }
+    .history-card:nth-child(6) { animation-delay: 0.6s; }
+
+    /* --- 9. RESPONSIVE DESIGN --- */
+    @media (max-width: 768px) {
+        .history-container {
+            padding: 1rem;
+        }
+
+        .hero-section {
+            padding: 40px 24px;
+            border-radius: 20px;
+        }
+
+        .hero-icon-wrapper {
+            width: 80px;
+            height: 80px;
+        }
+
+        .hero-icon {
+            font-size: 40px;
+        }
+
+        .hero-title {
+            font-size: 2rem;
+        }
+
+        .hero-subtitle {
+            font-size: 1.1rem;
+        }
+
+        .filters-card,
+        .history-card {
+            padding: 24px;
+        }
+
+        .filter-section-header {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 12px;
+        }
+
+        .filter-icon-badge {
+            width: 44px;
+            height: 44px;
+            font-size: 18px;
+        }
+
+        .history-grid {
+            grid-template-columns: 1fr;
+            gap: 1rem;
+        }
+
+        .card-header {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 12px;
+        }
+
+        .card-footer {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 12px;
+        }
+
+        .empty-history-state {
+            padding: 40px 24px;
+        }
+
+        .empty-icon-wrapper {
+            width: 100px;
+            height: 100px;
+        }
+
+        .empty-icon {
+            font-size: 48px;
+        }
+
+        .empty-actions {
+            flex-direction: column;
+        }
+
+        .empty-btn {
+            width: 100%;
+            justify-content: center;
+        }
+    }
+
+    @media (max-width: 576px) {
+        .hero-section {
+            padding: 30px 20px;
+        }
+
+        .filters-card {
+            padding: 20px;
+        }
+
+        .history-card {
+            padding: 20px;
+        }
+
+        .load-more-btn,
+        .empty-btn {
+            padding: 12px 24px;
+            font-size: 0.95rem;
+        }
+    }
+
+    /* Smooth Scrolling */
+    html {
+        scroll-behavior: smooth;
+    }
+
+    /* Focus Styles for Accessibility */
+    a:focus-visible,
+    button:focus-visible,
+    input:focus-visible,
+    select:focus-visible {
+        outline: 3px solid var(--primary);
+        outline-offset: 3px;
+        border-radius: 8px;
+    }
+</style>
+
 <div class="history-container">
-    <!-- Modern Header -->
-    <div class="history-header mb-4">
-        <div class="header-content">
-            <div class="header-icon">
-                <i class="fas fa-history"></i>
+    
+    <!-- Hero Section -->
+    <div class="hero-section">
+        <div class="hero-content">
+            <div class="hero-icon-wrapper">
+                <i class="fas fa-history hero-icon"></i>
             </div>
-            <div>
-                <h1 class="header-title">Security History</h1>
-                <p class="header-subtitle">Complete record of your security scans and analyses</p>
-            </div>
-        </div>
-        <div class="header-stats">
-            <div class="stat-badge">
+            <h1 class="hero-title">Security History</h1>
+            <p class="hero-subtitle">Complete record of your security scans and analyses</p>
+            <div class="hero-stats">
                 <i class="fas fa-shield-alt"></i>
-                {{ history|length }} Total Scans
+                <span>{{ history|length }} Total Scans</span>
             </div>
         </div>
+        <div class="hero-decoration"></div>
+        <div class="hero-decoration-2"></div>
     </div>
 
-    <!-- Filters and Search -->
-    <div class="history-filters mb-4">
+    {% if history %}
+    <!-- Filters Card -->
+    <div class="filters-card">
+        <div class="filter-section-header">
+            <div class="filter-icon-badge">
+                <i class="fas fa-filter"></i>
+            </div>
+            <h3 class="filter-title">Filter & Search</h3>
+        </div>
+        
         <div class="row g-3">
             <div class="col-md-6">
                 <div class="search-box">
@@ -49,8 +773,7 @@
         </div>
     </div>
 
-    {% if history %}
-    <!-- Modern History Cards -->
+    <!-- History Cards Grid -->
     <div class="history-grid">
         {% for entry in history %}
         <div class="history-card" data-type="{{ entry.type }}" data-risk="{{ entry.risk_level }}">
@@ -62,7 +785,7 @@
                     <span class="type-text">{{ entry.type }}</span>
                 </div>
                 <div class="card-date">
-                    <i class="fas fa-calendar"></i>
+                    <i class="fas fa-calendar-alt"></i>
                     {{ entry.date_checked|date:"M d, Y" }}
                 </div>
             </div>
@@ -71,14 +794,14 @@
                 <p class="content-preview">{{ entry.content|truncatechars:120 }}</p>
             </div>
             
+            {% if entry.flags %}
             <div class="card-flags">
-                {% if entry.flags %}
                 <div class="flags-container">
                     <i class="fas fa-flag"></i>
                     <span class="flags-text">{{ entry.flags|truncatechars:80 }}</span>
                 </div>
-                {% endif %}
             </div>
+            {% endif %}
             
             <div class="card-footer">
                 <div class="risk-indicator">
@@ -100,8 +823,8 @@
 
     <!-- Load More Button -->
     <div class="load-more-container">
-        <button class="load-more-btn">
-            <i class="fas fa-sync"></i>
+        <button class="load-more-btn" id="loadMoreBtn">
+            <i class="fas fa-sync-alt"></i>
             Load More History
         </button>
     </div>
@@ -109,11 +832,11 @@
     {% else %}
     <!-- Empty State -->
     <div class="empty-history-state">
-        <div class="empty-icon">
-            <i class="fas fa-history"></i>
+        <div class="empty-icon-wrapper">
+            <i class="fas fa-history empty-icon"></i>
         </div>
         <h3 class="empty-title">No Security History Yet</h3>
-        <p class="empty-text">Start building your security profile by analyzing links and messages</p>
+        <p class="empty-text">Start building your security profile by analyzing links and messages to protect yourself from phishing attacks</p>
         <div class="empty-actions">
             <a href="{% url 'phishield:check_link' %}" class="empty-btn primary">
                 <i class="fas fa-link"></i>
@@ -128,515 +851,8 @@
     {% endif %}
 </div>
 
-<style>
-/* Modern Color Palette */
-:root {
-    --lighttodark: var(--light);
-    --whitetogray: white;
-    --whitetodark: #ffffff;
-    --Hbackground: linear-gradient(135deg, #007BFF 0%, #00BCD4 50%, #00E0D1 100%);
-    --primary: #667eea;
-    --primary-dark: #5568d3;
-    --primary-light: #e0e7ff;
-    --danger: #f56565;
-    --danger-light: #fed7d7;
-    --success: #48bb78;
-    --success-light: #c6f6d5;
-    --warning: #ed8936;
-    --warning-light: #feebc8;
-    --info: #4299e1;
-    --dark: #2d3748;
-    --light: #f7fafc;
-    --gray: #718096;
-    --shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
-    --shadow-hover: 0 20px 60px rgba(0, 0, 0, 0.12);
-}
-
-.dark {
-    --lighttodark: var(--dark);
-    --whitetogray: var(--gray);
-    --whitetodark: var(--Hbackground);
-    --Hbackground: linear-gradient(135deg, #0b1220 0%, #0b1220 50%, #0b1220 100%);
-}
-
-.history-container {
-    max-width: 1400px;
-    margin: 0 auto;
-    padding: 2rem;
-}
-
-/* Header Styles */
-.history-header {
-    background: var(--Hbackground);
-    border-radius: 20px;
-    padding: 2rem;
-    color: white;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    box-shadow: var(--shadow);
-}
-
-.header-content {
-    display: flex;
-    align-items: center;
-    gap: 1.5rem;
-}
-
-.header-icon {
-    width: 60px;
-    height: 60px;
-    background: rgba(255, 255, 255, 0.2);
-    backdrop-filter: blur(10px);
-    border-radius: 16px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 28px;
-}
-
-.header-title {
-    font-size: 2rem;
-    font-weight: 800;
-    margin: 0;
-    letter-spacing: -0.5px;
-}
-
-.header-subtitle {
-    margin: 0.5rem 0 0;
-    opacity: 0.9;
-    font-size: 1rem;
-}
-
-.header-stats .stat-badge {
-    background: rgba(255, 255, 255, 0.2);
-    backdrop-filter: blur(10px);
-    padding: 0.75rem 1.5rem;
-    border-radius: 12px;
-    font-weight: 600;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-}
-
-/* Filters Section */
-.history-filters {
-    background: var(--whitetodark);
-    border-radius: 16px;
-    padding: 1.5rem;
-    box-shadow: var(--shadow);
-}
-
-.search-box {
-    position: relative;
-    width: 100%;
-}
-
-.search-box i {
-    position: absolute;
-    left: 1rem;
-    top: 50%;
-    transform: translateY(-50%);
-    color: var(--gray);
-}
-
-.search-box input {
-    width: 100%;
-    padding: 0.75rem 1rem 0.75rem 3rem;
-    border: 2px solid var(--gray);
-    border-radius: 12px;
-    font-size: 0.95rem;
-    transition: all 0.3s;
-}
-
-.search-box input:focus {
-    outline: none;
-    border-color: var(--primary);
-    box-shadow: 0 0 0 3px var(--primary-light);
-}
-
-.filter-select {
-    width: 100%;
-    padding: 0.75rem 1rem;
-    border: 2px solid var(--light); 
-    border-radius: 12px;
-    font-size: 0.95rem;
-    background: var(--light);
-    cursor: pointer;
-    transition: all 0.3s;
-}
-
-.filter-select:focus {
-    outline: none;
-    border-color: var(--primary);
-    box-shadow: 0 0 0 3px var(--primary-light);
-}
-
-/* History Grid */
-.history-grid {
-    background: var(--whitetodark);
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
-    gap: 1.5rem;
-    margin-bottom: 2rem;
-}
-
-.history-card {
-    background: var(--whitetodark);
-    border-radius: 16px;
-    padding: 1.5rem;
-    box-shadow: var(--shadow);
-    border: 2px solid transparent;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    position: relative;
-    overflow: hidden;
-}
-
-.history-card:hover {
-    transform: translateY(-8px);
-    box-shadow: var(--shadow-hover);
-    border-color: var(--primary-light);
-}
-
-.card-hover-effect {
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(102, 126, 234, 0.05), transparent);
-    transition: left 0.6s;
-}
-
-.history-card:hover .card-hover-effect {
-    left: 100%;
-}
-
-.card-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 1rem;
-}
-
-.card-type {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-}
-
-.type-icon {
-    width: 40px;
-    height: 40px;
-    border-radius: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 16px;
-    color: white;
-}
-
-.type-url {
-    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
-}
-
-.type-message {
-    background: linear-gradient(135deg, var(--info) 0%, #3182ce 100%);
-}
-
-.type-text {
-    font-weight: 600;
-    color: var(--dark);
-}
-
-.card-date {
-    font-size: 0.85rem;
-    color: var(--gray);
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-}
-
-.card-content {
-    margin-bottom: 1rem;
-}
-
-.content-preview {
-    color: var(--dark);
-    line-height: 1.5;
-    margin: 0;
-    font-size: 0.95rem;
-}
-
-.card-flags {
-    margin-bottom: 1rem;
-}
-
-.flags-container {
-    background: var(--light);
-    padding: 0.75rem;
-    border-radius: 8px;
-    display: flex;
-    align-items: flex-start;
-    gap: 0.75rem;
-    font-size: 0.85rem;
-}
-
-.flags-container i {
-    color: var(--warning);
-    margin-top: 0.1rem;
-    flex-shrink: 0;
-}
-
-.flags-text {
-    color: var(--gray);
-    line-height: 1.4;
-}
-
-.card-footer {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.risk-badge-modern {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    padding: 0.5rem 1rem;
-    border-radius: 20px;
-    font-weight: 700;
-    font-size: 0.8rem;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-}
-
-.risk-safe {
-    background: linear-gradient(135deg, var(--success-light) 0%, #9ae6b4 100%);
-    color: var(--success);
-    box-shadow: 0 4px 10px rgba(72, 187, 120, 0.2);
-}
-
-.risk-suspicious {
-    background: linear-gradient(135deg, var(--warning-light) 0%, #fbd38d 100%);
-    color: var(--warning);
-    box-shadow: 0 4px 10px rgba(237, 137, 54, 0.2);
-}
-
-.risk-dangerous {
-    background: linear-gradient(135deg, var(--danger-light) 0%, #fc8181 100%);
-    color: var(--danger);
-    box-shadow: 0 4px 10px rgba(245, 101, 101, 0.2);
-}
-
-.time-indicator {
-    font-size: 0.8rem;
-    color: var(--gray);
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-}
-
-/* Load More Button */
-.load-more-container {
-    text-align: center;
-    margin-top: 2rem;
-}
-
-.load-more-btn {
-    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
-    color: white;
-    border: none;
-    padding: 1rem 2rem;
-    border-radius: 12px;
-    font-weight: 600;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: all 0.3s;
-    display: inline-flex;
-    align-items: center;
-    gap: 0.75rem;
-    box-shadow: var(--shadow);
-}
-
-.load-more-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-hover);
-}
-
-/* Empty State */
-.empty-history-state {
-    text-align: center;
-    padding: 4rem 2rem;
-    background: white;
-    border-radius: 20px;
-    box-shadow: var(--shadow);
-}
-
-.empty-icon {
-    width: 100px;
-    height: 100px;
-    margin: 0 auto 2rem;
-    background: linear-gradient(135deg, var(--light) 0%, white 100%);
-    border-radius: 25px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 48px;
-    color: var(--gray);
-}
-
-.empty-title {
-    font-size: 1.75rem;
-    font-weight: 800;
-    color: var(--dark);
-    margin-bottom: 1rem;
-}
-
-.empty-text {
-    color: var(--gray);
-    font-size: 1.1rem;
-    margin-bottom: 2rem;
-    max-width: 400px;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-.empty-actions {
-    display: flex;
-    gap: 1rem;
-    justify-content: center;
-    flex-wrap: wrap;
-}
-
-.empty-btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.75rem;
-    padding: 1rem 1.5rem;
-    border-radius: 12px;
-    font-weight: 600;
-    text-decoration: none;
-    transition: all 0.3s;
-    font-size: 1rem;
-}
-
-.empty-btn.primary {
-    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
-    color: white;
-    box-shadow: 0 6px 15px rgba(102, 126, 234, 0.3);
-}
-
-.empty-btn.primary:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
-}
-
-.empty-btn.secondary {
-    background: white;
-    color: var(--primary);
-    border: 2px solid var(--primary-light);
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
-}
-
-.empty-btn.secondary:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 6px 15px rgba(102, 126, 234, 0.2);
-    background: var(--primary-light);
-}
-
-/* Responsive Design */
-@media (max-width: 768px) {
-    .history-container {
-        padding: 1rem;
-    }
-    
-    .history-header {
-        flex-direction: column;
-        gap: 1.5rem;
-        text-align: center;
-        padding: 1.5rem;
-    }
-    
-    .header-content {
-        flex-direction: column;
-        gap: 1rem;
-    }
-    
-    .history-grid {
-        grid-template-columns: 1fr;
-        gap: 1rem;
-    }
-    
-    .empty-actions {
-        flex-direction: column;
-    }
-    
-    .empty-btn {
-        width: 100%;
-        justify-content: center;
-    }
-}
-
-@media (max-width: 480px) {
-    .card-header {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 0.75rem;
-    }
-    
-    .card-footer {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 0.75rem;
-    }
-}
-
-/* Animations */
-@keyframes fadeInUp {
-    from {
-        opacity: 0;
-        transform: translateY(20px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-.history-card {
-    animation: fadeInUp 0.6s ease-out backwards;
-}
-
-.history-card:nth-child(odd) {
-    animation-delay: 0.1s;
-}
-
-.history-card:nth-child(even) {
-    animation-delay: 0.2s;
-}
-
-/* Custom Scrollbar */
-::-webkit-scrollbar {
-    width: 8px;
-}
-
-::-webkit-scrollbar-track {
-    background: var(--light);
-}
-
-::-webkit-scrollbar-thumb {
-    background: linear-gradient(180deg, var(--primary) 0%, var(--primary-dark) 100%);
-    border-radius: 4px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-    background: var(--primary-dark);
-}
-</style>
-
 <script>
-// Simple filtering functionality
+// Filtering functionality
 document.addEventListener('DOMContentLoaded', function() {
     const searchInput = document.getElementById('historySearch');
     const typeFilter = document.getElementById('typeFilter');
@@ -644,9 +860,9 @@ document.addEventListener('DOMContentLoaded', function() {
     const historyCards = document.querySelectorAll('.history-card');
     
     function filterHistory() {
-        const searchTerm = searchInput.value.toLowerCase();
-        const selectedType = typeFilter.value;
-        const selectedRisk = riskFilter.value;
+        const searchTerm = searchInput ? searchInput.value.toLowerCase() : '';
+        const selectedType = typeFilter ? typeFilter.value : '';
+        const selectedRisk = riskFilter ? riskFilter.value : '';
         
         historyCards.forEach(card => {
             const content = card.querySelector('.content-preview').textContent.toLowerCase();
@@ -665,18 +881,66 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     
-    searchInput.addEventListener('input', filterHistory);
-    typeFilter.addEventListener('change', filterHistory);
-    riskFilter.addEventListener('change', filterHistory);
+    if (searchInput) searchInput.addEventListener('input', filterHistory);
+    if (typeFilter) typeFilter.addEventListener('change', filterHistory);
+    if (riskFilter) riskFilter.addEventListener('change', filterHistory);
     
-    // Load more functionality (placeholder)
-    const loadMoreBtn = document.querySelector('.load-more-btn');
+    // Load more functionality
+    const loadMoreBtn = document.getElementById('loadMoreBtn');
     if (loadMoreBtn) {
+        // This should be passed from your Django backend
+        // For now, using a demo value - replace with: let hasMoreHistory = {{ has_more|lower }};
+        let hasMoreHistory = true;
+        let loadCount = 0;
+        
         loadMoreBtn.addEventListener('click', function() {
+            const container = this.parentElement;
+            
+            // Show loading state
             this.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Loading...';
+            this.disabled = true;
+            
+            // Simulate loading more history
+            // In production, replace this with actual AJAX call to your Django backend
             setTimeout(() => {
-                this.innerHTML = '<i class="fas fa-sync"></i> Load More History';
-                alert('More history items would be loaded here in a real implementation!');
+                loadCount++;
+                
+                // Demo: After 1 click, no more history (remove this in production)
+                if (loadCount >= 1) {
+                    hasMoreHistory = false;
+                }
+                
+                if (hasMoreHistory) {
+                    // TODO: In production, add the loaded history items to the grid here
+                    // Example:
+                    // const historyGrid = document.querySelector('.history-grid');
+                    // response.data.forEach(item => {
+                    //     historyGrid.insertAdjacentHTML('beforeend', createHistoryCard(item));
+                    // });
+                    
+                    // If more history loaded successfully, reset button
+                    this.innerHTML = '<i class="fas fa-sync-alt"></i> Load More History';
+                    this.disabled = false;
+                    
+                } else {
+                    // No more history available
+                    this.innerHTML = '<i class="fas fa-check"></i> All History Loaded';
+                    this.disabled = true;
+                    this.style.background = 'linear-gradient(135deg, var(--gray) 0%, var(--dark) 100%)';
+                    this.style.cursor = 'not-allowed';
+                    this.style.opacity = '0.7';
+                    
+                    // Show informative message
+                    setTimeout(() => {
+                        const endMessage = document.createElement('div');
+                        endMessage.className = 'end-message';
+                        endMessage.innerHTML = `
+                            <i class="fas fa-info-circle"></i>
+                            You've reached the end of your security history. Keep using PhiShield to build more records!
+                        `;
+                        container.appendChild(endMessage);
+                    }, 300);
+                }
             }, 1000);
         });
     }
