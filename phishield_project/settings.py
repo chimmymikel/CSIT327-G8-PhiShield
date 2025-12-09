@@ -170,25 +170,34 @@ SESSION_COOKIE_AGE = 1209600  # 2 weeks in seconds
 SESSION_SAVE_EVERY_REQUEST = True
 
 # ------------------------------
-# Email Configuration (UPDATED - Using Resend)
+# Email Configuration (Using SMTP)
 # ------------------------------
-# REPLACED: SMTP Backend (doesn't work on Railway)
-# NEW: Resend API Backend - Works on Railway and other cloud platforms
+# SMTP Email Backend Configuration
 
-# Use custom Resend email backend
-EMAIL_BACKEND = 'phishield.email_backends.ResendEmailBackend'
+# Use Django's SMTP email backend
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
-# Resend configuration
-# Get API key from environment variable (required)
-# Get from email from environment or use default
-# The from email must be verified in your Resend account
-RESEND_FROM_EMAIL = os.getenv('RESEND_FROM_EMAIL', 'onboarding@resend.dev')
-DEFAULT_FROM_EMAIL = RESEND_FROM_EMAIL
+# SMTP server configuration
+EMAIL_HOST = os.getenv('EMAIL_HOST', 'smtp.gmail.com')
+EMAIL_PORT = int(os.getenv('EMAIL_PORT', '587'))
+EMAIL_USE_TLS = os.getenv('EMAIL_USE_TLS', 'True').lower() == 'true'
+EMAIL_USE_SSL = os.getenv('EMAIL_USE_SSL', 'False').lower() == 'true'
+# Support both EMAIL_USER/EMAIL_PASSWORD and EMAIL_HOST_USER/EMAIL_HOST_PASSWORD
+EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER') or os.getenv('EMAIL_USER', '')
+EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD') or os.getenv('EMAIL_PASSWORD', '')
+
+# Default from email
+DEFAULT_FROM_EMAIL = os.getenv('DEFAULT_FROM_EMAIL', EMAIL_HOST_USER)
 CONTACT_EMAIL = os.getenv('CONTACT_EMAIL', 'phishield001@gmail.com')
 
 # Note: You need to set the following environment variables:
-# - RESEND_API_KEY: Your Resend API key (get it from https://resend.com/api-keys)
-# - RESEND_FROM_EMAIL: The verified sender email address in your Resend account
+# - EMAIL_HOST: SMTP server hostname (e.g., 'smtp.gmail.com', 'smtp.outlook.com')
+# - EMAIL_PORT: SMTP server port (usually 587 for TLS or 465 for SSL)
+# - EMAIL_USE_TLS: Set to 'True' for TLS encryption (usually for port 587)
+# - EMAIL_USE_SSL: Set to 'True' for SSL encryption (usually for port 465)
+# - EMAIL_USER or EMAIL_HOST_USER: Your email address (both names supported)
+# - EMAIL_PASSWORD or EMAIL_HOST_PASSWORD: Your email password or app-specific password (both names supported)
+# - DEFAULT_FROM_EMAIL: The sender email address (defaults to EMAIL_HOST_USER)
 # - CONTACT_EMAIL: The email address where contact form messages should be sent
 
 # ------------------------------

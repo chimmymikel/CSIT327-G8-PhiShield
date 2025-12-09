@@ -366,19 +366,16 @@ def contact(request):
         
         # 2. Validate that fields are not empty
         if name and email_from_user and subject_input and message:
-            # Check if resend package is installed
-            try:
-                import resend
-            except ImportError:
-                logger.error("Resend package is not installed")
-                messages.error(request, "Resend package is not installed. Please install it with: pip install resend")
-                return redirect('phishield:contact')
+            # Check if email configuration is set up (check Django settings, not env vars directly)
+            missing_vars = []
+            if not settings.EMAIL_HOST_USER:
+                missing_vars.append("EMAIL_HOST_USER")
+            if not settings.EMAIL_HOST_PASSWORD:
+                missing_vars.append("EMAIL_HOST_PASSWORD")
             
-            # Check if Resend API key is configured
-            import os
-            if not os.getenv('RESEND_API_KEY'):
-                logger.error("Email configuration missing: RESEND_API_KEY not set")
-                messages.error(request, "Email service is not configured. Please contact the administrator.")
+            if missing_vars:
+                logger.error(f"Email configuration missing: {', '.join(missing_vars)} not set")
+                messages.error(request, f"Email service is not configured. Missing: {', '.join(missing_vars)}. Please set these in your .env file.")
                 return redirect('phishield:contact')
             
             try:
@@ -416,27 +413,18 @@ def contact(request):
                 error_msg = str(e)
                 error_type = type(e).__name__
                 
-                # Handle missing API key
-                if "RESEND_API_KEY" in error_msg or "api key" in error_msg.lower() or "api_key" in error_msg.lower():
-                    messages.error(request, "Resend API key is missing. Please set RESEND_API_KEY in your environment variables.")
-                # Handle Resend API authentication errors
-                elif "unauthorized" in error_msg.lower() or "401" in error_msg or "invalid api key" in error_msg.lower():
-                    messages.error(request, "Resend API authentication failed. Please check your RESEND_API_KEY in your environment variables.")
-                # Handle Resend API rate limiting
-                elif "rate limit" in error_msg.lower() or "429" in error_msg:
-                    messages.error(request, "Email service rate limit exceeded. Please try again in a few moments.")
-                # Handle Resend domain/email verification errors
-                elif "domain" in error_msg.lower() and ("not verified" in error_msg.lower() or "unverified" in error_msg.lower()):
-                    messages.error(request, "The sender email domain is not verified in Resend. Please verify your domain or use a verified email address.")
-                # Handle missing from email
-                elif "from" in error_msg.lower() and ("required" in error_msg.lower() or "missing" in error_msg.lower()):
-                    messages.error(request, "Sender email is not configured. Please set RESEND_FROM_EMAIL in your environment variables.")
+                # Handle SMTP authentication errors
+                if "authentication failed" in error_msg.lower() or "535" in error_msg or "invalid credentials" in error_msg.lower():
+                    messages.error(request, "Email authentication failed. Please check your EMAIL_HOST_USER and EMAIL_HOST_PASSWORD in your environment variables.")
+                # Handle SMTP connection errors
+                elif "connection" in error_msg.lower() or "could not connect" in error_msg.lower():
+                    messages.error(request, "Could not connect to email server. Please check your EMAIL_HOST and EMAIL_PORT settings.")
                 # Handle timeout errors
                 elif "timeout" in error_msg.lower() or "timed out" in error_msg.lower():
                     messages.error(request, "Email service timed out. Please try again later.")
-                # Handle import errors (Resend package not installed)
-                elif "import" in error_msg.lower() or "ImportError" in error_type:
-                    messages.error(request, "Resend package is not installed. Please install it with: pip install resend")
+                # Handle missing configuration
+                elif "host" in error_msg.lower() and ("not set" in error_msg.lower() or "missing" in error_msg.lower()):
+                    messages.error(request, "Email configuration is missing. Please set EMAIL_HOST, EMAIL_HOST_USER, and EMAIL_HOST_PASSWORD in your environment variables.")
                 else:
                     messages.error(request, f"Error sending email: {error_msg}. Please contact the administrator if this persists.")
         else:
