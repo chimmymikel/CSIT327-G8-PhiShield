@@ -9,13 +9,17 @@ from django.conf import settings
 
 logger = logging.getLogger('phishield')
 
+# Try to import resend package
+resend = None
+Resend = None
 try:
     import resend
     from resend import Resend
-except ImportError:
-    resend = None
-    Resend = None
-    logger.warning("Resend package not installed. Please install it with: pip install resend")
+    logger.info(f"Successfully imported resend package (version: {getattr(resend, '__version__', 'unknown')})")
+except ImportError as e:
+    logger.warning(f"Resend package not installed. ImportError: {e}. Please install it with: pip install resend")
+except Exception as e:
+    logger.error(f"Unexpected error importing resend package: {e}", exc_info=True)
 
 
 class ResendEmailBackend(BaseEmailBackend):
@@ -27,8 +31,21 @@ class ResendEmailBackend(BaseEmailBackend):
     def __init__(self, fail_silently=False, **kwargs):
         super().__init__(fail_silently=fail_silently, **kwargs)
         
+        # Try to import resend if not already imported at module level
         if resend is None or Resend is None:
-            raise ImportError("Resend package is required. Install it with: pip install resend")
+            try:
+                import resend as resend_module
+                from resend import Resend as ResendClass
+                logger.info("Successfully imported resend package in __init__")
+                # Use the locally imported modules
+                self.resend_module = resend_module
+                self.ResendClass = ResendClass
+            except ImportError as e:
+                logger.error(f"Failed to import resend package: {e}", exc_info=True)
+                raise ImportError("Resend package is required. Install it with: pip install resend") from e
+        else:
+            self.resend_module = resend
+            self.ResendClass = Resend
         
         # Get Resend API key from environment variable
         api_key = os.getenv('RESEND_API_KEY')
@@ -38,7 +55,7 @@ class ResendEmailBackend(BaseEmailBackend):
                 raise ValueError("RESEND_API_KEY environment variable is required")
         
         # Initialize Resend client
-        self.resend_client = Resend(api_key=api_key)
+        self.resend_client = self.ResendClass(api_key=api_key)
         
         # Get from email from settings or environment
         self.from_email = getattr(settings, 'DEFAULT_FROM_EMAIL', None) or os.getenv('RESEND_FROM_EMAIL')
