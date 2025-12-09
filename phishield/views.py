@@ -366,6 +366,14 @@ def contact(request):
         
         # 2. Validate that fields are not empty
         if name and email_from_user and subject_input and message:
+            # Check if resend package is installed
+            try:
+                import resend
+            except ImportError:
+                logger.error("Resend package is not installed")
+                messages.error(request, "Resend package is not installed. Please install it with: pip install resend")
+                return redirect('phishield:contact')
+            
             # Check if Resend API key is configured
             import os
             if not os.getenv('RESEND_API_KEY'):
