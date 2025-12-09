@@ -1,0 +1,93 @@
+{% extends "phishield/base.html" %}
+
+{% block title %}Delete Account - PhiShield{% endblock %}
+
+{% block content %}
+<div class="container-fluid py-4">
+    <div class="row justify-content-center">
+        <div class="col-lg-6 col-md-8">
+            <div class="card shadow-sm border-danger">
+                <div class="card-header bg-danger text-white">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <h5 class="mb-0 fw-bold"><i class="fas fa-exclamation-triangle me-2"></i>Delete Account</h5>
+                            <p class="mb-0 small opacity-75">This action cannot be undone</p>
+                        </div>
+                        <a href="{% url 'phishield:settings' %}" class="btn btn-outline-light btn-sm">
+                            <i class="fas fa-times me-1"></i>Cancel
+                        </a>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <form method="POST" id="deleteAccountForm">
+                        {% csrf_token %}
+                        
+                        <div class="mb-4">
+                            <label for="verification_text" class="form-label fw-bold">
+                                <i class="fas fa-shield-alt me-1 text-danger"></i>Type "PhiShield" to confirm
+                            </label>
+                            <input type="text" class="form-control form-control-lg" id="verification_text" 
+                                   name="verification_text" placeholder="Type PhiShield here" 
+                                   autocomplete="off" required>
+                            <small class="form-text text-muted">
+                                You must type <strong>"PhiShield"</strong> exactly (case-sensitive) to confirm account deletion
+                            </small>
+                            <div id="verification-feedback" class="mt-2"></div>
+                        </div>
+
+                        <div class="d-flex justify-content-between align-items-center pt-3 border-top">
+                            <a href="{% url 'phishield:settings' %}" class="btn btn-outline-secondary">
+                                <i class="fas fa-arrow-left me-1"></i>Back to Settings
+                            </a>
+                            <button type="submit" class="btn btn-danger" id="submit-btn" disabled>
+                                <i class="fas fa-trash me-1"></i>Permanently Delete Account
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const verificationInput = document.getElementById('verification_text');
+    const submitBtn = document.getElementById('submit-btn');
+    const feedbackDiv = document.getElementById('verification-feedback');
+    const form = document.getElementById('deleteAccountForm');
+    
+    const REQUIRED_TEXT = "PhiShield";
+    
+    function checkVerification() {
+        const inputValue = verificationInput.value.trim();
+        const isValid = inputValue === REQUIRED_TEXT;
+        
+        if (inputValue === '') {
+            feedbackDiv.innerHTML = '';
+            submitBtn.disabled = true;
+            return;
+        }
+        
+        if (isValid) {
+            feedbackDiv.innerHTML = '<span class="text-success"><i class="fas fa-check-circle me-1"></i>Verification text matches!</span>';
+            submitBtn.disabled = false;
+        } else {
+            feedbackDiv.innerHTML = '<span class="text-danger"><i class="fas fa-times-circle me-1"></i>Verification text does not match. Please type "PhiShield" exactly.</span>';
+            submitBtn.disabled = true;
+        }
+    }
+    
+    verificationInput.addEventListener('input', checkVerification);
+    
+    // Prevent accidental submission
+    form.addEventListener('submit', function(e) {
+        if (verificationInput.value.trim() !== REQUIRED_TEXT) {
+            e.preventDefault();
+            return false;
+        }
+    });
+});
+</script>
+{% endblock %}
+

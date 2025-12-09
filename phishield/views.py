@@ -661,3 +661,55 @@ def change_password(request):
         return redirect('phishield:profile')
     
     return render(request, "phishield/change_password.html")
+
+
+@login_required
+def delete_account(request):
+    """Delete user account with verification"""
+    if request.method == "POST":
+        verification_text = request.POST.get('verification_text', '').strip()
+        
+        # Verify that user typed "PhiShield" exactly
+        if verification_text != "PhiShield":
+            messages.error(request, "Verification text does not match. Please type 'PhiShield' exactly to confirm account deletion.")
+            return redirect('phishield:delete_account')
+        
+        # Get user info before deletion for logging
+        username = request.user.username
+        user_id = request.user.id
+        
+        # ✅ Log account deletion attempt
+        logger.info(f"Account deletion initiated: {username} (ID: {user_id})")
+        
+        # Delete related data
+        try:
+            # Delete user profile
+            if hasattr(request.user, 'profile'):
+                request.user.profile.delete()
+            
+            # Delete suspicious links
+            SuspiciousLink.objects.filter(user=request.user).delete()
+            
+            # Delete suspicious messages
+            SuspiciousMessage.objects.filter(user=request.user).delete()
+            
+            # Delete the user account (this will cascade delete related objects)
+            request.user.delete()
+            
+            # ✅ Log successful account deletion
+            logger.info(f"Account successfully deleted: {username} (ID: {user_id})")
+            
+            # Logout the user
+            from django.contrib.auth import logout
+            logout(request)
+            
+            messages.success(request, "Your account has been permanently deleted.")
+            return redirect('phishield:login')
+            
+        except Exception as e:
+            logger.error(f"Error deleting account for {username}: {e}", exc_info=True)
+            messages.error(request, "An error occurred while deleting your account. Please contact support.")
+            return redirect('phishield:settings')
+    
+    # GET request - show verification form
+    return render(request, "phishield/delete_account.html")
