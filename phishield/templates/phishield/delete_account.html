@@ -3,47 +3,776 @@
 {% block title %}Delete Account - PhiShield{% endblock %}
 
 {% block content %}
-<div class="container-fluid py-4">
-    <div class="row justify-content-center">
-        <div class="col-lg-6 col-md-8">
-            <div class="card shadow-sm border-danger">
-                <div class="card-header bg-danger text-white">
-                    <div class="d-flex justify-content-between align-items-center">
-                        <div>
-                            <h5 class="mb-0 fw-bold"><i class="fas fa-exclamation-triangle me-2"></i>Delete Account</h5>
-                            <p class="mb-0 small opacity-75">This action cannot be undone</p>
+<style>
+    /* --- 1. CSS VARIABLES --- */
+    :root {
+        --whitetodark: #ffffff;
+        --mtitle: #1e293b;
+        --mtext: #64748b;
+        --mcard: #f8fafc;
+        --bg-gradient: linear-gradient(135deg, #dc3545 0%, #c82333 50%, #b02a37 100%);
+        --primary: #6366f1;
+        --primary-dark: #4f46e5;
+        --primary-light: #e0e7ff;
+        --primary-glow: rgba(99, 102, 241, 0.4);
+        --danger: #ef4444;
+        --danger-glow: rgba(239, 68, 68, 0.4);
+        --danger-dark: #dc2626;
+        --success: #10b981;
+        --success-light: #d1fae5;
+        --success-glow: rgba(16, 185, 129, 0.4);
+        --warning: #f59e0b;
+        --warning-light: #fef3c7;
+        --warning-glow: rgba(245, 158, 11, 0.4);
+        --info: #3b82f6;
+        --info-light: #dbeafe;
+        --info-glow: rgba(59, 130, 246, 0.4);
+        --dark: #1e293b;
+        --light: #f8fafc;
+        --gray: #64748b;
+        --gray-light: #cbd5e1;
+        --shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
+        --shadow-hover: 0 12px 40px rgba(0, 0, 0, 0.12);
+        --shadow-xl: 0 20px 60px rgba(0, 0, 0, 0.15);
+    }
+
+    .dark {
+        --whitetodark: #0b1220;
+        --mtext: #f8fafc;
+        --mtitle: #f8fafc;
+        --mcard: #0b1220;
+        --bg-gradient: linear-gradient(135deg, #dc3545 0%, #c82333 50%, #b02a37 100%);
+        --light: #1e293b;
+    }
+
+    /* --- 2. CONTAINER --- */
+    .delete-container {
+        max-width: 100%;
+        padding: 1.5rem;
+        margin: 0 auto;
+        min-height: calc(100vh - 200px);
+    }
+
+    /* --- 3. HERO SECTION --- */
+    .hero-section {
+        background: var(--bg-gradient);
+        border-radius: 28px;
+        padding: 60px 40px;
+        position: relative;
+        overflow: hidden;
+        margin-bottom: 3rem;
+        box-shadow: var(--shadow-xl);
+    }
+
+    .hero-content {
+        position: relative;
+        z-index: 2;
+        text-align: center;
+    }
+
+    .hero-icon-wrapper {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 100px;
+        height: 100px;
+        background: rgba(255, 255, 255, 0.15);
+        backdrop-filter: blur(16px);
+        border-radius: 24px;
+        margin-bottom: 24px;
+        box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        animation: pulse 2s ease-in-out infinite;
+    }
+
+    .hero-icon {
+        font-size: 52px;
+        color: white;
+        filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.3));
+    }
+
+    .hero-title {
+        font-size: 3rem;
+        font-weight: 800;
+        color: white;
+        margin-bottom: 16px;
+        letter-spacing: -1px;
+        text-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+    }
+
+    .hero-subtitle {
+        font-size: 1.3rem;
+        color: rgba(255, 255, 255, 0.95);
+        font-weight: 500;
+    }
+
+    .hero-decoration {
+        position: absolute;
+        right: -80px;
+        top: -80px;
+        width: 320px;
+        height: 320px;
+        background: radial-gradient(circle, rgba(255, 255, 255, 0.12) 0%, transparent 70%);
+        border-radius: 50%;
+        animation: float 6s ease-in-out infinite;
+    }
+
+    .hero-decoration-2 {
+        position: absolute;
+        left: -60px;
+        bottom: -60px;
+        width: 240px;
+        height: 240px;
+        background: radial-gradient(circle, rgba(255, 255, 255, 0.08) 0%, transparent 70%);
+        border-radius: 50%;
+        animation: float 8s ease-in-out infinite reverse;
+    }
+
+    /* --- 4. MAIN CONTENT CARDS --- */
+    .form-card {
+        background: var(--whitetodark);
+        border-radius: 24px;
+        padding: 40px;
+        box-shadow: var(--shadow);
+        border: 1px solid rgba(0, 0, 0, 0.06);
+        transition: all 0.4s;
+        animation: fadeInUp 0.7s ease-out;
+        height: 100%;
+    }
+
+    .form-card:hover {
+        box-shadow: var(--shadow-hover);
+        transform: translateY(-4px);
+    }
+
+    .info-card {
+        background: var(--whitetodark);
+        border-radius: 24px;
+        padding: 40px;
+        box-shadow: var(--shadow);
+        border: 1px solid rgba(0, 0, 0, 0.06);
+        transition: all 0.4s;
+        animation: fadeInUp 0.7s ease-out 0.2s backwards;
+        margin-bottom: 24px;
+    }
+
+    .info-card:hover {
+        box-shadow: var(--shadow-hover);
+        transform: translateY(-4px);
+    }
+
+    /* --- 5. SECTION HEADERS --- */
+    .section-header {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        margin-bottom: 28px;
+    }
+
+    .section-icon {
+        width: 64px;
+        height: 64px;
+        background: linear-gradient(135deg, var(--danger) 0%, var(--danger-dark) 100%);
+        border-radius: 18px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 28px;
+        box-shadow: 0 10px 30px var(--danger-glow);
+        flex-shrink: 0;
+    }
+
+    .section-title {
+        font-size: 2rem;
+        font-weight: 800;
+        color: var(--mtitle);
+        margin: 0;
+        letter-spacing: -0.5px;
+    }
+
+    /* --- 6. WARNING BOX --- */
+    .warning-box {
+        background: linear-gradient(135deg, rgba(239, 68, 68, 0.08) 0%, rgba(220, 38, 38, 0.08) 100%);
+        border-radius: 20px;
+        padding: 28px;
+        border: 2px solid rgba(239, 68, 68, 0.15);
+        box-shadow: var(--shadow);
+        margin-bottom: 32px;
+    }
+
+    .warning-box-header {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        margin-bottom: 20px;
+    }
+
+    .warning-icon-badge {
+        width: 48px;
+        height: 48px;
+        border-radius: 12px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 20px;
+        flex-shrink: 0;
+        background: linear-gradient(135deg, var(--danger) 0%, var(--danger-dark) 100%);
+        color: white;
+        box-shadow: 0 8px 20px var(--danger-glow);
+    }
+
+    .warning-box-title {
+        color: var(--danger);
+        font-weight: 700;
+        margin: 0;
+        font-size: 1.15rem;
+    }
+
+    .warning-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .warning-list li {
+        padding: 10px 0;
+        color: var(--mtext);
+        display: flex;
+        align-items: flex-start;
+        gap: 12px;
+        font-size: 0.95rem;
+        line-height: 1.6;
+        transition: all 0.3s;
+    }
+
+    .warning-list li:hover {
+        transform: translateX(4px);
+        color: var(--danger);
+    }
+
+    .warning-bullet {
+        width: 8px;
+        height: 8px;
+        background: linear-gradient(135deg, var(--danger) 0%, var(--danger-dark) 100%);
+        border-radius: 50%;
+        margin-top: 8px;
+        flex-shrink: 0;
+        box-shadow: 0 2px 8px var(--danger-glow);
+    }
+
+    /* --- 7. FORM ELEMENTS --- */
+    .form-label {
+        font-weight: 600;
+        color: var(--mtitle);
+        margin-bottom: 8px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 0.95rem;
+    }
+
+    .form-label i {
+        color: var(--danger);
+        font-size: 0.9rem;
+    }
+
+    .verification-input {
+        width: 100%;
+        border: 2px solid var(--gray-light);
+        border-radius: 12px;
+        padding: 12px 16px;
+        transition: all 0.3s ease;
+        font-size: 1rem;
+        background-color: var(--light);
+        color: var(--mtitle);
+        font-family: 'Courier New', monospace;
+        font-weight: 600;
+        letter-spacing: 1px;
+    }
+
+    .verification-input:focus {
+        background-color: var(--whitetodark);
+        border-color: var(--danger);
+        box-shadow: 0 0 0 4px rgba(239, 68, 68, 0.1);
+        outline: none;
+    }
+
+    .verification-input.valid {
+        border-color: var(--success);
+        background: rgba(16, 185, 129, 0.05);
+    }
+
+    .verification-input.invalid {
+        border-color: var(--danger);
+        background: rgba(239, 68, 68, 0.05);
+    }
+
+    .verification-input::placeholder {
+        color: var(--gray);
+        font-family: system-ui;
+        letter-spacing: normal;
+    }
+
+    .input-hint {
+        color: var(--mtext);
+        font-size: 0.85rem;
+        margin-top: 8px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .input-hint i {
+        color: var(--danger);
+    }
+
+    .match-progress {
+        height: 4px;
+        background: var(--gray-light);
+        border-radius: 2px;
+        margin-top: 12px;
+        overflow: hidden;
+    }
+
+    .match-progress-bar {
+        height: 100%;
+        background: linear-gradient(90deg, var(--danger), var(--danger-dark));
+        transition: width 0.3s ease;
+        border-radius: 2px;
+    }
+
+    .feedback-message {
+        margin-top: 16px;
+        padding: 12px 16px;
+        border-radius: 12px;
+        font-size: 0.9rem;
+        font-weight: 500;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        animation: slideIn 0.3s ease;
+    }
+
+    .feedback-success {
+        background: rgba(16, 185, 129, 0.1);
+        color: var(--success);
+        border: 2px solid rgba(16, 185, 129, 0.2);
+    }
+
+    .feedback-error {
+        background: rgba(239, 68, 68, 0.1);
+        color: var(--danger);
+        border: 2px solid rgba(239, 68, 68, 0.2);
+    }
+
+    .feedback-message i {
+        font-size: 1.2rem;
+    }
+
+    /* --- 8. BUTTONS --- */
+    .action-buttons {
+        display: flex;
+        gap: 16px;
+        padding-top: 24px;
+        border-top: 1px solid var(--gray-light);
+        margin-top: 32px;
+    }
+
+    .btn-modern {
+        flex: 1;
+        border-radius: 12px;
+        padding: 14px 40px;
+        font-weight: 600;
+        font-size: 1.05rem;
+        border: none;
+        cursor: pointer;
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+    }
+
+    .btn-cancel {
+        background: var(--light);
+        color: var(--mtitle);
+        border: 2px solid var(--gray-light);
+        text-decoration: none;
+    }
+
+    .btn-cancel:hover {
+        background: var(--gray-light);
+        transform: translateY(-4px);
+        box-shadow: var(--shadow);
+        border-color: var(--gray);
+        text-decoration: none;
+    }
+
+    .btn-delete {
+        background: linear-gradient(135deg, var(--danger) 0%, var(--danger-dark) 100%);
+        color: white;
+        box-shadow: 0 10px 30px var(--danger-glow);
+    }
+
+    .btn-delete:hover:not(:disabled) {
+        transform: translateY(-4px);
+        box-shadow: 0 15px 40px var(--danger-glow);
+    }
+
+    .btn-delete:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+        background: var(--gray);
+        box-shadow: none;
+    }
+
+    /* --- 9. INFO ITEMS --- */
+    .info-item {
+        padding: 18px 0;
+        border-bottom: 1px solid var(--gray-light);
+        display: flex;
+        align-items: flex-start;
+        gap: 16px;
+        transition: all 0.3s;
+    }
+
+    .info-item:first-child {
+        padding-top: 0;
+    }
+
+    .info-item:last-child {
+        border-bottom: none;
+        padding-bottom: 0;
+    }
+
+    .info-item:hover {
+        transform: translateX(8px);
+    }
+
+    .info-icon-badge {
+        width: 48px;
+        height: 48px;
+        border-radius: 12px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 20px;
+        flex-shrink: 0;
+        transition: all 0.3s;
+    }
+
+    .info-icon-badge.danger {
+        background: linear-gradient(135deg, var(--danger) 0%, var(--danger-dark) 100%);
+        color: white;
+        box-shadow: 0 8px 20px var(--danger-glow);
+    }
+
+    .info-icon-badge.warning {
+        background: linear-gradient(135deg, var(--warning) 0%, #ea580c 100%);
+        color: white;
+        box-shadow: 0 8px 20px var(--warning-glow);
+    }
+
+    .info-icon-badge.info {
+        background: linear-gradient(135deg, var(--info) 0%, #2563eb 100%);
+        color: white;
+        box-shadow: 0 8px 20px var(--info-glow);
+    }
+
+    .info-item:hover .info-icon-badge {
+        transform: scale(1.1) rotate(-8deg);
+    }
+
+    .info-content h6 {
+        font-weight: 700;
+        color: var(--mtitle);
+        margin-bottom: 6px;
+        font-size: 1.05rem;
+    }
+
+    .info-content p {
+        color: var(--mtext);
+        margin-bottom: 0;
+        font-size: 0.95rem;
+        line-height: 1.6;
+    }
+
+    /* --- 10. ANIMATIONS --- */
+    @keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    @keyframes float {
+        0%, 100% {
+            transform: translateY(0) rotate(0deg);
+        }
+        50% {
+            transform: translateY(-20px) rotate(5deg);
+        }
+    }
+
+    @keyframes pulse {
+        0%, 100% { 
+            transform: scale(1); 
+            opacity: 1; 
+        }
+        50% { 
+            transform: scale(1.05); 
+            opacity: 0.9; 
+        }
+    }
+
+    @keyframes slideIn {
+        from { 
+            opacity: 0; 
+            transform: translateY(-10px); 
+        }
+        to { 
+            opacity: 1; 
+            transform: translateY(0); 
+        }
+    }
+
+    @keyframes shake {
+        0%, 100% { transform: translateX(0); }
+        25% { transform: translateX(-10px); }
+        75% { transform: translateX(10px); }
+    }
+
+    /* --- 11. RESPONSIVE DESIGN --- */
+    @media (max-width: 768px) {
+        .delete-container {
+            padding: 1rem;
+        }
+
+        .hero-section {
+            padding: 40px 24px;
+            border-radius: 20px;
+        }
+
+        .hero-icon-wrapper {
+            width: 80px;
+            height: 80px;
+        }
+
+        .hero-icon {
+            font-size: 40px;
+        }
+
+        .hero-title {
+            font-size: 2rem;
+        }
+
+        .hero-subtitle {
+            font-size: 1.1rem;
+        }
+
+        .form-card,
+        .info-card {
+            padding: 28px;
+        }
+
+        .section-header {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 16px;
+        }
+
+        .section-icon {
+            width: 56px;
+            height: 56px;
+            font-size: 24px;
+        }
+
+        .section-title {
+            font-size: 1.75rem;
+        }
+
+        .info-icon-badge {
+            width: 44px;
+            height: 44px;
+            font-size: 18px;
+        }
+
+        .warning-box {
+            padding: 24px;
+        }
+
+        .warning-icon-badge {
+            width: 44px;
+            height: 44px;
+            font-size: 18px;
+        }
+
+        .action-buttons {
+            flex-direction: column-reverse;
+        }
+    }
+
+    @media (max-width: 576px) {
+        .hero-section {
+            padding: 30px 20px;
+        }
+
+        .btn-modern {
+            padding: 12px 30px;
+            font-size: 1rem;
+        }
+
+        .form-card,
+        .info-card {
+            padding: 24px;
+        }
+    }
+
+    /* Smooth Scrolling */
+    html {
+        scroll-behavior: smooth;
+    }
+
+    /* Focus Styles for Accessibility */
+    a:focus-visible,
+    button:focus-visible {
+        outline: 3px solid var(--danger);
+        outline-offset: 3px;
+        border-radius: 8px;
+    }
+</style>
+
+<div class="delete-container">
+    
+    <!-- Hero Section -->
+    <div class="hero-section">
+        <div class="hero-content">
+            <div class="hero-icon-wrapper">
+                <i class="fas fa-exclamation-triangle hero-icon"></i>
+            </div>
+            <h1 class="hero-title">Delete Account</h1>
+            <p class="hero-subtitle">This action is permanent and cannot be undone</p>
+        </div>
+        <div class="hero-decoration"></div>
+        <div class="hero-decoration-2"></div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="row g-4">
+        
+        <!-- Delete Form -->
+        <div class="col-lg-8">
+            <div class="form-card">
+                <div class="section-header">
+                    <div class="section-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h2 class="section-title">Confirm Account Deletion</h2>
+                </div>
+
+                <!-- Warning Box -->
+                <div class="warning-box">
+                    <div class="warning-box-header">
+                        <div class="warning-icon-badge">
+                            <i class="fas fa-info-circle"></i>
                         </div>
-                        <a href="{% url 'phishield:settings' %}" class="btn btn-outline-light btn-sm">
-                            <i class="fas fa-times me-1"></i>Cancel
+                        <h6 class="warning-box-title">What will be permanently deleted:</h6>
+                    </div>
+                    <ul class="warning-list">
+                        <li>
+                            <div class="warning-bullet"></div>
+                            <span>All your personal data and account settings</span>
+                        </li>
+                        <li>
+                            <div class="warning-bullet"></div>
+                            <span>Your complete email scanning history and reports</span>
+                        </li>
+                        <li>
+                            <div class="warning-bullet"></div>
+                            <span>All saved preferences and configurations</span>
+                        </li>
+                        <li>
+                            <div class="warning-bullet"></div>
+                            <span>Access to your PhiShield account and all features</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Verification Form -->
+                <form method="POST" id="deleteAccountForm">
+                    {% csrf_token %}
+                    
+                    <div class="mb-4">
+                        <label for="verification_text" class="form-label">
+                            <i class="fas fa-keyboard"></i>
+                            Type "PhiShield" to confirm deletion
+                        </label>
+                        <input 
+                            type="text" 
+                            class="verification-input" 
+                            id="verification_text" 
+                            name="verification_text" 
+                            placeholder="Type PhiShield here" 
+                            autocomplete="off" 
+                            spellcheck="false"
+                            required>
+                        <div class="input-hint">
+                            <i class="fas fa-info-circle"></i>
+                            Must match exactly (case-sensitive): <strong>PhiShield</strong>
+                        </div>
+                        <div class="match-progress">
+                            <div class="match-progress-bar" id="progressBar" style="width: 0%"></div>
+                        </div>
+                        <div id="verification-feedback"></div>
+                    </div>
+
+                    <div class="action-buttons">
+                        <a href="{% url 'phishield:settings' %}" class="btn-modern btn-cancel">
+                            <i class="fas fa-arrow-left"></i>
+                            Cancel & Go Back
                         </a>
+                        <button type="submit" class="btn-modern btn-delete" id="submit-btn" disabled>
+                            <i class="fas fa-trash-alt"></i>
+                            Permanently Delete Account
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Information Sidebar -->
+        <div class="col-lg-4">
+            <div class="info-card">
+                <div class="section-header" style="margin-bottom: 24px;">
+                    <div class="section-icon" style="background: linear-gradient(135deg, var(--info) 0%, #2563eb 100%); box-shadow: 0 10px 30px var(--info-glow);">
+                        <i class="fas fa-lightbulb"></i>
+                    </div>
+                    <h3 class="section-title" style="font-size: 1.5rem;">Important Information</h3>
+                </div>
+                
+                <div class="info-item">
+                    <div class="info-icon-badge danger">
+                        <i class="fas fa-exclamation-circle"></i>
+                    </div>
+                    <div class="info-content">
+                        <h6>Permanent Action</h6>
+                        <p>Once deleted, your account cannot be recovered. All data will be permanently erased.</p>
                     </div>
                 </div>
-                <div class="card-body">
-                    <form method="POST" id="deleteAccountForm">
-                        {% csrf_token %}
-                        
-                        <div class="mb-4">
-                            <label for="verification_text" class="form-label fw-bold">
-                                <i class="fas fa-shield-alt me-1 text-danger"></i>Type "PhiShield" to confirm
-                            </label>
-                            <input type="text" class="form-control form-control-lg" id="verification_text" 
-                                   name="verification_text" placeholder="Type PhiShield here" 
-                                   autocomplete="off" required>
-                            <small class="form-text text-muted">
-                                You must type <strong>"PhiShield"</strong> exactly (case-sensitive) to confirm account deletion
-                            </small>
-                            <div id="verification-feedback" class="mt-2"></div>
-                        </div>
 
-                        <div class="d-flex justify-content-between align-items-center pt-3 border-top">
-                            <a href="{% url 'phishield:settings' %}" class="btn btn-outline-secondary">
-                                <i class="fas fa-arrow-left me-1"></i>Back to Settings
-                            </a>
-                            <button type="submit" class="btn btn-danger" id="submit-btn" disabled>
-                                <i class="fas fa-trash me-1"></i>Permanently Delete Account
-                            </button>
-                        </div>
-                    </form>
+                <div class="info-item">
+                    <div class="info-icon-badge warning">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <div class="info-content">
+                        <h6>Immediate Effect</h6>
+                        <p>Your account will be deleted immediately after confirmation. You'll be logged out.</p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -55,25 +784,60 @@ document.addEventListener('DOMContentLoaded', function() {
     const verificationInput = document.getElementById('verification_text');
     const submitBtn = document.getElementById('submit-btn');
     const feedbackDiv = document.getElementById('verification-feedback');
+    const progressBar = document.getElementById('progressBar');
     const form = document.getElementById('deleteAccountForm');
     
     const REQUIRED_TEXT = "PhiShield";
     
+    function calculateMatchPercentage(input, target) {
+        if (input.length === 0) return 0;
+        let matches = 0;
+        const maxLength = Math.min(input.length, target.length);
+        
+        for (let i = 0; i < maxLength; i++) {
+            if (input[i] === target[i]) {
+                matches++;
+            }
+        }
+        
+        return (matches / target.length) * 100;
+    }
+    
     function checkVerification() {
-        const inputValue = verificationInput.value.trim();
+        const inputValue = verificationInput.value;
         const isValid = inputValue === REQUIRED_TEXT;
+        const matchPercentage = calculateMatchPercentage(inputValue, REQUIRED_TEXT);
+        
+        // Update progress bar
+        progressBar.style.width = matchPercentage + '%';
+        
+        // Clear previous states
+        verificationInput.classList.remove('valid', 'invalid');
         
         if (inputValue === '') {
             feedbackDiv.innerHTML = '';
             submitBtn.disabled = true;
+            progressBar.style.width = '0%';
             return;
         }
         
         if (isValid) {
-            feedbackDiv.innerHTML = '<span class="text-success"><i class="fas fa-check-circle me-1"></i>Verification text matches!</span>';
+            verificationInput.classList.add('valid');
+            feedbackDiv.innerHTML = `
+                <div class="feedback-message feedback-success">
+                    <i class="fas fa-check-circle"></i>
+                    <span>Perfect! Verification complete. You can now proceed with deletion.</span>
+                </div>
+            `;
             submitBtn.disabled = false;
         } else {
-            feedbackDiv.innerHTML = '<span class="text-danger"><i class="fas fa-times-circle me-1"></i>Verification text does not match. Please type "PhiShield" exactly.</span>';
+            verificationInput.classList.add('invalid');
+            feedbackDiv.innerHTML = `
+                <div class="feedback-message feedback-error">
+                    <i class="fas fa-times-circle"></i>
+                    <span>Text doesn't match. Remember: it's case-sensitive and must be exact.</span>
+                </div>
+            `;
             submitBtn.disabled = true;
         }
     }
@@ -82,7 +846,20 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Prevent accidental submission
     form.addEventListener('submit', function(e) {
-        if (verificationInput.value.trim() !== REQUIRED_TEXT) {
+        if (verificationInput.value !== REQUIRED_TEXT) {
+            e.preventDefault();
+            
+            // Shake animation for error
+            verificationInput.style.animation = 'none';
+            setTimeout(() => {
+                verificationInput.style.animation = 'shake 0.5s';
+            }, 10);
+            
+            return false;
+        }
+        
+        // Final confirmation dialog
+        if (!confirm('⚠️ FINAL WARNING ⚠️\n\nAre you absolutely sure you want to delete your account?\n\nThis action is PERMANENT and CANNOT be undone.\n\nClick OK to proceed with deletion, or Cancel to keep your account.')) {
             e.preventDefault();
             return false;
         }
@@ -90,4 +867,3 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 </script>
 {% endblock %}
-
