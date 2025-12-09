@@ -170,41 +170,26 @@ SESSION_COOKIE_AGE = 1209600  # 2 weeks in seconds
 SESSION_SAVE_EVERY_REQUEST = True
 
 # ------------------------------
-# Email Configuration (UPDATED)
+# Email Configuration (UPDATED - Using Resend)
 # ------------------------------
-# REPLACED: Old Console Backend
-# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+# REPLACED: SMTP Backend (doesn't work on Railway)
+# NEW: Resend API Backend - Works on Railway and other cloud platforms
 
-# NEW: Gmail SMTP Configuration using .env variables
-# Note: Railway may block outbound SMTP connections. If you get "Network is unreachable" errors,
-# consider using SendGrid, Mailgun, or Railway's email service instead.
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'
+# Use custom Resend email backend
+EMAIL_BACKEND = 'phishield.email_backends.ResendEmailBackend'
 
-# Port 587 with TLS is more reliable than 465 with SSL for Gmail
-# You can override this by setting EMAIL_PORT=465 in your .env file
-email_port = int(os.getenv('EMAIL_PORT', '587'))  # Default to 587 (TLS), can override with EMAIL_PORT env var
-EMAIL_PORT = email_port
-EMAIL_USE_SSL = (email_port == 465)
-EMAIL_USE_TLS = (email_port == 587)
+# Resend configuration
+# Get API key from environment variable (required)
+# Get from email from environment or use default
+# The from email must be verified in your Resend account
+RESEND_FROM_EMAIL = os.getenv('RESEND_FROM_EMAIL', 'onboarding@resend.dev')
+DEFAULT_FROM_EMAIL = RESEND_FROM_EMAIL
+CONTACT_EMAIL = os.getenv('CONTACT_EMAIL', 'phishield001@gmail.com')
 
-EMAIL_HOST_USER = os.getenv('EMAIL_USER')
-EMAIL_HOST_PASSWORD = os.getenv('EMAIL_PASSWORD')
-EMAIL_TIMEOUT = 10  # Timeout in seconds to prevent hanging requests
-
-# Set the default sender to the authenticated email
-DEFAULT_FROM_EMAIL = EMAIL_HOST_USER or 'phishield001@gmail.com'
-CONTACT_EMAIL = 'phishield001@gmail.com'
-
-# For production (commented out for development)
-"""
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.your-email-provider.com'
-EMAIL_PORT = 587
-EMAIL_USE_TLS = True
-EMAIL_HOST_USER = 'your-email@phishield.com'
-EMAIL_HOST_PASSWORD = 'your-email-password'
-"""
+# Note: You need to set the following environment variables:
+# - RESEND_API_KEY: Your Resend API key (get it from https://resend.com/api-keys)
+# - RESEND_FROM_EMAIL: The verified sender email address in your Resend account
+# - CONTACT_EMAIL: The email address where contact form messages should be sent
 
 # ------------------------------
 # Messages Framework

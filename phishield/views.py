@@ -366,9 +366,10 @@ def contact(request):
         
         # 2. Validate that fields are not empty
         if name and email_from_user and subject_input and message:
-            # Check if email configuration is set
-            if not settings.EMAIL_HOST_USER or not settings.EMAIL_HOST_PASSWORD:
-                logger.error("Email configuration missing: EMAIL_HOST_USER or EMAIL_HOST_PASSWORD not set")
+            # Check if Resend API key is configured
+            import os
+            if not os.getenv('RESEND_API_KEY'):
+                logger.error("Email configuration missing: RESEND_API_KEY not set")
                 messages.error(request, "Email service is not configured. Please contact the administrator.")
                 return redirect('phishield:contact')
             
@@ -407,29 +408,29 @@ def contact(request):
                 error_msg = str(e)
                 error_type = type(e).__name__
                 
-                # Handle network unreachable errors (common on Railway)
-                if "network is unreachable" in error_msg.lower() or "[errno 101]" in error_msg.lower():
-                    messages.error(request, "Cannot reach email server. This may be due to network restrictions on the hosting platform. Please contact the administrator or try again later.")
+                # Handle missing API key
+                if "RESEND_API_KEY" in error_msg or "api key" in error_msg.lower() or "api_key" in error_msg.lower():
+                    messages.error(request, "Resend API key is missing. Please set RESEND_API_KEY in your environment variables.")
+                # Handle Resend API authentication errors
+                elif "unauthorized" in error_msg.lower() or "401" in error_msg or "invalid api key" in error_msg.lower():
+                    messages.error(request, "Resend API authentication failed. Please check your RESEND_API_KEY in your environment variables.")
+                # Handle Resend API rate limiting
+                elif "rate limit" in error_msg.lower() or "429" in error_msg:
+                    messages.error(request, "Email service rate limit exceeded. Please try again in a few moments.")
+                # Handle Resend domain/email verification errors
+                elif "domain" in error_msg.lower() and ("not verified" in error_msg.lower() or "unverified" in error_msg.lower()):
+                    messages.error(request, "The sender email domain is not verified in Resend. Please verify your domain or use a verified email address.")
+                # Handle missing from email
+                elif "from" in error_msg.lower() and ("required" in error_msg.lower() or "missing" in error_msg.lower()):
+                    messages.error(request, "Sender email is not configured. Please set RESEND_FROM_EMAIL in your environment variables.")
                 # Handle timeout errors
-                elif "timeout" in error_msg.lower() or "timed out" in error_msg.lower() or "Timeout" in error_type:
-                    messages.error(request, "Email service timed out. Please try again later or check your internet connection.")
-                # Handle SSL/TLS connection errors
-                elif "ssl" in error_msg.lower() or "tls" in error_msg.lower() or "[ssl:" in error_msg.lower():
-                    messages.error(request, "SSL/TLS connection error. Try setting EMAIL_PORT=587 in your .env file if you're using port 465, or vice versa.")
-                # Handle authentication errors
-                elif "authentication failed" in error_msg.lower() or "535" in error_msg or "534" in error_msg or "535-5.7.8" in error_msg:
-                    messages.error(request, "Email authentication failed. Please check EMAIL_USER and EMAIL_PASSWORD in your .env file. Make sure you're using a Gmail App Password (not your regular password). To create one: Google Account > Security > 2-Step Verification > App Passwords")
-                # Handle missing configuration
-                elif "EMAIL_HOST_USER" in error_msg or "EMAIL_HOST_PASSWORD" in error_msg or "None" in error_msg or "not set" in error_msg.lower():
-                    messages.error(request, "Email configuration error. Please ensure EMAIL_USER and EMAIL_PASSWORD are set in your .env file.")
-                # Handle connection refused/refused errors
-                elif "connection" in error_msg.lower() or "refused" in error_msg.lower() or "[errno 111]" in error_msg.lower() or "[errno 10061]" in error_msg.lower():
-                    messages.error(request, "Could not connect to email server. Please check your internet connection and firewall settings.")
-                # Handle SMTP errors
-                elif "smtp" in error_msg.lower() or "smtplib" in error_type.lower():
-                    messages.error(request, f"SMTP error: {error_msg}. Please check your email configuration in the .env file.")
+                elif "timeout" in error_msg.lower() or "timed out" in error_msg.lower():
+                    messages.error(request, "Email service timed out. Please try again later.")
+                # Handle import errors (Resend package not installed)
+                elif "import" in error_msg.lower() or "ImportError" in error_type:
+                    messages.error(request, "Resend package is not installed. Please install it with: pip install resend")
                 else:
-                    messages.error(request, f"Error sending email: {error_msg}")
+                    messages.error(request, f"Error sending email: {error_msg}. Please contact the administrator if this persists.")
         else:
              messages.warning(request, 'Please fill in all fields.')
     
