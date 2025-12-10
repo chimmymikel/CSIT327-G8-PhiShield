@@ -248,3 +248,38 @@
 [2025-12-05 14:56:12,403] INFO phishield - URL analysis completed - Risk: dangerous
 [2025-12-05 14:57:01,864] INFO phishield - Message analysis by gave
 [2025-12-05 14:57:02,007] INFO phishield - Message analysis completed - Risk: safe
+[2025-12-10 07:44:28,769] INFO phishield - User registered and auto-verified: gave
+[2025-12-10 07:44:28,789] INFO phishield - Dashboard accessed by: gave
+[2025-12-10 07:44:42,142] INFO phishield - Profile accessed by: gave
+[2025-12-10 07:46:08,910] INFO phishield - Profile accessed by: gave
+[2025-12-10 07:46:23,929] INFO phishield - Profile accessed by: gave
+[2025-12-10 07:46:27,205] INFO phishield - Profile accessed by: gave
+[2025-12-10 07:46:33,713] INFO phishield - Profile accessed by: gave
+[2025-12-10 07:46:45,916] INFO phishield - Profile accessed by: gave
+[2025-12-10 07:46:48,864] INFO phishield - Profile accessed by: gave
+[2025-12-10 07:47:10,137] INFO phishield - Profile accessed by: gave
+[2025-12-10 07:47:15,368] INFO phishield - Profile accessed by: gave
+[2025-12-10 07:47:16,993] INFO phishield - Profile accessed by: gave
+[2025-12-10 07:47:23,811] INFO phishield - Profile accessed by: gave
+[2025-12-10 07:47:56,814] INFO phishield - Dashboard accessed by: gave
+[2025-12-10 07:48:01,085] INFO phishield - Profile accessed by: gave
+[2025-12-10 07:49:01,417] INFO phishield - Profile accessed by: gave
+[2025-12-10 07:50:21,630] INFO phishield - Profile accessed by: gave
+[2025-12-10 07:52:02,574] INFO phishield - Profile accessed by: gave
+[2025-12-10 07:55:36,109] INFO phishield - Dashboard accessed by: gave
+[2025-12-10 07:55:38,102] INFO phishield - History accessed by: gave
+[2025-12-10 07:55:38,678] INFO phishield - About Us page accessed
+[2025-12-10 07:59:02,433] INFO phishield - Dashboard accessed by: gave
+[2025-12-10 07:59:05,857] INFO phishield - Profile accessed by: gave
+[2025-12-10 07:59:24,453] INFO phishield - Profile accessed by: gave
+[2025-12-10 08:03:20,428] INFO phishield - History accessed by: gave
+[2025-12-10 08:03:25,652] INFO phishield - Dashboard accessed by: gave
+[2025-12-10 08:08:04,881] INFO phishield - About Us page accessed
+[2025-12-10 08:08:05,296] INFO phishield - History accessed by: gave
+[2025-12-10 08:08:06,527] INFO phishield - Dashboard accessed by: gave
+[2025-12-10 08:08:35,846] INFO phishield - Dashboard accessed by: gave
+[2025-12-10 08:10:35,761] INFO phishield - About Us page accessed
+[2025-12-10 08:11:01,681] INFO phishield - About Us page accessed
+[2025-12-10 08:11:04,007] INFO phishield - About Us page accessed
+[2025-12-10 08:11:05,399] INFO phishield - About Us page accessed
+[2025-12-10 08:11:11,105] INFO phishield - Dashboard accessed by: gave
