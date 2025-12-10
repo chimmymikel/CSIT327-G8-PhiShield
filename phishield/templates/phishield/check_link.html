@@ -432,6 +432,27 @@
         background: rgba(252, 129, 129, 0.05);
     }
 
+    /* Placeholder (hint text) Styling */
+    .form-control::placeholder,
+    input[type="url"]::placeholder,
+    textarea::placeholder {
+        color: var(--text-light);
+        opacity: 0.6;
+    }
+
+    /* Dark mode - Make placeholders white */
+    .dark .form-control::placeholder,
+    .dark input[type="url"]::placeholder,
+    .dark textarea::placeholder {
+        color: rgba(255, 255, 255, 0.6);
+    }
+
+    /* Dark mode - Make labels white (already handled by --text-dark variable) */
+    .dark .form-label,
+    .dark form label {
+        color: white;
+    }
+
     @media (max-width: 1200px) {
         .link-container {
             grid-template-columns: 1fr;

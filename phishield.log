@@ -1211,3 +1211,52 @@ INFO 2025-10-02 13:01:22,842 views Message analysis completed - Risk: suspicious
 [2025-12-10 08:11:11,100] INFO django.server - "POST /login/ HTTP/1.1" 302 0
 [2025-12-10 08:11:11,105] INFO phishield - Dashboard accessed by: gave
 [2025-12-10 08:11:11,119] INFO django.server - "GET /dashboard/ HTTP/1.1" 200 64332
+[2025-12-10 08:17:22,944] INFO django.utils.autoreload - Watching for file changes with StatReloader
+[2025-12-10 08:17:25,794] INFO django.server - "GET /check-link/ HTTP/1.1" 200 37095
+[2025-12-10 08:17:25,839] INFO django.server - "GET /static/phishield/images/bg.jpg HTTP/1.1" 304 0
+[2025-12-10 08:17:29,456] INFO django.server - "GET /check-link/ HTTP/1.1" 200 37095
+[2025-12-10 08:17:33,835] INFO django.server - "GET /contact/ HTTP/1.1" 200 47839
+[2025-12-10 08:17:34,399] INFO phishield - About Us page accessed
+[2025-12-10 08:17:34,416] INFO django.server - "GET /about/ HTTP/1.1" 200 53665
+[2025-12-10 08:17:34,436] INFO django.server - "GET /static/phishield/images/habon.png HTTP/1.1" 304 0
+[2025-12-10 08:17:34,439] INFO django.server - "GET /static/phishield/images/hontiveros.png HTTP/1.1" 304 0
+[2025-12-10 08:17:34,440] INFO django.server - "GET /static/phishield/images/campilanan.jpg HTTP/1.1" 304 0
+[2025-12-10 08:17:34,440] INFO django.server - "GET /static/phishield/images/pfp.jpg HTTP/1.1" 304 0
+[2025-12-10 08:17:34,441] INFO django.server - "GET /static/phishield/images/canete.png HTTP/1.1" 304 0
+[2025-12-10 08:17:34,441] INFO django.server - "GET /static/phishield/images/butihen.png HTTP/1.1" 304 0
+[2025-12-10 08:17:35,020] INFO phishield - History accessed by: gave
+[2025-12-10 08:17:35,037] INFO django.server - "GET /history/ HTTP/1.1" 200 46861
+[2025-12-10 08:17:35,538] INFO django.server - "GET /analyze-message/ HTTP/1.1" 200 37877
+[2025-12-10 08:17:38,298] INFO phishield - Dashboard accessed by: gave
+[2025-12-10 08:17:38,315] INFO django.server - "GET /dashboard/ HTTP/1.1" 200 64349
+[2025-12-10 08:17:39,186] INFO django.server - "GET /check-link/ HTTP/1.1" 200 37095
+[2025-12-10 08:17:41,409] INFO django.server - "GET /analyze-message/ HTTP/1.1" 200 37877
+[2025-12-10 08:17:41,778] INFO django.server - "GET /check-link/ HTTP/1.1" 200 37095
+[2025-12-10 08:17:45,883] INFO django.server - "GET /check-link/ HTTP/1.1" 200 37095
+[2025-12-10 08:17:46,699] INFO django.server - "GET /analyze-message/ HTTP/1.1" 200 37877
+[2025-12-10 08:17:47,304] INFO django.server - "GET /check-link/ HTTP/1.1" 200 37095
+[2025-12-10 08:19:04,052] INFO django.server - "GET /check-link/ HTTP/1.1" 200 37095
+[2025-12-10 08:19:09,599] INFO django.server - "GET /check-link/ HTTP/1.1" 200 37095
+[2025-12-10 08:19:11,480] INFO django.server - "GET /check-link/ HTTP/1.1" 200 37095
+[2025-12-10 08:19:11,679] INFO django.server - "GET /check-link/ HTTP/1.1" 200 37095
+[2025-12-10 08:19:12,358] INFO django.server - "GET /check-link/ HTTP/1.1" 200 37095
+[2025-12-10 08:19:18,033] INFO django.server - "GET /check-link/ HTTP/1.1" 200 37095
+[2025-12-10 08:19:18,544] INFO django.server - "GET /check-link/ HTTP/1.1" 200 37095
+[2025-12-10 08:19:49,148] INFO django.server - "GET /check-link/ HTTP/1.1" 200 37089
+[2025-12-10 08:19:59,253] INFO django.server - "GET /check-link/ HTTP/1.1" 200 37095
+[2025-12-10 08:21:13,902] INFO django.server - "GET /check-link/ HTTP/1.1" 200 37670
+[2025-12-10 08:21:31,711] INFO django.server - "GET /check-link/ HTTP/1.1" 200 37670
+[2025-12-10 08:21:32,612] INFO django.server - "GET /analyze-message/ HTTP/1.1" 200 37877
+[2025-12-10 08:23:58,078] INFO django.server - "GET /analyze-message/ HTTP/1.1" 200 37971
+[2025-12-10 08:23:58,998] INFO django.server - "GET /analyze-message/ HTTP/1.1" 200 37971
+[2025-12-10 08:24:00,010] INFO django.server - "GET /check-link/ HTTP/1.1" 200 37755
+[2025-12-10 08:24:01,195] INFO django.server - "GET /check-link/ HTTP/1.1" 200 37755
+[2025-12-10 08:24:03,963] INFO django.server - "GET /analyze-message/ HTTP/1.1" 200 37971
+[2025-12-10 08:24:04,826] INFO django.server - "GET /check-link/ HTTP/1.1" 200 37755
+[2025-12-10 08:24:59,130] INFO django.server - "GET /check-link/ HTTP/1.1" 200 37661
+[2025-12-10 08:25:00,621] INFO django.server - "GET /analyze-message/ HTTP/1.1" 200 37877
+[2025-12-10 08:25:01,722] INFO django.server - "GET /analyze-message/ HTTP/1.1" 200 37877
+[2025-12-10 08:25:05,489] INFO django.server - "GET /analyze-message/ HTTP/1.1" 200 37877
+[2025-12-10 08:25:06,048] INFO django.server - "GET /check-link/ HTTP/1.1" 200 37661
+[2025-12-10 08:25:06,974] INFO django.server - "GET /analyze-message/ HTTP/1.1" 200 37877
+[2025-12-10 08:25:07,350] INFO django.server - "GET /check-link/ HTTP/1.1" 200 37661
