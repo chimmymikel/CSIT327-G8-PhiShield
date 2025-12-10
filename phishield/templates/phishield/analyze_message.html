@@ -75,7 +75,6 @@
         border-radius: var(--radius-xlarge);
         padding: 0;
         box-shadow: 0 10px 40px var(--shadow-light);
-        border: 1px solid var(--border-light);
         overflow: hidden;
         display: flex;
         flex-direction: column;
@@ -195,7 +194,6 @@
         border-radius: var(--radius-xlarge);
         padding: 0;
         box-shadow: 0 10px 40px var(--shadow-light);
-        border: 1px solid var(--border-light);
         overflow: hidden;
         display: flex;
         flex-direction: column;
@@ -312,50 +310,6 @@
         font-size: 0.95rem;
     }
 
-    .flags-list {
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
-    }
-
-    .flag-item {
-        display: flex;
-        align-items: flex-start;
-        gap: 10px;
-        padding: 10px;
-        background: rgba(0, 123, 255, 0.05);
-        border-radius: var(--radius-small);
-        border-left: 3px solid #007BFF;
-        transition: all 0.2s ease;
-    }
-
-    .flag-item:hover {
-        background: rgba(0, 123, 255, 0.1);
-        transform: translateX(3px);
-    }
-
-    .flag-item i {
-        color: #007BFF;
-        margin-top: 3px;
-        font-size: 0.85rem;
-    }
-
-    .flag-item span {
-        color: var(--text-dark);
-        line-height: 1.6;
-        font-size: 0.95rem;
-        flex: 1;
-    }
-
-    .dark .flag-item {
-        background: rgba(0, 188, 212, 0.1);
-        border-left-color: #00BCD4;
-    }
-
-    .dark .flag-item i {
-        color: #00BCD4;
-    }
-
     .alert {
         border-radius: var(--radius-large);
         border: none;
@@ -444,6 +398,68 @@
         margin: 0;
     }
 
+    /* Error Message Styling */
+    .errorlist {
+        list-style: none;
+        padding: 12px 18px;
+        margin: 10px 0;
+        background: linear-gradient(135deg, var(--danger-light) 0%, var(--danger-dark) 100%);
+        color: white;
+        border-radius: var(--radius-medium);
+        border-left: 5px solid rgba(255, 255, 255, 0.5);
+        box-shadow: 0 4px 15px rgba(252, 129, 129, 0.3);
+        animation: slideIn 0.5s ease-out;
+        font-weight: 600;
+    }
+
+    .errorlist li {
+        margin: 0;
+    }
+
+    /* Highlight the input field that has an error */
+    .form-control.error, 
+    input[type="url"].error,
+    textarea.error {
+        border-color: var(--danger-dark);
+        background: rgba(252, 129, 129, 0.05);
+    }
+
+    .form-control.error:focus,
+    input[type="url"].error:focus,
+    textarea.error:focus {
+        border-color: var(--danger-dark);
+        box-shadow: 0 0 0 4px rgba(229, 62, 62, 0.2);
+    }
+
+    /* If Django adds error class to the field wrapper */
+    .has-error .form-control,
+    .has-error input[type="url"],
+    .has-error textarea {
+        border-color: var(--danger-dark);
+        background: rgba(252, 129, 129, 0.05);
+    }
+
+    /* Placeholder (hint text) Styling */
+    .form-control::placeholder,
+    input[type="url"]::placeholder,
+    textarea::placeholder {
+        color: var(--text-light);
+        opacity: 0.6;
+    }
+
+    /* Dark mode - Make placeholders white */
+    .dark .form-control::placeholder,
+    .dark input[type="url"]::placeholder,
+    .dark textarea::placeholder {
+        color: rgba(255, 255, 255, 0.6);
+    }
+
+    /* Dark mode - Make labels white (already handled by --text-dark variable) */
+    .dark .form-label,
+    .dark form label {
+        color: white;
+    }
+
     @media (max-width: 1200px) {
         .analyze-container {
             grid-template-columns: 1fr;
@@ -517,13 +533,7 @@
                 {% if flags %}
                 <div class="details-section">
                     <h6><i class="fas fa-info-circle"></i> Detection Details</h6>
-                    <div class="flags-list">
-                        {% for flag in flags %}
-                            <div class="flag-item">
-                                <i class="fas fa-chevron-right"></i> <span>{{ flag }}</span>
-                            </div>
-                        {% endfor %}
-                    </div>
+                    <p>{{ flags }}</p>
                 </div>
                 {% endif %}
 
