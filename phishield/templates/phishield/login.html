@@ -104,6 +104,72 @@
 
 <!-- Animations & Styles -->
 <style>
+  :root {
+    /* Text Colors */
+    --text-dark: #212529;
+    --text-muted: #6c757d;
+    
+    /* Card & Background */
+    --card-bg: linear-gradient(to bottom, #ffffff 0%, #f8f9fa 100%);
+    --card-border: rgba(0, 0, 0, 0.08);
+    
+    /* Form Elements */
+    --form-bg: white;
+    --form-border: #dee2e6;
+    --form-text: #212529;
+    
+    /* Button Toggle */
+    --toggle-btn-hover-bg: #e9ecef;
+    --toggle-btn-bg: transparent;
+    --toggle-btn-border: #dee2e6;
+    --toggle-btn-color: #6c757d;
+    
+    /* Divider */
+    --divider-color: #6c757d;
+    --divider-opacity: 0.15;
+    
+    /* Alert */
+    --alert-danger-bg: #f8d7da;
+    --alert-danger-border: #dc3545;
+  }
+  
+  .dark {
+    --text-dark: white;
+    --text-muted: #94a3b8;
+    
+    /* Card & Background */
+    --card-bg: linear-gradient(to bottom, #0b1220 0%, #1e293b 100%);
+    --card-border: #334155;
+    
+    /* Form Elements */
+    --form-bg: #1e293b;
+    --form-border: #334155;
+    --form-text: white;
+    
+    /* Button Toggle */
+    --toggle-btn-hover-bg: #334155;
+    --toggle-btn-bg: transparent;
+    --toggle-btn-border: #334155;
+    --toggle-btn-color: #94a3b8;
+    
+    /* Divider */
+    --divider-color: #475569;
+    --divider-opacity: 0.3;
+    
+    /* Alert */
+    --alert-danger-bg: #2d1f1f;
+    --alert-danger-border: #dc3545;
+  }
+
+  /* Text Colors */
+  .text-dark {
+    color: var(--text-dark) !important;
+  }
+  
+  .text-muted {
+    color: var(--text-muted) !important;
+  }
+
   /* Icon Circle */
   .icon-circle {
     width: 60px;
@@ -123,8 +189,8 @@
 
   /* Content Card Enhancements */
   .content-card {
-    background: linear-gradient(to bottom, #ffffff 0%, #f8f9fa 100%);
-    border: 1px solid rgba(0, 0, 0, 0.08);
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
     transition: box-shadow 0.3s ease;
   }
 
@@ -132,12 +198,34 @@
     box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12) !important;
   }
 
+  /* Form Controls */
+  .form-control {
+    background: var(--form-bg) !important;
+    border-color: var(--form-border) !important;
+    color: var(--form-text) !important;
+  }
+
   /* Input Focus Effects */
   .form-control:focus {
-    border-color: #0d6efd;
+    border-color: #0d6efd !important;
     box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.15);
     transform: translateY(-1px);
     transition: all 0.2s ease;
+  }
+
+  /* Placeholder Styling */
+  .form-control::placeholder {
+    color: var(--text-muted);
+    opacity: 0.6;
+  }
+
+  .dark .form-control::placeholder {
+    color: rgba(255, 255, 255, 0.5);
+  }
+
+  /* Form Labels */
+  .form-label {
+    color: var(--text-dark);
   }
 
   /* Button Hover Effects */
@@ -188,10 +276,13 @@
   /* Toggle Button Enhancement */
   .toggle-btn {
     transition: all 0.2s ease;
+    background: var(--toggle-btn-bg) !important;
+    border-color: var(--toggle-btn-border) !important;
+    color: var(--toggle-btn-color) !important;
   }
 
   .toggle-btn:hover {
-    background-color: #e9ecef;
+    background-color: var(--toggle-btn-hover-bg) !important;
     transform: scale(1.05);
   }
 
@@ -257,8 +348,8 @@
   }
 
   .alert-danger {
-    border-left-color: #dc3545;
-    background-color: #f8d7da;
+    border-left-color: var(--alert-danger-border);
+    background-color: var(--alert-danger-bg);
   }
 
   /* Label Icons Animation */
@@ -273,8 +364,8 @@
 
   /* Divider Enhancement */
   hr {
-    opacity: 0.15;
-    border-color: #6c757d;
+    opacity: var(--divider-opacity);
+    border-color: var(--divider-color);
   }
 
   /* Smooth focus transitions for inputs */

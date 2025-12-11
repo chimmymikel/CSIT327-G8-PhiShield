@@ -1260,3 +1260,147 @@ INFO 2025-10-02 13:01:22,842 views Message analysis completed - Risk: suspicious
 [2025-12-10 08:25:06,048] INFO django.server - "GET /check-link/ HTTP/1.1" 200 37661
 [2025-12-10 08:25:06,974] INFO django.server - "GET /analyze-message/ HTTP/1.1" 200 37877
 [2025-12-10 08:25:07,350] INFO django.server - "GET /check-link/ HTTP/1.1" 200 37661
+[2025-12-10 08:31:34,073] INFO django.utils.autoreload - Watching for file changes with StatReloader
+[2025-12-10 08:31:42,758] INFO phishield - Profile accessed by: gave
+[2025-12-10 08:31:42,793] INFO django.server - "GET /profile/ HTTP/1.1" 200 46642
+[2025-12-10 08:31:42,839] INFO django.server - "GET /static/phishield/images/bg.jpg HTTP/1.1" 304 0
+[2025-12-10 08:31:47,097] INFO phishield - About Us page accessed
+[2025-12-10 08:31:47,113] INFO django.server - "GET /about/ HTTP/1.1" 200 53665
+[2025-12-10 08:31:47,138] INFO django.server - "GET /static/phishield/images/habon.png HTTP/1.1" 304 0
+[2025-12-10 08:31:47,142] INFO django.server - "GET /static/phishield/images/campilanan.jpg HTTP/1.1" 304 0
+[2025-12-10 08:31:47,143] INFO django.server - "GET /static/phishield/images/pfp.jpg HTTP/1.1" 304 0
+[2025-12-10 08:31:47,143] INFO django.server - "GET /static/phishield/images/hontiveros.png HTTP/1.1" 304 0
+[2025-12-10 08:31:47,143] INFO django.server - "GET /static/phishield/images/canete.png HTTP/1.1" 304 0
+[2025-12-10 08:31:47,144] INFO django.server - "GET /static/phishield/images/butihen.png HTTP/1.1" 304 0
+[2025-12-10 08:31:48,125] INFO phishield - History accessed by: gave
+[2025-12-10 08:31:48,139] INFO django.server - "GET /history/ HTTP/1.1" 200 46861
+[2025-12-10 08:31:48,669] INFO django.server - "GET /analyze-message/ HTTP/1.1" 200 37877
+[2025-12-10 08:31:50,709] INFO django.server - "GET /check-link/ HTTP/1.1" 200 37661
+[2025-12-10 08:31:51,743] INFO phishield - Dashboard accessed by: gave
+[2025-12-10 08:31:51,760] INFO django.server - "GET /dashboard/ HTTP/1.1" 200 64332
+[2025-12-10 08:31:53,200] INFO django.server - "GET /contact/ HTTP/1.1" 200 47839
+[2025-12-10 08:31:56,184] INFO phishield - Profile accessed by: gave
+[2025-12-10 08:31:56,197] INFO django.server - "GET /profile/ HTTP/1.1" 200 46642
+[2025-12-11 15:28:35,453] INFO django.utils.autoreload - Watching for file changes with StatReloader
+[2025-12-11 15:28:50,667] INFO django.server - "GET / HTTP/1.1" 302 0
+[2025-12-11 15:28:50,675] INFO phishield - Dashboard accessed by: gave
+[2025-12-11 15:28:50,705] INFO django.server - "GET /dashboard/ HTTP/1.1" 200 64340
+[2025-12-11 15:28:50,914] INFO django.server - "GET /static/phishield/images/bg.jpg HTTP/1.1" 304 0
+[2025-12-11 15:28:53,051] INFO phishield - Dashboard accessed by: gave
+[2025-12-11 15:28:53,064] INFO django.server - "GET /dashboard/ HTTP/1.1" 200 64336
+[2025-12-11 15:28:53,969] INFO django.server - "GET / HTTP/1.1" 302 0
+[2025-12-11 15:28:53,978] INFO phishield - Dashboard accessed by: gave
+[2025-12-11 15:28:53,989] INFO django.server - "GET /dashboard/ HTTP/1.1" 200 64338
+[2025-12-11 15:28:56,603] INFO django.server - "POST /logout/ HTTP/1.1" 302 0
+[2025-12-11 15:28:56,616] INFO django.server - "GET /login/ HTTP/1.1" 200 27878
+[2025-12-11 15:28:59,059] INFO django.server - "GET /login/ HTTP/1.1" 200 27878
+[2025-12-11 15:28:59,656] INFO django.server - "GET /register/ HTTP/1.1" 200 39308
+[2025-12-11 15:29:00,179] INFO django.server - "GET /login/ HTTP/1.1" 200 27878
+[2025-12-11 15:29:00,639] INFO phishield - About Us page accessed
+[2025-12-11 15:29:00,645] INFO django.server - "GET /about/ HTTP/1.1" 200 50605
+[2025-12-11 15:29:01,097] INFO django.server - "GET /static/phishield/images/habon.png HTTP/1.1" 200 163886
+[2025-12-11 15:29:01,102] INFO django.server - "GET /login/ HTTP/1.1" 200 27878
+[2025-12-11 15:29:01,138] INFO django.server - "GET /static/phishield/images/campilanan.jpg HTTP/1.1" 200 542099
+[2025-12-11 15:29:01,179] INFO django.server - "GET /static/phishield/images/hontiveros.png HTTP/1.1" 200 356776
+[2025-12-11 15:29:01,195] INFO django.server - "GET /static/phishield/images/pfp.jpg HTTP/1.1" 200 188882
+[2025-12-11 15:29:01,214] INFO django.server - - Broken pipe from ('127.0.0.1', 61410)
+[2025-12-11 15:29:01,222] INFO django.server - - Broken pipe from ('127.0.0.1', 62768)
+[2025-12-11 15:29:15,777] INFO django.server - "GET /password-reset/ HTTP/1.1" 200 22782
+[2025-12-11 15:29:21,375] INFO django.server - "GET /register/ HTTP/1.1" 200 39308
+[2025-12-11 15:29:27,312] INFO django.server - "GET /login/ HTTP/1.1" 200 27878
+[2025-12-11 15:29:33,973] INFO django.server - "GET /login/ HTTP/1.1" 200 27878
+[2025-12-11 15:35:54,738] INFO django.server - "GET /login/ HTTP/1.1" 200 29991
+[2025-12-11 15:36:02,882] INFO django.server - "GET /login/ HTTP/1.1" 200 27878
+[2025-12-11 15:36:13,185] INFO django.server - "GET /login/ HTTP/1.1" 200 29991
+[2025-12-11 15:36:20,993] INFO django.server - "POST /login/ HTTP/1.1" 200 30232
+[2025-12-11 15:36:25,413] INFO django.server - "POST /login/ HTTP/1.1" 200 30232
+[2025-12-11 15:36:29,223] INFO django.server - "POST /login/ HTTP/1.1" 302 0
+[2025-12-11 15:36:29,229] INFO phishield - Dashboard accessed by: gave
+[2025-12-11 15:36:29,238] INFO django.server - "GET /dashboard/ HTTP/1.1" 200 64332
+[2025-12-11 15:36:31,687] INFO django.server - "GET /settings/ HTTP/1.1" 200 55309
+[2025-12-11 15:36:35,276] INFO django.server - "POST /logout/ HTTP/1.1" 302 0
+[2025-12-11 15:36:35,283] INFO django.server - "GET /login/ HTTP/1.1" 200 29991
+[2025-12-11 15:36:38,576] INFO django.server - "GET /register/ HTTP/1.1" 200 39308
+[2025-12-11 15:36:39,272] INFO django.server - "GET /login/ HTTP/1.1" 200 29991
+[2025-12-11 15:36:46,106] INFO django.server - "POST /login/ HTTP/1.1" 200 30232
+[2025-12-11 15:36:50,805] INFO django.server - "POST /login/ HTTP/1.1" 200 30232
+[2025-12-11 15:36:56,993] INFO django.server - "POST /login/ HTTP/1.1" 200 30232
+[2025-12-11 15:37:03,238] INFO django.server - "POST /login/ HTTP/1.1" 200 30232
+[2025-12-11 15:37:12,686] INFO django.server - "GET /register/ HTTP/1.1" 200 39308
+[2025-12-11 15:37:16,377] INFO django.server - "GET /login/ HTTP/1.1" 200 29991
+[2025-12-11 15:37:23,033] INFO django.server - "POST /login/ HTTP/1.1" 200 30232
+[2025-12-11 15:37:28,082] INFO django.server - "POST /login/ HTTP/1.1" 200 30232
+[2025-12-11 15:37:34,105] INFO django.server - "POST /login/ HTTP/1.1" 302 0
+[2025-12-11 15:37:34,111] INFO phishield - Dashboard accessed by: gave
+[2025-12-11 15:37:34,118] INFO django.server - "GET /dashboard/ HTTP/1.1" 200 64347
+[2025-12-11 15:43:02,003] INFO django.server - "POST /logout/ HTTP/1.1" 302 0
+[2025-12-11 15:43:02,009] INFO django.server - "GET /login/ HTTP/1.1" 200 29991
+[2025-12-11 15:43:03,300] INFO django.server - "GET /register/ HTTP/1.1" 200 39308
+[2025-12-11 15:46:07,084] INFO django.server - "GET /register/ HTTP/1.1" 200 43073
+[2025-12-11 15:46:07,994] INFO django.server - "GET /login/ HTTP/1.1" 200 29991
+[2025-12-11 15:46:12,788] INFO django.server - "POST /login/ HTTP/1.1" 302 0
+[2025-12-11 15:46:12,794] INFO phishield - Dashboard accessed by: gave
+[2025-12-11 15:46:12,806] INFO django.server - "GET /dashboard/ HTTP/1.1" 200 64332
+[2025-12-11 15:46:15,894] INFO django.server - "GET /settings/ HTTP/1.1" 200 55309
+[2025-12-11 15:46:19,320] INFO django.server - "POST /logout/ HTTP/1.1" 302 0
+[2025-12-11 15:46:19,324] INFO django.server - "GET /login/ HTTP/1.1" 200 29991
+[2025-12-11 15:46:25,256] INFO django.server - "GET /register/ HTTP/1.1" 200 43073
+[2025-12-11 15:46:52,623] INFO django.server - "GET /register/ HTTP/1.1" 200 39308
+[2025-12-11 15:46:59,680] INFO django.server - "GET /register/ HTTP/1.1" 200 43073
+[2025-12-11 15:47:03,551] INFO django.server - "GET /login/ HTTP/1.1" 200 29991
+[2025-12-11 15:47:05,049] INFO django.server - "GET /password-reset/ HTTP/1.1" 200 22782
+[2025-12-11 15:49:41,212] INFO django.server - "GET /password-reset/ HTTP/1.1" 200 26506
+[2025-12-11 15:49:48,030] INFO django.server - "GET /password-reset/ HTTP/1.1" 200 22782
+[2025-12-11 15:49:55,026] INFO django.server - "GET /password-reset/ HTTP/1.1" 200 26506
+[2025-12-11 15:49:58,188] INFO django.server - "GET /login/ HTTP/1.1" 200 29991
+[2025-12-11 15:49:59,907] INFO django.server - "GET /password-reset/ HTTP/1.1" 200 26506
+[2025-12-11 15:50:22,298] INFO django.server - "POST /password-reset/ HTTP/1.1" 302 0
+[2025-12-11 15:50:22,303] INFO django.server - "GET /password-reset/done/ HTTP/1.1" 200 22990
+[2025-12-11 15:56:37,313] INFO django.server - "GET /password-reset/done/ HTTP/1.1" 200 22990
+[2025-12-11 15:56:43,819] INFO django.server - "GET /password-reset/done/ HTTP/1.1" 200 22990
+[2025-12-11 15:56:47,282] INFO django.server - "GET /password-reset/done/ HTTP/1.1" 200 22990
+[2025-12-11 15:56:51,696] INFO django.server - "GET /password-reset/done/ HTTP/1.1" 200 22990
+[2025-12-11 15:57:03,631] INFO django.server - "GET /password-reset/done/ HTTP/1.1" 200 22990
+[2025-12-11 16:39:30,844] INFO django.server - "GET /password-reset/done/ HTTP/1.1" 200 22990
+[2025-12-11 16:39:34,144] INFO django.server - "GET /password-reset/done/ HTTP/1.1" 200 22990
+[2025-12-11 16:39:34,636] INFO django.server - "GET /password-reset/done/ HTTP/1.1" 200 22990
+[2025-12-11 16:39:43,233] INFO django.server - "GET /password-reset/ HTTP/1.1" 200 26506
+[2025-12-11 16:39:45,966] INFO django.server - "GET /password-reset/ HTTP/1.1" 200 26506
+[2025-12-11 16:39:58,319] INFO django.server - "GET /login/ HTTP/1.1" 200 29991
+[2025-12-11 16:40:00,335] INFO django.server - "GET /password-reset/ HTTP/1.1" 200 26506
+[2025-12-11 16:40:15,643] INFO django.server - - Broken pipe from ('127.0.0.1', 52271)
+[2025-12-11 16:40:16,612] INFO django.server - - Broken pipe from ('127.0.0.1', 50219)
+[2025-12-11 16:40:18,050] INFO django.server - - Broken pipe from ('127.0.0.1', 59119)
+[2025-12-11 16:40:18,284] INFO django.server - - Broken pipe from ('127.0.0.1', 52314)
+[2025-12-11 16:40:18,429] INFO django.server - - Broken pipe from ('127.0.0.1', 64090)
+[2025-12-11 16:40:18,672] INFO django.server - - Broken pipe from ('127.0.0.1', 54377)
+[2025-12-11 16:40:19,378] INFO django.server - - Broken pipe from ('127.0.0.1', 61392)
+[2025-12-11 16:40:20,391] INFO django.server - "GET /password-reset/ HTTP/1.1" 200 26506
+[2025-12-11 16:40:20,582] INFO django.server - - Broken pipe from ('127.0.0.1', 53798)
+[2025-12-11 16:40:20,846] INFO django.server - - Broken pipe from ('127.0.0.1', 60180)
+[2025-12-11 16:40:21,087] INFO django.server - - Broken pipe from ('127.0.0.1', 57133)
+[2025-12-11 16:40:21,775] INFO django.server - - Broken pipe from ('127.0.0.1', 59992)
+[2025-12-11 16:40:22,141] INFO django.server - - Broken pipe from ('127.0.0.1', 53828)
+[2025-12-11 16:40:26,129] INFO django.server - "POST /password-reset/ HTTP/1.1" 302 0
+[2025-12-11 16:40:26,133] INFO django.server - "GET /password-reset/done/ HTTP/1.1" 200 22990
+[2025-12-11 16:40:49,371] INFO django.server - "GET /login/ HTTP/1.1" 200 29991
+[2025-12-11 16:40:50,856] INFO django.server - "GET /password-reset/ HTTP/1.1" 200 26506
+[2025-12-11 16:40:58,535] INFO django.server - "POST /password-reset/ HTTP/1.1" 302 0
+[2025-12-11 16:40:58,541] INFO django.server - "GET /password-reset/done/ HTTP/1.1" 200 22990
+[2025-12-11 17:25:36,003] INFO django.server - "GET /password-reset/done/ HTTP/1.1" 200 23683
+[2025-12-11 17:25:43,785] INFO django.server - "GET /password-reset/done/ HTTP/1.1" 200 22990
+[2025-12-11 17:25:54,603] INFO django.server - "GET /password-reset/done/ HTTP/1.1" 200 23683
+[2025-12-11 17:28:18,041] INFO django.server - "GET /password-reset/done/ HTTP/1.1" 200 23683
+[2025-12-11 17:28:32,127] INFO django.server - "GET /password-reset/done/ HTTP/1.1" 200 22990
+[2025-12-11 17:28:40,298] INFO django.server - "GET /password-reset/done/ HTTP/1.1" 200 23683
+[2025-12-11 17:28:46,590] INFO django.server - "GET /password-reset/done/ HTTP/1.1" 200 22990
+[2025-12-11 17:29:05,923] INFO django.server - "GET /password-reset/done/ HTTP/1.1" 200 23683
+[2025-12-11 17:31:10,251] INFO django.server - "GET /password-reset/done/ HTTP/1.1" 200 23819
+[2025-12-11 17:31:23,695] INFO django.server - "GET /password-reset/done/ HTTP/1.1" 200 23819
+[2025-12-11 17:31:45,692] INFO django.server - "GET /password-reset/done/ HTTP/1.1" 200 23826
+[2025-12-11 17:32:03,035] INFO django.server - "GET /password-reset/done/ HTTP/1.1" 200 23826
+[2025-12-11 17:32:05,874] INFO django.server - "GET /password-reset/done/ HTTP/1.1" 200 22990
+[2025-12-11 17:32:16,982] INFO django.server - "GET /password-reset/done/ HTTP/1.1" 200 23826
+[2025-12-11 17:32:23,158] INFO django.server - "GET /login/ HTTP/1.1" 200 29991
+[2025-12-11 17:32:24,171] INFO django.server - "GET /register/ HTTP/1.1" 200 43073
+[2025-12-11 17:32:24,629] INFO django.server - "GET /login/ HTTP/1.1" 200 29991
