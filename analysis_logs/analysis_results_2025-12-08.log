@@ -1,0 +1,32 @@
+[2025-12-08 18:18:16] | User: michi | Type: URL | Risk: safe
+Content: https://facebook.com
+Flags: No threats detected
+--------------------------------------------------------------------------------
+[2025-12-08 18:18:30] | User: michi | Type: URL | Risk: dangerous
+Content: https://facebook.org
+Flags: Possible typosquatting detected (similar to facebook.com, 100% match) | No valid SSL certificate detected
+--------------------------------------------------------------------------------
+[2025-12-08 18:18:52] | User: michi | Type: URL | Risk: suspicious
+Content: https://lto.gov.ph
+Flags: No valid SSL certificate detected
+--------------------------------------------------------------------------------
+[2025-12-08 18:20:00] | User: michi | Type: URL | Risk: suspicious
+Content: https://lto.gov.ph/
+Flags: No valid SSL certificate detected
+--------------------------------------------------------------------------------
+[2025-12-08 18:22:23] | User: michi | Type: URL | Risk: suspicious
+Content: https://lto.gov.ph/https://www.cloudflare.com/en-gb/learning/ssl/common-errors/
+Flags: No valid SSL certificate detected | Excessive path depth (8 levels)
+--------------------------------------------------------------------------------
+[2025-12-08 18:22:35] | User: michi | Type: URL | Risk: safe
+Content: https://www.cloudflare.com/en-gb/learning/ssl/common-errors/
+Flags: No threats detected
+--------------------------------------------------------------------------------
+[2025-12-08 18:23:03] | User: michi | Type: URL | Risk: safe
+Content: https://www.youtube.com/
+Flags: No threats detected
+--------------------------------------------------------------------------------
+[2025-12-08 18:23:24] | User: michi | Type: URL | Risk: safe
+Content: https://app.grammarly.com/
+Flags: No threats detected
+--------------------------------------------------------------------------------

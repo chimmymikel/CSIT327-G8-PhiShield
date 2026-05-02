@@ -1006,257 +1006,293 @@ INFO 2025-10-02 13:01:22,842 views Message analysis completed - Risk: suspicious
 [2025-12-05 14:57:02,007] INFO phishield - Message analysis completed - Risk: safe
 [2025-12-05 14:57:02,191] INFO django.server - "POST /analyze-message/ HTTP/1.1" 200 36789
 [2025-12-05 14:57:09,843] INFO django.server - "GET /check-link/ HTTP/1.1" 200 37189
-[2025-12-10 07:43:51,386] INFO django.utils.autoreload - Watching for file changes with StatReloader
-[2025-12-10 07:43:56,491] INFO django.server - "GET /settings/ HTTP/1.1" 302 0
-[2025-12-10 07:43:56,519] INFO django.server - "GET /login/?next=/settings/ HTTP/1.1" 200 27878
-[2025-12-10 07:44:03,367] INFO django.server - "POST /login/?next=/settings/ HTTP/1.1" 200 28119
-[2025-12-10 07:44:08,459] INFO django.server - "GET /register/ HTTP/1.1" 200 39308
-[2025-12-10 07:44:28,769] INFO phishield - User registered and auto-verified: gave
-[2025-12-10 07:44:28,778] INFO django.server - "POST /register/ HTTP/1.1" 302 0
-[2025-12-10 07:44:28,789] INFO phishield - Dashboard accessed by: gave
-[2025-12-10 07:44:28,805] INFO django.server - "GET /dashboard/ HTTP/1.1" 200 65022
-[2025-12-10 07:44:42,142] INFO phishield - Profile accessed by: gave
-[2025-12-10 07:44:42,159] INFO django.server - "GET /profile/ HTTP/1.1" 200 42299
-[2025-12-10 07:44:42,299] INFO django.server - "GET /static/phishield/images/bg.jpg HTTP/1.1" 200 919056
-[2025-12-10 07:46:08,910] INFO phishield - Profile accessed by: gave
-[2025-12-10 07:46:08,928] INFO django.server - "GET /profile/ HTTP/1.1" 200 42299
-[2025-12-10 07:46:08,943] INFO django.server - "GET /static/phishield/images/bg.jpg HTTP/1.1" 304 0
-[2025-12-10 07:46:23,929] INFO phishield - Profile accessed by: gave
-[2025-12-10 07:46:23,941] INFO django.server - "GET /profile/ HTTP/1.1" 200 42299
-[2025-12-10 07:46:27,205] INFO phishield - Profile accessed by: gave
-[2025-12-10 07:46:27,224] INFO django.server - "GET /profile/ HTTP/1.1" 200 42299
-[2025-12-10 07:46:33,713] INFO phishield - Profile accessed by: gave
-[2025-12-10 07:46:33,731] INFO django.server - "GET /profile/ HTTP/1.1" 200 42299
-[2025-12-10 07:46:33,747] INFO django.server - "GET /static/phishield/images/bg.jpg HTTP/1.1" 304 0
-[2025-12-10 07:46:45,916] INFO phishield - Profile accessed by: gave
-[2025-12-10 07:46:45,936] INFO django.server - "GET /profile/ HTTP/1.1" 200 42299
-[2025-12-10 07:46:48,864] INFO phishield - Profile accessed by: gave
-[2025-12-10 07:46:48,877] INFO django.server - "GET /profile/ HTTP/1.1" 200 42299
-[2025-12-10 07:47:10,137] INFO phishield - Profile accessed by: gave
-[2025-12-10 07:47:10,157] INFO django.server - "GET /profile/ HTTP/1.1" 200 42299
-[2025-12-10 07:47:10,174] INFO django.server - "GET /static/phishield/images/bg.jpg HTTP/1.1" 304 0
-[2025-12-10 07:47:12,683] INFO django.server - "GET /contact/ HTTP/1.1" 200 47943
-[2025-12-10 07:47:15,368] INFO phishield - Profile accessed by: gave
-[2025-12-10 07:47:15,383] INFO django.server - "GET /profile/ HTTP/1.1" 200 42299
-[2025-12-10 07:47:16,993] INFO phishield - Profile accessed by: gave
-[2025-12-10 07:47:17,007] INFO django.server - "GET /profile/ HTTP/1.1" 200 42299
-[2025-12-10 07:47:23,811] INFO phishield - Profile accessed by: gave
-[2025-12-10 07:47:23,829] INFO django.server - "GET /profile/ HTTP/1.1" 200 42299
-[2025-12-10 07:47:56,808] INFO django.server - "GET / HTTP/1.1" 302 0
-[2025-12-10 07:47:56,814] INFO phishield - Dashboard accessed by: gave
-[2025-12-10 07:47:56,828] INFO django.server - "GET /dashboard/ HTTP/1.1" 200 64320
-[2025-12-10 07:48:01,085] INFO phishield - Profile accessed by: gave
-[2025-12-10 07:48:01,096] INFO django.server - "GET /profile/ HTTP/1.1" 200 42299
-[2025-12-10 07:48:01,116] INFO django.server - "GET /static/phishield/images/bg.jpg HTTP/1.1" 304 0
-[2025-12-10 07:49:01,417] INFO phishield - Profile accessed by: gave
-[2025-12-10 07:49:01,439] INFO django.server - "GET /profile/ HTTP/1.1" 200 42299
-[2025-12-10 07:49:01,456] INFO django.server - "GET /static/phishield/images/bg.jpg HTTP/1.1" 304 0
-[2025-12-10 07:49:27,053] INFO django.server - "GET /profile/edit/ HTTP/1.1" 200 43344
-[2025-12-10 07:50:09,267] INFO django.server - "GET /profile/edit/ HTTP/1.1" 200 43698
-[2025-12-10 07:50:16,366] INFO django.server - "GET /contact/ HTTP/1.1" 200 47943
-[2025-12-10 07:50:21,630] INFO phishield - Profile accessed by: gave
-[2025-12-10 07:50:21,647] INFO django.server - "GET /profile/ HTTP/1.1" 200 42299
-[2025-12-10 07:50:21,671] INFO django.server - "GET /static/phishield/images/bg.jpg HTTP/1.1" 304 0
-[2025-12-10 07:52:02,574] INFO phishield - Profile accessed by: gave
-[2025-12-10 07:52:02,593] INFO django.server - "GET /profile/ HTTP/1.1" 200 46642
-[2025-12-10 07:52:02,610] INFO django.server - "GET /static/phishield/images/bg.jpg HTTP/1.1" 304 0
-[2025-12-10 07:52:07,379] INFO django.server - "GET /settings/ HTTP/1.1" 200 59367
-[2025-12-10 07:53:10,917] INFO django.server - "GET /settings/ HTTP/1.1" 200 57598
-[2025-12-10 07:53:25,041] INFO django.server - "GET /settings/ HTTP/1.1" 200 55309
-[2025-12-10 07:53:45,104] INFO django.server - "GET /settings/ HTTP/1.1" 200 55309
-[2025-12-10 07:53:48,107] INFO django.server - "GET /check-link/ HTTP/1.1" 200 37189
-[2025-12-10 07:54:27,327] INFO django.server - "GET /analyze-message/ HTTP/1.1" 200 37019
-[2025-12-10 07:54:28,223] INFO django.server - "GET /analyze-message/ HTTP/1.1" 200 37019
-[2025-12-10 07:54:29,014] INFO django.server - "GET /analyze-message/ HTTP/1.1" 200 37019
-[2025-12-10 07:54:33,560] INFO django.server - "GET /settings/ HTTP/1.1" 200 55309
-[2025-12-10 07:54:40,517] INFO django.server - "GET /static/phishield/images/bg.jpg HTTP/1.1" 304 0
-[2025-12-10 07:54:43,575] INFO django.server - "GET /analyze-message/ HTTP/1.1" 200 37019
-[2025-12-10 07:55:19,840] INFO django.server - "GET /analyze-message/ HTTP/1.1" 200 37019
-[2025-12-10 07:55:21,169] INFO django.server - "GET /check-link/ HTTP/1.1" 200 37095
-[2025-12-10 07:55:28,012] INFO django.server - "GET /analyze-message/ HTTP/1.1" 200 37019
-[2025-12-10 07:55:29,150] INFO django.server - "GET /check-link/ HTTP/1.1" 200 37095
-[2025-12-10 07:55:30,232] INFO django.server - "GET /analyze-message/ HTTP/1.1" 200 37019
-[2025-12-10 07:55:32,252] INFO django.server - "GET /check-link/ HTTP/1.1" 200 37095
-[2025-12-10 07:55:33,225] INFO django.server - "GET /analyze-message/ HTTP/1.1" 200 37019
-[2025-12-10 07:55:35,537] INFO django.server - "GET /check-link/ HTTP/1.1" 200 37095
-[2025-12-10 07:55:36,109] INFO phishield - Dashboard accessed by: gave
-[2025-12-10 07:55:36,125] INFO django.server - "GET /dashboard/ HTTP/1.1" 200 64338
-[2025-12-10 07:55:36,725] INFO django.server - "GET /check-link/ HTTP/1.1" 200 37095
-[2025-12-10 07:55:37,407] INFO django.server - "GET /analyze-message/ HTTP/1.1" 200 37019
-[2025-12-10 07:55:38,102] INFO phishield - History accessed by: gave
-[2025-12-10 07:55:38,113] INFO django.server - "GET /history/ HTTP/1.1" 200 46861
-[2025-12-10 07:55:38,678] INFO phishield - About Us page accessed
-[2025-12-10 07:55:38,693] INFO django.server - "GET /about/ HTTP/1.1" 200 53665
-[2025-12-10 07:55:38,726] INFO django.server - "GET /static/phishield/images/habon.png HTTP/1.1" 200 163886
-[2025-12-10 07:55:38,726] INFO django.server - "GET /static/phishield/images/pfp.jpg HTTP/1.1" 200 188882
-[2025-12-10 07:55:38,729] INFO django.server - "GET /static/phishield/images/canete.png HTTP/1.1" 200 338010
-[2025-12-10 07:55:38,730] INFO django.server - "GET /static/phishield/images/hontiveros.png HTTP/1.1" 200 356776
-[2025-12-10 07:55:38,732] INFO django.server - "GET /static/phishield/images/campilanan.jpg HTTP/1.1" 200 542099
-[2025-12-10 07:55:38,741] INFO django.server - "GET /static/phishield/images/butihen.png HTTP/1.1" 200 1480994
-[2025-12-10 07:55:39,414] INFO django.server - "GET /contact/ HTTP/1.1" 200 47943
-[2025-12-10 07:55:41,695] INFO django.server - "GET /check-link/ HTTP/1.1" 200 37095
-[2025-12-10 07:55:42,270] INFO django.server - "GET /analyze-message/ HTTP/1.1" 200 37019
-[2025-12-10 07:56:08,786] INFO django.server - "GET /settings/ HTTP/1.1" 200 55309
-[2025-12-10 07:56:08,812] INFO django.server - "GET /static/phishield/images/bg.jpg HTTP/1.1" 304 0
-[2025-12-10 07:56:13,460] INFO django.server - "GET /analyze-message/ HTTP/1.1" 200 37019
-[2025-12-10 07:57:24,466] INFO django.server - "GET /analyze-message/ HTTP/1.1" 200 37287
-[2025-12-10 07:58:29,199] INFO django.server - "GET /analyze-message/ HTTP/1.1" 200 37971
-[2025-12-10 07:58:58,314] INFO django.server - "GET /analyze-message/ HTTP/1.1" 200 37877
-[2025-12-10 07:58:59,929] INFO django.server - "GET /check-link/ HTTP/1.1" 200 37095
-[2025-12-10 07:59:01,069] INFO django.server - "GET /check-link/ HTTP/1.1" 200 37095
-[2025-12-10 07:59:01,743] INFO django.server - "GET /analyze-message/ HTTP/1.1" 200 37877
-[2025-12-10 07:59:02,433] INFO phishield - Dashboard accessed by: gave
-[2025-12-10 07:59:02,446] INFO django.server - "GET /dashboard/ HTTP/1.1" 200 64340
-[2025-12-10 07:59:05,857] INFO phishield - Profile accessed by: gave
-[2025-12-10 07:59:05,874] INFO django.server - "GET /profile/ HTTP/1.1" 200 46642
-[2025-12-10 07:59:05,897] INFO django.server - "GET /static/phishield/images/bg.jpg HTTP/1.1" 304 0
-[2025-12-10 07:59:17,147] INFO django.server - "GET /settings/ HTTP/1.1" 200 55309
-[2025-12-10 07:59:18,443] INFO django.server - "GET /profile/edit/ HTTP/1.1" 200 43698
-[2025-12-10 07:59:24,453] INFO phishield - Profile accessed by: gave
-[2025-12-10 07:59:24,467] INFO django.server - "GET /profile/ HTTP/1.1" 200 46642
-[2025-12-10 07:59:25,594] INFO django.server - "GET /profile/edit/ HTTP/1.1" 200 43698
-[2025-12-10 07:59:33,267] INFO django.server - "GET /settings/ HTTP/1.1" 200 55309
-[2025-12-10 07:59:46,462] INFO django.server - "GET /contact/ HTTP/1.1" 200 47943
-[2025-12-10 08:01:43,599] INFO django.server - "GET /settings/ HTTP/1.1" 200 55309
-[2025-12-10 08:01:45,119] INFO django.server - "GET /static/phishield/images/bg.jpg HTTP/1.1" 304 0
-[2025-12-10 08:01:46,049] INFO django.server - "GET /contact/ HTTP/1.1" 200 47943
-[2025-12-10 08:02:29,079] INFO django.server - "GET /contact/ HTTP/1.1" 200 47891
-[2025-12-10 08:02:32,248] INFO django.server - "GET /settings/ HTTP/1.1" 200 55309
-[2025-12-10 08:02:43,459] INFO django.server - "GET /contact/ HTTP/1.1" 200 47891
-[2025-12-10 08:03:00,534] INFO django.server - "GET /contact/ HTTP/1.1" 200 47839
-[2025-12-10 08:03:17,483] INFO django.server - "GET /contact/ HTTP/1.1" 200 47839
-[2025-12-10 08:03:20,428] INFO phishield - History accessed by: gave
-[2025-12-10 08:03:20,442] INFO django.server - "GET /history/ HTTP/1.1" 200 46861
-[2025-12-10 08:03:21,970] INFO django.server - "GET /analyze-message/ HTTP/1.1" 200 37877
-[2025-12-10 08:03:23,951] INFO django.server - "GET /check-link/ HTTP/1.1" 200 37095
-[2025-12-10 08:03:25,652] INFO phishield - Dashboard accessed by: gave
-[2025-12-10 08:03:25,663] INFO django.server - "GET /dashboard/ HTTP/1.1" 200 64340
-[2025-12-10 08:03:50,153] INFO django.server - "GET /contact/ HTTP/1.1" 200 47839
-[2025-12-10 08:03:56,638] INFO django.server - "GET /settings/ HTTP/1.1" 200 55309
-[2025-12-10 08:03:58,519] INFO django.server - "GET /static/phishield/images/bg.jpg HTTP/1.1" 304 0
-[2025-12-10 08:03:59,287] INFO django.server - "GET /contact/ HTTP/1.1" 200 47839
-[2025-12-10 08:07:49,503] INFO django.server - "GET /contact/ HTTP/1.1" 200 47839
-[2025-12-10 08:07:49,525] INFO django.server - "GET /static/phishield/images/bg.jpg HTTP/1.1" 304 0
-[2025-12-10 08:07:51,610] INFO django.server - "GET /settings/ HTTP/1.1" 200 55309
-[2025-12-10 08:07:53,303] INFO django.server - "GET /profile/delete-account/ HTTP/1.1" 200 48012
-[2025-12-10 08:07:57,712] INFO django.server - "GET /settings/ HTTP/1.1" 200 55309
-[2025-12-10 08:08:00,704] INFO django.server - "GET /profile/delete-account/ HTTP/1.1" 200 48012
-[2025-12-10 08:08:04,511] INFO django.server - "GET /contact/ HTTP/1.1" 200 47839
-[2025-12-10 08:08:04,881] INFO phishield - About Us page accessed
-[2025-12-10 08:08:04,897] INFO django.server - "GET /about/ HTTP/1.1" 200 53665
-[2025-12-10 08:08:04,926] INFO django.server - "GET /static/phishield/images/habon.png HTTP/1.1" 304 0
-[2025-12-10 08:08:04,927] INFO django.server - "GET /static/phishield/images/hontiveros.png HTTP/1.1" 304 0
-[2025-12-10 08:08:04,928] INFO django.server - "GET /static/phishield/images/pfp.jpg HTTP/1.1" 304 0
-[2025-12-10 08:08:04,930] INFO django.server - "GET /static/phishield/images/butihen.png HTTP/1.1" 304 0
-[2025-12-10 08:08:04,930] INFO django.server - "GET /static/phishield/images/canete.png HTTP/1.1" 304 0
-[2025-12-10 08:08:04,931] INFO django.server - "GET /static/phishield/images/campilanan.jpg HTTP/1.1" 304 0
-[2025-12-10 08:08:05,296] INFO phishield - History accessed by: gave
-[2025-12-10 08:08:05,313] INFO django.server - "GET /history/ HTTP/1.1" 200 46861
-[2025-12-10 08:08:06,203] INFO django.server - "GET /check-link/ HTTP/1.1" 200 37095
-[2025-12-10 08:08:06,527] INFO phishield - Dashboard accessed by: gave
-[2025-12-10 08:08:06,543] INFO django.server - "GET /dashboard/ HTTP/1.1" 200 64332
-[2025-12-10 08:08:11,049] INFO django.server - "GET /check-link/ HTTP/1.1" 200 37095
-[2025-12-10 08:08:13,376] INFO django.server - "GET /analyze-message/ HTTP/1.1" 200 37877
-[2025-12-10 08:08:17,441] INFO django.server - "GET /contact/ HTTP/1.1" 200 47839
-[2025-12-10 08:08:20,312] INFO django.server - "GET /settings/ HTTP/1.1" 200 55309
-[2025-12-10 08:08:21,615] INFO django.server - "GET /profile/edit/ HTTP/1.1" 200 43698
-[2025-12-10 08:08:31,185] INFO django.server - "GET /analyze-message/ HTTP/1.1" 200 37877
-[2025-12-10 08:08:33,628] INFO django.server - "GET /check-link/ HTTP/1.1" 200 37095
-[2025-12-10 08:08:35,846] INFO phishield - Dashboard accessed by: gave
-[2025-12-10 08:08:35,859] INFO django.server - "GET /dashboard/ HTTP/1.1" 200 64338
-[2025-12-10 08:08:38,360] INFO django.server - "GET /contact/ HTTP/1.1" 200 47839
-[2025-12-10 08:08:40,676] INFO django.server - "GET /contact/ HTTP/1.1" 200 47839
-[2025-12-10 08:08:41,904] INFO django.server - "GET /settings/ HTTP/1.1" 200 55309
-[2025-12-10 08:08:44,383] INFO django.server - "GET /profile/delete-account/ HTTP/1.1" 200 48012
-[2025-12-10 08:08:48,357] INFO django.server - "GET /contact/ HTTP/1.1" 200 47839
-[2025-12-10 08:09:02,941] INFO django.server - "GET /contact/ HTTP/1.1" 200 47839
-[2025-12-10 08:09:04,219] INFO django.server - "GET /contact/ HTTP/1.1" 200 47839
-[2025-12-10 08:09:20,852] INFO django.server - "GET /contact/ HTTP/1.1" 200 47839
-[2025-12-10 08:09:21,847] INFO django.server - "GET /contact/ HTTP/1.1" 200 47839
-[2025-12-10 08:09:27,285] INFO django.server - "GET /settings/ HTTP/1.1" 200 55309
-[2025-12-10 08:10:17,223] INFO django.utils.autoreload - Watching for file changes with StatReloader
-[2025-12-10 08:10:19,906] INFO django.server - "GET /profile/change-password/ HTTP/1.1" 200 33759
-[2025-12-10 08:10:26,664] INFO django.server - "POST /logout/ HTTP/1.1" 302 0
-[2025-12-10 08:10:26,673] INFO django.server - "GET /login/ HTTP/1.1" 200 27878
-[2025-12-10 08:10:29,987] INFO django.server - "GET /register/ HTTP/1.1" 200 39308
-[2025-12-10 08:10:32,647] INFO django.server - "GET /login/ HTTP/1.1" 200 27878
-[2025-12-10 08:10:34,050] INFO django.server - "GET /register/ HTTP/1.1" 200 39308
-[2025-12-10 08:10:34,437] INFO django.server - "GET /login/ HTTP/1.1" 200 27878
-[2025-12-10 08:10:35,761] INFO phishield - About Us page accessed
-[2025-12-10 08:10:35,765] INFO django.server - "GET /about/ HTTP/1.1" 200 50605
-[2025-12-10 08:10:41,546] INFO django.server - "GET /login/ HTTP/1.1" 200 27878
-[2025-12-10 08:10:43,548] INFO django.server - "GET /register/ HTTP/1.1" 200 39308
-[2025-12-10 08:10:49,472] INFO django.server - "GET /login/ HTTP/1.1" 200 27878
-[2025-12-10 08:10:50,918] INFO django.server - "GET /password-reset/ HTTP/1.1" 200 22782
-[2025-12-10 08:11:00,826] INFO django.server - "GET /register/ HTTP/1.1" 200 39308
-[2025-12-10 08:11:01,681] INFO phishield - About Us page accessed
-[2025-12-10 08:11:01,683] INFO django.server - "GET /about/ HTTP/1.1" 200 50605
-[2025-12-10 08:11:01,708] INFO django.server - "GET /static/phishield/images/habon.png HTTP/1.1" 304 0
-[2025-12-10 08:11:01,710] INFO django.server - "GET /static/phishield/images/canete.png HTTP/1.1" 304 0
-[2025-12-10 08:11:01,711] INFO django.server - "GET /static/phishield/images/hontiveros.png HTTP/1.1" 304 0
-[2025-12-10 08:11:01,711] INFO django.server - "GET /static/phishield/images/pfp.jpg HTTP/1.1" 304 0
-[2025-12-10 08:11:01,712] INFO django.server - "GET /static/phishield/images/butihen.png HTTP/1.1" 304 0
-[2025-12-10 08:11:01,712] INFO django.server - "GET /static/phishield/images/campilanan.jpg HTTP/1.1" 304 0
-[2025-12-10 08:11:02,524] INFO django.server - "GET /login/ HTTP/1.1" 200 27878
-[2025-12-10 08:11:03,057] INFO django.server - "GET /register/ HTTP/1.1" 200 39308
-[2025-12-10 08:11:04,007] INFO phishield - About Us page accessed
-[2025-12-10 08:11:04,009] INFO django.server - "GET /about/ HTTP/1.1" 200 50605
-[2025-12-10 08:11:04,437] INFO django.server - "GET /login/ HTTP/1.1" 200 27878
-[2025-12-10 08:11:04,755] INFO django.server - "GET /register/ HTTP/1.1" 200 39308
-[2025-12-10 08:11:05,098] INFO django.server - "GET /login/ HTTP/1.1" 200 27878
-[2025-12-10 08:11:05,399] INFO phishield - About Us page accessed
-[2025-12-10 08:11:05,401] INFO django.server - "GET /about/ HTTP/1.1" 200 50605
-[2025-12-10 08:11:05,790] INFO django.server - "GET /register/ HTTP/1.1" 200 39308
-[2025-12-10 08:11:06,137] INFO django.server - "GET /login/ HTTP/1.1" 200 27878
-[2025-12-10 08:11:11,100] INFO django.server - "POST /login/ HTTP/1.1" 302 0
-[2025-12-10 08:11:11,105] INFO phishield - Dashboard accessed by: gave
-[2025-12-10 08:11:11,119] INFO django.server - "GET /dashboard/ HTTP/1.1" 200 64332
-[2025-12-10 08:17:22,944] INFO django.utils.autoreload - Watching for file changes with StatReloader
-[2025-12-10 08:17:25,794] INFO django.server - "GET /check-link/ HTTP/1.1" 200 37095
-[2025-12-10 08:17:25,839] INFO django.server - "GET /static/phishield/images/bg.jpg HTTP/1.1" 304 0
-[2025-12-10 08:17:29,456] INFO django.server - "GET /check-link/ HTTP/1.1" 200 37095
-[2025-12-10 08:17:33,835] INFO django.server - "GET /contact/ HTTP/1.1" 200 47839
-[2025-12-10 08:17:34,399] INFO phishield - About Us page accessed
-[2025-12-10 08:17:34,416] INFO django.server - "GET /about/ HTTP/1.1" 200 53665
-[2025-12-10 08:17:34,436] INFO django.server - "GET /static/phishield/images/habon.png HTTP/1.1" 304 0
-[2025-12-10 08:17:34,439] INFO django.server - "GET /static/phishield/images/hontiveros.png HTTP/1.1" 304 0
-[2025-12-10 08:17:34,440] INFO django.server - "GET /static/phishield/images/campilanan.jpg HTTP/1.1" 304 0
-[2025-12-10 08:17:34,440] INFO django.server - "GET /static/phishield/images/pfp.jpg HTTP/1.1" 304 0
-[2025-12-10 08:17:34,441] INFO django.server - "GET /static/phishield/images/canete.png HTTP/1.1" 304 0
-[2025-12-10 08:17:34,441] INFO django.server - "GET /static/phishield/images/butihen.png HTTP/1.1" 304 0
-[2025-12-10 08:17:35,020] INFO phishield - History accessed by: gave
-[2025-12-10 08:17:35,037] INFO django.server - "GET /history/ HTTP/1.1" 200 46861
-[2025-12-10 08:17:35,538] INFO django.server - "GET /analyze-message/ HTTP/1.1" 200 37877
-[2025-12-10 08:17:38,298] INFO phishield - Dashboard accessed by: gave
-[2025-12-10 08:17:38,315] INFO django.server - "GET /dashboard/ HTTP/1.1" 200 64349
-[2025-12-10 08:17:39,186] INFO django.server - "GET /check-link/ HTTP/1.1" 200 37095
-[2025-12-10 08:17:41,409] INFO django.server - "GET /analyze-message/ HTTP/1.1" 200 37877
-[2025-12-10 08:17:41,778] INFO django.server - "GET /check-link/ HTTP/1.1" 200 37095
-[2025-12-10 08:17:45,883] INFO django.server - "GET /check-link/ HTTP/1.1" 200 37095
-[2025-12-10 08:17:46,699] INFO django.server - "GET /analyze-message/ HTTP/1.1" 200 37877
-[2025-12-10 08:17:47,304] INFO django.server - "GET /check-link/ HTTP/1.1" 200 37095
-[2025-12-10 08:19:04,052] INFO django.server - "GET /check-link/ HTTP/1.1" 200 37095
-[2025-12-10 08:19:09,599] INFO django.server - "GET /check-link/ HTTP/1.1" 200 37095
-[2025-12-10 08:19:11,480] INFO django.server - "GET /check-link/ HTTP/1.1" 200 37095
-[2025-12-10 08:19:11,679] INFO django.server - "GET /check-link/ HTTP/1.1" 200 37095
-[2025-12-10 08:19:12,358] INFO django.server - "GET /check-link/ HTTP/1.1" 200 37095
-[2025-12-10 08:19:18,033] INFO django.server - "GET /check-link/ HTTP/1.1" 200 37095
-[2025-12-10 08:19:18,544] INFO django.server - "GET /check-link/ HTTP/1.1" 200 37095
-[2025-12-10 08:19:49,148] INFO django.server - "GET /check-link/ HTTP/1.1" 200 37089
-[2025-12-10 08:19:59,253] INFO django.server - "GET /check-link/ HTTP/1.1" 200 37095
-[2025-12-10 08:21:13,902] INFO django.server - "GET /check-link/ HTTP/1.1" 200 37670
-[2025-12-10 08:21:31,711] INFO django.server - "GET /check-link/ HTTP/1.1" 200 37670
-[2025-12-10 08:21:32,612] INFO django.server - "GET /analyze-message/ HTTP/1.1" 200 37877
-[2025-12-10 08:23:58,078] INFO django.server - "GET /analyze-message/ HTTP/1.1" 200 37971
-[2025-12-10 08:23:58,998] INFO django.server - "GET /analyze-message/ HTTP/1.1" 200 37971
-[2025-12-10 08:24:00,010] INFO django.server - "GET /check-link/ HTTP/1.1" 200 37755
-[2025-12-10 08:24:01,195] INFO django.server - "GET /check-link/ HTTP/1.1" 200 37755
-[2025-12-10 08:24:03,963] INFO django.server - "GET /analyze-message/ HTTP/1.1" 200 37971
-[2025-12-10 08:24:04,826] INFO django.server - "GET /check-link/ HTTP/1.1" 200 37755
-[2025-12-10 08:24:59,130] INFO django.server - "GET /check-link/ HTTP/1.1" 200 37661
-[2025-12-10 08:25:00,621] INFO django.server - "GET /analyze-message/ HTTP/1.1" 200 37877
-[2025-12-10 08:25:01,722] INFO django.server - "GET /analyze-message/ HTTP/1.1" 200 37877
-[2025-12-10 08:25:05,489] INFO django.server - "GET /analyze-message/ HTTP/1.1" 200 37877
-[2025-12-10 08:25:06,048] INFO django.server - "GET /check-link/ HTTP/1.1" 200 37661
-[2025-12-10 08:25:06,974] INFO django.server - "GET /analyze-message/ HTTP/1.1" 200 37877
-[2025-12-10 08:25:07,350] INFO django.server - "GET /check-link/ HTTP/1.1" 200 37661
+[2025-12-10 00:51:29,379] INFO django.utils.autoreload - Watching for file changes with StatReloader
+[2025-12-10 00:51:36,089] INFO django.server - "GET / HTTP/1.1" 200 10361
+[2025-12-10 00:51:38,741] INFO django.server - "GET /login/ HTTP/1.1" 200 27878
+[2025-12-10 00:51:45,887] INFO django.server - "POST /login/ HTTP/1.1" 302 0
+[2025-12-10 00:51:45,892] INFO phishield - Dashboard accessed by: Michelle
+[2025-12-10 00:51:45,907] INFO django.server - "GET /dashboard/ HTTP/1.1" 200 64346
+[2025-12-10 00:51:59,462] INFO phishield - History accessed by: Michelle
+[2025-12-10 00:51:59,474] INFO django.server - "GET /history/ HTTP/1.1" 200 38058
+[2025-12-10 00:53:19,629] INFO django.server - "GET /settings/ HTTP/1.1" 200 59371
+[2025-12-10 00:53:24,899] INFO django.server - "GET /settings/ HTTP/1.1" 200 59371
+[2025-12-10 00:53:26,634] INFO django.server - "GET /profile/delete-account/ HTTP/1.1" 200 48016
+[2025-12-10 00:54:45,146] INFO phishield - History accessed by: Michelle
+[2025-12-10 00:54:45,219] INFO django.server - "GET /history/ HTTP/1.1" 200 44195
+[2025-12-10 00:54:54,738] INFO django.server - "GET /check-link/ HTTP/1.1" 200 37193
+[2025-12-10 00:55:01,920] INFO phishield - URL check by Michelle: https://gemini.com
+[2025-12-10 00:55:02,876] INFO phishield - URL analysis completed - Risk: safe
+[2025-12-10 00:55:02,884] INFO django.server - "POST /check-link/ HTTP/1.1" 200 37788
+[2025-12-10 00:55:14,927] INFO phishield - URL check by Michelle: https://github.com/chimmymikel/CSIT327-G8-PhiShield/commit/227d4d50acc9b37ad30fc6243975f202cdacf52a#diff-1805acbee3babf8cd1082ff45d6148c23284c28b5a768929369e69f232da7dd3
+[2025-12-10 00:55:15,718] INFO phishield - URL analysis completed - Risk: suspicious
+[2025-12-10 00:55:15,726] INFO django.server - "POST /check-link/ HTTP/1.1" 200 37991
+[2025-12-10 00:55:38,665] INFO phishield - URL check by Michelle: https://claude.ai/chat/2f16904e-6f69-4c23-a61a-c4452e8ac84b
+[2025-12-10 00:55:39,408] INFO phishield - URL analysis completed - Risk: safe
+[2025-12-10 00:55:39,422] INFO django.server - "POST /check-link/ HTTP/1.1" 200 37824
+[2025-12-10 00:55:47,877] INFO phishield - URL check by Michelle: https://mail.google.com/mail/u/0/#inbox
+[2025-12-10 00:55:48,480] INFO phishield - URL analysis completed - Risk: safe
+[2025-12-10 00:55:48,488] INFO django.server - "POST /check-link/ HTTP/1.1" 200 37817
+[2025-12-10 00:55:54,939] INFO phishield - URL check by Michelle: https://www.facebook.com/
+[2025-12-10 00:55:55,683] INFO phishield - URL analysis completed - Risk: safe
+[2025-12-10 00:55:55,691] INFO django.server - "POST /check-link/ HTTP/1.1" 200 37792
+[2025-12-10 00:56:01,992] INFO phishield - URL check by Michelle: https://lto.gov.ph
+[2025-12-10 00:56:02,670] INFO phishield - URL analysis completed - Risk: suspicious
+[2025-12-10 00:56:02,681] INFO django.server - "POST /check-link/ HTTP/1.1" 200 37793
+[2025-12-10 00:56:36,669] INFO phishield - URL check by Michelle: https://www.aiclassasean.org/
+[2025-12-10 00:56:37,739] INFO phishield - URL analysis completed - Risk: safe
+[2025-12-10 00:56:37,748] INFO django.server - "POST /check-link/ HTTP/1.1" 200 37790
+[2025-12-10 00:56:43,394] INFO phishield - URL check by Michelle: http://127.0.0.1:8000/check-link/
+[2025-12-10 00:56:46,001] INFO phishield - URL analysis completed - Risk: dangerous
+[2025-12-10 00:56:46,007] INFO django.server - "POST /check-link/ HTTP/1.1" 200 37942
+[2025-12-10 00:57:06,141] INFO phishield - URL check by Michelle: https://csit327-g8-phishield-production.up.railway.app/dashboard/
+[2025-12-10 00:57:06,868] INFO phishield - URL analysis completed - Risk: safe
+[2025-12-10 00:57:06,877] INFO django.server - "POST /check-link/ HTTP/1.1" 200 37826
+[2025-12-10 00:57:18,709] INFO phishield - URL check by Michelle: https://blissfuljuan.com
+[2025-12-10 00:57:19,451] INFO phishield - URL analysis completed - Risk: suspicious
+[2025-12-10 00:57:19,462] INFO django.server - "POST /check-link/ HTTP/1.1" 200 37820
+[2025-12-10 00:57:28,632] INFO phishield - URL check by Michelle: https://github.com
+[2025-12-10 00:57:29,306] INFO phishield - URL analysis completed - Risk: safe
+[2025-12-10 00:57:29,318] INFO django.server - "POST /check-link/ HTTP/1.1" 200 37777
+[2025-12-10 00:57:37,398] INFO django.server - "GET /analyze-message/ HTTP/1.1" 200 37117
+[2025-12-10 00:57:43,751] INFO phishield - Message analysis by Michelle
+[2025-12-10 00:57:43,768] INFO phishield - Message analysis completed - Risk: safe
+[2025-12-10 00:57:43,779] INFO django.server - "POST /analyze-message/ HTTP/1.1" 200 37980
+[2025-12-10 00:58:51,148] INFO phishield - Message analysis by Michelle
+[2025-12-10 00:58:51,160] INFO phishield - Message analysis completed - Risk: safe
+[2025-12-10 00:58:51,174] INFO django.server - "POST /analyze-message/ HTTP/1.1" 200 38154
+[2025-12-10 00:59:09,470] INFO phishield - Message analysis by Michelle
+[2025-12-10 00:59:09,484] INFO phishield - Message analysis completed - Risk: safe
+[2025-12-10 00:59:09,495] INFO django.server - "POST /analyze-message/ HTTP/1.1" 200 38015
+[2025-12-10 00:59:13,561] INFO phishield - History accessed by: Michelle
+[2025-12-10 00:59:13,598] INFO django.server - "GET /history/ HTTP/1.1" 200 66826
+[2025-12-10 00:59:28,821] INFO django.server - "GET /settings/ HTTP/1.1" 200 59371
+[2025-12-10 00:59:34,669] INFO phishield - History accessed by: Michelle
+[2025-12-10 00:59:34,680] INFO django.server - "GET /history/ HTTP/1.1" 200 66828
+[2025-12-10 00:59:53,079] INFO phishield - About Us page accessed
+[2025-12-10 00:59:53,099] INFO django.server - "GET /about/ HTTP/1.1" 200 53669
+[2025-12-10 00:59:53,141] INFO django.server - "GET /static/phishield/images/habon.png HTTP/1.1" 304 0
+[2025-12-10 00:59:53,143] INFO django.server - "GET /static/phishield/images/hontiveros.png HTTP/1.1" 304 0
+[2025-12-10 00:59:53,148] INFO django.server - "GET /static/phishield/images/pfp.jpg HTTP/1.1" 304 0
+[2025-12-10 00:59:53,150] INFO django.server - "GET /static/phishield/images/butihen.png HTTP/1.1" 304 0
+[2025-12-10 00:59:53,150] INFO django.server - "GET /static/phishield/images/canete.png HTTP/1.1" 304 0
+[2025-12-10 00:59:53,151] INFO django.server - "GET /static/phishield/images/campilanan.jpg HTTP/1.1" 304 0
+[2025-12-10 00:59:54,559] INFO django.server - "GET /contact/ HTTP/1.1" 200 47962
+[2025-12-10 00:59:56,195] INFO phishield - About Us page accessed
+[2025-12-10 00:59:56,204] INFO django.server - "GET /about/ HTTP/1.1" 200 53669
+[2025-12-10 00:59:56,886] INFO phishield - History accessed by: Michelle
+[2025-12-10 00:59:56,899] INFO django.server - "GET /history/ HTTP/1.1" 200 66828
+[2025-12-10 01:02:20,512] INFO django.server - "GET /settings/ HTTP/1.1" 200 59371
+[2025-12-10 01:02:27,045] INFO phishield - History accessed by: Michelle
+[2025-12-10 01:02:27,055] INFO django.server - "GET /history/ HTTP/1.1" 200 66829
+[2025-12-10 01:06:12,817] INFO django.utils.autoreload - Watching for file changes with StatReloader
+[2025-12-10 01:06:14,941] INFO django.server - "GET / HTTP/1.1" 302 0
+[2025-12-10 01:06:14,953] INFO phishield - Dashboard accessed by: Michelle
+[2025-12-10 01:06:14,975] INFO django.server - "GET /dashboard/ HTTP/1.1" 200 70977
+[2025-12-10 01:06:17,230] INFO phishield - History accessed by: Michelle
+[2025-12-10 01:06:17,292] INFO django.server - "GET /history/ HTTP/1.1" 200 68805
+[2025-12-10 01:06:37,967] INFO django.server - "GET /settings/ HTTP/1.1" 200 59371
+[2025-12-10 01:06:44,710] INFO phishield - History accessed by: Michelle
+[2025-12-10 01:06:44,727] INFO django.server - "GET /history/ HTTP/1.1" 200 68806
+[2025-12-10 01:08:51,715] INFO django.utils.autoreload - Watching for file changes with StatReloader
+[2025-12-10 01:08:53,690] INFO django.server - "GET / HTTP/1.1" 302 0
+[2025-12-10 01:08:53,714] INFO phishield - Dashboard accessed by: Michelle
+[2025-12-10 01:08:53,741] INFO django.server - "GET /dashboard/ HTTP/1.1" 200 70966
+[2025-12-10 01:08:55,765] INFO phishield - History accessed by: Michelle
+[2025-12-10 01:08:55,827] INFO django.server - "GET /history/ HTTP/1.1" 200 68907
+[2025-12-10 01:10:30,927] INFO django.utils.autoreload - Watching for file changes with StatReloader
+[2025-12-10 01:10:32,647] INFO django.server - "GET / HTTP/1.1" 302 0
+[2025-12-10 01:10:32,664] INFO phishield - Dashboard accessed by: Michelle
+[2025-12-10 01:10:32,686] INFO django.server - "GET /dashboard/ HTTP/1.1" 200 70973
+[2025-12-10 01:10:34,446] INFO phishield - About Us page accessed
+[2025-12-10 01:10:34,458] INFO django.server - "GET /about/ HTTP/1.1" 200 53669
+[2025-12-10 01:10:34,816] INFO phishield - History accessed by: Michelle
+[2025-12-10 01:10:34,892] INFO django.server - "GET /history/ HTTP/1.1" 200 69025
+[2025-12-10 01:10:56,079] INFO phishield - History accessed by: Michelle
+[2025-12-10 01:10:56,088] INFO django.server - "GET /history/ HTTP/1.1" 200 69025
+[2025-12-10 01:12:56,573] INFO django.utils.autoreload - Watching for file changes with StatReloader
+[2025-12-10 01:12:58,247] INFO django.server - "GET / HTTP/1.1" 200 10361
+[2025-12-10 01:13:07,916] INFO django.server - "GET / HTTP/1.1" 302 0
+[2025-12-10 01:13:07,927] INFO phishield - Dashboard accessed by: Michelle
+[2025-12-10 01:13:07,944] INFO django.server - "GET /dashboard/ HTTP/1.1" 200 70982
+[2025-12-10 01:13:10,393] INFO phishield - History accessed by: Michelle
+[2025-12-10 01:13:10,462] INFO django.server - "GET /history/ HTTP/1.1" 200 71900
+[2025-12-10 01:13:30,782] INFO phishield - History accessed by: Michelle
+[2025-12-10 01:13:30,790] INFO django.server - "GET /history/ HTTP/1.1" 200 71900
+[2025-12-10 01:15:04,978] INFO phishield - History accessed by: Michelle
+[2025-12-10 01:15:05,041] INFO django.server - "GET /history/ HTTP/1.1" 200 71955
+[2025-12-10 01:15:26,128] INFO phishield - History accessed by: Michelle
+[2025-12-10 01:15:26,144] INFO django.server - "GET /history/ HTTP/1.1" 200 71955
+[2025-12-10 01:15:34,425] INFO phishield - About Us page accessed
+[2025-12-10 01:15:34,437] INFO django.server - "GET /about/ HTTP/1.1" 200 53669
+[2025-12-10 01:15:36,991] INFO django.server - "GET /analyze-message/ HTTP/1.1" 200 37117
+[2025-12-10 01:15:43,852] INFO phishield - History accessed by: Michelle
+[2025-12-10 01:15:43,864] INFO django.server - "GET /history/ HTTP/1.1" 200 71955
+[2025-12-10 01:16:55,222] INFO phishield - History accessed by: Michelle
+[2025-12-10 01:16:55,270] INFO django.server - "GET /history/ HTTP/1.1" 200 66843
+[2025-12-10 01:22:48,095] INFO phishield - History accessed by: Michelle
+[2025-12-10 01:22:48,142] INFO django.server - "GET /history/ HTTP/1.1" 200 70492
+[2025-12-10 01:23:23,653] INFO phishield - History accessed by: Michelle
+[2025-12-10 01:23:23,669] INFO django.server - "GET /history/ HTTP/1.1" 200 70492
+[2025-12-10 01:23:32,407] INFO django.server - "GET /contact/ HTTP/1.1" 200 47962
+[2025-12-10 01:23:34,965] INFO phishield - About Us page accessed
+[2025-12-10 01:23:34,974] INFO django.server - "GET /about/ HTTP/1.1" 200 53669
+[2025-12-10 01:23:35,693] INFO phishield - History accessed by: Michelle
+[2025-12-10 01:23:35,710] INFO django.server - "GET /history/ HTTP/1.1" 200 70492
+[2025-12-10 01:23:37,644] INFO phishield - History accessed by: Michelle
+[2025-12-10 01:23:37,658] INFO django.server - "GET /history/ HTTP/1.1" 200 70492
+[2025-12-10 01:23:46,979] INFO phishield - History accessed by: Michelle
+[2025-12-10 01:23:46,994] INFO django.server - "GET /history/ HTTP/1.1" 200 70492
+[2025-12-10 01:25:13,186] INFO django.server - "GET / HTTP/1.1" 302 0
+[2025-12-10 01:25:13,201] INFO phishield - Dashboard accessed by: Michelle
+[2025-12-10 01:25:13,215] INFO django.server - "GET /dashboard/ HTTP/1.1" 200 70971
+[2025-12-10 01:25:29,867] INFO phishield - Profile accessed by: Michelle
+[2025-12-10 01:25:29,912] INFO django.server - "GET /profile/ HTTP/1.1" 200 52133
+[2025-12-10 01:25:48,716] INFO django.server - "GET /contact/ HTTP/1.1" 200 47962
+[2025-12-10 01:25:51,183] INFO phishield - Profile accessed by: Michelle
+[2025-12-10 01:25:51,192] INFO django.server - "GET /profile/ HTTP/1.1" 200 52133
+[2025-12-10 01:25:54,215] INFO django.server - "GET /check-link/ HTTP/1.1" 200 37193
+[2025-12-10 01:25:55,607] INFO django.server - "GET /analyze-message/ HTTP/1.1" 200 37117
+[2025-12-10 01:25:57,411] INFO phishield - History accessed by: Michelle
+[2025-12-10 01:25:57,468] INFO django.server - "GET /history/ HTTP/1.1" 200 69530
+[2025-12-10 01:26:03,737] INFO phishield - About Us page accessed
+[2025-12-10 01:26:03,747] INFO django.server - "GET /about/ HTTP/1.1" 200 53669
+[2025-12-10 01:26:06,434] INFO django.server - "GET /contact/ HTTP/1.1" 200 47962
+[2025-12-10 01:26:10,530] INFO phishield - Profile accessed by: Michelle
+[2025-12-10 01:26:10,540] INFO django.server - "GET /profile/ HTTP/1.1" 200 52133
+[2025-12-10 01:33:09,370] INFO phishield - Profile accessed by: Michelle
+[2025-12-10 01:33:09,420] INFO django.server - "GET /profile/ HTTP/1.1" 200 67964
+[2025-12-10 01:33:36,855] INFO django.server - "GET /contact/ HTTP/1.1" 200 47962
+[2025-12-10 01:33:39,395] INFO phishield - Profile accessed by: Michelle
+[2025-12-10 01:33:39,407] INFO django.server - "GET /profile/ HTTP/1.1" 200 67964
+[2025-12-10 01:36:29,481] INFO phishield - Profile accessed by: Michelle
+[2025-12-10 01:36:29,564] INFO django.server - "GET /profile/ HTTP/1.1" 200 68040
+[2025-12-10 01:36:41,544] INFO django.server - "GET /contact/ HTTP/1.1" 200 47962
+[2025-12-10 01:36:43,790] INFO phishield - Profile accessed by: Michelle
+[2025-12-10 01:36:43,809] INFO django.server - "GET /profile/ HTTP/1.1" 200 68040
+[2025-12-10 01:45:22,008] INFO phishield - Profile accessed by: Michelle
+[2025-12-10 01:45:22,060] INFO django.server - "GET /profile/ HTTP/1.1" 200 68933
+[2025-12-10 01:46:33,942] INFO phishield - Profile accessed by: Michelle
+[2025-12-10 01:46:33,977] INFO django.server - "GET /profile/ HTTP/1.1" 200 52133
+[2025-12-10 01:46:54,865] INFO django.server - "GET /contact/ HTTP/1.1" 200 47962
+[2025-12-10 01:46:56,467] INFO phishield - About Us page accessed
+[2025-12-10 01:46:56,477] INFO django.server - "GET /about/ HTTP/1.1" 200 53669
+[2025-12-10 01:46:57,566] INFO django.server - "GET /contact/ HTTP/1.1" 200 47962
+[2025-12-10 01:46:58,963] INFO phishield - Profile accessed by: Michelle
+[2025-12-10 01:46:58,978] INFO django.server - "GET /profile/ HTTP/1.1" 200 52133
+[2025-12-10 01:49:15,270] INFO phishield - Profile accessed by: Michelle
+[2025-12-10 01:49:15,287] INFO django.server - "GET /profile/ HTTP/1.1" 200 52133
+[2025-12-10 01:49:18,663] INFO phishield - Profile accessed by: Michelle
+[2025-12-10 01:49:18,673] INFO django.server - "GET /profile/ HTTP/1.1" 200 52133
+[2025-12-10 01:49:31,687] INFO phishield - Profile accessed by: Michelle
+[2025-12-10 01:49:31,703] INFO django.server - "GET /profile/ HTTP/1.1" 200 52133
+[2025-12-10 01:49:33,806] INFO phishield - Profile accessed by: Michelle
+[2025-12-10 01:49:33,817] INFO django.server - "GET /profile/ HTTP/1.1" 200 52133
+[2025-12-10 01:51:19,948] INFO phishield - Profile accessed by: Michelle
+[2025-12-10 01:51:19,997] INFO django.server - "GET /profile/ HTTP/1.1" 200 53016
+[2025-12-10 01:51:26,719] INFO django.server - "GET /contact/ HTTP/1.1" 200 47962
+[2025-12-10 01:51:43,271] INFO django.server - "GET /contact/ HTTP/1.1" 200 47962
+[2025-12-10 01:51:44,985] INFO phishield - Profile accessed by: Michelle
+[2025-12-10 01:51:45,001] INFO django.server - "GET /profile/ HTTP/1.1" 200 53016
+[2025-12-10 01:53:28,693] INFO phishield - History accessed by: Michelle
+[2025-12-10 01:53:28,710] INFO django.server - "GET /history/ HTTP/1.1" 200 69530
+[2025-12-10 01:53:44,401] INFO phishield - Profile accessed by: Michelle
+[2025-12-10 01:53:44,466] INFO django.server - "GET /profile/ HTTP/1.1" 200 54452
+[2025-12-10 01:53:52,502] INFO django.server - "GET /contact/ HTTP/1.1" 200 47962
+[2025-12-10 01:53:55,361] INFO phishield - Profile accessed by: Michelle
+[2025-12-10 01:53:55,376] INFO django.server - "GET /profile/ HTTP/1.1" 200 54452
+[2025-12-10 01:54:03,205] INFO django.server - "GET /contact/ HTTP/1.1" 200 47962
+[2025-12-10 01:54:04,277] INFO phishield - About Us page accessed
+[2025-12-10 01:54:04,288] INFO django.server - "GET /about/ HTTP/1.1" 200 53669
+[2025-12-10 01:54:05,005] INFO phishield - History accessed by: Michelle
+[2025-12-10 01:54:05,019] INFO django.server - "GET /history/ HTTP/1.1" 200 69530
+[2025-12-10 01:54:07,353] INFO phishield - Profile accessed by: Michelle
+[2025-12-10 01:54:07,364] INFO django.server - "GET /profile/ HTTP/1.1" 200 54452
+[2026-02-21 15:21:27,711] INFO django.utils.autoreload - Watching for file changes with StatReloader
+[2026-02-21 15:21:33,493] INFO django.server - "GET / HTTP/1.1" 200 10361
+[2026-02-21 15:22:08,407] INFO django.server - "GET /register/ HTTP/1.1" 200 39308
+[2026-02-21 15:22:08,521] INFO django.server - "GET /static/phishield/images/bg.jpg HTTP/1.1" 200 919056
+[2026-02-21 15:23:02,485] INFO django.server - "POST /register/ HTTP/1.1" 200 39627
+[2026-02-21 15:23:24,283] INFO phishield - User registered and auto-verified: ashleycutie
+[2026-02-21 15:23:24,287] INFO django.server - "POST /register/ HTTP/1.1" 302 0
+[2026-02-21 15:23:24,293] INFO phishield - Dashboard accessed by: ashleycutie
+[2026-02-21 15:23:24,322] INFO django.server - "GET /dashboard/ HTTP/1.1" 200 65034
+[2026-02-21 15:23:36,833] INFO django.server - "GET /check-link/ HTTP/1.1" 200 37196
+[2026-02-21 15:23:44,497] INFO phishield - URL check by ashleycutie: https://drive.google.com/file/d/1pkTcrYQRrFSxkwsJakuunoxqtUOBGoRc/view?fbclid=IwY2xjawQGEaJleHRuA2FlbQIxMABicmlkETJITDVURXdXbjlCS3kzTHFyc3J0YwZhcHBfaWQQMjIyMDM5MTc4ODIwMDg5MgABHsuopjK5whZ36qo99MmRUya-Tv3k0f0fwfRZiegw6pZmjty7wooR5-hPURKk_aem_EackDA_6bfQWvf2qtjyr9A&pli=1
+[2026-02-21 15:23:45,541] INFO phishield - URL analysis completed - Risk: suspicious
+[2026-02-21 15:23:45,548] INFO django.server - "POST /check-link/ HTTP/1.1" 200 38096
+[2026-02-21 15:23:56,974] INFO phishield - URL check by ashleycutie: https://www.facebook.com/
+[2026-02-21 15:23:57,551] INFO phishield - URL analysis completed - Risk: safe
+[2026-02-21 15:23:57,559] INFO django.server - "POST /check-link/ HTTP/1.1" 200 37795
+[2026-02-21 15:24:31,945] INFO django.server - "GET /analyze-message/ HTTP/1.1" 200 37120
+[2026-02-21 15:31:59,581] INFO django.server - "GET / HTTP/1.1" 302 0
+[2026-02-21 15:31:59,586] INFO phishield - Dashboard accessed by: ashleycutie
+[2026-02-21 15:31:59,598] INFO django.server - "GET /dashboard/ HTTP/1.1" 200 66544
+[2026-02-21 15:32:43,770] INFO django.server - "GET /check-link/ HTTP/1.1" 200 37196
+[2026-02-21 15:32:54,513] INFO phishield - URL check by ashleycutie: https://www.facebook.com/
+[2026-02-21 15:32:55,313] INFO phishield - URL analysis completed - Risk: safe
+[2026-02-21 15:32:55,321] INFO django.server - "POST /check-link/ HTTP/1.1" 200 37795
+[2026-02-21 15:34:15,162] INFO django.server - "GET /analyze-message/ HTTP/1.1" 200 37120
+[2026-02-21 15:34:40,341] INFO phishield - Message analysis by ashleycutie
+[2026-02-21 15:34:40,355] INFO phishield - Message analysis completed - Risk: safe
+[2026-02-21 15:34:40,365] INFO django.server - "POST /analyze-message/ HTTP/1.1" 200 38175
+[2026-02-21 15:36:32,923] INFO phishield - Dashboard accessed by: ashleycutie
+[2026-02-21 15:36:32,933] INFO django.server - "GET /dashboard/ HTTP/1.1" 200 69542
+[2026-02-21 15:36:46,139] INFO phishield - History accessed by: ashleycutie
+[2026-02-21 15:36:46,258] INFO django.server - "GET /history/ HTTP/1.1" 200 54075
+[2026-02-21 15:38:26,510] INFO phishield - Dashboard accessed by: ashleycutie
+[2026-02-21 15:38:26,519] INFO django.server - "GET /dashboard/ HTTP/1.1" 200 69552
+[2026-02-21 15:39:10,287] INFO phishield - History accessed by: ashleycutie
+[2026-02-21 15:39:10,304] INFO django.server - "GET /history/ HTTP/1.1" 200 54075
+[2026-02-21 15:56:34,158] INFO django.server - "GET /check-link/ HTTP/1.1" 200 37196
+[2026-02-21 15:57:00,397] INFO django.server - "GET /analyze-message/ HTTP/1.1" 200 37120
+[2026-02-21 15:57:10,764] INFO phishield - History accessed by: ashleycutie
+[2026-02-21 15:57:10,774] INFO django.server - "GET /history/ HTTP/1.1" 200 54077
+[2026-02-27 15:43:31,280] INFO django.utils.autoreload - Watching for file changes with StatReloader
+[2026-02-27 15:50:06,561] INFO django.server - "GET / HTTP/1.1" 302 0
+[2026-02-27 15:50:06,577] INFO phishield - Dashboard accessed by: ashleycutie
+[2026-02-27 15:50:06,710] INFO django.server - "GET /dashboard/ HTTP/1.1" 200 69540
+[2026-02-27 15:50:07,001] INFO django.server - "GET /static/phishield/images/bg.jpg HTTP/1.1" 200 919056
+[2026-02-27 15:50:12,834] INFO django.server - "GET / HTTP/1.1" 302 0
+[2026-02-27 15:50:12,842] INFO phishield - Dashboard accessed by: ashleycutie
+[2026-02-27 15:50:12,853] INFO django.server - "GET /dashboard/ HTTP/1.1" 200 69529
+[2026-02-27 15:50:14,684] INFO django.server - "POST /logout/ HTTP/1.1" 302 0
+[2026-02-27 15:50:14,823] INFO django.server - "GET /login/ HTTP/1.1" 200 27878
+[2026-02-27 15:50:16,488] INFO django.server - "GET / HTTP/1.1" 200 10361
+[2026-02-27 15:53:50,776] INFO django.server - "GET /login/ HTTP/1.1" 200 27878
+[2026-02-27 15:58:56,294] INFO django.server - "GET /register/ HTTP/1.1" 200 39308
+[2026-02-27 16:00:08,941] INFO django.server - "GET /login/ HTTP/1.1" 200 27878
+[2026-02-27 16:00:10,538] INFO phishield - About Us page accessed
+[2026-02-27 16:00:10,594] INFO django.server - "GET /about/ HTTP/1.1" 200 50605
+[2026-02-27 16:00:10,663] INFO django.server - "GET /static/phishield/images/habon.png HTTP/1.1" 200 163886
+[2026-02-27 16:00:10,666] INFO django.server - "GET /static/phishield/images/pfp.jpg HTTP/1.1" 200 188882
+[2026-02-27 16:00:10,687] INFO django.server - "GET /static/phishield/images/hontiveros.png HTTP/1.1" 200 356776
+[2026-02-27 16:00:10,688] INFO django.server - "GET /static/phishield/images/canete.png HTTP/1.1" 200 338010
+[2026-02-27 16:00:10,692] INFO django.server - "GET /static/phishield/images/campilanan.jpg HTTP/1.1" 200 542099
+[2026-02-27 16:00:10,751] INFO django.server - "GET /static/phishield/images/butihen.png HTTP/1.1" 200 1480994
+[2026-02-27 16:00:29,916] INFO django.server - "GET /login/ HTTP/1.1" 200 27878
+[2026-02-27 16:00:38,793] INFO django.server - "POST /login/ HTTP/1.1" 302 0
+[2026-02-27 16:00:38,802] INFO phishield - Dashboard accessed by: Michelle
+[2026-02-27 16:00:38,812] INFO django.server - "GET /dashboard/ HTTP/1.1" 200 71013
+[2026-02-27 16:01:19,690] INFO django.server - "GET /check-link/ HTTP/1.1" 200 37193
+[2026-02-27 16:02:16,856] INFO django.server - "GET /analyze-message/ HTTP/1.1" 200 37117
+[2026-02-27 16:03:02,512] INFO phishield - History accessed by: Michelle
+[2026-02-27 16:03:02,681] INFO django.server - "GET /history/ HTTP/1.1" 200 69642
+[2026-02-27 16:03:38,673] INFO phishield - About Us page accessed
+[2026-02-27 16:03:38,684] INFO django.server - "GET /about/ HTTP/1.1" 200 53669
+[2026-02-27 16:04:29,732] INFO phishield - Profile accessed by: Michelle
+[2026-02-27 16:04:29,815] INFO django.server - "GET /profile/ HTTP/1.1" 200 52197
+[2026-02-27 16:05:00,694] INFO django.server - "GET /settings/ HTTP/1.1" 200 59371
+[2026-05-02 15:48:48,420] INFO django.utils.autoreload - Watching for file changes with StatReloader
+[2026-05-02 15:48:58,981] INFO django.server - "GET / HTTP/1.1" 200 10361
+[2026-05-02 15:49:04,333] INFO django.server - "GET /register/ HTTP/1.1" 200 39308
+[2026-05-02 15:49:04,448] INFO django.server - "GET /static/phishield/images/bg.jpg HTTP/1.1" 200 919056
+[2026-05-02 15:49:32,645] INFO django.server - "POST /register/ HTTP/1.1" 200 39879
+[2026-05-02 15:49:40,218] INFO django.server - "POST /register/ HTTP/1.1" 200 39829
+[2026-05-02 15:50:02,536] INFO phishield - User registered and auto-verified: michelleMarie
+[2026-05-02 15:50:02,540] INFO django.server - "POST /register/ HTTP/1.1" 302 0
+[2026-05-02 15:50:02,547] INFO phishield - Dashboard accessed by: michelleMarie
+[2026-05-02 15:50:02,564] INFO django.server - "GET /dashboard/ HTTP/1.1" 200 65049
+[2026-05-02 15:50:08,325] INFO django.server - "GET /check-link/ HTTP/1.1" 200 37198
+[2026-05-02 15:50:12,977] INFO phishield - URL check by michelleMarie: https://claude.ai/chat/c1d59a80-47b6-4c62-99c1-6628d22f78cd
+[2026-05-02 15:50:15,304] INFO phishield - URL analysis completed - Risk: safe
+[2026-05-02 15:50:15,309] INFO django.server - "POST /check-link/ HTTP/1.1" 200 37840

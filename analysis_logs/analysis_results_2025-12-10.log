@@ -1,0 +1,59 @@
+[2025-12-10 00:55:02] | User: Michelle | Type: URL | Risk: safe
+Content: https://gemini.com
+Flags: No threats detected
+--------------------------------------------------------------------------------
+[2025-12-10 00:55:15] | User: Michelle | Type: URL | Risk: suspicious
+Content: https://github.com/chimmymikel/CSIT327-G8-PhiShield/commit/227d4d50acc9b37ad30fc6243975f202cdacf52a#diff-1805acbee3babf8cd1082ff45d6148c23284c28b5a768929369e69f232da7dd3
+Flags: Extremely long URL (169 chars) - potential obfuscation
+--------------------------------------------------------------------------------
+[2025-12-10 00:55:39] | User: Michelle | Type: URL | Risk: safe
+Content: https://claude.ai/chat/2f16904e-6f69-4c23-a61a-c4452e8ac84b
+Flags: No threats detected
+--------------------------------------------------------------------------------
+[2025-12-10 00:55:48] | User: Michelle | Type: URL | Risk: safe
+Content: https://mail.google.com/mail/u/0/#inbox
+Flags: No threats detected
+--------------------------------------------------------------------------------
+[2025-12-10 00:55:55] | User: Michelle | Type: URL | Risk: safe
+Content: https://www.facebook.com/
+Flags: No threats detected
+--------------------------------------------------------------------------------
+[2025-12-10 00:56:02] | User: Michelle | Type: URL | Risk: suspicious
+Content: https://lto.gov.ph
+Flags: No valid SSL certificate detected
+--------------------------------------------------------------------------------
+[2025-12-10 00:56:37] | User: Michelle | Type: URL | Risk: safe
+Content: https://www.aiclassasean.org/
+Flags: No threats detected
+--------------------------------------------------------------------------------
+[2025-12-10 00:56:45] | User: Michelle | Type: URL | Risk: dangerous
+Content: http://127.0.0.1:8000/check-link/
+Flags: Domain is an IP address (highly suspicious) | No valid SSL certificate detected | Numeric subdomain detected (suspicious) | Non-standard port detected (8000)
+--------------------------------------------------------------------------------
+[2025-12-10 00:57:06] | User: Michelle | Type: URL | Risk: safe
+Content: https://csit327-g8-phishield-production.up.railway.app/dashboard/
+Flags: No threats detected
+--------------------------------------------------------------------------------
+[2025-12-10 00:57:19] | User: Michelle | Type: URL | Risk: suspicious
+Content: https://blissfuljuan.com
+Flags: Domain does not resolve (suspicious)
+--------------------------------------------------------------------------------
+[2025-12-10 00:57:29] | User: Michelle | Type: URL | Risk: safe
+Content: https://github.com
+Flags: No threats detected
+--------------------------------------------------------------------------------
+[2025-12-10 00:57:43] | User: Michelle | Type: MESSAGE | Risk: safe
+Content: update
+Flags: No threats detected - message appears safe
+--------------------------------------------------------------------------------
+[2025-12-10 00:58:51] | User: Michelle | Type: MESSAGE | Risk: safe
+Content: Your order is confirmed!
+Hi michelle habs!
+Your order is confirmed and is being prepared for shipment! We'll send tracking info as soon as it's on the way.
+The TikTok Shop team
+Flags: No threats detected - message appears safe
+--------------------------------------------------------------------------------
+[2025-12-10 00:59:09] | User: Michelle | Type: MESSAGE | Risk: safe
+Content: hello good morning, click here for more details!
+Flags: No threats detected - message appears safe
+--------------------------------------------------------------------------------

@@ -1,0 +1,20 @@
+[2026-02-21 15:23:45] | User: ashleycutie | Type: URL | Risk: suspicious
+Content: https://drive.google.com/file/d/1pkTcrYQRrFSxkwsJakuunoxqtUOBGoRc/view?fbclid=IwY2xjawQGEaJleHRuA2FlbQIxMABicmlkETJITDVURXdXbjlCS3kzTHFyc3J0YwZhcHBfaWQQMjIyMDM5MTc4ODIwMDg5MgABHsuopjK5whZ36qo99MmRUya-Tv3k0f0fwfRZiegw6pZmjty7wooR5-hPURKk_aem_EackDA_6bfQWvf2qtjyr9A&pli=1
+Flags: Extremely long URL (269 chars) - potential obfuscation
+--------------------------------------------------------------------------------
+[2026-02-21 15:23:57] | User: ashleycutie | Type: URL | Risk: safe
+Content: https://www.facebook.com/
+Flags: No threats detected
+--------------------------------------------------------------------------------
+[2026-02-21 15:32:55] | User: ashleycutie | Type: URL | Risk: safe
+Content: https://www.facebook.com/
+Flags: No threats detected
+--------------------------------------------------------------------------------
+[2026-02-21 15:34:40] | User: ashleycutie | Type: MESSAGE | Risk: safe
+Content: Dear misyel846,
+Your reference case number is 2024454414371569694. Please click on the button below on mobile phone to view the progress of your case.
+View Case Status
+Best Regards,
+Shopee Customer Service
+Flags: No threats detected - message appears safe
+--------------------------------------------------------------------------------
