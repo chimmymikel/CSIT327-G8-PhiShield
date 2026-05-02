@@ -17,18 +17,121 @@
         --accent-orange: #f59e0b;
         --text-dark: #1e293b;
         --text-muted: #64748b;
+        --text-secondary: #475569;
         --card-radius: 20px;
         --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
         --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        
+        /* Card & Background Colors */
+        --card-bg: white;
+        --card-border: rgba(59, 130, 246, 0.1);
+        --avatar-ring-bg: white;
+        --verified-border: white;
+        --btn-outline-bg: white;
+        --btn-outline-border: #e2e8f0;
+        --btn-outline-hover-bg: #f8fafc;
+        
+        /* Stat Box Colors */
+        --stat-box-bg: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+        --stat-box-border: #e2e8f0;
+        --stat-box-featured-bg: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+        --stat-box-featured-border: #bfdbfe;
+        
+        /* Role Badge */
+        --role-badge-bg: linear-gradient(135deg, #dbeafe 0%, #e0e7ff 100%);
+        --role-badge-color: #1e40af;
+        --role-badge-border: #bfdbfe;
+        
+        /* Timeline */
+        --timeline-line-bg: linear-gradient(to bottom, #cbd5e1 0%, transparent 100%);
+        --timeline-dot-border: white;
+        --timeline-card-bg: #f8fafc;
+        --timeline-card-border: #e2e8f0;
+        --timeline-card-hover-bg: white;
+        --timeline-fade-bg: linear-gradient(to bottom, transparent 0%, white 100%);
+        
+        /* Bio Section */
+        --bio-bg: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+        --bio-border: #cbd5e1;
+        
+        /* Stat Icon Backgrounds */
+        --stat-icon-blue-bg: #dbeafe;
+        --stat-icon-blue-color: #0284c7;
+        --stat-icon-purple-bg: #f3e8ff;
+        --stat-icon-purple-color: #9333ea;
+        --stat-icon-red-bg: #fee2e2;
+        --stat-icon-red-color: #dc2626;
+        --stat-icon-green-bg: #a7f3d0;
+        --stat-icon-green-color: #059669;
+        
+        /* Stat Box Variants */
+        --stat-box-red-bg: linear-gradient(135deg, #fef2f2 0%, #fee2e2 100%);
+        --stat-box-red-border: #fecaca;
+        --stat-box-green-bg: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%);
+        --stat-box-green-border: #a7f3d0;
+    }
+
+    .dark {
+        --text-dark: white;
+        --text-muted: #94a3b8;
+        --text-secondary: #cbd5e1;
+        
+        /* Card & Background Colors */
+        --card-bg: #0b1220;
+        --card-border: #334155;
+        --avatar-ring-bg: #1e293b;
+        --verified-border: #1e293b;
+        --btn-outline-bg: #0b1220;
+        --btn-outline-border: #334155;
+        --btn-outline-hover-bg: #1e293b;
+        
+        /* Stat Box Colors */
+        --stat-box-bg: #1e293b;
+        --stat-box-border: #334155;
+        --stat-box-featured-bg: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+        --stat-box-featured-border: #475569;
+        
+        /* Role Badge */
+        --role-badge-bg: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+        --role-badge-color: #60a5fa;
+        --role-badge-border: #475569;
+        
+        /* Timeline */
+        --timeline-line-bg: linear-gradient(to bottom, #475569 0%, transparent 100%);
+        --timeline-dot-border: #1e293b;
+        --timeline-card-bg: #1e293b;
+        --timeline-card-border: #334155;
+        --timeline-card-hover-bg: #0b1220;
+        --timeline-fade-bg: linear-gradient(to bottom, transparent 0%, #0b1220 100%);
+        
+        /* Bio Section */
+        --bio-bg: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+        --bio-border: #475569;
+        
+        /* Stat Icon Backgrounds */
+        --stat-icon-blue-bg: #1e3a5f;
+        --stat-icon-blue-color: #60a5fa;
+        --stat-icon-purple-bg: #2d1f3d;
+        --stat-icon-purple-color: #c084fc;
+        --stat-icon-red-bg: #3d2626;
+        --stat-icon-red-color: #f87171;
+        --stat-icon-green-bg: #26362e;
+        --stat-icon-green-color: #34d399;
+        
+        /* Stat Box Variants */
+        --stat-box-red-bg: linear-gradient(135deg, #2d1f1f 0%, #3d2626 100%);
+        --stat-box-red-border: #5a3737;
+        --stat-box-green-bg: linear-gradient(135deg, #1f2d26 0%, #26362e 100%);
+        --stat-box-green-border: #375a45;
     }
 
     /* Keep original background */
 
     /* --- MODERN CARDS --- */
     .modern-card {
-        background: white;
+        background: var(--card-bg);
         border-radius: var(--card-radius);
-        border: 1px solid rgba(59, 130, 246, 0.1);
+        border: 1px solid var(--card-border);
         box-shadow: var(--shadow-md);
         transition: all 0.3s ease;
         overflow: hidden;
@@ -57,7 +160,7 @@
 
     .profile-avatar-ring {
         padding: 6px;
-        background: white;
+        background: var(--avatar-ring-bg);
         border-radius: 50%;
         box-shadow: 0 8px 20px rgba(0,0,0,0.15);
         display: inline-block;
@@ -78,7 +181,7 @@
         width: 44px;
         height: 44px;
         background: var(--accent-green);
-        border: 4px solid white;
+        border: 4px solid var(--verified-border);
         border-radius: 50%;
         display: flex;
         align-items: center;
@@ -105,9 +208,9 @@
     }
 
     .btn-outline-custom {
-        border: 2px solid #e2e8f0;
+        border: 2px solid var(--btn-outline-border);
         color: var(--text-dark);
-        background: white;
+        background: var(--btn-outline-bg);
         font-weight: 600;
         padding: 0.7rem 1.2rem;
         border-radius: 12px;
@@ -116,16 +219,16 @@
 
     .btn-outline-custom:hover {
         border-color: var(--brand-primary);
-        background: #f8fafc;
+        background: var(--btn-outline-hover-bg);
         color: var(--brand-primary);
     }
 
     /* --- STAT BOXES --- */
     .stat-box {
-        background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+        background: var(--stat-box-bg);
         border-radius: 16px;
         padding: 1.3rem;
-        border: 1px solid #e2e8f0;
+        border: 1px solid var(--stat-box-border);
         transition: all 0.2s ease;
         height: 100%;
     }
@@ -136,8 +239,8 @@
     }
 
     .stat-box.featured {
-        background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
-        border-color: #bfdbfe;
+        background: var(--stat-box-featured-bg);
+        border-color: var(--stat-box-featured-border);
     }
 
     .stat-icon {
@@ -153,13 +256,13 @@
 
     /* --- ROLE BADGE --- */
     .role-badge {
-        background: linear-gradient(135deg, #dbeafe 0%, #e0e7ff 100%);
-        color: #1e40af;
+        background: var(--role-badge-bg);
+        color: var(--role-badge-color);
         padding: 0.5rem 1.5rem;
         border-radius: 20px;
         font-weight: 600;
         font-size: 0.9rem;
-        border: 1px solid #bfdbfe;
+        border: 1px solid var(--role-badge-border);
     }
 
     /* --- TIMELINE --- */
@@ -174,7 +277,7 @@
         top: 20px;
         bottom: 0;
         width: 2px;
-        background: linear-gradient(to bottom, #cbd5e1 0%, transparent 100%);
+        background: var(--timeline-line-bg);
     }
 
     .timeline-item {
@@ -189,7 +292,7 @@
         width: 18px;
         height: 18px;
         border-radius: 50%;
-        border: 3px solid white;
+        border: 3px solid var(--timeline-dot-border);
         box-shadow: 0 2px 8px rgba(0,0,0,0.15);
         z-index: 2;
     }
@@ -199,15 +302,15 @@
     .timeline-dot.warn { background: var(--accent-orange); }
 
     .timeline-card {
-        background: #f8fafc;
+        background: var(--timeline-card-bg);
         border-radius: 14px;
         padding: 1.2rem;
-        border: 1px solid #e2e8f0;
+        border: 1px solid var(--timeline-card-border);
         transition: all 0.2s ease;
     }
 
     .timeline-card:hover {
-        background: white;
+        background: var(--timeline-card-hover-bg);
         box-shadow: 0 4px 12px rgba(0,0,0,0.08);
     }
 
@@ -217,7 +320,7 @@
         font-weight: 700;
         text-transform: uppercase;
         letter-spacing: 0.08em;
-        color: #94a3b8;
+        color: var(--text-muted);
         margin-bottom: 0.4rem;
     }
 
@@ -250,6 +353,12 @@
     .icon-green { color: var(--accent-green); }
     .icon-red { color: var(--accent-red); }
     .icon-orange { color: var(--accent-orange); }
+
+    /* --- TEXT COLORS --- */
+    .text-dark { color: var(--text-dark) !important; }
+    .text-muted { color: var(--text-muted) !important; }
+    .text-secondary { color: var(--text-secondary) !important; }
+
 </style>
 
 <div class="profile-container">
@@ -332,7 +441,7 @@
                     <!-- URL Checks -->
                     <div class="col-6">
                         <div class="stat-box text-center">
-                            <div class="stat-icon mx-auto" style="background: #dbeafe; color: #0284c7;">
+                            <div class="stat-icon mx-auto" style="background: var(--stat-icon-blue-bg); color: var(--stat-icon-blue-color);">
                                 <i class="fas fa-link"></i>
                             </div>
                             <div class="h4 fw-bold mb-0 text-dark">{{ total_url_checks }}</div>
@@ -343,7 +452,7 @@
                     <!-- Message Checks -->
                     <div class="col-6">
                         <div class="stat-box text-center">
-                            <div class="stat-icon mx-auto" style="background: #f3e8ff; color: #9333ea;">
+                            <div class="stat-icon mx-auto" style="background: var(--stat-icon-purple-bg); color: var(--stat-icon-purple-color);">
                                 <i class="fas fa-envelope"></i>
                             </div>
                             <div class="h4 fw-bold mb-0 text-dark">{{ total_message_checks }}</div>
@@ -353,8 +462,8 @@
 
                     <!-- Threats Detected -->
                     <div class="col-6">
-                        <div class="stat-box text-center" style="background: linear-gradient(135deg, #fef2f2 0%, #fee2e2 100%); border-color: #fecaca;">
-                            <div class="stat-icon mx-auto" style="background: #fee2e2; color: #dc2626;">
+                        <div class="stat-box text-center" style="background: var(--stat-box-red-bg); border-color: var(--stat-box-red-border);">
+                            <div class="stat-icon mx-auto" style="background: var(--stat-icon-red-bg); color: var(--stat-icon-red-color);">
                                 <i class="fas fa-exclamation-triangle"></i>
                             </div>
                             <div class="h4 fw-bold mb-0 text-danger">{{ profile.threats_detected }}</div>
@@ -364,8 +473,8 @@
 
                     <!-- Safe Checks -->
                     <div class="col-6">
-                        <div class="stat-box text-center" style="background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%); border-color: #a7f3d0;">
-                            <div class="stat-icon mx-auto" style="background: #a7f3d0; color: #059669;">
+                        <div class="stat-box text-center" style="background: var(--stat-box-green-bg); border-color: var(--stat-box-green-border);">
+                            <div class="stat-icon mx-auto" style="background: var(--stat-icon-green-bg); color: var(--stat-icon-green-color);">
                                 <i class="fas fa-check-circle"></i>
                             </div>
                             <div class="h4 fw-bold mb-0 text-success">{{ profile.safe_checks }}</div>
@@ -408,7 +517,7 @@
                     </div>
                     <div class="col-12">
                         <div class="label-fancy"><i class="fas fa-info-circle icon-primary me-1"></i>About Me</div>
-                        <div class="p-4 rounded-3" style="background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%); border: 2px dashed #cbd5e1;">
+                        <div class="p-4 rounded-3" style="background: var(--bio-bg); border: 2px dashed var(--bio-border);">
                             {% if profile.bio %}
                                 <p class="mb-0 text-secondary" style="line-height: 1.7;">{{ profile.bio|linebreaksbr }}</p>
                             {% else %}
@@ -521,7 +630,7 @@
                     {% endif %}
                     
                     <!-- Fade gradient overlay when collapsed -->
-                    <div id="timeline-fade" class="position-absolute bottom-0 w-100" style="height: 80px; background: linear-gradient(to bottom, transparent 0%, white 100%); pointer-events: none; display: none;"></div>
+                    <div id="timeline-fade" class="position-absolute bottom-0 w-100" style="height: 80px; background: var(--timeline-fade-bg); pointer-events: none; display: none;"></div>
                 </div>
                 
                 <!-- View More/Less Button -->

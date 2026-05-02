@@ -130,45 +130,6 @@
                             </div>
                         </div>
 
-                        <!-- Security Settings Section -->
-                        <div class="settings-section">
-                            <div class="section-header">
-                                <div class="section-icon section-icon-success">
-                                    <i class="fas fa-shield-alt"></i>
-                                </div>
-                                <div>
-                                    <h5 class="section-title">Security Settings</h5>
-                                    <p class="section-subtitle">Configure advanced security features</p>
-                                </div>
-                            </div>
-
-                            <div class="settings-options">
-                                <div class="setting-item">
-                                    <div class="setting-info">
-                                        <div class="setting-icon-wrapper">
-                                            <i class="fas fa-search"></i>
-                                        </div>
-                                        <div class="setting-text">
-                                            <label class="setting-label" for="auto_scan_links">
-                                                Auto-scan Links
-                                            </label>
-                                            <p class="setting-description">
-                                                Automatically scan URLs found in analyzed messages for additional security
-                                            </p>
-                                        </div>
-                                    </div>
-                                    <div class="setting-control">
-                                        <label class="toggle-switch">
-                                            <input type="checkbox" name="auto_scan_links" 
-                                                   id="auto_scan_links" 
-                                                   {% if profile.auto_scan_links %}checked{% endif %}>
-                                            <span class="toggle-slider"></span>
-                                        </label>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
                         <!-- Appearance Settings Section -->
                         <div class="settings-section">
                             <div class="section-header">
@@ -228,37 +189,6 @@
                                             <span class="toggle-slider"></span>
                                         </label>
                                     </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Language Settings Section -->
-                        <div class="settings-section">
-                            <div class="section-header">
-                                <div class="section-icon section-icon-info">
-                                    <i class="fas fa-language"></i>
-                                </div>
-                                <div>
-                                    <h5 class="section-title">Language & Region</h5>
-                                    <p class="section-subtitle">Set your preferred language</p>
-                                </div>
-                            </div>
-
-                            <div class="settings-options">
-                                <div class="setting-item-select">
-                                    <label for="language" class="select-label">
-                                        <i class="fas fa-globe me-2"></i>
-                                        Interface Language
-                                    </label>
-                                    <select class="form-select-custom" name="language" id="language">
-                                        <option value="en" {% if profile.language == 'en' %}selected{% endif %}>
-                                            🇺🇸 English
-                                        </option>
-                                        <option value="es" {% if profile.language == 'es' %}selected{% endif %}>
-                                            🇪🇸 Español (Spanish)
-                                        </option>
-                                    </select>
-                                    <small class="select-hint">Choose your preferred language for the interface</small>
                                 </div>
                             </div>
                         </div>

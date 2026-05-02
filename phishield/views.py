@@ -7,8 +7,6 @@ from .models import SuspiciousLink, SuspiciousMessage, UserProfile
 from .forms import LinkForm, MessageForm, RegisterForm
 from .utils import analyze_url, analyze_message
 from django.contrib import messages
-from django.core.mail import send_mail  # ✅ Added for email
-from django.conf import settings        # ✅ Added to access email settings
 import random
 import logging
 import os
@@ -353,7 +351,7 @@ def about_us(request):
 
 @login_required
 def contact(request):
-    """Contact page with functional email logic"""
+    """Contact page - aesthetic only, no actual email sending"""
     if request.method == "POST":
         # 1. Get data from the HTML form
         name = request.POST.get('name')
@@ -361,74 +359,16 @@ def contact(request):
         subject_input = request.POST.get('subject')
         message = request.POST.get('message')
         
-        # ✅ Log contact form submission
+        # ✅ Log contact form submission (for aesthetics/tracking only)
         logger.info(f"Contact form submitted by: {request.user.username}")
         
         # 2. Validate that fields are not empty
         if name and email_from_user and subject_input and message:
-            # Check if email configuration is set up (check Django settings, not env vars directly)
-            missing_vars = []
-            if not settings.EMAIL_HOST_USER:
-                missing_vars.append("EMAIL_HOST_USER")
-            if not settings.EMAIL_HOST_PASSWORD:
-                missing_vars.append("EMAIL_HOST_PASSWORD")
-            
-            if missing_vars:
-                logger.error(f"Email configuration missing: {', '.join(missing_vars)} not set")
-                messages.error(request, f"Email service is not configured. Missing: {', '.join(missing_vars)}. Please set these in your .env file.")
-                return redirect('phishield:contact')
-            
-            try:
-                # 3. Create the email content
-                full_message = f"""
-                You have received a new contact inquiry via PhiShield.
-                
-                --------------------------------------------------
-                Sender Name: {name}
-                Sender Email: {email_from_user}
-                Subject: {subject_input}
-                --------------------------------------------------
-                
-                Message:
-                {message}
-                """
-                
-                # 4. Send the email using Settings
-                send_mail(
-                    subject=f"PhiShield Contact: {subject_input}",
-                    message=full_message,
-                    from_email=settings.DEFAULT_FROM_EMAIL,
-                    recipient_list=[settings.CONTACT_EMAIL], # Defined in settings.py
-                    fail_silently=False,
-                )
-                
-                # 5. Success Message
-                messages.success(request, "Your message has been received! We'll get back to you soon.")
-                return redirect('phishield:contact')
-                
-            except Exception as e:
-                # Error Message if email fails
-                logger.error(f"Failed to send email: {e}", exc_info=True)
-                # Provide more helpful error message
-                error_msg = str(e)
-                error_type = type(e).__name__
-                
-                # Handle SMTP authentication errors
-                if "authentication failed" in error_msg.lower() or "535" in error_msg or "invalid credentials" in error_msg.lower():
-                    messages.error(request, "Email authentication failed. Please check your EMAIL_HOST_USER and EMAIL_HOST_PASSWORD in your environment variables.")
-                # Handle SMTP connection errors
-                elif "connection" in error_msg.lower() or "could not connect" in error_msg.lower():
-                    messages.error(request, "Could not connect to email server. Please check your EMAIL_HOST and EMAIL_PORT settings.")
-                # Handle timeout errors
-                elif "timeout" in error_msg.lower() or "timed out" in error_msg.lower():
-                    messages.error(request, "Email service timed out. Please try again later.")
-                # Handle missing configuration
-                elif "host" in error_msg.lower() and ("not set" in error_msg.lower() or "missing" in error_msg.lower()):
-                    messages.error(request, "Email configuration is missing. Please set EMAIL_HOST, EMAIL_HOST_USER, and EMAIL_HOST_PASSWORD in your environment variables.")
-                else:
-                    messages.error(request, f"Error sending email: {error_msg}. Please contact the administrator if this persists.")
+            # Just show success message - no actual email sending
+            messages.success(request, "Your message has been sent! We'll get back to you soon.")
+            return redirect('phishield:contact')
         else:
-             messages.warning(request, 'Please fill in all fields.')
+            messages.warning(request, 'Please fill in all fields.')
     
     return render(request, "phishield/contact.html")
 

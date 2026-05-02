@@ -18,28 +18,89 @@
         --card-radius: 16px;
         --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
         --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        
+        /* Card & Background Colors */
+        --card-bg: white;
+        --card-border: rgba(59, 130, 246, 0.1);
+        --sidebar-bg: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+        --info-badge-bg: linear-gradient(135deg, #f0f9ff 0%, #faf5ff 100%);
+        --info-badge-border: rgba(59, 130, 246, 0.1);
+        
+        /* Form Elements */
+        --form-border: #e2e8f0;
+        --form-focus-border: var(--brand-primary);
+        --form-bg: white;
+        
+        /* Button Colors */
+        --btn-outline-border: #e2e8f0;
+        --btn-outline-hover-bg: #f8fafc;
+        --btn-outline-hover-border: #cbd5e1;
+        
+        /* Borders & Dividers */
+        --border-color: #e2e8f0;
+        --divider-color: #e2e8f0;
+        
+        /* Info Box */
+        --info-box-bg: #f8fafc;
+        
+        /* Camera Button */
+        --camera-btn-border: white;
+    }
+    
+    .dark {
+        --text-dark: white;
+        --text-muted: #94a3b8;
+        --bg-light: #1e293b;
+        
+        /* Card & Background Colors */
+        --card-bg: #0b1220;
+        --card-border: #334155;
+        --sidebar-bg: linear-gradient(135deg, #0b1220 0%, #1e293b 100%);
+        --info-badge-bg: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+        --info-badge-border: #334155;
+        
+        /* Form Elements */
+        --form-border: #334155;
+        --form-bg: #0b1220;
+        
+        /* Button Colors */
+        --btn-outline-border: #334155;
+        --btn-outline-hover-bg: #1e293b;
+        --btn-outline-hover-border: #475569;
+        
+        /* Borders & Dividers */
+        --border-color: #334155;
+        --divider-color: #334155;
+        
+        /* Info Box */
+        --info-box-bg: #1e293b;
+        
+        /* Camera Button */
+        --camera-btn-border: #1e293b;
     }
     
     /* Keep original background - don't override */
     
     .modern-card {
-        background: white;
+        background: var(--card-bg);
         border-radius: var(--card-radius);
         box-shadow: var(--shadow-lg);
         overflow: hidden;
-        border: 1px solid rgba(59, 130, 246, 0.1);
+        border: 1px solid var(--card-border);
     }
     
     .form-control, .form-select {
         border-radius: 10px;
-        border: 2px solid #e2e8f0;
+        border: 2px solid var(--form-border);
         padding: 0.7rem 1rem;
         font-size: 0.95rem;
         transition: all 0.2s ease;
+        background: var(--form-bg);
+        color: var(--text-dark);
     }
     
     .form-control:focus {
-        border-color: var(--brand-primary);
+        border-color: var(--form-focus-border);
         box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
     }
     
@@ -63,14 +124,16 @@
         border-radius: 10px;
         font-weight: 600;
         padding: 0.7rem 2rem;
-        border: 2px solid #e2e8f0;
+        border: 2px solid var(--btn-outline-border);
         color: var(--text-dark);
         transition: all 0.2s ease;
+        background: transparent;
     }
     
     .btn-outline-secondary:hover {
-        background: var(--bg-light);
-        border-color: #cbd5e1;
+        background: var(--btn-outline-hover-bg);
+        border-color: var(--btn-outline-hover-border);
+        color: var(--text-dark);
     }
     
     .form-label {
@@ -86,7 +149,7 @@
         color: var(--text-dark);
         margin-bottom: 1.5rem;
         padding-bottom: 0.75rem;
-        border-bottom: 2px solid #e2e8f0;
+        border-bottom: 2px solid var(--border-color);
         display: flex;
         align-items: center;
         gap: 0.5rem;
@@ -125,11 +188,11 @@
     
     /* Profile sidebar with gradient */
     .profile-sidebar {
-        background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+        background: var(--sidebar-bg);
         border-radius: var(--card-radius);
         padding: 2rem;
         box-shadow: var(--shadow-md);
-        border: 1px solid rgba(59, 130, 246, 0.1);
+        border: 1px solid var(--card-border);
         position: sticky;
         top: 2rem;
     }
@@ -155,7 +218,7 @@
         height: 100%;
         border-radius: 50%;
         overflow: hidden;
-        background: white;
+        background: var(--card-bg);
         position: relative;
         z-index: 1;
     }
@@ -168,7 +231,7 @@
         height: 44px;
         border-radius: 50%;
         background: var(--brand-gradient);
-        border: 3px solid white;
+        border: 3px solid var(--camera-btn-border);
         display: flex;
         align-items: center;
         justify-content: center;
@@ -184,11 +247,11 @@
     
     /* User info badges */
     .info-badge {
-        background: linear-gradient(135deg, #f0f9ff 0%, #faf5ff 100%);
+        background: var(--info-badge-bg);
         border-radius: 10px;
         padding: 1rem;
         margin-top: 1.5rem;
-        border: 1px solid rgba(59, 130, 246, 0.1);
+        border: 1px solid var(--info-badge-border);
     }
     
     .info-row {
@@ -199,7 +262,7 @@
     }
     
     .info-row:not(:last-child) {
-        border-bottom: 1px solid #e2e8f0;
+        border-bottom: 1px solid var(--divider-color);
     }
     
     /* Accent colors for icons */
@@ -209,13 +272,49 @@
     
     /* Page header integrated into main card */
     .page-title-card {
-        background: white;
+        background: var(--card-bg);
         border-radius: var(--card-radius);
         padding: 1.5rem 2rem;
         margin-bottom: 2rem;
         box-shadow: var(--shadow-md);
-        border: 1px solid rgba(59, 130, 246, 0.1);
+        border: 1px solid var(--card-border);
     }
+    
+    /* Info box styling */
+    .info-box {
+        background: var(--info-box-bg);
+        padding: 1rem;
+        border-radius: 10px;
+    }
+    
+    /* Border top */
+    .border-top {
+        border-color: var(--border-color) !important;
+    }
+    
+    /* Text colors */
+    .text-dark {
+        color: var(--text-dark) !important;
+    }
+    
+    .text-muted {
+        color: var(--text-muted) !important;
+    }
+
+    .form-control::placeholder,
+    .form-select::placeholder,
+    textarea::placeholder {
+    color: var(--text-muted);
+    opacity: 0.6;
+    }
+
+    /* Dark mode - Make placeholders lighter/white */
+    .dark .form-control::placeholder,
+    .dark .form-select::placeholder,
+    .dark textarea::placeholder {
+    color: rgba(255, 255, 255, 0.6);
+    }
+
 </style>
 
 <div class="profile-container">
@@ -242,7 +341,7 @@
             <!-- Left Sidebar: Profile Picture & Info -->
             <div class="profile-sidebar">
                 <div class="text-center">
-                    <h6 class="fw-bold mb-3" style="color: var(--text-dark);">
+                    <h6 class="fw-bold mb-3 text-dark">
                         <i class="fas fa-image me-2 icon-accent-2"></i>Profile Picture
                     </h6>
                     
@@ -266,7 +365,7 @@
                     
                     <input type="file" class="d-none" id="profile_picture" name="profile_picture" accept="image/jpeg,image/jpg,image/png,image/gif,image/webp">
                     
-                    <div class="mt-3 text-start" style="background: #f8fafc; padding: 1rem; border-radius: 10px;">
+                    <div class="mt-3 text-start info-box">
                         <small class="text-muted d-block mb-1">
                             <i class="fas fa-check-circle icon-accent-1 me-1"></i>
                             <strong>Formats:</strong> JPG, PNG, GIF, WebP
